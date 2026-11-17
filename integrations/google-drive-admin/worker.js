@@ -45,7 +45,8 @@ export default {
     if (
       request.method !== "GET" &&
       !(request.method === "POST" &&
-        url.pathname === "/drive/catalog/setup")
+        (url.pathname === "/drive/catalog/setup" ||
+         url.pathname === "/drive/catalog/upload-test"))
     ) {
       return json({ error: "Method not allowed" }, 405);
     }
@@ -238,8 +239,20 @@ pre{white-space:pre-wrap;background:#1e293b;padding:20px;border-radius:8px}
 <h1>SAFAQAT Drive Administration</h1>
 <p>Create the cloud product catalog folder.</p>
 <button id="setup">Create / Verify Catalog</button>
+<button id="upload">Upload Test Image</button>
 <pre id="result">Ready</pre>
 <script>
+document.getElementById("upload").onclick=async()=>{
+ const result=document.getElementById("result");
+ result.textContent="Uploading...";
+ try{
+  const r=await fetch("/drive/catalog/upload-test",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"}
+  });
+  result.textContent=JSON.stringify(await r.json(),null,2);
+ }catch(e){result.textContent="Upload request failed";}
+};
 document.getElementById("setup").onclick=async()=>{
  const result=document.getElementById("result");
  result.textContent="Working...";
@@ -260,6 +273,66 @@ document.getElementById("setup").onclick=async()=>{
           "content-security-policy": "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"
         }
       });
+    }
+
+
+    if (url.pathname === "/drive/catalog/upload-test" && request.method === "POST") {
+      const origin = request.headers.get("Origin");
+      if (origin !== url.origin ||
+          !(request.headers.get("Content-Type") || "").startsWith("application/json")) {
+        return json({ error: "Forbidden request" }, 403);
+      }
+
+      try {
+        const folderId = await env.SAFAQAT_DRIVE_AUTH.get("google:catalog-folder");
+        if (!folderId) return json({ error: "Create catalog first" }, 409);
+
+        const token = await getDriveAccessToken(env);
+        const email = await verifyDriveConnection(token);
+        if (email?.toLowerCase() !== EXPECTED_EMAIL) {
+          return json({ error: "Unauthorized account" }, 403);
+        }
+
+        const png = Uint8Array.from(
+          atob("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/lXcAAAAASUVORK5CYII="),
+          c => c.charCodeAt(0)
+        );
+
+        const boundary = "safaqat_test_boundary";
+        const metadata = {
+          name: "SAFAQAT-CATALOG-TEST.png",
+          mimeType: "image/png",
+          parents: [folderId]
+        };
+
+        const body = new Blob([
+          "--" + boundary + "\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n",
+          JSON.stringify(metadata),
+          "\r\n--" + boundary + "\r\nContent-Type: image/png\r\n\r\n",
+          png,
+          "\r\n--" + boundary + "--\r\n"
+        ]);
+
+        const response = await fetch(
+          "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,mimeType,parents",
+          {
+            method: "POST",
+            headers: {
+              authorization: `Bearer ${token}`,
+              "content-type": `multipart/related; boundary=${boundary}`
+            },
+            body
+          }
+        );
+
+        if (!response.ok) {
+          return json({ error: "Test image upload failed", status: response.status }, 502);
+        }
+
+        return json({ uploaded: true, file: await response.json() });
+      } catch {
+        return json({ error: "Upload test unavailable" }, 503);
+      }
     }
 
     if (url.pathname === "/drive/status") {
