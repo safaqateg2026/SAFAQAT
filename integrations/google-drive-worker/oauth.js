@@ -1,5 +1,5 @@
 const REDIRECT_URI =
-  "https://safaqat-drive-connector.safaqat-eg2026.workers.dev/oauth/callback";
+  "https://safaqat-drive-admin.safaqat-eg2026.workers.dev/oauth/callback";
 
 const encoder = new TextEncoder();
 
@@ -45,5 +45,5 @@ export async function createGoogleAuthUrl(env) {
     state,
   });
 
-  return `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
+  return { url: `https://accounts.google.com/o/oauth2/v2/auth?${params}`, state };
 }

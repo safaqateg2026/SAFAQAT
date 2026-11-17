@@ -2,5 +2,11 @@
   "name": "safaqat-drive-admin",
   "main": "worker.js",
   "compatibility_date": "2026-11-16",
-  "workers_dev": true
+  "workers_dev": true,
+  "kv_namespaces": [
+    {
+      "binding": "SAFAQAT_DRIVE_AUTH",
+      "id": "653f2cedc272488db2e1e64175c95bff"
+    }
+  ]
 }
