@@ -156,6 +156,18 @@ export default {
       }
     }
 
+
+    if (
+      url.pathname === "/drive/catalog" ||
+      url.pathname === "/drive/catalog/setup" ||
+      url.pathname === "/drive/catalog/upload-test"
+    ) {
+      const accessJwt = request.headers.get("Cf-Access-Jwt-Assertion");
+      if (!accessJwt) {
+        return json({ error: "Cloudflare Access authentication required" }, 403);
+      }
+    }
+
     if (url.pathname === "/drive/catalog/setup" && request.method === "POST") {
       const origin = request.headers.get("Origin");
       const expectedOrigin = new URL(request.url).origin;
@@ -293,6 +305,11 @@ document.getElementById("setup").onclick=async()=>{
           return json({ error: "Unauthorized account" }, 403);
         }
 
+        const existingTest = await env.SAFAQAT_DRIVE_AUTH.get("google:catalog-test-image");
+        if (existingTest) {
+          return json({ uploaded: true, created: false, fileId: existingTest });
+        }
+
         const png = Uint8Array.from(
           atob("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/lXcAAAAASUVORK5CYII="),
           c => c.charCodeAt(0)
@@ -329,7 +346,12 @@ document.getElementById("setup").onclick=async()=>{
           return json({ error: "Test image upload failed", status: response.status }, 502);
         }
 
-        return json({ uploaded: true, file: await response.json() });
+        const file = await response.json();
+        if (!file.id) {
+          return json({ error: "Google returned no file ID" }, 502);
+        }
+        await env.SAFAQAT_DRIVE_AUTH.put("google:catalog-test-image", file.id);
+        return json({ uploaded: true, created: true, file });
       } catch {
         return json({ error: "Upload test unavailable" }, 503);
       }
