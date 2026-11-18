@@ -38,6 +38,70 @@ function readStateCookie(request) {
   }
 }
 
+
+const ACCESS_ISSUER = "https://dark-mountain-8d9a.cloudflareaccess.com";
+const ACCESS_AUD = "f23484bfbf2ef5ee84a6cebb5008ef6d6eb9793eafda0e6aeb4602574556182a";
+
+function decodeJwtPart(value) {
+  const padded = value.replace(/-/g, "+").replace(/_/g, "/");
+  const raw = atob(padded.padEnd(Math.ceil(padded.length / 4) * 4, "="));
+  return Uint8Array.from(raw, c => c.charCodeAt(0));
+}
+
+async function verifyAdminAccess(request) {
+  const jwt = request.headers.get("Cf-Access-Jwt-Assertion");
+  if (!jwt) return false;
+
+  try {
+    const parts = jwt.split(".");
+    if (parts.length !== 3) return false;
+
+    const header = JSON.parse(new TextDecoder().decode(decodeJwtPart(parts[0])));
+    const claims = JSON.parse(new TextDecoder().decode(decodeJwtPart(parts[1])));
+
+    if (header.alg !== "RS256" || typeof header.kid !== "string") return false;
+
+    const now = Math.floor(Date.now() / 1000);
+    if (
+      claims.iss !== ACCESS_ISSUER ||
+      !Array.isArray(claims.aud) ||
+      !claims.aud.includes(ACCESS_AUD) ||
+      typeof claims.exp !== "number" ||
+      claims.exp <= now ||
+      typeof claims.iat !== "number" ||
+      claims.iat > now + 60 ||
+      (claims.nbf !== undefined && (typeof claims.nbf !== "number" || claims.nbf > now)) ||
+      claims.email?.toLowerCase() !== "safaqat.eg2026@gmail.com"
+    ) return false;
+
+    const response = await fetch(ACCESS_ISSUER + "/cdn-cgi/access/certs");
+    if (!response.ok) return false;
+
+    const certs = await response.json();
+    const jwk = certs.keys?.find(
+      key => key.kid === header.kid && key.kty === "RSA"
+    );
+    if (!jwk) return false;
+
+    const key = await crypto.subtle.importKey(
+      "jwk",
+      jwk,
+      { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+      false,
+      ["verify"]
+    );
+
+    return await crypto.subtle.verify(
+      "RSASSA-PKCS1-v1_5",
+      key,
+      decodeJwtPart(parts[2]),
+      new TextEncoder().encode(parts[0] + "." + parts[1])
+    );
+  } catch {
+    return false;
+  }
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -46,7 +110,8 @@ export default {
       request.method !== "GET" &&
       !(request.method === "POST" &&
         (url.pathname === "/drive/catalog/setup" ||
-         url.pathname === "/drive/catalog/upload-test"))
+         url.pathname === "/drive/catalog/upload-test" ||
+         url.pathname === "/drive/catalog/upload-product"))
     ) {
       return json({ error: "Method not allowed" }, 405);
     }
@@ -160,10 +225,10 @@ export default {
     if (
       url.pathname === "/drive/catalog" ||
       url.pathname === "/drive/catalog/setup" ||
-      url.pathname === "/drive/catalog/upload-test"
+      url.pathname === "/drive/catalog/upload-test" ||
+      url.pathname === "/drive/catalog/upload-product"
     ) {
-      const accessJwt = request.headers.get("Cf-Access-Jwt-Assertion");
-      if (!accessJwt) {
+      if (!(await verifyAdminAccess(request))) {
         return json({ error: "Cloudflare Access authentication required" }, 403);
       }
     }
@@ -252,8 +317,27 @@ pre{white-space:pre-wrap;background:#1e293b;padding:20px;border-radius:8px}
 <p>Create the cloud product catalog folder.</p>
 <button id="setup">Create / Verify Catalog</button>
 <button id="upload">Upload Test Image</button>
+<p>Upload a real product image (JPG, PNG or WebP, max 5 MB)</p>
+<input id="productImage" type="file" accept="image/jpeg,image/png,image/webp">
+<button id="productUpload">Upload Product Image</button>
+
 <pre id="result">Ready</pre>
 <script>
+
+document.getElementById("productUpload").onclick=async()=>{
+ const result=document.getElementById("result");
+ const file=document.getElementById("productImage").files[0];
+ if(!file){result.textContent="Choose an image first";return;}
+ const form=new FormData();
+ form.append("image",file);
+ result.textContent="Uploading product image...";
+ try{
+  const r=await fetch("/drive/catalog/upload-product",{
+   method:"POST",body:form
+  });
+  result.textContent=JSON.stringify(await r.json(),null,2);
+ }catch(e){result.textContent="Upload failed";}
+};
 document.getElementById("upload").onclick=async()=>{
  const result=document.getElementById("result");
  result.textContent="Uploading...";
@@ -354,6 +438,105 @@ document.getElementById("setup").onclick=async()=>{
         return json({ uploaded: true, created: true, file });
       } catch {
         return json({ error: "Upload test unavailable" }, 503);
+      }
+    }
+
+
+    if (url.pathname === "/drive/catalog/upload-product" &&
+        request.method === "POST") {
+
+      if (request.headers.get("Origin") !== url.origin) {
+        return json({ error: "Forbidden origin" }, 403);
+      }
+
+      const contentType = request.headers.get("Content-Type") || "";
+      if (!contentType.startsWith("multipart/form-data;")) {
+        return json({ error: "Multipart form required" }, 415);
+      }
+
+      if (Number(request.headers.get("Content-Length") || 0) > 6 * 1024 * 1024) {
+        return json({ error: "Request too large" }, 413);
+      }
+
+      try {
+        const folderId = await env.SAFAQAT_DRIVE_AUTH.get("google:catalog-folder");
+        if (!folderId) return json({ error: "Catalog not initialized" }, 409);
+
+        const form = await request.formData();
+        const file = form.get("image");
+
+        if (!file || typeof file.arrayBuffer !== "function") {
+          return json({ error: "Image required" }, 400);
+        }
+
+        const types = {
+          "image/jpeg": "jpg",
+          "image/png": "png",
+          "image/webp": "webp"
+        };
+
+        if (!types[file.type] || file.size < 1 || file.size > 5 * 1024 * 1024) {
+          return json({ error: "Only JPG, PNG or WebP up to 5 MB" }, 400);
+        }
+
+        const bytes = new Uint8Array(await file.arrayBuffer());
+
+        const valid =
+          (file.type === "image/jpeg" &&
+           bytes[0] === 255 && bytes[1] === 216 && bytes[2] === 255) ||
+          (file.type === "image/png" &&
+           bytes.slice(0, 8).every((b, i) =>
+             b === [137,80,78,71,13,10,26,10][i])) ||
+          (file.type === "image/webp" &&
+           new TextDecoder().decode(bytes.slice(0,4)) === "RIFF" &&
+           new TextDecoder().decode(bytes.slice(8,12)) === "WEBP");
+
+        if (!valid) return json({ error: "Invalid image format" }, 400);
+
+        const token = await getDriveAccessToken(env);
+        const email = await verifyDriveConnection(token);
+
+        if (email?.toLowerCase() !== EXPECTED_EMAIL) {
+          return json({ error: "Google account mismatch" }, 403);
+        }
+
+        const filename =
+          "product-" + crypto.randomUUID() + "." + types[file.type];
+
+        const metadata = {
+          name: filename,
+          mimeType: file.type,
+          parents: [folderId]
+        };
+
+        const boundary = "safaqat_" + crypto.randomUUID();
+        const body = new Blob([
+          "--" + boundary + "\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n",
+          JSON.stringify(metadata),
+          "\r\n--" + boundary + "\r\nContent-Type: " + file.type + "\r\n\r\n",
+          bytes,
+          "\r\n--" + boundary + "--\r\n"
+        ]);
+
+        const response = await fetch(
+          "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,mimeType,parents",
+          {
+            method: "POST",
+            headers: {
+              authorization: "Bearer " + token,
+              "content-type": "multipart/related; boundary=" + boundary
+            },
+            body
+          }
+        );
+
+        if (!response.ok) {
+          return json({ error: "Google Drive upload failed", status: response.status }, 502);
+        }
+
+        return json({ uploaded: true, file: await response.json() });
+      } catch {
+        return json({ error: "Product upload failed" }, 503);
       }
     }
 
