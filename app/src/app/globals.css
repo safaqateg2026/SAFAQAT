@@ -1,13 +1,7 @@
-@import "tailwindcss";
 :root { color-scheme: dark; }
 * { box-sizing: border-box; }
 html, body { margin: 0; min-height: 100%; background: #220035; font-family: Tahoma, Arial, sans-serif; }
 .safaqat-app { min-height: 100dvh; background: #230037; }
-.splash { position: fixed; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; background: radial-gradient(ellipse at center, #7103a0 0%, #3b075e 48%, #1a002c 100%); animation: splash-in .45s ease-out; }
-.splash-logo { width: min(65vw, 310px); aspect-ratio: 1; object-fit: contain; border-radius: 23%; box-shadow: 0 0 60px #e20aff75; animation: logo-in 1.15s ease-out; }
-.splash-caption { color: #ffd77b; font-size: clamp(14px, 4vw, 19px); font-weight: 700; }
-@keyframes logo-in { from { opacity: 0; transform: scale(.78); } to { opacity: 1; transform: scale(1); } }
-@keyframes splash-in { from { opacity: 0; } to { opacity: 1; } }
 .welcome { position: relative; width: min(100%, 560px); margin: 0 auto; background: #220035; box-shadow: 0 0 40px #0b001b; }
 .welcome-art { display: block; width: 100%; height: auto; }
 .hotspot { position: absolute; display: block; border: 0; background: transparent; cursor: pointer; touch-action: manipulation; border-radius: 16px; }
@@ -17,11 +11,9 @@ html, body { margin: 0; min-height: 100%; background: #220035; font-family: Taho
 .supplier { left: 51%; top: 52.6%; width: 44%; height: 12%; }
 .attendance { left: 3%; top: 65.2%; width: 94%; height: 11%; }
 .install { left: 3%; top: 77%; width: 94%; height: 11%; }
-.modal-backdrop { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; background: #10001cd9; padding: 22px; }
 .modal { position: relative; width: min(100%, 430px); background: linear-gradient(145deg, #6c0792, #24003b); color: #fff; border: 2px solid #ffc74f; border-radius: 24px; padding: 35px 24px; text-align: center; box-shadow: 0 0 50px #d80bff66; }
 .modal h2 { font-size: 27px; font-weight: 800; color: #ffd66b; margin: 0 0 16px; }
 .modal p { line-height: 1.9; }
-.close { position: absolute; left: 12px; top: 8px; background: transparent; color: white; border: 0; font-size: 30px; cursor: pointer; }
 .modal-action { margin-top: 16px; background: linear-gradient(#ffe57d, #ffb400); color: #2b093a; border: 0; border-radius: 14px; padding: 12px 25px; font-weight: 800; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; scroll-behavior: auto !important; } }
 
@@ -33,4 +25,15 @@ html, body { margin: 0; min-height: 100%; background: #220035; font-family: Taho
   margin: auto;
   max-height: calc(100dvh - 2rem);
   overflow: auto;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
