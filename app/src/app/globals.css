@@ -25,73 +25,12 @@ html, body { margin: 0; min-height: 100%; background: #220035; font-family: Taho
 .modal-action { margin-top: 16px; background: linear-gradient(#ffe57d, #ffb400); color: #2b093a; border: 0; border-radius: 14px; padding: 12px 25px; font-weight: 800; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; scroll-behavior: auto !important; } }
 
-/* SAFAQAT mobile full-screen layout */
-html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-}
 
-.safaqat-page {
-  width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-.safaqat-overlay {
-  min-height: 100vh;
-  min-height: 100dvh;
-}
-
-@media (max-width: 768px) {
-  .safaqat-page {
-    background-size: 100% 100%;
-    background-position: center top;
-    background-repeat: no-repeat;
-  }
-}
-
-/* SAFAQAT mobile screen fitting */
-@media (max-width: 768px) {
-  .welcome {
-    width: 100%;
-    height: 100dvh;
-    min-height: 100dvh;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .welcome-art {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-  }
-}
-
-/* SAFAQAT responsive welcome screen */
-@media (max-width: 768px) {
-  .welcome {
-    width: 100%;
-    height: 100dvh;
-    min-height: 0;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .welcome-art {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-  }
-
-  .hotspot {
-    z-index: 2;
-  }
+.modal::backdrop { background: #10001cd9; }
+.modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
 }

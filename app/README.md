@@ -34,3 +34,32 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Cloudflare release
+
+Development runs with `npm run dev` on a dedicated feature branch. Run the
+following gates using the checked-in lockfile and use the same static export
+for both staging and production:
+
+```sh
+npm ci
+npm run lint
+npx tsc --noEmit
+npm run build
+```
+
+Upload only `app/out` to the approved Cloudflare Pages project. Use a
+non-production branch name such as `staging` for a preview deployment, then
+verify the HTTPS homepage, role navigation, Android/iOS guidance, manifest,
+icons, and service worker. Record the preview URL and the source commit.
+
+After owner approval of the tested artifact, upload the same export manually to
+the project's configured production branch. Verify the canonical HTTPS URL
+after promotion. Use the Cloudflare Pages deployment history to roll back if
+necessary. Direct Upload keeps a Git push from publishing changes. Production
+promotion does not require merging into Git `main`.
+
+The export contains the public landing PWA only. It has no database bindings,
+private stock data, credentials, identity forms, order processing, or payments.
+The service worker serves a small offline notice when a network navigation
+fails and does not pin application HTML or JavaScript to a stale release.

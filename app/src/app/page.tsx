@@ -1,66 +1,77 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-type Selection = "buyer" | "supplier" | "attendance" | null;
+type Panel = "buyer" | "supplier" | "attendance" | "install";
+type InstallPrompt = Event & { prompt: () => Promise<void> };
+
+const details = {
+  buyer: ["حساب مشتري", "واجهة المشتري قيد التجهيز. الطلبات والدفع غير متاحين في هذا الإصدار."],
+  supplier: ["حساب مورد", "واجهة المورد قيد التجهيز. التسجيل والتحقق والبيع غير متاحين في هذا الإصدار."],
+  attendance: ["منظومة البصمة", "عرض تعريفي لميزة قيد التجهيز. لا تُجمع بيانات البصمة في هذا الإصدار."],
+  install: ["تثبيت صفقات", "على Android: افتح صفقات في Chrome واختر تثبيت التطبيق من القائمة. على iPhone أو iPad: افتح صفقات في Safari، ثم مشاركة، ثم إضافة إلى الشاشة الرئيسية، ثم إضافة."],
+};
 
 export default function Home() {
-  const [showSplash, setShowSplash] = useState(true);
-  const [selection, setSelection] = useState<Selection>(null);
-  const [installPrompt, setInstallPrompt] = useState<Event | null>(null);
+  const [panel, setPanel] = useState<Panel | null>(null);
+  const [installPrompt, setInstallPrompt] = useState<InstallPrompt | null>(null);
+  const dialog = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setShowSplash(false), 2000);
-    const onInstall = (event: Event) => {
+    const onPrompt = (event: Event) => {
       event.preventDefault();
-      setInstallPrompt(event);
+      setInstallPrompt(event as InstallPrompt);
     };
-    window.addEventListener("beforeinstallprompt", onInstall);
+    const onInstalled = () => setInstallPrompt(null);
+    window.addEventListener("beforeinstallprompt", onPrompt);
+    window.addEventListener("appinstalled", onInstalled);
+    if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
+      void navigator.serviceWorker.register("/sw.js", { updateViaCache: "none" }).catch(console.error);
+    }
     return () => {
-      window.clearTimeout(timer);
-      window.removeEventListener("beforeinstallprompt", onInstall);
+      window.removeEventListener("beforeinstallprompt", onPrompt);
+      window.removeEventListener("appinstalled", onInstalled);
     };
   }, []);
 
+  useEffect(() => {
+    if (panel && !dialog.current?.open) dialog.current?.showModal();
+  }, [panel]);
+
   async function install() {
-    if (installPrompt && "prompt" in installPrompt) {
-      const promptEvent = installPrompt as Event & { prompt: () => Promise<void> };
-      await promptEvent.prompt();
-      setInstallPrompt(null);
+    if (installPrompt) {
+      try {
+        await installPrompt.prompt();
+        return;
+      } catch {
+        setPanel("install");
+      } finally {
+        setInstallPrompt(null);
+      }
     } else {
-      setSelection(null);
-      window.alert("للتثبيت: افتح رابط HTTPS من Chrome ثم اختر تثبيت التطبيق من القائمة. على iPhone استخدم Safari ثم مشاركة > إضافة إلى الشاشة الرئيسية. التثبيت غير متاح من رابط الشبكة المحلي الحالي.");
+      setPanel("install");
     }
   }
 
   return (
-    <main className="safaqat-app" lang="ar" dir="rtl">
-      {showSplash ? (
-        <div className="splash" aria-label="جاري فتح صفقات">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/logo.jpg" alt="شعار صفقات" className="splash-logo" />
-        </div>
-      ) : (
-        <div className="welcome" aria-label="الواجهة الترحيبية لصفقات">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/welcome.jpg" alt="صفقات: كل الجملة في مكان واحد، اختر مشتري أو مورد" className="welcome-art" />
-          <button className="hotspot start" aria-label="ابدأ الآن" onClick={() => setSelection("buyer")} />
-          <button className="hotspot buyer" aria-label="مشتري - صاحب محل أو تاجر" onClick={() => setSelection("buyer")} />
-          <button className="hotspot supplier" aria-label="مورد - جملة أو مصنع أو موزع" onClick={() => setSelection("supplier")} />
-          <button className="hotspot attendance" aria-label="تفاصيل منظومة البصمة" onClick={() => setSelection("attendance")} />
-          <button className="hotspot install" aria-label="تحميل تطبيق صفقات" onClick={install} />
-          {selection && (
-            <div className="modal-backdrop" onClick={() => setSelection(null)}>
-              <section className="modal" role="dialog" aria-modal="true" aria-label="الاختيار" onClick={(event) => event.stopPropagation()}>
-                <button className="close" onClick={() => setSelection(null)} aria-label="إغلاق">×</button>
-                <h2>{selection === "buyer" ? "حساب مشتري" : selection === "supplier" ? "حساب مورد" : "منظومة البصمة"}</h2>
-                <p>{selection === "buyer" ? "واجهة المشتري قيد البناء. لا توجد طلبات حقيقية في هذه النسخة." : selection === "supplier" ? "واجهة المورد قيد البناء. التسجيل والتحقق والبيع غير مفعّلين بعد." : "هذا القسم إعلان تعريفي فقط، والتفاصيل قيد التجهيز."}</p>
-                <button className="modal-action" onClick={() => setSelection(null)}>العودة للواجهة</button>
-              </section>
-            </div>
-          )}
-        </div>
-      )}
+    <main className="safaqat-app">
+      <div className="welcome">
+        <h1 className="sr-only">صفقات — كل الجملة في مكان واحد</h1>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/approved-home-reference.png" width={1024} height={1536} alt="" className="welcome-art" fetchPriority="high" />
+        <button className="hotspot start" onClick={() => setPanel("buyer")}><span className="sr-only">ابدأ الآن</span></button>
+        <button className="hotspot buyer" onClick={() => setPanel("buyer")}><span className="sr-only">مشتري - صاحب محل أو تاجر</span></button>
+        <button className="hotspot supplier" onClick={() => setPanel("supplier")}><span className="sr-only">مورد - جملة أو مصنع أو موزع</span></button>
+        <button className="hotspot attendance" onClick={() => setPanel("attendance")}><span className="sr-only">اعرف تفاصيل منظومة البصمة</span></button>
+        <button className="hotspot install" onClick={install}><span className="sr-only">تثبيت صفقات مجانًا</span></button>
+        <dialog ref={dialog} className="modal" aria-labelledby="panel-title" onClose={() => setPanel(null)}>
+          {panel && <>
+            <h2 id="panel-title">{details[panel][0]}</h2>
+            <p>{details[panel][1]}</p>
+            <form method="dialog"><button className="modal-action">العودة للواجهة</button></form>
+          </>}
+        </dialog>
+      </div>
     </main>
   );
 }
