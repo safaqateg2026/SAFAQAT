@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   applicationName: "صفقات",
   manifest: "/manifest.webmanifest",
   appleWebApp: { capable: true, title: "صفقات", statusBarStyle: "black-translucent" },
-  icons: { icon: "/icons/icon-192.png", apple: "/icons/icon-192.png" },
+  icons: { icon: "/icons/safaqat-luminous-v5-any-192.png", apple: "/icons/safaqat-luminous-v5-any-192.png" },
 };
-export const viewport: Viewport = { themeColor: "#31004f", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#31004f", width: "device-width", initialScale: 1, viewportFit: "cover" };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="ar" dir="rtl"><body>{children}</body></html>;
 }

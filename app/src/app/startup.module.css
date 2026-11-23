@@ -1,0 +1,100 @@
+@font-face {
+  font-family: "Noto Kufi Arabic";
+  src: url("/fonts/NotoKufiArabic-Bold.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.startup,
+.landing {
+  display: contents;
+}
+
+.startup {
+  --startup-hold: 2760ms;
+  --startup-fade: 240ms;
+}
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding:
+    max(16px, env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right))
+    max(16px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
+  background: #1a002c;
+  visibility: hidden;
+  animation: dissolve var(--startup-fade) ease-out var(--startup-hold) backwards;
+}
+
+.mark {
+  width: min(78vw, 54svh, 420px);
+  container-type: inline-size;
+  display: grid;
+  justify-items: center;
+  gap: clamp(8px, 1.6svh, 18px);
+  text-align: center;
+}
+
+.mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.tagline {
+  margin: 0;
+  color: #ffdf62;
+  font-family: "Noto Kufi Arabic", Tahoma, Arial, sans-serif;
+  font-size: 7.6cqi;
+  font-weight: 700;
+  line-height: 1.55;
+  white-space: nowrap;
+  text-shadow: 0 0 10px #ffb52a5c;
+}
+
+.landing > * {
+  animation: conceal var(--startup-hold) linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .startup {
+    --startup-hold: 3000ms;
+    --startup-fade: 0ms;
+  }
+
+  .landing > * {
+    animation: conceal 0ms linear var(--startup-hold) backwards;
+  }
+
+  /* Keep the hold, but override the global reduced-motion duration. */
+  .splash,
+  .landing > * {
+    animation-duration: 0ms !important;
+  }
+}
+
+/* Installed apps may already show a native startup screen. */
+@media (display-mode: standalone) {
+  .splash {
+    display: none;
+  }
+
+  .landing > * {
+    animation: none;
+  }
+}
+
+@keyframes dissolve {
+  from { opacity: 1; visibility: visible; }
+  to { opacity: 0; visibility: hidden; }
+}
+
+@keyframes conceal {
+  from, to { visibility: hidden; }
+}
