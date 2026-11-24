@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { usePwaInstall, type InstallNotice } from "./usePwaInstall";
 import { landingMessages, type Language } from "./landingMessages";
 import { useStandaloneRootBack } from "./useStandaloneRootBack";
+import RegistrationPreview, { type RegistrationRole } from "./RegistrationPreview";
+import { registrationMessages } from "./registrationMessages";
 import "./SafaqatLanding.css";
 
 const iconPaths = {
@@ -111,7 +113,7 @@ function copyWithSelection(text: string) {
 }
 
 export default function SafaqatLanding() {
-  const [dialog, setDialog] = useState<(InstallNotice & { shareUrl?: string }) | null>(null);
+  const [dialog, setDialog] = useState<(InstallNotice & { shareUrl?: string; registration?: RegistrationRole }) | null>(null);
   const [shareFeedback, setShareFeedback] = useState("");
   const sharing = useRef(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -240,8 +242,9 @@ export default function SafaqatLanding() {
                   data-role={role.id}
                   aria-haspopup="dialog"
                   onClick={() => setDialog({
-                    title: messages.roles[role.id][0],
-                    description: messages.rolePreview,
+                    title: registrationMessages[language].title[role.id],
+                    description: registrationMessages[language].preview,
+                    registration: role.id,
                   })}
                 >
                   <svg className="safaqat-role-icon" viewBox="0 0 80 48" aria-hidden="true">
@@ -265,7 +268,7 @@ export default function SafaqatLanding() {
       </div>
       <dialog
         ref={dialogRef}
-        className="safaqat-dialog"
+        className={dialog?.registration ? "safaqat-dialog safaqat-registration-dialog" : "safaqat-dialog"}
         aria-labelledby="safaqat-dialog-title"
         aria-describedby="safaqat-dialog-description"
         onCancel={event => {
@@ -282,6 +285,7 @@ export default function SafaqatLanding() {
           </button>
           <h2 id="safaqat-dialog-title">{dialog?.title}</h2>
           <p id="safaqat-dialog-description">{dialog?.description}</p>
+          {dialog?.registration && <RegistrationPreview role={dialog.registration} language={language} />}
           {dialog?.shareUrl && (
             <input className="safaqat-share-link" aria-label={messages.shareLink} dir="ltr" readOnly value={dialog.shareUrl} onFocus={event => event.currentTarget.select()} />
           )}

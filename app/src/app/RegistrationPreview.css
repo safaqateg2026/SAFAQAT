@@ -1,0 +1,40 @@
+.safaqat-dialog.safaqat-registration-dialog {
+  width: min(620px, calc(100% - 24px));
+  max-height: 88vh;
+  max-height: 88dvh;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.safaqat-registration {
+  display: grid;
+  gap: 1rem;
+  margin-block-start: 1rem;
+}
+
+.safaqat-registration fieldset {
+  display: grid;
+  gap: .75rem;
+  min-inline-size: 0;
+  padding: .85rem;
+  border: 1px solid #a67b43;
+  border-radius: .75rem;
+}
+
+.safaqat-registration legend { color: #ffdf62; font-weight: 700; padding-inline: .4rem; }
+.safaqat-registration label { display: grid; gap: .3rem; min-inline-size: 0; }
+.safaqat-registration input, .safaqat-registration select, .safaqat-registration button {
+  min-inline-size: 0;
+  min-block-size: 44px;
+  padding: .5rem .65rem;
+  color: #fff;
+  background: #260631;
+  border: 1px solid #ba8c4b;
+  border-radius: .5rem;
+  font: inherit;
+}
+
+.safaqat-registration input::placeholder { color: #e1cddf; }
+.safaqat-registration button[type="submit"] { background: #ffcf45; color: #290530; font-weight: 800; cursor: pointer; }
+.safaqat-registration :is(input, select, button):focus-visible { outline: 2px solid #ffdf62; outline-offset: 2px; }
+.safaqat-registration ul { margin: 0; padding-inline-start: 1.3rem; }
