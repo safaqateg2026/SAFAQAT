@@ -66,3 +66,18 @@
 .safaqat-registration .registration-consent input { accent-color: #ffcf45; }
 .safaqat-registration button:disabled { opacity: .6; }
 .registration-map canvas { max-block-size: none; aspect-ratio: 640 / 420; }
+
+.registration-localities, .registration-locality-results { display: grid; gap: .45rem; }
+.registration-locality-results {
+  grid-auto-rows: max-content;
+  max-block-size: 15rem;
+  padding: .25rem;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #ffd96b #260631;
+}
+.registration-locality-results > p { margin: 0 .2rem .25rem; }
+.registration-locality-results > button { display: grid; gap: .1rem; text-align: start; }
+.registration-locality-results small, .registration-geography-credit { color: #e8ccac; }
+.registration-locality-current { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: space-between; align-items: center; }
+.registration-geography-credit a { color: inherit; }

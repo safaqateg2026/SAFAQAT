@@ -1,40 +1,91 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Language } from "./landingMessages";
 import { registrationMessages } from "./registrationMessages";
-import { governorates, initialCenter, locateDistrict, type Boundary, type Point } from "./registrationGeography";
+import { governorates, initialCenter, loadRegistrationMap, resolveRegistrationDistrict, type Boundary, type MapIndex, type Point } from "./registrationGeography";
+import RegistrationLocalityPicker from "./RegistrationLocalityPicker";
+import { indexLocalities, loadLocalities, loadLocalityAreas, suggestLocality, type LocalityAreas, type ResidentialLocality } from "./registrationLocalities";
 
 const size = [640, 420] as const;
 
 export default function RegistrationLocation({ language }: { language: Language }) {
   const copy = registrationMessages[language];
   const [governorate, setGovernorate] = useState("");
-  const [district, setDistrict] = useState("");
+  const [locality, setLocality] = useState("");
   const [open, setOpen] = useState(false);
-  const [boundaries, setBoundaries] = useState<Boundary[]>();
+  const [map, setMap] = useState<MapIndex>();
+  const [resolution, setResolution] = useState<{ point: Point; result?: { area: Boundary; boundaries: Boundary[] } }>();
+  const [catalog, setCatalog] = useState<{ code: string; items: ResidentialLocality[]; failed?: true }>();
+  const [areaCatalog, setAreaCatalog] = useState<{ code: string; areas?: LocalityAreas }>();
+  const [accuracy, setAccuracy] = useState(Infinity);
   const [center, setCenter] = useState<Point>(initialCenter);
   const [pin, setPin] = useState<Point>();
-  const [confirmed, setConfirmed] = useState<Point>();
+  const [confirmed, setConfirmed] = useState<{ point: Point; district: string }>();
   const [scale, setScale] = useState(27);
   const [error, setError] = useState<"mapUnavailable" | "gpsUnavailable" | null>(null);
   const [locating, setLocating] = useState(false);
   const canvas = useRef<HTMLCanvasElement>(null);
   const requestId = useRef({ id: 0 });
-  const selectedGovernorate = governorates.find(item => item.code === governorate);
-  const match = pin && boundaries && locateDistrict(pin, boundaries);
+  const resolved = pin && resolution?.point === pin ? resolution.result : undefined;
+  const match = resolved?.area;
+  const activeGovernorate = (open && match?.parent) || governorate;
+  const activeCatalog = catalog?.code === activeGovernorate ? catalog : undefined;
+  const records = useMemo(() => activeCatalog ? indexLocalities(activeCatalog.items, activeGovernorate, language) : [],
+    [activeCatalog, activeGovernorate, language]);
+  const areaCode = open && accuracy <= 75 ? match?.code : undefined;
+  const activeAreas = areaCode && areaCatalog?.code === areaCode ? areaCatalog : undefined;
+  const suggestion = pin && match && activeAreas?.areas
+    ? suggestLocality(pin, accuracy, records, match.code, activeAreas.areas) : undefined;
+  const boundaries = resolved?.boundaries ?? map?.outline;
+  const pinPending = !!(open && pin && map && (resolution?.point !== pin || (areaCode && !activeAreas)));
 
   useEffect(() => {
-    if (!open) return;
-    const pendingPosition = requestId.current;
+    if (!open || map) return;
     const controller = new AbortController();
-    fetch("/registration-geography/egy-adm2-v01.json", { signal: controller.signal })
-      .then(response => {
-        if (!response.ok) throw new Error("boundary data unavailable");
-        return response.json() as Promise<Boundary[]>;
-      })
-      .then(setBoundaries)
+    loadRegistrationMap(controller.signal).then(setMap)
       .catch(() => { if (!controller.signal.aborted) setError("mapUnavailable"); });
-    return () => { controller.abort(); pendingPosition.id++; };
-  }, [open]);
+    return () => controller.abort();
+  }, [open, map]);
+
+  useEffect(() => {
+    const pendingPosition = requestId.current;
+    return () => { pendingPosition.id++; };
+  }, []);
+
+  useEffect(() => {
+    if (!pin || !map || !open) return;
+    const controller = new AbortController();
+    resolveRegistrationDistrict(pin, map, controller.signal).then(result => {
+      if (!controller.signal.aborted) setResolution({ point: pin, result });
+    }).catch(() => {
+      if (!controller.signal.aborted) {
+        setResolution({ point: pin });
+        setError("mapUnavailable");
+      }
+    });
+    return () => controller.abort();
+  }, [map, open, pin]);
+
+  useEffect(() => {
+    if (!activeGovernorate) return;
+    const controller = new AbortController();
+    loadLocalities(activeGovernorate, controller.signal).then(items => {
+      if (!controller.signal.aborted) setCatalog({ code: activeGovernorate, items });
+    }).catch(() => {
+      if (!controller.signal.aborted) setCatalog({ code: activeGovernorate, items: [], failed: true });
+    });
+    return () => controller.abort();
+  }, [activeGovernorate]);
+
+  useEffect(() => {
+    if (!areaCode) return;
+    const controller = new AbortController();
+    loadLocalityAreas(areaCode, controller.signal).then(areas => {
+      if (!controller.signal.aborted) setAreaCatalog({ code: areaCode, areas });
+    }).catch(() => {
+      if (!controller.signal.aborted) setAreaCatalog({ code: areaCode });
+    });
+    return () => controller.abort();
+  }, [areaCode]);
 
   useEffect(() => {
     const context = canvas.current?.getContext("2d");
@@ -82,6 +133,7 @@ export default function RegistrationLocation({ language }: { language: Language 
       if (id !== requestId.current.id) return;
       const point: Point = [coords.longitude, coords.latitude];
       setPin(point);
+      setAccuracy(Number.isFinite(coords.accuracy) ? coords.accuracy : Infinity);
       setCenter(point);
       setScale(750);
       setLocating(false);
@@ -101,6 +153,8 @@ export default function RegistrationLocation({ language }: { language: Language 
   function correct(point: Point) {
     requestId.current.id++;
     setLocating(false);
+    setAccuracy(0);
+    setError(null);
     setPin(point);
   }
 
@@ -109,25 +163,24 @@ export default function RegistrationLocation({ language }: { language: Language 
     <fieldset>
       <legend>{copy.location}</legend>
       <label>{copy.governorate}
-        <select required value={open && match ? match.parent : governorate} onChange={event => {
-          closeMap(); setGovernorate(event.target.value); setDistrict(""); setConfirmed(undefined);
+        <select required value={activeGovernorate} onChange={event => {
+          closeMap(); setGovernorate(event.target.value); setLocality(""); setConfirmed(undefined);
         }}>
           <option value="">{copy.select}</option>
           {governorates.map(item => <option key={item.code} value={item.code}>{item[language]}</option>)}
         </select>
       </label>
-      <label>{copy.district}
-        <select required disabled={!selectedGovernorate && !match} value={open && match ? match.code : district}
-          onChange={event => {
-            const target = event.target.value;
-            if (open && match) setGovernorate(match.parent);
-            closeMap(); setDistrict(target); setConfirmed(undefined);
-          }}>
-          <option value="">{copy.select}</option>
-          {(open && match ? governorates.find(item => item.code === match.parent) : selectedGovernorate)?.districts.map(
-            item => <option key={item.code} value={item.code}>{item[language]}</option>)}
-        </select>
-      </label>
+      <RegistrationLocalityPicker language={language} key={activeGovernorate}
+        enabled={!!activeGovernorate} records={records} value={activeGovernorate === governorate ? locality : ""}
+        loading={!!activeGovernorate && !activeCatalog} failed={activeCatalog?.failed === true}
+        onSelect={id => {
+          if (open && match && id) {
+            setGovernorate(match.parent);
+            setConfirmed(undefined);
+            closeMap();
+          }
+          setLocality(id);
+        }} />
       <label>{copy.address}<input required maxLength={300} /></label>
       <button type="button" onClick={detect}>{copy.gps}</button>
       {confirmed && !open && <p role="status">{copy.locationConfirmed}</p>}
@@ -136,7 +189,7 @@ export default function RegistrationLocation({ language }: { language: Language 
           onKeyDown={event => {
             const change: Record<string, Point> = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, 1], ArrowDown: [0, -1] };
             const delta = change[event.key];
-            if (!delta || !boundaries) return;
+            if (!delta || !map) return;
             event.preventDefault();
             const previous = pin ?? center;
             const next: Point = [previous[0] + 12 * delta[0] / scale, previous[1] + 12 * delta[1] / scale];
@@ -144,20 +197,24 @@ export default function RegistrationLocation({ language }: { language: Language 
             setCenter(next);
           }}
           onClick={event => {
-            if (!boundaries) return;
+            if (!map) return;
             const bounds = event.currentTarget.getBoundingClientRect();
             correct([center[0] + ((event.clientX - bounds.left) / bounds.width - .5) * size[0] / scale,
               center[1] - ((event.clientY - bounds.top) / bounds.height - .5) * size[1] / scale]);
           }} />
         <p role="status">{mapError || (locating ? copy.locating : !boundaries ? copy.loadingMap :
-          pin && !match ? copy.locationUnmatched : copy.mapGuide)}</p>
+          pinPending ? copy.loadingMap : pin && !match ? copy.locationUnmatched :
+          suggestion ? copy.gpsSuggestedLocality.replace("{name}", suggestion.label) : match ? copy.gpsReviewLocality : copy.mapGuide)}</p>
         <div className="registration-actions">
           <button type="button" aria-label={copy.zoomIn} onClick={() => { setCenter(pin ?? center); setScale(Math.min(scale * 2, 12000)); }}>+</button>
           <button type="button" aria-label={copy.zoomOut} onClick={() => setScale(Math.max(scale / 2, 20))}>−</button>
           <button type="button" onClick={() => { setCenter(initialCenter); setScale(27); }}>{copy.resetMap}</button>
-          <button type="button" disabled={!match} onClick={() => {
+          <button type="button" disabled={!match || !activeCatalog || pinPending} onClick={() => {
             if (!pin || !match) return;
-            setGovernorate(match.parent); setDistrict(match.code); setConfirmed(pin); closeMap();
+            setGovernorate(match.parent);
+            setLocality(suggestion?.id ?? "");
+            setConfirmed({ point: pin, district: match.code });
+            closeMap();
           }}>{copy.confirmLocation}</button>
           <button type="button" onClick={closeMap}>{copy.cancel}</button>
         </div>
