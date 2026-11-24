@@ -3,7 +3,7 @@ import type { Language } from "./landingMessages";
 import { registrationMessages } from "./registrationMessages";
 import { governorates, initialCenter, loadRegistrationMap, resolveRegistrationDistrict, type Boundary, type MapIndex, type Point } from "./registrationGeography";
 import RegistrationLocalityPicker from "./RegistrationLocalityPicker";
-import { indexLocalities, loadLocalities, loadLocalityAreas, suggestLocality, type LocalityAreas, type ResidentialLocality } from "./registrationLocalities";
+import { indexAreas, loadAreas, loadAreaMap, suggestArea, type CuratedArea, type InternalAreaMap } from "./registrationLocalities";
 
 const size = [640, 420] as const;
 
@@ -14,8 +14,8 @@ export default function RegistrationLocation({ language }: { language: Language 
   const [open, setOpen] = useState(false);
   const [map, setMap] = useState<MapIndex>();
   const [resolution, setResolution] = useState<{ point: Point; result?: { area: Boundary; boundaries: Boundary[] } }>();
-  const [catalog, setCatalog] = useState<{ code: string; items: ResidentialLocality[]; failed?: true }>();
-  const [areaCatalog, setAreaCatalog] = useState<{ code: string; areas?: LocalityAreas }>();
+  const [catalog, setCatalog] = useState<{ code: string; items: CuratedArea[]; failed?: true }>();
+  const [areaMaps, setAreaMaps] = useState<Record<string, InternalAreaMap>>({});
   const [accuracy, setAccuracy] = useState(Infinity);
   const [center, setCenter] = useState<Point>(initialCenter);
   const [pin, setPin] = useState<Point>();
@@ -29,15 +29,12 @@ export default function RegistrationLocation({ language }: { language: Language 
   const match = resolved?.area;
   const activeGovernorate = (open && match?.parent) || governorate;
   const activeCatalog = catalog?.code === activeGovernorate ? catalog : undefined;
-  const records = useMemo(() => activeCatalog ? indexLocalities(activeCatalog.items, activeGovernorate, language) : [],
-    [activeCatalog, activeGovernorate, language]);
-  const areaCode = open && accuracy <= 75 && match && records.some(record => record.district === match.code && record.areaIds.length)
-    ? match.code : undefined;
-  const activeAreas = areaCode && areaCatalog?.code === areaCode ? areaCatalog : undefined;
-  const suggestion = pin && match
-    ? suggestLocality(pin, accuracy, records, match.code, activeAreas?.areas ?? {}) : undefined;
+  const records = useMemo(() => activeCatalog ? indexAreas(activeCatalog.items, language) : [], [activeCatalog, language]);
+  const gpsMap = activeGovernorate ? areaMaps[activeGovernorate] : undefined;
+  const suggestedId = pin && match ? suggestArea(pin, accuracy, gpsMap, match.code) : undefined;
+  const suggestion = suggestedId ? records.find(record => record.id === suggestedId) : undefined;
   const boundaries = resolved?.boundaries ?? map?.outline;
-  const pinPending = !!(open && pin && map && (resolution?.point !== pin || (areaCode && !activeAreas)));
+  const pinPending = !!(open && pin && map && (resolution?.point !== pin || (!!match && !gpsMap)));
 
   useEffect(() => {
     if (!open || map) return;
@@ -69,7 +66,7 @@ export default function RegistrationLocation({ language }: { language: Language 
   useEffect(() => {
     if (!activeGovernorate) return;
     const controller = new AbortController();
-    loadLocalities(activeGovernorate, controller.signal).then(items => {
+    loadAreas(activeGovernorate, controller.signal).then(items => {
       if (!controller.signal.aborted) setCatalog({ code: activeGovernorate, items });
     }).catch(() => {
       if (!controller.signal.aborted) setCatalog({ code: activeGovernorate, items: [], failed: true });
@@ -78,15 +75,13 @@ export default function RegistrationLocation({ language }: { language: Language 
   }, [activeGovernorate]);
 
   useEffect(() => {
-    if (!areaCode) return;
+    if (!activeGovernorate || areaMaps[activeGovernorate]) return;
     const controller = new AbortController();
-    loadLocalityAreas(areaCode, controller.signal).then(areas => {
-      if (!controller.signal.aborted) setAreaCatalog({ code: areaCode, areas });
-    }).catch(() => {
-      if (!controller.signal.aborted) setAreaCatalog({ code: areaCode });
-    });
+    loadAreaMap(activeGovernorate, controller.signal).then(value => {
+      if (!controller.signal.aborted) setAreaMaps(previous => ({ ...previous, [activeGovernorate]: value }));
+    }).catch(() => undefined);
     return () => controller.abort();
-  }, [areaCode]);
+  }, [activeGovernorate, areaMaps]);
 
   useEffect(() => {
     const context = canvas.current?.getContext("2d");
@@ -163,6 +158,7 @@ export default function RegistrationLocation({ language }: { language: Language 
   return (
     <fieldset>
       <legend>{copy.location}</legend>
+      <button type="button" onClick={detect}>{copy.gps}</button>
       <label>{copy.governorate}
         <select required value={activeGovernorate} onChange={event => {
           closeMap(); setGovernorate(event.target.value); setLocality(""); setConfirmed(undefined);
@@ -183,7 +179,6 @@ export default function RegistrationLocation({ language }: { language: Language 
           setLocality(id);
         }} />
       <label>{copy.address}<input required maxLength={300} /></label>
-      <button type="button" onClick={detect}>{copy.gps}</button>
       {confirmed && !open && <p role="status">{copy.locationConfirmed}</p>}
       {open && <div className="registration-map">
         <canvas ref={canvas} width={size[0]} height={size[1]} tabIndex={0} aria-label={copy.mapGuide}

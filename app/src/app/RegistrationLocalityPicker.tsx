@@ -1,16 +1,16 @@
 import { useState } from "react";
 import type { Language } from "./landingMessages";
 import { registrationMessages } from "./registrationMessages";
-import { searchLocalities, type IndexedLocality } from "./registrationLocalities";
+import { searchAreas, type IndexedArea } from "./registrationLocalities";
 
 export default function RegistrationLocalityPicker({ language, enabled, records, value, loading, failed, onSelect }:
-  { language: Language; enabled: boolean; records: IndexedLocality[]; value: string; loading: boolean;
+  { language: Language; enabled: boolean; records: IndexedArea[]; value: string; loading: boolean;
     failed: boolean; onSelect: (id: string) => void }) {
   const copy = registrationMessages[language];
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState(false);
   const selected = records.find(record => record.id === value);
-  const results = searchLocalities(records, query);
+  const results = searchAreas(records, query);
   return (
     <div className="registration-localities">
       <label htmlFor="registration-locality-validation">{copy.district}</label>
@@ -20,7 +20,7 @@ export default function RegistrationLocalityPicker({ language, enabled, records,
       </select>
       <button type="button" className="registration-locality-trigger" disabled={!enabled || failed}
         aria-haspopup="listbox" aria-expanded={expanded} onClick={() => setExpanded(value => !value)}>
-        <span>{selected ? `${selected.label}${selected.context ? ` · ${selected.context}` : ""}` :
+        <span>{selected ? selected.label :
           failed ? copy.localityUnavailable : loading ? copy.localitiesLoading : copy.localitySearch}</span>
         <span aria-hidden="true">⌄</span>
       </button>
@@ -32,7 +32,7 @@ export default function RegistrationLocalityPicker({ language, enabled, records,
             results.length ? results.map(record =>
               <button role="option" aria-selected={record.id === value} type="button" key={record.id}
                 onClick={() => { setQuery(""); onSelect(record.id); setExpanded(false); }}>
-                <span>{record.label}</span>{record.context && <small>{record.context}</small>}
+                <span>{record.label}</span>
               </button>) : <p role="status">{copy.localityNoResults}</p>}
         </div>
       </div>}
