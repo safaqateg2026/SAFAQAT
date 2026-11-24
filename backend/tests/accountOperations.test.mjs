@@ -247,3 +247,36 @@ test("authorized suspension records its reason and revokes the existing session"
   assert.equal(record.reason, request.reason);
   assert.equal(record.previous_state, "active");
 });
+
+test("archive objects are streamed only to the owner and every successful read is audited", async t => {
+  const { database, sql } = databaseForTest(t);
+  const { readOwnArchiveDocument } = await import("../archive.mjs");
+  const { issueVerifiedSession, revokeSession } = await import("../sessions.mjs");
+  const owner = await register(database, "retailer", 0);
+  const other = await register(database, "retailer", 1);
+  for (const account of [owner, other]) activate(sql, account.subscriberId);
+  const [ownerSession, otherSession] = await Promise.all([owner, other].map(account =>
+    issueVerifiedSession(database, { ...account, now: 102, expiresAt: 200 })));
+  const key = "a".repeat(64);
+  sql.prepare("INSERT INTO subscriber_archive_document VALUES ('doc', ?, 'business_facade', ?, 1, 105)")
+    .run(owner.subscriberId, key);
+  let bucketCalls = 0;
+  const bucket = {
+    async get(path) {
+      bucketCalls++;
+      assert.equal(path, `retailer/${owner.subscriberId}/${key}`);
+      return { body: new Response("Synthetic document").body };
+    },
+  };
+  const read = token => readOwnArchiveDocument(database, bucket, { token, documentId: "doc", clock: () => 107 });
+  assert.equal(await read(otherSession.token), null);
+  assert.equal(bucketCalls, 0);
+  const response = await read(ownerSession.token);
+  assert.equal(response.headers.get("cache-control"), "private, no-store");
+  assert.equal(response.headers.get("content-disposition"), "attachment");
+  assert.equal(await response.text(), "Synthetic document");
+  await revokeSession(database, ownerSession.token, 107);
+  assert.equal(await read(ownerSession.token), null);
+  assert.equal(bucketCalls, 1);
+  assert.equal(sql.prepare("SELECT count(*) AS n FROM subscriber_audit_event WHERE event_type = 'document_accessed'").get().n, 1);
+});

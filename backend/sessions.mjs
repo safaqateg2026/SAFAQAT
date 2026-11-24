@@ -7,13 +7,13 @@ function hex(bytes) {
   return Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("");
 }
 
-async function digest(token) {
+export async function digestSessionToken(token) {
   return hex(new Uint8Array(await crypto.subtle.digest("SHA-256", encoder.encode(token))));
 }
 
 export async function createSessionSecret() {
   const token = hex(crypto.getRandomValues(new Uint8Array(32)));
-  return { token, tokenDigest: await digest(token) };
+  return { token, tokenDigest: await digestSessionToken(token) };
 }
 
 export async function prepareSessionClaim(database, {
@@ -60,7 +60,7 @@ export async function findActiveSession(database, token, now) {
     JOIN subscriber AS account ON account.id = session.subscriber_id
     WHERE session.token_digest = ?1 AND session.issued_at <= ?2
       AND session.expires_at > ?2 AND session.revoked_at IS NULL AND account.state = 'active'
-  `).bind(await digest(token), now).first();
+  `).bind(await digestSessionToken(token), now).first();
 }
 
 export async function revokeSession(database, token, now) {
@@ -69,6 +69,6 @@ export async function revokeSession(database, token, now) {
     UPDATE subscriber_session SET revoked_at = ?2
     WHERE token_digest = ?1 AND issued_at <= ?2 AND revoked_at IS NULL
     RETURNING subscriber_id
-  `).bind(await digest(token), now).first();
+  `).bind(await digestSessionToken(token), now).first();
   return Boolean(row);
 }
