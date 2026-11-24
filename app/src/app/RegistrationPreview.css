@@ -67,7 +67,11 @@
 .safaqat-registration button:disabled { opacity: .6; }
 .registration-map canvas { max-block-size: none; aspect-ratio: 640 / 420; }
 
-.registration-localities, .registration-locality-results { display: grid; gap: .45rem; }
+.registration-localities { display: grid; gap: .45rem; position: relative; }
+.registration-locality-validation { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.registration-locality-trigger { display: flex; width: 100%; justify-content: space-between; align-items: center; text-align: start; }
+.registration-locality-menu { display: grid; gap: .4rem; padding: .55rem; border: 1px solid #ca9d58; border-radius: .7rem; background: #241037; }
+.registration-locality-results { display: grid; gap: .35rem; }
 .registration-locality-results {
   grid-auto-rows: max-content;
   max-block-size: 15rem;
@@ -79,5 +83,5 @@
 .registration-locality-results > p { margin: 0 .2rem .25rem; }
 .registration-locality-results > button { display: grid; gap: .1rem; text-align: start; }
 .registration-locality-results small, .registration-geography-credit { color: #e8ccac; }
-.registration-locality-current { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: space-between; align-items: center; }
+.registration-locality-change { justify-self: start; padding: .25rem .5rem; }
 .registration-geography-credit a { color: inherit; }

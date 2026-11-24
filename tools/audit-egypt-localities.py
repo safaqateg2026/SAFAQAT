@@ -2,11 +2,17 @@
 import argparse
 import json
 import math
+import re
 from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 GEOGRAPHY = ROOT / "app/public/registration-geography"
+CURATED = GEOGRAPHY / "localities-v2"
+
+def normalized_name(value):
+    value = value.casefold().translate(str.maketrans("ىةأإآؤئـ٠١٢٣٤٥٦٧٨٩", "يهاااوي 0123456789"))
+    return " ".join(re.sub(r"[^\w]+", " ", value).split())
 
 
 def point_valid(point):
@@ -72,7 +78,37 @@ def audit():
         summary["districts_without_locality_polygons"] = no_polygons
         summary["missing_districts"] = [name for district, name in districts.items() if district not in covered]
         report.append(summary)
-    return report
+    filtered = {}
+    invalid_tokens = re.compile(r"(?:ابراج|أبراج|برج\s+(?!العرب)|عمارة|عمارات|عمائر|كمبوند|كومباوند|مجمع(?:ات)? سكن|مساكن|اسكان|إسكان|سكن طلاب|فيلات|ريزيدنس|مطار|ميناء|مستشفى|مدرسة|مصنع|منطقة صناعية|أكاديمية الشرطة|\b(?:police|tower|towers|building|buildings|compound|housing|residence|residences|resort|hostel|villa|villas|airport|hospital|school|factory|mall|hotel)\b)", re.I)
+    for governorate in catalog:
+        code = governorate["code"]
+        entries = json.loads((CURATED / f"{code}.json").read_text())
+        names = [normalized_name(name) for row in entries for name in [row.get("ar", ""), row.get("en", ""), *row.get("aliases", [])] if name]
+        assert len(entries) == len({row["id"] for row in entries}), code
+        assert all(row.get("kind") in {"city", "town", "village", "hamlet", "suburb", "neighbourhood", "quarter", "isolated_dwelling", "settlement"} for row in entries)
+        assert all(not row.get("mappedArea") and not row.get("ring") for row in entries), code
+        assert all(not row.get("point") or point_valid(row["point"]) for row in entries), code
+        assert all(row.get("source") in {"capmas", "osm", "verified-reference", "owner-accepted-example"} for row in entries), code
+        assert all(not invalid_tokens.search(name) for name in names), code
+        assert not any("ابراج القاهره" in name or "ابراج المعتز" in name for name in names), code
+        assert not any(re.match(r"^(?:قسم(?:\s|$)|إدارة شرطة|اداره شرطه|مركز شرطة|مركز شرطه)", name) or re.search(r"\bpolice\b", name, re.I) for name in names), code
+        assert sum(row.get("source") == "capmas" for row in entries) > 0, code
+        assert sum(row.get("source") == "osm" for row in entries) > 0, code
+        filtered[code] = {"governorate": governorate["ar"], "capmas": sum(row.get("source") == "capmas" for row in entries),
+                          "osm_place_records": sum(row.get("source") == "osm" for row in entries),
+                          "verified_reference": sum(row.get("source") == "verified-reference" for row in entries),
+                          "owner_accepted_name": sum(row.get("source") == "owner-accepted-example" for row in entries),
+                          "unique_localities": len(entries), "mapped_areas_in_dropdown": 0,
+                          "coverage_status": "partial; national locality completeness not independently verified"}
+    expected = {
+        "EG02": "سيدي جابر|سيدي بشر|سبورتنج|الإبراهيمية|محطة الرمل|المنشية|الورديان|المكس|الدخيلة|البيطاش|الهانوفيل|الكيلو 21|أبو تلات|العطارين|السيوف|السيوف شماعة|الرأس السوداء|الطابية|العصافرة|المندرة|ميامي|سموحة|محرم بك|أبو قير|أبو يوسف|الصفا والمروة".split("|"),
+        "EG18": "دمنهور|أبو حمص|كفر الدوار|إدكو|رشيد|حوش عيسى|أبو المطامير|كوم حمادة|الدلنجات|إيتاي البارود|شبراخيت|المحمودية|الرحمانية".split("|")}
+    for code, examples in expected.items():
+        entries = json.loads((CURATED / f"{code}.json").read_text())
+        available = {normalized_name(name) for row in entries for name in [row.get("ar", ""), row.get("en", ""), *row.get("aliases", [])] if name}
+        missing = [name for name in examples if normalized_name(name) not in available]
+        assert not missing, f"{code}: required examples missing: {missing}"
+    return {"source_structure": report, "curated": filtered, "total_curated": sum(row["unique_localities"] for row in filtered.values())}
 
 
 def main():

@@ -11,6 +11,8 @@ export type ResidentialLocality = {
   context?: Record<Language, string>;
   aliases?: string[];
   mappedArea?: true;
+  source?: string;
+  reference?: string;
 };
 
 export type IndexedLocality = Omit<ResidentialLocality, "context"> & { label: string; context: string; search: string; areaIds: string[] };
@@ -19,6 +21,7 @@ export type LocalityAreas = Record<string, Point[]>;
 export function normalizeLocalityName(value: string) {
   return value.normalize("NFKD").toLowerCase()
     .replace(/\p{M}|ـ/gu, "")
+    .replace(/[أإآٱ]/g, "ا")
     .replace(/[ىةؤئ]/g, letter => ({ "ى": "ي", "ة": "ه", "ؤ": "و", "ئ": "ي" })[letter]!)
     .replace(/[٠-٩۰-۹]/g, digit => String(digit.charCodeAt(0) % 16))
     .replace(/(\p{L})([0-9])/gu, "$1 $2").replace(/([0-9])(\p{L})/gu, "$1 $2")
@@ -32,23 +35,9 @@ function metersBetween(first: Point, second: Point) {
 
 export async function loadLocalities(code: string, signal: AbortSignal): Promise<ResidentialLocality[]> {
   if (!governorates.some(governorate => governorate.code === code)) throw new TypeError("unknown governorate");
-  const records: ResidentialLocality[] = [];
-  for (const source of ["osm", "capmas"]) {
-    const response = await fetch(`/registration-geography/localities-v1/${source}/${code}.json`, { signal });
-    if (!response.ok) throw new Error("locality catalog unavailable");
-    records.push(...await response.json() as ResidentialLocality[]);
-  }
-  if (code === "EG02") {
-    const response = await fetch("/registration-geography/localities-v1/verified/EG02.json", { signal });
-    if (!response.ok) throw new Error("verified Alexandria names unavailable");
-    const verified = await response.json() as { aliases: Record<string, string[]>; entries: ResidentialLocality[] };
-    for (const record of records) {
-      const names = verified.aliases[record.id];
-      if (names) record.aliases = [...(record.aliases ?? []), ...names];
-    }
-    records.push(...verified.entries);
-  }
-  return records;
+  const response = await fetch(`/registration-geography/localities-v2/${code}.json`, { signal });
+  if (!response.ok) throw new Error("locality catalog unavailable");
+  return await response.json() as ResidentialLocality[];
 }
 
 // Keep namesakes in separate districts or at separate positions. Co-located

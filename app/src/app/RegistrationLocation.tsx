@@ -31,10 +31,11 @@ export default function RegistrationLocation({ language }: { language: Language 
   const activeCatalog = catalog?.code === activeGovernorate ? catalog : undefined;
   const records = useMemo(() => activeCatalog ? indexLocalities(activeCatalog.items, activeGovernorate, language) : [],
     [activeCatalog, activeGovernorate, language]);
-  const areaCode = open && accuracy <= 75 ? match?.code : undefined;
+  const areaCode = open && accuracy <= 75 && match && records.some(record => record.district === match.code && record.areaIds.length)
+    ? match.code : undefined;
   const activeAreas = areaCode && areaCatalog?.code === areaCode ? areaCatalog : undefined;
-  const suggestion = pin && match && activeAreas?.areas
-    ? suggestLocality(pin, accuracy, records, match.code, activeAreas.areas) : undefined;
+  const suggestion = pin && match
+    ? suggestLocality(pin, accuracy, records, match.code, activeAreas?.areas ?? {}) : undefined;
   const boundaries = resolved?.boundaries ?? map?.outline;
   const pinPending = !!(open && pin && map && (resolution?.point !== pin || (areaCode && !activeAreas)));
 

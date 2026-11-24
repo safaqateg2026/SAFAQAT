@@ -186,10 +186,10 @@ class Places(osmium.SimpleHandler):
 
     def add_tags(self, tags, identifier, point, ring=None):
         kind = tags.get("place")
+        # A residential land-use polygon describes land use, not a verified
+        # locality. Only explicit place classifications are eligible.
         if kind not in PLACE_TYPES:
-            if not ring or tags.get("landuse") != "residential":
-                return
-            kind = "neighbourhood"
+            return
         name = (tags.get("name") or "").strip()
         ar = (tags.get("name:ar") or (name if ARABIC.search(name) else "")).strip()
         en = (tags.get("name:en") or (name if not ARABIC.search(name) and LATIN.search(name) else "")).strip()
@@ -206,7 +206,7 @@ class Places(osmium.SimpleHandler):
         self.add_tags(node.tags, f"n:{node.id}", [node.location.lon, node.location.lat])
 
     def way(self, way):
-        if not (way.tags.get("place") in PLACE_TYPES or way.tags.get("landuse") == "residential"):
+        if way.tags.get("place") not in PLACE_TYPES:
             return
         if not any(way.tags.get(key) for key in ("name", "name:ar", "name:en")) or not way.is_closed():
             return
