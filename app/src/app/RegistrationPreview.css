@@ -38,3 +38,31 @@
 .safaqat-registration button[type="submit"] { background: #ffcf45; color: #290530; font-weight: 800; cursor: pointer; }
 .safaqat-registration :is(input, select, button):focus-visible { outline: 2px solid #ffdf62; outline-offset: 2px; }
 .safaqat-registration ul { margin: 0; padding-inline-start: 1.3rem; }
+
+.registration-birth, .registration-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.registration-birth > label { flex: 1 1 5rem; }
+.registration-birth select { width: 100%; }
+.registration-map, .registration-camera, .registration-camera-stage { display: grid; gap: .6rem; min-width: 0; }
+.registration-map canvas, .registration-camera-stage canvas:not([hidden]), .registration-camera-stage video {
+  display: block;
+  inline-size: 100%;
+  max-block-size: 48vh;
+  object-fit: contain;
+  background: #180d24;
+  border-radius: .5rem;
+}
+.registration-map canvas { cursor: crosshair; }
+.registration-map canvas:focus-visible { outline: 2px solid #ffdf62; }
+.registration-viewfinder { position: relative; }
+.registration-frame {
+  position: absolute;
+  inset: 18% 12%;
+  border: 2px dashed #ffdf62;
+  border-radius: .45rem;
+  pointer-events: none;
+}
+.registration-frame-selfie { inset: 12% 30%; border-radius: 50%; }
+.safaqat-registration .registration-consent { display: flex; align-items: center; }
+.safaqat-registration .registration-consent input { accent-color: #ffcf45; }
+.safaqat-registration button:disabled { opacity: .6; }
+.registration-map canvas { max-block-size: none; aspect-ratio: 640 / 420; }

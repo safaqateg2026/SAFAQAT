@@ -1,17 +1,12 @@
 import { useState } from "react";
 import type { Language } from "./landingMessages";
 import { registrationMessages } from "./registrationMessages";
+import BirthDateFields from "./BirthDateFields";
+import RegistrationLocation from "./RegistrationLocation";
+import RegistrationCamera from "./RegistrationCamera";
 import "./RegistrationPreview.css";
 
 export type RegistrationRole = keyof typeof registrationMessages.ar.title;
-
-function latestBirthday() {
-  const date = new Date();
-  const year = date.getFullYear() - 18;
-  const month = date.getMonth();
-  const day = Math.min(date.getDate(), new Date(year, month + 1, 0).getDate());
-  return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-}
 
 export default function RegistrationPreview({ role, language }: { role: RegistrationRole; language: Language }) {
   const copy = registrationMessages[language];
@@ -19,8 +14,15 @@ export default function RegistrationPreview({ role, language }: { role: Registra
   const business = role === "merchant" || role === "supplier";
   const courier = role === "courier";
   const consumer = role === "consumer";
-  const documents: string[] = [copy.id, copy.idFront, copy.idBack, copy.selfie];
-  if (business) documents.push(copy.facade);
+  const cameraItems = [
+    { key: "idFront", label: copy.idFront }, { key: "idBack", label: copy.idBack },
+    { key: "selfie", label: copy.selfie, selfie: true },
+    ...(courier ? [
+      { key: "vehiclePhoto", label: copy.vehiclePhoto },
+      { key: "drivingLicense", label: copy.drivingLicense },
+      { key: "vehicleLicense", label: copy.vehicleLicense },
+    ] : []),
+  ];
   const policies = [copy.terms, copy.privacy, copy.commission];
   const applicablePolicies = [...policies, ...(!courier ? [copy.sales] : []), ...(courier || consumer ? [copy.deliveryPolicy] : [])];
 
@@ -33,17 +35,10 @@ export default function RegistrationPreview({ role, language }: { role: Registra
         <label>{copy.name}<input required maxLength={150} /></label>
         <label>{copy.phone}<input required type="tel" dir="ltr" pattern="\+201[0-9]{9}" maxLength={13} /></label>
         <label>{consumer ? copy.optionalEmail : copy.email}<input required={!consumer} dir="ltr" type="email" maxLength={254} /></label>
-        <label>{copy.birth}<input required type="date" max={latestBirthday()} /></label>
+        <BirthDateFields language={language} />
       </fieldset>
-      <fieldset>
-        <legend>{copy.location}</legend>
-        <label>{copy.governorate}<input required maxLength={100} /></label>
-        <label>{copy.district}<input required maxLength={100} /></label>
-        <label>{copy.address}<input required maxLength={300} /></label>
-        <label>{copy.latitude}<input required type="number" step="any" min="-90" max="90" dir="ltr" /></label>
-        <label>{copy.longitude}<input required type="number" step="any" min="-180" max="180" dir="ltr" /></label>
-        {!consumer && <label>{copy.coverage}<input disabled placeholder={copy.coverageHint} /></label>}
-      </fieldset>
+      <RegistrationLocation language={language} />
+      {!consumer && <label>{copy.coverage}<input disabled placeholder={copy.coverageHint} /></label>}
       {business && <fieldset>
         <legend>{copy.business}</legend>
         <label>{copy.businessName}<input required maxLength={150} /></label>
@@ -62,9 +57,12 @@ export default function RegistrationPreview({ role, language }: { role: Registra
       </fieldset>}
       {!consumer && <fieldset>
         <legend>{copy.documents}</legend>
-        <ul>{[...documents, ...(courier ? [copy.vehiclePhoto, copy.drivingLicense, copy.vehicleLicense] : [])]
-          .map(document => <li key={document}>{document}</li>)}</ul>
-        <button type="button" disabled>{copy.upload}</button>
+        <ul>
+          <li>{copy.id}</li>
+          {business && <li>{copy.facade}</li>}
+        </ul>
+        <RegistrationCamera language={language} items={cameraItems} />
+        <p>{copy.upload}</p>
       </fieldset>}
       <fieldset>
         <legend>{copy.policies}</legend>

@@ -32,11 +32,8 @@ export function validateRegistration(input, { today, districts, activities, poli
   const birth = input.birthDate;
   const parsedBirth = typeof birth === "string" && /^\d{4}-\d{2}-\d{2}$/.test(birth) ? new Date(birth) : null;
   if (!parsedBirth || !Number.isFinite(parsedBirth.valueOf())
-    || parsedBirth.toISOString().slice(0, 10) !== birth || birth > today) {
+    || parsedBirth.toISOString().slice(0, 10) !== birth || birth.startsWith("0000-") || birth > today) {
     issues.push("invalidBirthDate");
-  } else {
-    const adulthoodYear = Number(birth.slice(0, 4)) + 18;
-    if (`${adulthoodYear}${birth.slice(4)}` > today) issues.push("minimumAge");
   }
 
   if (!districts.get(input.governorateCode)?.has(input.districtCode)) issues.push("invalidDistrict");

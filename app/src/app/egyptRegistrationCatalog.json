@@ -1,0 +1,2016 @@
+[
+  {
+    "code": "EG02",
+    "en": "Alexandria",
+    "ar": "الاسكندرية",
+    "districts": [
+      {
+        "code": "EG0209",
+        "en": "A L Labban",
+        "ar": "قسم اللبان"
+      },
+      {
+        "code": "EG0213",
+        "en": "Al Amreia",
+        "ar": "قسم العامرية"
+      },
+      {
+        "code": "EG0206",
+        "en": "Al Attarin",
+        "ar": "قسم العطارين"
+      },
+      {
+        "code": "EG0212",
+        "en": "Al Dikhila",
+        "ar": "قسم الدخيلة"
+      },
+      {
+        "code": "EG0210",
+        "en": "Al Gumruk",
+        "ar": "قسم الجمرك"
+      },
+      {
+        "code": "EG0207",
+        "en": "Al Manshiyya",
+        "ar": "قسم المنشية"
+      },
+      {
+        "code": "EG0202",
+        "en": "Al Raml",
+        "ar": "قسم أول الرمل"
+      },
+      {
+        "code": "EG0204",
+        "en": "Bab Sharqi",
+        "ar": "قسم باب شرقى"
+      },
+      {
+        "code": "EG0214",
+        "en": "Burg al-Arab",
+        "ar": "قسم برج العرب"
+      },
+      {
+        "code": "EG0216",
+        "en": "Burg Al-Arab City",
+        "ar": "مدينه برج العرب الجديده"
+      },
+      {
+        "code": "EG0208",
+        "en": "Karmuz",
+        "ar": "قسم كرموز"
+      },
+      {
+        "code": "EG0217",
+        "en": "Kesm than Al Raml",
+        "ar": "قسم ثان الرمل"
+      },
+      {
+        "code": "EG0211",
+        "en": "Mina Al-Basal",
+        "ar": "قسم مينا البصل"
+      },
+      {
+        "code": "EG0205",
+        "en": "Muharam Bik",
+        "ar": "قسم محرم بك"
+      },
+      {
+        "code": "EG0201",
+        "en": "Muntazah",
+        "ar": "قسم المنتزة"
+      },
+      {
+        "code": "EG0218",
+        "en": "North Coast",
+        "ar": "الساحل الشمالى"
+      },
+      {
+        "code": "EG0215",
+        "en": "Port Alexandria Police Department",
+        "ar": "اداره شرطه ميناء الأسكندريه"
+      },
+      {
+        "code": "EG0203",
+        "en": "Sidi Gabir",
+        "ar": "قسم سيدى جابر"
+      },
+      {
+        "code": "EG0200",
+        "en": "Zemam Out",
+        "ar": "خارج الزمام"
+      }
+    ]
+  },
+  {
+    "code": "EG25",
+    "en": "Assiut",
+    "ar": "أسيوط",
+    "districts": [
+      {
+        "code": "EG2504",
+        "en": "Abnub",
+        "ar": "مركز أبنوب"
+      },
+      {
+        "code": "EG2505",
+        "en": "Abu Tig",
+        "ar": "مركز أبوتيج"
+      },
+      {
+        "code": "EG2506",
+        "en": "Al- Badari",
+        "ar": "مركز البدارى"
+      },
+      {
+        "code": "EG2508",
+        "en": "Al-Ghanayem",
+        "ar": "مركز الغنايم"
+      },
+      {
+        "code": "EG2509",
+        "en": "Al-Qusia",
+        "ar": "مركز القوصية"
+      },
+      {
+        "code": "EG2513",
+        "en": "Alfath",
+        "ar": "مركز الفتح"
+      },
+      {
+        "code": "EG2503",
+        "en": "Assuit",
+        "ar": "مركز أسيوط"
+      },
+      {
+        "code": "EG2514",
+        "en": "Assuit City",
+        "ar": "مدينة اسيوط الجديدة"
+      },
+      {
+        "code": "EG2510",
+        "en": "Dayrut",
+        "ar": "مركز ديروط"
+      },
+      {
+        "code": "EG2501",
+        "en": "Kesm Awal Assuit",
+        "ar": "قسم أول أسيوط"
+      },
+      {
+        "code": "EG2502",
+        "en": "Kesm Than Assuit",
+        "ar": "قسم ثان أسيوط"
+      },
+      {
+        "code": "EG2512",
+        "en": "Manfalut",
+        "ar": "مركز منفلوط"
+      },
+      {
+        "code": "EG2507",
+        "en": "Sahil Silim",
+        "ar": "مركز ساحل سليم"
+      },
+      {
+        "code": "EG2511",
+        "en": "Sidfa",
+        "ar": "مركز صدفا"
+      },
+      {
+        "code": "EG2500",
+        "en": "Zemam Out",
+        "ar": "صحراء أسيوط"
+      }
+    ]
+  },
+  {
+    "code": "EG28",
+    "en": "Aswan",
+    "ar": "أسوان",
+    "districts": [
+      {
+        "code": "EG2807",
+        "en": "Abu Simbel",
+        "ar": "مركز أبوسنبل"
+      },
+      {
+        "code": "EG2803",
+        "en": "Adfu",
+        "ar": "مركز أدفو"
+      },
+      {
+        "code": "EG2801",
+        "en": "Aswan",
+        "ar": "قسم أسوان"
+      },
+      {
+        "code": "EG2802",
+        "en": "Aswan",
+        "ar": "مركز أسوان"
+      },
+      {
+        "code": "EG2808",
+        "en": "Aswan City",
+        "ar": "مدينة أسوان الجديدة"
+      },
+      {
+        "code": "EG2806",
+        "en": "Daraw",
+        "ar": "مركز دراو"
+      },
+      {
+        "code": "EG2804",
+        "en": "Kum Umbu",
+        "ar": "مركز كوم امبو"
+      },
+      {
+        "code": "EG2805",
+        "en": "Nasr",
+        "ar": "مركز نصر"
+      },
+      {
+        "code": "EG2809",
+        "en": "Tushaka",
+        "ar": "مدينة توشكى الجديدة"
+      },
+      {
+        "code": "EG2800",
+        "en": "Zemam Out",
+        "ar": "خارج الزمام"
+      }
+    ]
+  },
+  {
+    "code": "EG18",
+    "en": "Behera",
+    "ar": "البحيرة",
+    "districts": [
+      {
+        "code": "EG1803",
+        "en": "Abu-l-Matamir",
+        "ar": "مركز ابوالمطامير"
+      },
+      {
+        "code": "EG1804",
+        "en": "Abu Hummus",
+        "ar": "مركز ابوحمص"
+      },
+      {
+        "code": "EG1805",
+        "en": "Al-Dilingat",
+        "ar": "مركز الدلنجات"
+      },
+      {
+        "code": "EG1806",
+        "en": "Al-Mahmudiyya",
+        "ar": "مركز المحمودية"
+      },
+      {
+        "code": "EG1815",
+        "en": "Al-Rahmaniyya",
+        "ar": "مركز الرحمانية"
+      },
+      {
+        "code": "EG1818",
+        "en": "Badr",
+        "ar": "مركز بدر"
+      },
+      {
+        "code": "EG1801",
+        "en": "Damanhur",
+        "ar": "قسم دمنهور"
+      },
+      {
+        "code": "EG1802",
+        "en": "Damanhur",
+        "ar": "مركز دمنهور"
+      },
+      {
+        "code": "EG1808",
+        "en": "Hush Isa",
+        "ar": "مركز حوش عيسى"
+      },
+      {
+        "code": "EG1816",
+        "en": "Idku",
+        "ar": "مركز إدكو"
+      },
+      {
+        "code": "EG1807",
+        "en": "Itay Al-Barud",
+        "ar": "مركز إيتاى البارود"
+      },
+      {
+        "code": "EG1811",
+        "en": "Kafr Al-Dawwar",
+        "ar": "قسم كفرالدوار"
+      },
+      {
+        "code": "EG1812",
+        "en": "Kafr Al-Dawwar",
+        "ar": "مركز كفر الدوار"
+      },
+      {
+        "code": "EG1813",
+        "en": "Kum Hamada",
+        "ar": "مركز كوم حمادة"
+      },
+      {
+        "code": "EG1817",
+        "en": "Nubariyya West",
+        "ar": "قسم غرب النوبارية"
+      },
+      {
+        "code": "EG1809",
+        "en": "Rashid",
+        "ar": "مركز رشيد"
+      },
+      {
+        "code": "EG1810",
+        "en": "Shubra Khit",
+        "ar": "مركز شبراخيت"
+      },
+      {
+        "code": "EG1814",
+        "en": "Wadi Al-NatrUn",
+        "ar": "مركز وادى النطرون"
+      },
+      {
+        "code": "EG1800",
+        "en": "Zemam Out",
+        "ar": "خارج الزمام"
+      }
+    ]
+  },
+  {
+    "code": "EG22",
+    "en": "Beni Suef",
+    "ar": "بنى سويف",
+    "districts": [
+      {
+        "code": "EG2206",
+        "en": "Ahnasya",
+        "ar": "مركز أهناسيا"
+      },
+      {
+        "code": "EG2204",
+        "en": "Al Fashn",
+        "ar": "مركز الفشن"
+      },
+      {
+        "code": "EG2205",
+        "en": "Al Wasta",
+        "ar": "مركز الواسطى"
+      },
+      {
+        "code": "EG2201",
+        "en": "Bani Swayf",
+        "ar": "قسم بنى سويف"
+      },
+      {
+        "code": "EG2202",
+        "en": "Bani Swayf",
+        "ar": "مركز بنى سويف"
+      },
+      {
+        "code": "EG2203",
+        "en": "Bani Swayf City",
+        "ar": "قسم مدينة بنى سويف الجديدة"
+      },
+      {
+        "code": "EG2207",
+        "en": "Biba",
+        "ar": "مركز ببا"
+      },
+      {
+        "code": "EG2209",
+        "en": "Nasir",
+        "ar": "مركز ناصر"
+      },
+      {
+        "code": "EG2208",
+        "en": "Sumusta",
+        "ar": "مركز سمسطا"
+      },
+      {
+        "code": "EG2200",
+        "en": "Zemam Out",
+        "ar": "خارج الزمام"
+      }
+    ]
+  },
+  {
+    "code": "EG01",
+    "en": "Cairo",
+    "ar": "القاهرة",
+    "districts": [
+      {
+        "code": "EG0103",
+        "en": "15 Mayu",
+        "ar": "قسم 15 مايو"
+      },
+      {
+        "code": "EG0109",
+        "en": "Abdin",
+        "ar": "قسم عابدين"
+      },
+      {
+        "code": "EG0130",
+        "en": "Ain Shams",
+        "ar": "قسم عينشمس"
+      },
+      {
+        "code": "EG0113",
+        "en": "Al Azbakiyya",
+        "ar": "قسم الأزبكية"
+      },
+      {
+        "code": "EG0114",
+        "en": "Al Darb al-Ahmar",
+        "ar": "قسم الدرب الأحمر"
+      },
+      {
+        "code": "EG0108",
+        "en": "Al Khalifa",
+        "ar": "قسم الخليفة"
+      },
+      {
+        "code": "EG0125",
+        "en": "Al Matariyya",
+        "ar": "قسم المطرية"
+      },
+      {
+        "code": "EG0121",
+        "en": "Al Sahil",
+        "ar": "قسم الساحل"
+      },
+      {
+        "code": "EG0132",
+        "en": "Al Salam",
+        "ar": "قسم السلام"
+      },
+      {
+        "code": "EG0118",
+        "en": "Al Sharabiyya",
+        "ar": "قسم الشرابية"
+      },
+      {
+        "code": "EG0101",
+        "en": "Al Tibbin",
+        "ar": "قسم التبين"
+      },
+      {
+        "code": "EG0122",
+        "en": "Al Wayli",
+        "ar": "قسم الوايلي"
+      },
+      {
+        "code": "EG0117",
+        "en": "Al Zahir",
+        "ar": "قسم الظاهر"
+      },
+      {
+        "code": "EG0124",
+        "en": "Al Zaytun",
+        "ar": "قسم الزيتون"
+      },
+      {
+        "code": "EG0116",
+        "en": "Bab Al-Shariyya",
+        "ar": "قسم باب الشعرية"
+      },
+      {
+        "code": "EG0141",
+        "en": "Badr",
+        "ar": "قسم بدر"
+      },
+      {
+        "code": "EG0135",
+        "en": "Basatin",
+        "ar": "قسم البساتين"
+      },
+      {
+        "code": "EG0112",
+        "en": "Bulaq",
+        "ar": "قسم بولاق"
+      },
+      {
+        "code": "EG0115",
+        "en": "Gamaliyya",
+        "ar": "قسم الجمالية"
+      },
+      {
+        "code": "EG0123",
+        "en": "Hadaiq Al-Qubba",
+        "ar": "قسم حدائقالقبة"
+      },
+      {
+        "code": "EG0102",
+        "en": "Hilwan",
+        "ar": "قسم حلوان"
+      },
+      {
+        "code": "EG0104",
+        "en": "Maadi",
+        "ar": "قسم المعادي"
+      },
+      {
+        "code": "EG0127",
+        "en": "Madinat Nasr-2",
+        "ar": "قسم ثانمدينةنصر"
+      },
+      {
+        "code": "EG0136",
+        "en": "Marg",
+        "ar": "قسم المرج"
+      },
+      {
+        "code": "EG0134",
+        "en": "Minshat Nasir",
+        "ar": "منشأةناصر"
+      },
+      {
+        "code": "EG0128",
+        "en": "Misr al-Gadida",
+        "ar": "قسم مصرالجديدة"
+      },
+      {
+        "code": "EG0106",
+        "en": "Misr Al-Qadima",
+        "ar": "مصرالقديمة"
+      },
+      {
+        "code": "EG0110",
+        "en": "Muski",
+        "ar": "قسم الموسكي"
+      },
+      {
+        "code": "EG0126",
+        "en": "Nasr City",
+        "ar": "قسم أول مدينة نصر"
+      },
+      {
+        "code": "EG0137",
+        "en": "New Cairo-1",
+        "ar": "قسم أول القاهرة الجديدة"
+      },
+      {
+        "code": "EG0138",
+        "en": "New Cairo-2",
+        "ar": "قسم ثان القاهرة الجديدة"
+      },
+      {
+        "code": "EG0139",
+        "en": "New Cairo-3",
+        "ar": "قسم ثالث القاهرة الجديدة"
+      },
+      {
+        "code": "EG0129",
+        "en": "Nuzha",
+        "ar": "قسم النزهة"
+      },
+      {
+        "code": "EG0111",
+        "en": "Qasr Al-Nile",
+        "ar": "قسم قصر النيل"
+      },
+      {
+        "code": "EG0120",
+        "en": "Rud Al-Farag",
+        "ar": "قسم روضالفرج"
+      },
+      {
+        "code": "EG0107",
+        "en": "Sayyida Zainab",
+        "ar": "قسم السيدة زينب"
+      },
+      {
+        "code": "EG0140",
+        "en": "Shroq",
+        "ar": "قسم الشروق"
+      },
+      {
+        "code": "EG0119",
+        "en": "Shubra",
+        "ar": "قسم شبرا"
+      },
+      {
+        "code": "EG0105",
+        "en": "Tura",
+        "ar": "قسم طره"
+      },
+      {
+        "code": "EG0133",
+        "en": "Zamalik",
+        "ar": "قسم الزمالك"
+      },
+      {
+        "code": "EG0131",
+        "en": "Zawiyya Al-Hamra",
+        "ar": "قسم الزاويةالحمراء"
+      },
+      {
+        "code": "EG0100",
+        "en": "Zemam Out",
+        "ar": "خارج الزمام"
+      }
+    ]
+  },
+  {
+    "code": "EG12",
+    "en": "Dakahlia",
+    "ar": "الدقهلية",
+    "districts": [
+      {
+        "code": "EG1204",
+        "en": "Aga",
+        "ar": "مركز أجا"
+      },
+      {
+        "code": "EG1218",
+        "en": "Bany Abeed",
+        "ar": "مركز بنى عبيد"
+      },
+      {
+        "code": "EG1208",
+        "en": "Bilqas",
+        "ar": "مركز بلقاس"
+      },
+      {
+        "code": "EG1209",
+        "en": "Dikirnis",
+        "ar": "مركز دكرنس"
+      },
+      {
+        "code": "EG1202",
+        "en": "E Mansora 2",
+        "ar": "قسم ثان المنصورة"
+      },
+      {
+        "code": "EG1203",
+        "en": "El Mansora",
+        "ar": "مركز المنصورة"
+      },
+      {
+        "code": "EG1201",
+        "en": "El Mansora 1",
+        "ar": "قسم اول المنصورة"
+      },
+      {
+        "code": "EG1215",
+        "en": "Gamaliyya",
+        "ar": "مركز الجمالية"
+      },
+      {
+        "code": "EG1220",
+        "en": "Gamsa",
+        "ar": "قسم جمصة"
+      },
+      {
+        "code": "EG1219",
+        "en": "Mahalet Demna",
+        "ar": "مركز محلة دمنة"
+      },
+      {
+        "code": "EG1207",
+        "en": "Manzala",
+        "ar": "مركز المنزلة"
+      },
+      {
+        "code": "EG1206",
+        "en": "Matariyya",
+        "ar": "مركز المطرية"
+      },
+      {
+        "code": "EG1214",
+        "en": "Minya Al-Nasr",
+        "ar": "مركز منية النصر"
+      },
+      {
+        "code": "EG1212",
+        "en": "Mit Ghamr",
+        "ar": "قسم ميت غمر"
+      },
+      {
+        "code": "EG1213",
+        "en": "Mit Ghamr",
+        "ar": "مركز ميت غمر"
+      },
+      {
+        "code": "EG1217",
+        "en": "MIt Salsil",
+        "ar": "مركز ميت سلسيل"
+      },
+      {
+        "code": "EG1221",
+        "en": "Nebro",
+        "ar": "مركز نبروة"
+      },
+      {
+        "code": "EG1210",
+        "en": "Shirbin",
+        "ar": "مركز شربين"
+      },
+      {
+        "code": "EG1205",
+        "en": "Sinbillawin",
+        "ar": "مركز السنبلاوين"
+      },
+      {
+        "code": "EG1211",
+        "en": "Talkha",
+        "ar": "مركز طلخا"
+      },
+      {
+        "code": "EG1216",
+        "en": "Tamy Al-Amdid",
+        "ar": "مركز تمى الأمديد"
+      }
+    ]
+  },
+  {
+    "code": "EG11",
+    "en": "Damietta",
+    "ar": "دمياط",
+    "districts": [
+      {
+        "code": "EG1102",
+        "en": "Dumyat",
+        "ar": "مركز دمياط"
+      },
+      {
+        "code": "EG1101",
+        "en": "Dumyat 1",
+        "ar": "قسم أول دمياط"
+      },
+      {
+        "code": "EG1109",
+        "en": "Dumyat 2",
+        "ar": "قسم ثان دمياط"
+      },
+      {
+        "code": "EG1105",
+        "en": "Dumyat Al-Gadida",
+        "ar": "قسم مدينه دمياط الجديده"
+      },
+      {
+        "code": "EG1103",
+        "en": "Fariskur",
+        "ar": "مركز فارسكور"
+      },
+      {
+        "code": "EG1104",
+        "en": "Kafr Sad",
+        "ar": "مركز كفر سعد"
+      },
+      {
+        "code": "EG1108",
+        "en": "Police Department Port of Damietta",
+        "ar": "إداره شرطه ميناء دمياط الجديد"
+      },
+      {
+        "code": "EG1106",
+        "en": "Ras al-Bar",
+        "ar": "قسم رأس البر"
+      },
+      {
+        "code": "EG1107",
+        "en": "Zarqa",
+        "ar": "مركز الزرقا"
+      }
+    ]
+  },
+  {
+    "code": "EG23",
+    "en": "Fayoum",
+    "ar": "الفيوم",
+    "districts": [
+      {
+        "code": "EG2303",
+        "en": "Abshaway",
+        "ar": "مركز أبشواى"
+      },
+      {
+        "code": "EG2304",
+        "en": "Atsa",
+        "ar": "مركز أطسا"
+      },
+      {
+        "code": "EG2301",
+        "en": "Fayyum",
+        "ar": "قسم الفيوم"
+      },
+      {
+        "code": "EG2302",
+        "en": "Fayyum",
+        "ar": "مركز الفيوم"
+      },
+      {
+        "code": "EG2308",
+        "en": "Fayyum City",
+        "ar": "مدينة الفيوم الجديدة"
+      },
+      {
+        "code": "EG2305",
+        "en": "Sinuras",
+        "ar": "مركز سنورس"
+      },
+      {
+        "code": "EG2306",
+        "en": "Tamya",
+        "ar": "مركز طامية"
+      },
+      {
+        "code": "EG2307",
+        "en": "Yousef El sadeq",
+        "ar": "مركز يوسف الصديق"
+      },
+      {
+        "code": "EG2300",
+        "en": "Zemam Out",
+        "ar": "خارج الزمام"
+      }
+    ]
+  },
+  {
+    "code": "EG16",
+    "en": "Gharbia",
+    "ar": "الغربية",
+    "districts": [
+      {
+        "code": "EG1608",
+        "en": "Basyun",
+        "ar": "مركز بسيون"
+      },
+      {
+        "code": "EG1607",
+        "en": "El Mahalla El Kobra",
+        "ar": "مركز المحله الكبرى"
+      },
+      {
+        "code": "EG1605",
+        "en": "El Mahalla El Kobra 1",
+        "ar": "قسم أول المحلة الكبرى"
+      },
+      {
+        "code": "EG1606",
+        "en": "El Mahalla El Kobra 2",
+        "ar": "قسم ثان المحلة الكبرى"
+      },
+      {
+        "code": "EG1612",
+        "en": "Kafr Al-Zayyat",
+        "ar": "مركز كفر الزيات"
+      },
+      {
+        "code": "EG1611",
+        "en": "Qutur",
+        "ar": "مركز قطور"
+      },
+      {
+        "code": "EG1610",
+        "en": "Samannud",
+        "ar": "مركز سمنود"
+      },
+      {
+        "code": "EG1604",
+        "en": "Santa",
+        "ar": "مركز السنطة"
+      },
+      {
+        "code": "EG1603",
+        "en": "Tanta",
+        "ar": "مركز طنطا"
+      },
+      {
+        "code": "EG1601",
+        "en": "Tanta 1",
+        "ar": "قسم أول طنطا"
+      },
+      {
+        "code": "EG1602",
+        "en": "Tanta 2",
+        "ar": "قسم ثان طنطا"
+      },
+      {
+        "code": "EG1609",
+        "en": "Zifta",
+        "ar": "مركز زفتى"
+      }
+    ]
+  },
+  {
+    "code": "EG21",
+    "en": "Giza",
+    "ar": "الجيزة",
+    "districts": [
+      {
+        "code": "EG2107",
+        "en": "6 October-1",
+        "ar": "قسم أول 6 أكتوبر"
+      },
+      {
+        "code": "EG2121",
+        "en": "6 October-2",
+        "ar": "قسم ثان 6 أكتوبر"
+      },
+      {
+        "code": "EG2102",
+        "en": "Al-Aguza",
+        "ar": "قسم العجوزة"
+      },
+      {
+        "code": "EG2106",
+        "en": "Al-Ahram",
+        "ar": "قسم الأهرام"
+      },
+      {
+        "code": "EG2115",
+        "en": "Atfeh",
+        "ar": "مركز أطفيح"
+      },
+      {
+        "code": "EG2116",
+        "en": "Auseem",
+        "ar": "مركز أوسيم"
+      },
+      {
+        "code": "EG2112",
+        "en": "Ayat",
+        "ar": "مركز العياط"
+      },
+      {
+        "code": "EG2110",
+        "en": "Badrashain",
+        "ar": "مركز البدرشين"
+      },
+      {
+        "code": "EG2114",
+        "en": "Bahariya Oasis",
+        "ar": "قسم الواحاتالبحرية"
+      },
+      {
+        "code": "EG2105",
+        "en": "Bulaq Al-DakrUr",
+        "ar": "قسم بولاق الدكرور"
+      },
+      {
+        "code": "EG2103",
+        "en": "DuqqI",
+        "ar": "قسم الدقي"
+      },
+      {
+        "code": "EG2104",
+        "en": "Giza",
+        "ar": "قسم الجيزة"
+      },
+      {
+        "code": "EG2109",
+        "en": "Giza",
+        "ar": "مركز الجيزة"
+      },
+      {
+        "code": "EG2108",
+        "en": "Hwamdeia",
+        "ar": "قسم الحوامدية"
+      },
+      {
+        "code": "EG2101",
+        "en": "Imbaba",
+        "ar": "قسم امبابه"
+      },
+      {
+        "code": "EG2113",
+        "en": "Imbaba",
+        "ar": "مركز إمبابة"
+      },
+      {
+        "code": "EG2120",
+        "en": "Kardasa",
+        "ar": "مركز كرداسة"
+      },
+      {
+        "code": "EG2111",
+        "en": "Saf",
+        "ar": "مركز الصف"
+      },
+      {
+        "code": "EG2119",
+        "en": "Shaykh Zayed",
+        "ar": "قسم الشيخ زايد"
+      },
+      {
+        "code": "EG2118",
+        "en": "Umraniyya",
+        "ar": "قسم العمرانية"
+      },
+      {
+        "code": "EG2117",
+        "en": "Waraq",
+        "ar": "قسم الوراق"
+      },
+      {
+        "code": "EG2100",
+        "en": "Zemam Out",
+        "ar": "خارج الزمام"
+      }
+    ]
+  },
+  {
+    "code": "EG19",
+    "en": "Ismailia",
+    "ar": "الإسماعيلية",
+    "districts": [
+      {
+        "code": "EG1907",
+        "en": "Fayid",
+        "ar": "مركز فايد"
+      },
+      {
+        "code": "EG1904",
+        "en": "Ismailiyya",
+        "ar": "مركز الاسماعيلية"
+      },
+      {
+        "code": "EG1901",
+        "en": "Ismailiyya 1",
+        "ar": "قسم أول الاسماعيلية"
+      },
+      {
+        "code": "EG1902",
+        "en": "Ismailiyya 2",
+        "ar": "قسم ثان الاسماعيلية"
+      },
+      {
+        "code": "EG1903",
+        "en": "Ismailiyya 3",
+        "ar": "قسم ثالث الاسماعيلية"
+      },
+      {
+        "code": "EG1906",
+        "en": "Qantara Gharb, al-",
+        "ar": "مركز القنطرة"
+      },
+      {
+        "code": "EG1908",
+        "en": "Qantara Sharq, al-",
+        "ar": "قسم القنطرة شرق"
+      },
+      {
+        "code": "EG1905",
+        "en": "Tal al-Kabir, al-",
+        "ar": "مركز التل الكبير"
+      }
+    ]
+  },
+  {
+    "code": "EG15",
+    "en": "Kafr El-Shikh",
+    "ar": "كفر الشيخ",
+    "districts": [
+      {
+        "code": "EG1511",
+        "en": "Al Hamul",
+        "ar": "مركز الحامول"
+      },
+      {
+        "code": "EG1504",
+        "en": "Biyalu",
+        "ar": "مركز بيلا"
+      },
+      {
+        "code": "EG1503",
+        "en": "Burullus",
+        "ar": "مركز البرلس"
+      },
+      {
+        "code": "EG1505",
+        "en": "Disuq",
+        "ar": "قسم دسوق"
+      },
+      {
+        "code": "EG1506",
+        "en": "Disuq",
+        "ar": "مركز دسوق"
+      },
+      {
+        "code": "EG1508",
+        "en": "Fuwwa",
+        "ar": "مركز فوه"
+      },
+      {
+        "code": "EG1501",
+        "en": "Kafr Al-Shaykh",
+        "ar": "قسم كفر الشيخ"
+      },
+      {
+        "code": "EG1502",
+        "en": "Kafr Al-Shaykh",
+        "ar": "مركز كفر الشيخ"
+      },
+      {
+        "code": "EG1510",
+        "en": "Mitubas",
+        "ar": "مركز مطوبس"
+      },
+      {
+        "code": "EG1509",
+        "en": "Qillin",
+        "ar": "مركز قلين"
+      },
+      {
+        "code": "EG1512",
+        "en": "Riyad",
+        "ar": "مركز الرياض"
+      },
+      {
+        "code": "EG1507",
+        "en": "Sidi Salim",
+        "ar": "مركز سيدى سالم"
+      }
+    ]
+  },
+  {
+    "code": "EG14",
+    "en": "Kalyoubia",
+    "ar": "القليوبية",
+    "districts": [
+      {
+        "code": "EG1413",
+        "en": "Abour",
+        "ar": "قسم العبور"
+      },
+      {
+        "code": "EG1403",
+        "en": "Al Khanka",
+        "ar": "مركز الخانكة"
+      },
+      {
+        "code": "EG1401",
+        "en": "Banha",
+        "ar": "قسم بنها"
+      },
+      {
+        "code": "EG1402",
+        "en": "Banha",
+        "ar": "مركز بنها"
+      },
+      {
+        "code": "EG1411",
+        "en": "Kafr Shukr",
+        "ar": "مركز كفر شكر"
+      },
+      {
+        "code": "EG1412",
+        "en": "Khsos",
+        "ar": "قسم الخصوص"
+      },
+      {
+        "code": "EG1414",
+        "en": "Qaha",
+        "ar": "قسم قها"
+      },
+      {
+        "code": "EG1409",
+        "en": "Qalyub",
+        "ar": "قسم قليوب"
+      },
+      {
+        "code": "EG1410",
+        "en": "Qalyub",
+        "ar": "مركز قليوب"
+      },
+      {
+        "code": "EG1404",
+        "en": "Qanatir Al-Khayriyya",
+        "ar": "مركز القناطر الخيرية"
+      },
+      {
+        "code": "EG1405",
+        "en": "Shibin al-Qanatir",
+        "ar": "مركز شبين القناطر"
+      },
+      {
+        "code": "EG1406",
+        "en": "Shubra Al-Khayma 1",
+        "ar": "قسم أول شبرا الخيمة"
+      },
+      {
+        "code": "EG1407",
+        "en": "Shubra Al-Khayma 2",
+        "ar": "قسم ثان شبرا الخيمة"
+      },
+      {
+        "code": "EG1408",
+        "en": "Tukh",
+        "ar": "مركز طوخ"
+      },
+      {
+        "code": "EG1400",
+        "en": "Zemam Out",
+        "ar": "خارج الزمام"
+      }
+    ]
+  },
+  {
+    "code": "EG29",
+    "en": "Luxor",
+    "ar": "مدينة الأقصر",
+    "districts": [
+      {
+        "code": "EG2901",
+        "en": "Luxor",
+        "ar": "قسم الأقصر"
+      },
+      {
+        "code": "EG2902",
+        "en": "Luxor",
+        "ar": "مركز الأقصر"
+      },
+      {
+        "code": "EG2903",
+        "en": "Tiba police station",
+        "ar": "مركز شرطة طيبة"
+      },
+      {
+        "code": "EG2900",
+        "en": "Zemam Out",
+        "ar": "خارج الزمام"
+      }
+    ]
+  },
+  {
+    "code": "EG33",
+    "en": "Matrouh",
+    "ar": "مطروح",
+    "districts": [
+      {
+        "code": "EG3302",
+        "en": "Al-Hammam",
+        "ar": "قسم الحمام"
+      },
+      {
+        "code": "EG3307",
+        "en": "Alamn",
+        "ar": "قسم مارينا العلمين السياحية"
+      },
+      {
+        "code": "EG3304",
+        "en": "Daba",
+        "ar": "مركز الضبعة"
+      },
+      {
+        "code": "EG3301",
+        "en": "Marsa Matruh",
+        "ar": "قسم مرسى مطروح"
+      },
+      {
+        "code": "EG3308",
+        "en": "North Coast",
+        "ar": "قسم الساحل الشمالى-جزء"
+      },
+      {
+        "code": "EG3303",
+        "en": "Salloum",
+        "ar": "قسم السلوم"
+      },
+      {
+        "code": "EG3305",
+        "en": "Sidi Barani",
+        "ar": "قسم سيدى برانى"
+      },
+      {
+        "code": "EG3306",
+        "en": "Siwa",
+        "ar": "مركز سيوة"
+      }
+    ]
+  },
+  {
+    "code": "EG24",
+    "en": "Menia",
+    "ar": "المنيا",
+    "districts": [
+      {
+        "code": "EG2401",
+        "en": "Kesm Al-minya",
+        "ar": "قسم المنيا"
+      },
+      {
+        "code": "EG2411",
+        "en": "Kesm Mallawi",
+        "ar": "قسم ملوى"
+      },
+      {
+        "code": "EG2404",
+        "en": "Markz Abu Qurqas",
+        "ar": "مركز ابو قرقاص"
+      },
+      {
+        "code": "EG2405",
+        "en": "Markz Al Idwa",
+        "ar": "مركز العدوة"
+      },
+      {
+        "code": "EG2402",
+        "en": "Markz Al Minya",
+        "ar": "مركز المنيا"
+      },
+      {
+        "code": "EG2406",
+        "en": "Markz Bani Mazar",
+        "ar": "مركز بنى مزار"
+      },
+      {
+        "code": "EG2407",
+        "en": "Markz Dir Mawas",
+        "ar": "مركز دير مواس"
+      },
+      {
+        "code": "EG2410",
+        "en": "Markz Maghagha",
+        "ar": "مركز مغاغة"
+      },
+      {
+        "code": "EG2412",
+        "en": "Markz Mallawi",
+        "ar": "مركز ملوى"
+      },
+      {
+        "code": "EG2409",
+        "en": "Markz Matay",
+        "ar": "مركز مطاى"
+      },
+      {
+        "code": "EG2408",
+        "en": "Markz Samalut",
+        "ar": "مركز سمالوط"
+      },
+      {
+        "code": "EG2403",
+        "en": "New Minya",
+        "ar": "مدينة المنيا الجديدة"
+      },
+      {
+        "code": "EG2400",
+        "en": "Zemam Out",
+        "ar": "خارج الزمام"
+      }
+    ]
+  },
+  {
+    "code": "EG17",
+    "en": "Menoufia",
+    "ar": "المنوفية",
+    "districts": [
+      {
+        "code": "EG1704",
+        "en": "Al-Bagur",
+        "ar": "مركز الباجور"
+      },
+      {
+        "code": "EG1705",
+        "en": "Al-Shuhada",
+        "ar": "مركز الشهداء"
+      },
+      {
+        "code": "EG1703",
+        "en": "Ashmun",
+        "ar": "مركز أشمون"
+      },
+      {
+        "code": "EG1706",
+        "en": "Birkat Al-Sab",
+        "ar": "مركز بركة السبع"
+      },
+      {
+        "code": "EG1709",
+        "en": "Minuf",
+        "ar": "مركز منوف"
+      },
+      {
+        "code": "EG1712",
+        "en": "Minuf City",
+        "ar": "قسم مدينة منوف"
+      },
+      {
+        "code": "EG1708",
+        "en": "Quwisna",
+        "ar": "مركز قويسنا"
+      },
+      {
+        "code": "EG1711",
+        "en": "Sadat City",
+        "ar": "مركز السادات"
+      },
+      {
+        "code": "EG1701",
+        "en": "Shibin al-Kum",
+        "ar": "قسم شبين الكوم"
+      },
+      {
+        "code": "EG1702",
+        "en": "Shibin al-Kum",
+        "ar": "مركز شبين الكوم"
+      },
+      {
+        "code": "EG1710",
+        "en": "Sirs Al-Layyana City",
+        "ar": "قسم مدينة سرس الليانة"
+      },
+      {
+        "code": "EG1707",
+        "en": "Tala",
+        "ar": "مركز تلا"
+      }
+    ]
+  },
+  {
+    "code": "EG32",
+    "en": "New Valley",
+    "ar": "الوادى الجديد",
+    "districts": [
+      {
+        "code": "EG3202",
+        "en": "A-Dakhla Oasis",
+        "ar": "مركز الوحات الداخلة"
+      },
+      {
+        "code": "EG3201",
+        "en": "Al-Kharga Oasis",
+        "ar": "مركز الواحات الخارجة"
+      },
+      {
+        "code": "EG3203",
+        "en": "Al Farafra Oasis",
+        "ar": "مركز الفرافرة"
+      },
+      {
+        "code": "EG3204",
+        "en": "Paris Paris",
+        "ar": "مركز باريس"
+      }
+    ]
+  },
+  {
+    "code": "EG34",
+    "en": "North Sinai",
+    "ar": "شمال سيناء",
+    "districts": [
+      {
+        "code": "EG3406",
+        "en": "Al-Hasna",
+        "ar": "قسم الحسنة"
+      },
+      {
+        "code": "EG3405",
+        "en": "Bir Al-Abd",
+        "ar": "قسم بئر العبد"
+      },
+      {
+        "code": "EG3401",
+        "en": "El Arish 1",
+        "ar": "قسم أول العريش"
+      },
+      {
+        "code": "EG3402",
+        "en": "El Arish 2",
+        "ar": "قسم ثان العريش"
+      },
+      {
+        "code": "EG3403",
+        "en": "El Arish 3",
+        "ar": "قسم ثالث العريش"
+      },
+      {
+        "code": "EG3404",
+        "en": "El Arish 4",
+        "ar": "قسم رابع العريش"
+      },
+      {
+        "code": "EG3407",
+        "en": "Nakhl",
+        "ar": "قسم نخل"
+      },
+      {
+        "code": "EG3411",
+        "en": "Qasima",
+        "ar": "قسم القسيمة"
+      },
+      {
+        "code": "EG3409",
+        "en": "Rafah",
+        "ar": "قسم رفح"
+      },
+      {
+        "code": "EG3410",
+        "en": "Rummana",
+        "ar": "قسم رمانة"
+      },
+      {
+        "code": "EG3408",
+        "en": "Shaykh Zuwayd",
+        "ar": "قسم الشيخ زويد"
+      }
+    ]
+  },
+  {
+    "code": "EG03",
+    "en": "Port Said",
+    "ar": "بورسعيد",
+    "districts": [
+      {
+        "code": "EG0302",
+        "en": "Al-Arab",
+        "ar": "قسم العرب"
+      },
+      {
+        "code": "EG0305",
+        "en": "Al-Dawahy",
+        "ar": "قسم الضواحى"
+      },
+      {
+        "code": "EG0306",
+        "en": "Al-Ganoub",
+        "ar": "قسم الجنوب"
+      },
+      {
+        "code": "EG0311",
+        "en": "Al-Ganoub 2",
+        "ar": "قسم ثان الجنوب"
+      },
+      {
+        "code": "EG0310",
+        "en": "Al-Manasra",
+        "ar": "قسم المناصرة"
+      },
+      {
+        "code": "EG0303",
+        "en": "Al-Munakh",
+        "ar": "قسم المناخ"
+      },
+      {
+        "code": "EG0301",
+        "en": "Al-Sharq",
+        "ar": "قسم الشرق"
+      },
+      {
+        "code": "EG0307",
+        "en": "Al-Zohour",
+        "ar": "قسم الزهور"
+      },
+      {
+        "code": "EG0309",
+        "en": "Mubark-Sharq Tafrea",
+        "ar": "قسم مبارك - شرق التفريعة"
+      },
+      {
+        "code": "EG0312",
+        "en": "Police Department Port Said Port",
+        "ar": "إدارة شرطة ميناء بورسعيد"
+      },
+      {
+        "code": "EG0304",
+        "en": "Port Fuad",
+        "ar": "قسم بور فؤاد"
+      },
+      {
+        "code": "EG0308",
+        "en": "Port Fuad 2",
+        "ar": "قسم ثان بور فؤاد"
+      }
+    ]
+  },
+  {
+    "code": "EG27",
+    "en": "Qena",
+    "ar": "قنا",
+    "districts": [
+      {
+        "code": "EG2703",
+        "en": "Abu Tisht",
+        "ar": "مركز أبو طشت"
+      },
+      {
+        "code": "EG2712",
+        "en": "Al Waqf",
+        "ar": "مركز الوقف"
+      },
+      {
+        "code": "EG2704",
+        "en": "Armant",
+        "ar": "مركز أرمنت"
+      },
+      {
+        "code": "EG2706",
+        "en": "Dishna",
+        "ar": "مركز دشنا"
+      },
+      {
+        "code": "EG2710",
+        "en": "Farshut",
+        "ar": "مركز فرشوط"
+      },
+      {
+        "code": "EG2705",
+        "en": "Isna",
+        "ar": "مركز إسنا"
+      },
+      {
+        "code": "EG2708",
+        "en": "Nag Hammadi",
+        "ar": "مركز نجع حمادى"
+      },
+      {
+        "code": "EG2709",
+        "en": "Naqada",
+        "ar": "مركز نقادة"
+      },
+      {
+        "code": "EG2711",
+        "en": "Qift",
+        "ar": "مركز قفط"
+      },
+      {
+        "code": "EG2701",
+        "en": "Qina",
+        "ar": "قسم قنا"
+      },
+      {
+        "code": "EG2702",
+        "en": "Qina",
+        "ar": "مركز قنا"
+      },
+      {
+        "code": "EG2713",
+        "en": "Qina City",
+        "ar": "مدينة قنا الجديدة"
+      },
+      {
+        "code": "EG2707",
+        "en": "Qus",
+        "ar": "مركز قوص"
+      },
+      {
+        "code": "EG2700",
+        "en": "Zemam Out",
+        "ar": "صحراء قنا"
+      }
+    ]
+  },
+  {
+    "code": "EG31",
+    "en": "Red Sea",
+    "ar": "البحر الأحمر",
+    "districts": [
+      {
+        "code": "EG3107",
+        "en": "Halayib",
+        "ar": "قسم حلايب"
+      },
+      {
+        "code": "EG3101",
+        "en": "Hurghada 1",
+        "ar": "قسم أول الغردقة"
+      },
+      {
+        "code": "EG3108",
+        "en": "Hurghada 2",
+        "ar": "قسم ثان الغردقة"
+      },
+      {
+        "code": "EG3104",
+        "en": "Marsa Alam",
+        "ar": "قسم مرسى علم"
+      },
+      {
+        "code": "EG3102",
+        "en": "Qusir",
+        "ar": "قسم القصير"
+      },
+      {
+        "code": "EG3105",
+        "en": "Ras Gharib",
+        "ar": "قسم رأس غارب"
+      },
+      {
+        "code": "EG3103",
+        "en": "Safaga",
+        "ar": "قسم سفاجا"
+      },
+      {
+        "code": "EG3106",
+        "en": "Shallatin",
+        "ar": "قسم شلاتين"
+      }
+    ]
+  },
+  {
+    "code": "EG13",
+    "en": "Sharkia",
+    "ar": "الشرقية",
+    "districts": [
+      {
+        "code": "EG1309",
+        "en": "10 Ramadan 1",
+        "ar": "قسم اول مدينة العاشر من رمضان"
+      },
+      {
+        "code": "EG1321",
+        "en": "10 Ramadan 2",
+        "ar": "قسم ثان مدينه العاشر من رمضان"
+      },
+      {
+        "code": "EG1304",
+        "en": "Abu Hammad",
+        "ar": "مركز أبو حماد"
+      },
+      {
+        "code": "EG1305",
+        "en": "Abu Kabir",
+        "ar": "مركز أبوكبير"
+      },
+      {
+        "code": "EG1306",
+        "en": "Al-Husayniya",
+        "ar": "مركز الحسينية"
+      },
+      {
+        "code": "EG1318",
+        "en": "Al-Qanayat",
+        "ar": "قسم القنايات"
+      },
+      {
+        "code": "EG1307",
+        "en": "Al-Salhiyya",
+        "ar": "قسم الصالحية الجديدة"
+      },
+      {
+        "code": "EG1319",
+        "en": "Awlad Saqr",
+        "ar": "مركز أولاد صقر"
+      },
+      {
+        "code": "EG1308",
+        "en": "Bilbis",
+        "ar": "مركز بلبيس"
+      },
+      {
+        "code": "EG1310",
+        "en": "Dyarb Nigm",
+        "ar": "مركز ديرب نجم"
+      },
+      {
+        "code": "EG1317",
+        "en": "El-Ibrahimiya",
+        "ar": "مركز الأبراهيمية"
+      },
+      {
+        "code": "EG1311",
+        "en": "Faqus",
+        "ar": "قسم فاقوس"
+      },
+      {
+        "code": "EG1312",
+        "en": "Faqus",
+        "ar": "مركز فاقوس"
+      },
+      {
+        "code": "EG1315",
+        "en": "Hihya",
+        "ar": "مركز ههيا"
+      },
+      {
+        "code": "EG1313",
+        "en": "Kafr Saqr",
+        "ar": "مركز كفر صقر"
+      },
+      {
+        "code": "EG1316",
+        "en": "Mashtul Al-Suq",
+        "ar": "مركز مشتول السوق"
+      },
+      {
+        "code": "EG1314",
+        "en": "Minya al-Qamh",
+        "ar": "مركز منيا القمح"
+      },
+      {
+        "code": "EG1320",
+        "en": "Qurin",
+        "ar": "قسم القرين"
+      },
+      {
+        "code": "EG1303",
+        "en": "Zaqaziq",
+        "ar": "مركز الزقازيق"
+      },
+      {
+        "code": "EG1301",
+        "en": "Zaqaziq 1",
+        "ar": "قسم اول الزقازيق"
+      },
+      {
+        "code": "EG1302",
+        "en": "Zaqaziq 2",
+        "ar": "قسم ثان الزقازيق"
+      },
+      {
+        "code": "EG1300",
+        "en": "Zemam Out",
+        "ar": "خارج الزمام"
+      }
+    ]
+  },
+  {
+    "code": "EG35",
+    "en": "South Sinai",
+    "ar": "جنوب سيناء",
+    "districts": [
+      {
+        "code": "EG3503",
+        "en": "Abu Radis",
+        "ar": "قسم أبو رديس"
+      },
+      {
+        "code": "EG3501",
+        "en": "Al-Tur",
+        "ar": "قسم الطور"
+      },
+      {
+        "code": "EG3506",
+        "en": "Dahab",
+        "ar": "قسم دهب"
+      },
+      {
+        "code": "EG3507",
+        "en": "Nuweiba",
+        "ar": "قسم نويبع"
+      },
+      {
+        "code": "EG3502",
+        "en": "Ras Sidr",
+        "ar": "قسم رأس سدر"
+      },
+      {
+        "code": "EG3504",
+        "en": "Sant Katrin",
+        "ar": "قسم سانت كاترين"
+      },
+      {
+        "code": "EG3505",
+        "en": "Sharm el-Sheikh",
+        "ar": "قسم شرم الشيخ"
+      },
+      {
+        "code": "EG3508",
+        "en": "Taba",
+        "ar": "قسم طابا"
+      }
+    ]
+  },
+  {
+    "code": "EG04",
+    "en": "Suez",
+    "ar": "السويس",
+    "districts": [
+      {
+        "code": "EG0402",
+        "en": "Al-Arbiin",
+        "ar": "قسم الأربعين"
+      },
+      {
+        "code": "EG0405",
+        "en": "Al-Ganayin",
+        "ar": "قسم الجناين"
+      },
+      {
+        "code": "EG0403",
+        "en": "Ataqa",
+        "ar": "قسم عتاقة"
+      },
+      {
+        "code": "EG0404",
+        "en": "Faysal",
+        "ar": "قسم فيصل"
+      },
+      {
+        "code": "EG0406",
+        "en": "Port Suez Police Department",
+        "ar": "إدارة شرطة ميناء السويس"
+      },
+      {
+        "code": "EG0401",
+        "en": "Suez",
+        "ar": "قسم السويس"
+      }
+    ]
+  },
+  {
+    "code": "EG26",
+    "en": "Suhag",
+    "ar": "سوهاج",
+    "districts": [
+      {
+        "code": "EG2604",
+        "en": "Akhmim",
+        "ar": "مركز أخميم"
+      },
+      {
+        "code": "EG2618",
+        "en": "Akhmim City",
+        "ar": "مدينة أخميم الجديدة"
+      },
+      {
+        "code": "EG2605",
+        "en": "Al-Balyana",
+        "ar": "مركز البلينا"
+      },
+      {
+        "code": "EG2606",
+        "en": "Al-Maragha",
+        "ar": "مركز المراغة"
+      },
+      {
+        "code": "EG2607",
+        "en": "Al-Minshat",
+        "ar": "مركز المنشأة"
+      },
+      {
+        "code": "EG2617",
+        "en": "Al Usayrat",
+        "ar": "مركز العسيرات"
+      },
+      {
+        "code": "EG2608",
+        "en": "Dar al-Salam",
+        "ar": "مركز دار السلام"
+      },
+      {
+        "code": "EG2609",
+        "en": "Girga",
+        "ar": "قسم جرجا"
+      },
+      {
+        "code": "EG2610",
+        "en": "Girga",
+        "ar": "مركز جرجا"
+      },
+      {
+        "code": "EG2611",
+        "en": "Guhayna Al-Gharbiyya",
+        "ar": "مركز جهينة الغربية"
+      },
+      {
+        "code": "EG2616",
+        "en": "Kawther",
+        "ar": "قسم الكوثر"
+      },
+      {
+        "code": "EG2615",
+        "en": "Kesm Tahta",
+        "ar": "قسم طهطا"
+      },
+      {
+        "code": "EG2612",
+        "en": "Saqulta",
+        "ar": "مركز ساقلته"
+      },
+      {
+        "code": "EG2601",
+        "en": "Suhag",
+        "ar": "قسم اول سوهاج"
+      },
+      {
+        "code": "EG2603",
+        "en": "Suhag",
+        "ar": "مركز سوهاج"
+      },
+      {
+        "code": "EG2602",
+        "en": "Suhag-2",
+        "ar": "قسم ثان سوهاج"
+      },
+      {
+        "code": "EG2619",
+        "en": "Suhag City",
+        "ar": "مدينة سوهاج الجديدة"
+      },
+      {
+        "code": "EG2614",
+        "en": "Tahta",
+        "ar": "مركز طهطا"
+      },
+      {
+        "code": "EG2613",
+        "en": "Tama",
+        "ar": "مركز طما"
+      },
+      {
+        "code": "EG2600",
+        "en": "Zemam Out",
+        "ar": "صحراء سوهاج"
+      }
+    ]
+  }
+]

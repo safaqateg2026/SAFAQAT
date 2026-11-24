@@ -30,10 +30,13 @@ test("each approved role has its own minimum registration fields", () => {
   assert.deepEqual(validateRegistration({ ...fixture("courier"), delivery: null }, config), ["invalidVehicle"]);
 });
 
-test("invalid dates, underage applicants and stale policies are rejected", () => {
+test("valid dates for minors are accepted and invalid dates and stale policies are rejected", () => {
   const input = fixture("consumer");
-  assert.deepEqual(validateRegistration({ ...input, birthDate: "2008-11-25" }, config), ["minimumAge"]);
+  assert.deepEqual(validateRegistration({ ...input, birthDate: "2014-11-25" }, config), []);
   assert.deepEqual(validateRegistration({ ...input, birthDate: "2000-02-31" }, config), ["invalidBirthDate"]);
+  assert.deepEqual(validateRegistration({ ...input, birthDate: "2026-11-25" }, config), ["invalidBirthDate"]);
+  assert.deepEqual(validateRegistration({ ...input, birthDate: "2024-02-29" }, config), []);
+  assert.deepEqual(validateRegistration({ ...input, birthDate: "2025-02-29" }, config), ["invalidBirthDate"]);
   assert.deepEqual(validateRegistration({ ...input, policyVersions: {} }, config), ["policiesRequired"]);
   assert.deepEqual(validateRegistration({ ...input, districtCode: "other", latitude: null }, config),
     ["invalidDistrict", "invalidLocation"]);
