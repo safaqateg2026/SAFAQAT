@@ -24,11 +24,25 @@ function databaseForTest(t) {
     UPDATE subscriber SET phone_verified_at = 102, state = 'active';
   `);
   const database = {
+    async batch(statements) {
+      sql.exec("BEGIN IMMEDIATE");
+      try {
+        const results = statements.map(statement => ({ results: statement.all() }));
+        sql.exec("COMMIT");
+        return results;
+      } catch (error) {
+        sql.exec("ROLLBACK");
+        throw error;
+      }
+    },
     prepare(statement) {
       return {
         bind(...values) {
           const named = Object.fromEntries(values.map((value, index) => [String(index + 1), value]));
-          return { first: async () => sql.prepare(statement).get(named) ?? null };
+          return {
+            first: async () => sql.prepare(statement).get(named) ?? null,
+            all: () => sql.prepare(statement).all(named),
+          };
         },
       };
     },
@@ -132,4 +146,30 @@ test("rate limits bound attempts per action without resetting on a stale clock",
   assert.equal(await attempt(109), false);
   assert.equal(await attempt(111), true);
   assert.equal(await attempt(112), false);
+});
+
+test("authenticated login consumes its challenge and claims a session in one batch", async t => {
+  const { database, sql } = databaseForTest(t);
+  const { createVerificationChallenge, consumeVerifiedLogin } = await import("../verification.mjs");
+  const key = await crypto.subtle.generateKey({ name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const target = "+201000000000";
+  const issue = async () => ({
+    ...await createVerificationChallenge(database, key, {
+      subscriberId: "member", purpose: "login", channel: "whatsapp", target, now: 104, expiresAt: 120,
+    }),
+    sender: target, purpose: "login", channel: "whatsapp",
+  });
+  const event = await issue();
+  const options = { subscriberId: "member", now: 105, expiresAt: 130 };
+  assert.equal(await consumeVerifiedLogin(database, key, event, { ...options, subscriberId: "wrong" }), null);
+  const claims = await Promise.all([
+    consumeVerifiedLogin(database, key, event, options),
+    consumeVerifiedLogin(database, key, event, options),
+  ]);
+  assert.equal(claims.filter(Boolean).length, 1);
+  const original = claims.find(Boolean);
+  const next = await issue();
+  assert.equal(await consumeVerifiedLogin(database, key, next, options), null);
+  assert.equal((await findActiveSession(database, original.token, 106)).subscriberId, "member");
+  assert.equal(sql.prepare("SELECT COUNT(*) AS count FROM subscriber_verification_challenge WHERE consumed_at IS NOT NULL").get().count, 2);
 });

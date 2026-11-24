@@ -11,16 +11,22 @@ async function digest(token) {
   return hex(new Uint8Array(await crypto.subtle.digest("SHA-256", encoder.encode(token))));
 }
 
-export async function issueVerifiedSession(database, { subscriberId, now, expiresAt, deviceLabel = null }) {
+export async function prepareSessionClaim(database, {
+  subscriberId, now, expiresAt, deviceLabel = null, challengeId = null, loginClaim = null,
+}) {
   if (!Number.isSafeInteger(now) || !Number.isSafeInteger(expiresAt) || expiresAt <= now) {
     throw new RangeError("invalid session timestamps");
   }
   const token = hex(crypto.getRandomValues(new Uint8Array(32)));
-  const row = await database.prepare(`
+  const statement = database.prepare(`
     INSERT INTO subscriber_session
         (subscriber_id, token_digest, device_label, issued_at, last_seen_at, expires_at)
     SELECT id, ?2, ?3, ?4, ?4, ?5 FROM subscriber
     WHERE id = ?1 AND state = 'active'
+      AND (?6 IS NULL OR EXISTS (
+          SELECT 1 FROM subscriber_verification_challenge
+          WHERE id = ?6 AND subscriber_id = ?1 AND login_claim = ?7
+      ))
     ON CONFLICT (subscriber_id) DO UPDATE SET
         token_digest = excluded.token_digest,
         device_label = excluded.device_label,
@@ -31,7 +37,13 @@ export async function issueVerifiedSession(database, { subscriberId, now, expire
     WHERE subscriber_session.expires_at <= excluded.issued_at
        OR subscriber_session.revoked_at <= excluded.issued_at
     RETURNING subscriber_id
-  `).bind(subscriberId, await digest(token), deviceLabel, now, expiresAt).first();
+  `).bind(subscriberId, await digest(token), deviceLabel, now, expiresAt, challengeId, loginClaim);
+  return { statement, token, expiresAt };
+}
+
+export async function issueVerifiedSession(database, options) {
+  const { statement, token, expiresAt } = await prepareSessionClaim(database, options);
+  const row = await statement.first();
   return row ? { token, expiresAt } : null;
 }
 
