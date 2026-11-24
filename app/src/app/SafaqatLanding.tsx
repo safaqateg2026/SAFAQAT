@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { usePwaInstall, type InstallNotice } from "./usePwaInstall";
+import { useStandaloneRootBack } from "./useStandaloneRootBack";
 import "./SafaqatLanding.css";
 
 const iconPaths = {
@@ -114,6 +115,13 @@ export default function SafaqatLanding() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const requestInstall = usePwaInstall();
 
+  const closeDialog = useCallback(() => {
+    if (!dialogRef.current?.open) return;
+    dialogRef.current.close();
+    setDialog(null);
+  }, []);
+  useStandaloneRootBack(closeDialog);
+
   useEffect(() => {
     if (dialog && !dialogRef.current?.open) {
       dialogRef.current?.showModal();
@@ -222,13 +230,16 @@ export default function SafaqatLanding() {
         className="safaqat-dialog"
         aria-labelledby="safaqat-dialog-title"
         aria-describedby="safaqat-dialog-description"
-        onClose={() => setDialog(null)}
+        onCancel={event => {
+          event.preventDefault();
+          closeDialog();
+        }}
         onClick={event => {
-          if (event.target === event.currentTarget) event.currentTarget.close();
+          if (event.target === event.currentTarget) closeDialog();
         }}
       >
         <div className="safaqat-dialog-content">
-          <button type="button" className="safaqat-close" aria-label="إغلاق" onClick={() => dialogRef.current?.close()}>
+          <button type="button" className="safaqat-close" aria-label="إغلاق" onClick={closeDialog}>
             ×
           </button>
           <h2 id="safaqat-dialog-title">{dialog?.title}</h2>

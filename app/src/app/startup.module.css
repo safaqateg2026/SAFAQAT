@@ -12,7 +12,7 @@
 }
 
 .startup {
-  --startup-hold: 2760ms;
+  --startup-hold: 3760ms;
   --startup-fade: 240ms;
 }
 
@@ -64,7 +64,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .startup {
-    --startup-hold: 3000ms;
+    --startup-hold: 4000ms;
     --startup-fade: 0ms;
   }
 
@@ -79,15 +79,12 @@
   }
 }
 
-/* Installed apps may already show a native startup screen. */
-@media (display-mode: standalone) {
-  .splash {
-    display: none;
-  }
+:global(html[data-safaqat-skip-startup]) .splash {
+  display: none;
+}
 
-  .landing > * {
-    animation: none;
-  }
+:global(html[data-safaqat-skip-startup]) .landing > * {
+  animation: none;
 }
 
 @keyframes dissolve {
