@@ -40,6 +40,9 @@
 .safaqat-registration ul { margin: 0; padding-inline-start: 1.3rem; }
 
 .registration-birth, .registration-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.registration-plate { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; direction: rtl; }
+.registration-plate > label { min-width: 0; }
+.registration-plate input { width: 100%; }
 .registration-birth > label { flex: 1 1 5rem; }
 .registration-birth select { width: 100%; }
 .registration-map, .registration-camera, .registration-camera-stage { display: grid; gap: .6rem; min-width: 0; }

@@ -53,7 +53,12 @@ export default function RegistrationPreview({ role, language }: { role: Registra
           <option value="car">{copy.car}</option>
           <option value="truck">{copy.truck}</option>
         </select></label>
-        <label>{copy.plate}<input maxLength={30} /></label>
+        <div className="registration-plate" aria-label={copy.plate}>
+          <label>{copy.plateLetters}<input name="plate_letters" dir="rtl" inputMode="text" maxLength={6}
+            pattern="[ء-يٱ-ۓ ]{0,6}" autoComplete="off" /></label>
+          <label>{copy.plateDigits}<input name="plate_digits" dir="ltr" inputMode="numeric" maxLength={8}
+            pattern="[0-9٠-٩۰-۹ ]{0,8}" autoComplete="off" /></label>
+        </div>
       </fieldset>}
       {!consumer && <fieldset>
         <legend>{copy.documents}</legend>

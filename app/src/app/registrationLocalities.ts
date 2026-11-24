@@ -55,12 +55,14 @@ export function searchAreas(records: IndexedArea[], query: string) {
   return words.length ? records.filter(record => words.every(word => record.search.includes(word))) : records;
 }
 
-export function suggestArea(point: [number, number], accuracy: number, map: InternalAreaMap | undefined, district: string) {
+export function suggestArea(point: [number, number], accuracy: number, map: InternalAreaMap | undefined) {
   if (!map || !Number.isFinite(accuracy) || accuracy < 0 || accuracy > 75) return undefined;
   const exact = map.exactPoints.map(item => ({ ...item, distance: metersBetween(point, item.point) }))
     .filter(item => item.distance + accuracy <= 90)
     .sort((first, second) => first.distance - second.distance);
   if (exact.length && (exact.length === 1 || exact[1].distance - exact[0].distance > accuracy * 2)) return exact[0].area;
+  // A broad administrative polygon can span multiple familiar localities. Only
+  // populate the area field when a surveyed locality point gives a confident match.
   if (exact.length) return undefined;
-  return map.districtToArea[district];
+  return undefined;
 }

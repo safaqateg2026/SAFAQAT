@@ -63,6 +63,7 @@ ALEXANDRIA = [
     ("سموحة", "Smouha", ["Semouha"]), ("محرم بك", "Moharam Bek", ["Muharam Bik"]),
     ("أبو قير", "Abu Qir", ["أبو قير الشرقية", "أبو قير الغربية", "ابوقيرالشرقية", "ابوقيرالغربية"]),
     ("الصفا والمروة", "Safa and Marwa", ["Safa Wal Marwa", "Safa Marwa"]), ("أبو يوسف", "Abu Youssef", ["Abu Yousef"]),
+    ("كفر عبده", "Kafr Abdo", []), ("الشاطبي", "Shatby", ["الشاطبى", "Chatby"]),
 ]
 
 

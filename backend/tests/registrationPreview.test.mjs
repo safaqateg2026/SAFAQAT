@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { assessRegistrationImage } from "../../app/src/app/registrationImageQuality.ts";
+import { normalizePlateDigits, normalizePlateLetters } from "../registration.mjs";
 
 test("published administrative catalog matches all map polygons and governorate memberships", () => {
   const catalog = JSON.parse(readFileSync(new URL("../../app/src/app/egyptRegistrationCatalog.json", import.meta.url)));
@@ -60,7 +61,7 @@ test("curated area catalogs stay separate from internal GIS and cover the requir
   for (const item of ["ابراج القاهرة", "ابراج المعتز"]) assert.ok(![...names.values()].map(normalize).includes(normalize(item)), item);
   for (const item of ["دمنهور", "أبو حمص", "كفر الدوار", "إدكو", "رشيد", "حوش عيسى", "أبو المطامير", "كوم حمادة", "الدلنجات", "إيتاي البارود", "شبراخيت", "المحمودية", "الرحمانية"])
     assert.ok(beh.includes(normalize(item)), `Beheira area missing: ${item}`);
-  for (const item of ["سيدي جابر", "سيدي بشر", "سبورتنج", "الإبراهيمية", "محطة الرمل", "المنشية", "الورديان", "المكس", "الدخيلة", "البيطاش", "الهانوفيل", "الكيلو 21", "أبو تلات", "العطارين", "السيوف", "السيوف شماعة", "الرأس السوداء", "الطابية", "العصافرة", "المندرة", "ميامي", "سموحة", "محرم بك", "أبو قير", "أبو يوسف", "الصفا والمروة"])
+  for (const item of ["سيدي جابر", "سيدي بشر", "سبورتنج", "الإبراهيمية", "محطة الرمل", "المنشية", "الورديان", "المكس", "الدخيلة", "البيطاش", "الهانوفيل", "الكيلو 21", "أبو تلات", "العطارين", "السيوف", "السيوف شماعة", "الرأس السوداء", "الطابية", "العصافرة", "المندرة", "ميامي", "سموحة", "محرم بك", "أبو قير", "أبو يوسف", "الصفا والمروة", "كفر عبده", "الشاطبي"])
     assert.ok(alex.includes(normalize(item)), `Alexandria area missing: ${item}`);
   for (const item of ["البيطاش شرق", "البيطاش غرب", "أبو قير الشرقية", "أبو قير الغربية"]) {
     assert.ok(!alex.includes(normalize(item)), `unmerged area exposed: ${item}`);
@@ -68,4 +69,11 @@ test("curated area catalogs stay separate from internal GIS and cover the requir
   assert.equal(alex.filter(name => name === normalize("البيطاش")).length, 1);
   assert.equal(alex.filter(name => name === normalize("أبو قير")).length, 1);
   assert.equal(alex.filter(name => name === normalize("الدخيلة")).length, 1);
+});
+
+test("Egyptian plate fields normalize letters and Arabic-Indic or Western digits separately", () => {
+  assert.equal(normalizePlateLetters(" س ب ي "), "سبي");
+  assert.equal(normalizePlateDigits("٤٣٦٣"), "4363");
+  assert.equal(normalizePlateDigits("4363"), "4363");
+  assert.equal(normalizePlateDigits("۴۳۶۳"), "4363");
 });

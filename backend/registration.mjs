@@ -2,6 +2,19 @@
 // selected environment and persists the validated registration atomically.
 const roles = new Set(["supplier", "retailer", "consumer", "courier"]);
 const vehicles = new Set(["rider", "car", "truck"]);
+const arabicDigits = "٠١٢٣٤٥٦٧٨٩";
+const persianDigits = "۰۱۲۳۴۵۶۷۸۹";
+
+export function normalizePlateDigits(value) {
+  return value.replace(/[٠-٩۰-۹]/g, digit => {
+    const index = arabicDigits.indexOf(digit);
+    return String(index >= 0 ? index : persianDigits.indexOf(digit));
+  }).replace(/\D/g, "");
+}
+
+export function normalizePlateLetters(value) {
+  return value.replace(/[^ء-يٱ-ۓ]/g, "").normalize("NFC");
+}
 
 export function requiredPolicies(role) {
   if (!roles.has(role)) throw new TypeError("invalid registration role");
@@ -48,7 +61,14 @@ export function validateRegistration(input, { today, districts, activities, poli
     requireText(input.business?.premisesAddress, "premisesAddressRequired");
     if (!activities.has(input.business?.activityCode)) issues.push("invalidBusinessActivity");
   }
-  if (role === "courier" && !vehicles.has(input.delivery?.vehicleType)) issues.push("invalidVehicle");
+  if (role === "courier") {
+    if (!vehicles.has(input.delivery?.vehicleType)) issues.push("invalidVehicle");
+    const letters = input.delivery?.plateLetters ?? "";
+    const digits = input.delivery?.plateDigits ?? "";
+    if (typeof letters !== "string" || typeof digits !== "string"
+      || (letters && !/^[ء-يٱ-ۓ ]{1,6}$/.test(letters))
+      || (digits && !/^[0-9٠-٩۰-۹ ]{1,8}$/.test(digits))) issues.push("invalidPlate");
+  }
 
   if (requiredPolicies(role).some(policy => {
     const version = policyVersions.get(policy);
@@ -83,9 +103,14 @@ export async function saveRegistration(database, input, catalogs, now) {
     `).bind(id, input.business.name.trim(), input.business.activityCode, input.business.premisesAddress.trim()));
   }
   if (input.role === "courier") {
+    const letters = normalizePlateLetters(input.delivery.plateLetters ?? "");
+    const digits = normalizePlateDigits(input.delivery.plateDigits ?? "");
+    const legacy = input.delivery.plateNumber ?? ([letters, digits].filter(Boolean).join(" ") || null);
     statements.push(database.prepare(`
-      INSERT INTO subscriber_delivery (subscriber_id, vehicle_type, plate_number) VALUES (?1, ?2, ?3)
-    `).bind(id, input.delivery.vehicleType, input.delivery.plateNumber ?? null));
+      INSERT INTO subscriber_delivery
+        (subscriber_id, vehicle_type, plate_number, plate_letters, plate_digits)
+      VALUES (?1, ?2, ?3, ?4, ?5)
+    `).bind(id, input.delivery.vehicleType, legacy, letters || null, digits || null));
   }
   if (input.role === "retailer") {
     statements.push(database.prepare(`

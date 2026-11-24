@@ -41,3 +41,10 @@ test("valid dates for minors are accepted and invalid dates and stale policies a
   assert.deepEqual(validateRegistration({ ...input, districtCode: "other", latitude: null }, config),
     ["invalidDistrict", "invalidLocation"]);
 });
+
+test("courier plate fields stay optional and reject characters outside the separate Arabic formats", () => {
+  const input = fixture("courier");
+  assert.deepEqual(validateRegistration({ ...input, delivery: { vehicleType: "rider", plateLetters: "س ب ي", plateDigits: "٤٣٦٣" } }, config), []);
+  assert.deepEqual(validateRegistration({ ...input, delivery: { vehicleType: "rider", plateLetters: "ABC", plateDigits: "43-63" } }, config), ["invalidPlate"]);
+  assert.deepEqual(validateRegistration({ ...input, delivery: { vehicleType: "rider", plateLetters: "", plateDigits: "" } }, config), []);
+});
