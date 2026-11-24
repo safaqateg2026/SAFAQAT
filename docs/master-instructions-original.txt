@@ -1,0 +1,2552 @@
+SAFAQAT — FINAL MASTER IMPLEMENTATION INSTRUCTIONS
+
+RESUME, DEVELOPMENT, CLOUD ARCHITECTURE,
+CLOUD ORGANIZATION, SECURITY, RESOURCE PROTECTION,
+APPROVED VISUAL UPDATES, CONTINUOUS PRODUCTION
+DEPLOYMENT AND VALIDATION
+
+==================================================
+01. PROJECT INFORMATION
+==================================================
+
+Project: SAFAQAT
+Repository: https://github.com/safaqateg2026/SAFAQAT
+Local repository: ~/projects/SAFAQAT
+Working branch: feature/landing-pwa
+Base development branch: develop
+Production URL: https://safaqat-59e.pages.dev/
+
+Last confirmed pushed commit:
+6deeff2de96d908ae57ff9a7e53e0afc0ae10c3c
+
+The previous session was interrupted by the usage limit.
+
+Resume from the exact interruption point.
+
+Do not restart the project.
+Do not repeat completed work unnecessarily.
+Do not overwrite approved existing work.
+Keep main unchanged.
+
+Read AGENTS.md, PROJECT_SPEC.md, approved requirements,
+existing implementation records, and approved visual
+design references completely before making changes.
+
+Treat this master instruction as the latest approved
+implementation scope.
+
+Preserve previous approved requirements unless an
+explicitly approved change supersedes them.
+
+LATEST APPROVED VISUAL CHANGES:
+
+Landing page slogan:
+كل طلباتك في مكان واحد
+
+Shipping and delivery card title:
+شحن و توصيل
+
+Shipping and delivery card subtitle:
+طيار / سيارة / نقل
+
+Startup splash slogan remains:
+سوقك الذكي لكل طلباتك
+
+LATEST PRODUCTION DEPLOYMENT AUTHORIZATION:
+
+The project owner explicitly authorizes immediate,
+incremental production deployment of completed,
+validated, secure, approved implementation stages.
+
+This authorization supersedes previous instructions
+requiring separate production approval for every
+completed implementation stage.
+
+Do not wait until the entire master task is finished
+before publishing completed stages.
+
+Publish each independently releasable, validated
+stage to the existing real production application.
+
+Do not expose unfinished, insecure, or unverified
+functionality to production users.
+
+==================================================
+02. CONTINUOUS LAPTOP RESOURCE PROTECTION
+==================================================
+
+This requirement applies throughout the entire task,
+including inspection, coding, file organization,
+cloud synchronization, testing, and deployment.
+
+The Ubuntu laptop has approximately 3.7 GiB of RAM
+and previously experienced severe memory pressure
+and excessive swap usage.
+
+Protect the laptop from freezing, resource exhaustion,
+and unresponsive applications.
+
+Before starting:
+
+- Inspect available RAM.
+- Inspect swap usage.
+- Inspect memory pressure.
+- Inspect CPU load.
+- Inspect available disk space.
+- Inspect temporary filesystem usage.
+- Inspect existing background processes.
+- Inspect existing build processes.
+- Inspect existing browser processes.
+- Identify duplicate or abandoned task processes.
+
+Throughout execution:
+
+- Use low-memory execution.
+- Use sequential operations.
+- Run only one heavy operation at a time.
+- Limit build concurrency to one worker where supported.
+- Disable unnecessary parallel processing.
+- Avoid concurrent builds.
+- Avoid concurrent browser test sessions.
+- Avoid simultaneous heavy validation tasks.
+- Use small processing batches.
+- Stream large datasets.
+- Use pagination and incremental processing.
+- Avoid loading complete product catalogs into RAM.
+- Avoid loading complete image libraries into RAM.
+- Avoid loading complete subscriber datasets into RAM.
+- Use bounded caches.
+- Throttle resource-intensive operations.
+- Monitor available memory during heavy tasks.
+- Monitor memory pressure and swap activity.
+- Monitor available disk and temporary storage.
+- Pause heavy operations when resource pressure increases.
+- Resume only when sufficient resources are available.
+- Use conservative task-specific memory limits.
+- Use bounded execution timeouts.
+- Prevent infinite retry loops.
+- Avoid repeated heavy operations without diagnosis.
+- Clean confirmed disposable test artifacts.
+- Close task-owned browser instances after testing.
+- Stop task-owned temporary servers when no longer needed.
+- Never terminate unrelated user processes.
+- Never modify system-wide memory or power settings
+  without separate approval.
+
+Use lightweight monitoring with minimal overhead.
+
+Prefer MemAvailable and actual memory pressure
+indicators over misleading raw free-memory values.
+
+Avoid increasing swap usage through unnecessary
+concurrent processes.
+
+If memory pressure becomes critical:
+
+1. Pause or safely terminate the current task-owned
+   heavy operation as appropriate.
+2. Preserve completed work.
+3. Release unnecessary task-owned resources.
+4. Record current implementation progress.
+5. Resume using a smaller workload when safe.
+
+If local builds cannot run reliably within the
+available resources, use existing approved cloud-based
+CI validation where available.
+
+Do not repeatedly exhaust laptop resources.
+
+Laptop stability is more important than execution speed.
+
+Keep all seven existing SAFAQAT product collection
+workers stopped throughout this task:
+
+- safaqat-product-collector.service
+- safaqat-product-verifier.service
+- safaqat-product-discovery.service
+- safaqat-product-repair.service
+- safaqat-frequency.service
+- safaqat-image-search.service
+- safaqat-cloud-sync.service
+
+Verify their actual service names and current status.
+
+Do not restart them.
+
+==================================================
+03. RESUME THE INTERRUPTED PREVIOUS RELEASE
+==================================================
+
+Inspect:
+
+- Current Git status.
+- Current working branch.
+- Existing uncommitted changes.
+- Previous validation logs.
+- Existing deployment records.
+- Running processes.
+- Temporary release directories.
+- Existing Cloudflare configuration.
+- GitHub branch status.
+
+Verify the last confirmed pushed commit.
+
+The previous execution report indicated:
+
+- TypeScript passed.
+- ESLint passed.
+- Production static build passed.
+- Local browser smoke tests passed.
+- Sharing and installation tests passed.
+- The startup release was pushed to GitHub.
+- The new Cloudflare deployment was reported live.
+- Public HTTPS asset checks passed.
+- Final production browser validation was interrupted.
+
+Independently verify the current production status.
+
+Complete the unfinished production validation:
+
+- Approved luminous SAFAQAT startup logo.
+- Exact approved Arabic startup tagline:
+  سوقك الذكي لكل طلباتك
+- Bold gold tagline styling.
+- 4000 ms in-app startup splash duration including fade.
+- Fresh browser launches.
+- Fresh installed PWA launches.
+- No repeated splash during internal navigation.
+- No repeated splash during background resume.
+- Preserve application state during resume.
+- Android Back behavior at the application root.
+- Normal internal navigation.
+- Normal browser Back and Forward behavior.
+- Sharing functionality.
+- Installation functionality.
+- Service worker functionality.
+- Manifest integrity.
+- Icon integrity.
+- Responsive mobile and desktop rendering.
+- Required asset availability.
+- No unexpected runtime exceptions.
+
+Respect browser and operating-system limitations.
+
+Do not attempt to block operating-system navigation.
+Do not create unlimited browser history entries.
+Do not introduce an unapproved exit confirmation dialog.
+
+Complete the previous deployment report.
+
+Record the verified production deployment identifier,
+rollback target, Git commit, and actual validation results.
+
+Distinguish actual physical-device testing from
+browser emulation and automated browser testing.
+
+Do not claim physical-device tests passed unless
+they were actually performed.
+
+If a critical regression is discovered, safely restore
+the last known healthy production release where an
+authorized, non-destructive rollback is available.
+
+Record the regression and rollback results.
+
+Do not introduce unrelated production changes.
+
+After completing this phase, continue with the newly
+approved implementation requirements.
+
+==================================================
+04. MANDATORY CLOUD-FIRST ARCHITECTURE
+==================================================
+
+This requirement overrides conflicting local storage
+or infrastructure assumptions.
+
+The laptop is strictly a temporary development,
+execution, and testing device.
+
+It must never become a permanent storage location,
+production server, database server, authentication
+server, or operational dependency for SAFAQAT.
+
+SAFAQAT must operate independently while the laptop
+is powered off, disconnected, replaced, or formatted.
+
+Store permanent project resources in their appropriate
+approved cloud services.
+
+GITHUB:
+
+- Source code.
+- Database migration definitions.
+- Infrastructure configuration without secrets.
+- Approved project specifications.
+- Arabic project documentation.
+- Approved design references.
+- Implementation progress records.
+- Validation records.
+- Recovery instructions.
+- Deployment procedures.
+- Cloud architecture documentation.
+- Dependency manifests and lockfiles.
+
+CLOUD APPLICATION HOSTING:
+
+- Production application.
+- Approved backend services.
+- Application APIs.
+- Authentication services.
+- Authorized administrative services.
+
+SECURE CLOUD DATABASES:
+
+- Subscriber accounts.
+- Account categories.
+- Verification metadata.
+- Authentication sessions.
+- Geographic coverage.
+- Retailer codes.
+- Consumer favorites.
+- Product catalog records.
+- Orders.
+- Invoice records.
+- Cumulative financial records.
+- Violations.
+- Complaints.
+- Administrative records.
+- Audit logs.
+
+PRIVATE CLOUD OBJECT STORAGE:
+
+- National ID images.
+- Identity verification selfies.
+- Business verification documents.
+- Delivery verification documents.
+- Private subscriber archives.
+- Private invoice documents.
+- Complaint evidence.
+- Violation evidence.
+- Sensitive attachments.
+
+DESIGNATED CLOUD PRODUCT STORAGE:
+
+- Product images.
+- Product catalog assets.
+- Manufacturer records.
+- Product category assets.
+- Product collection data.
+- Product collection checkpoints.
+
+SECURE CLOUD SECRET MANAGEMENT:
+
+- Production credentials.
+- API keys.
+- Database credentials.
+- Authentication secrets.
+- Future WhatsApp integration credentials.
+- Service access tokens.
+
+CLOUD BACKUP INFRASTRUCTURE:
+
+- Encrypted database backups.
+- Private document backups.
+- Product data backups.
+- Recovery manifests.
+- Approved release recovery assets.
+
+Never commit credentials, secrets, real subscriber
+personal data, or private identity documents to GitHub.
+
+Never persist real subscriber personal data on the
+development laptop.
+
+Use synthetic data for local development and testing.
+
+Allow temporary local source files, build artifacts,
+dependency caches, and test files only when necessary.
+
+Temporary local files must never be the only copy
+of valuable project work.
+
+Do not use the laptop as the permanent source of truth.
+
+Inspect existing cloud infrastructure before selecting
+or introducing additional services.
+
+Prefer existing approved services where technically
+appropriate and secure.
+
+Do not invent unavailable infrastructure.
+
+Do not purchase or provision paid services without
+explicit approval.
+
+Report exact access, infrastructure, billing, or
+authorization blockers.
+
+Continue independent implementation work when possible.
+
+==================================================
+05. PROFESSIONAL CLOUD ORGANIZATION
+==================================================
+
+Inspect all authorized existing SAFAQAT cloud resources.
+
+Identify the current purpose, ownership, dependencies,
+environment, and usage of each relevant resource.
+
+Create a professional cloud resource inventory.
+
+Organize resources by:
+
+- Service responsibility.
+- Application module.
+- Account category.
+- Data classification.
+- Environment.
+- Access permissions.
+- Retention requirements.
+- Backup requirements.
+
+Separate development, testing, and production.
+
+Use consistent naming conventions.
+Use stable identifiers.
+Avoid duplicate authoritative data sources.
+Avoid random filenames and unexplained directories.
+Avoid mixing production data with test data.
+Avoid mixing public assets with private documents.
+
+Organize GitHub logically into appropriate sections for:
+
+- Application source.
+- Shared components.
+- Backend services.
+- Database migrations.
+- Localization.
+- Authentication.
+- Registration.
+- Geographic services.
+- Product services.
+- Order services.
+- Financial services.
+- Shipping and delivery services.
+- Administrative services.
+- Tests.
+- Infrastructure configuration.
+- Approved design assets.
+- Arabic documentation.
+
+Respect the existing framework and repository structure.
+
+Do not move files merely for cosmetic organization
+if doing so would break imports, routes, builds,
+deployment configuration, or existing integrations.
+
+Organize cloud storage using clear logical namespaces
+and access boundaries.
+
+Suggested logical categories:
+
+- Public approved brand assets.
+- Public product assets.
+- Private subscriber documents.
+- Private verification records.
+- Private invoice documents.
+- Private complaint evidence.
+- Private violation evidence.
+- Protected backup resources.
+
+Use immutable subscriber identifiers rather than
+personal names or national ID numbers in storage paths.
+
+Maintain documented relationships between database
+records and cloud storage objects.
+
+Use consistent metadata and naming.
+
+Document the authoritative location of every major
+data category.
+
+Create an Arabic cloud architecture and inventory
+document inside GitHub.
+
+Do not expose secrets or sensitive customer information
+inside the inventory documentation.
+
+==================================================
+06. CLOUD CLEANUP AND REMOVAL OF UNUSED FILES
+==================================================
+
+Audit existing SAFAQAT cloud resources and repository
+files for obsolete, duplicate, abandoned, temporary,
+and genuinely unused resources.
+
+The objective is professional, organized, valuable,
+functional cloud storage without unnecessary clutter.
+
+Do not delete files based only on their age,
+filename, size, or apparent lack of recent activity.
+
+Before classifying a file as unused, inspect:
+
+- Source code references.
+- Static and dynamic imports.
+- Application routes.
+- Asset references.
+- Database references.
+- Object storage references.
+- Product catalog references.
+- Manifest references.
+- Service worker references.
+- Deployment configuration.
+- Environment configuration.
+- CI/CD workflows.
+- Documentation references.
+- Backup and recovery dependencies.
+- Active and supported application releases.
+- Historical records.
+- Legal retention requirements.
+
+Classify audited resources as:
+
+A. Active and required.
+B. Approved reference or documentation.
+C. Required backup or recovery resource.
+D. Duplicate with a verified authoritative copy.
+E. Confirmed disposable temporary resource.
+F. Obsolete and demonstrably unused.
+G. Uncertain or protected resource.
+
+Preserve categories A, B, C, and G.
+
+For confirmed duplicates:
+
+- Verify file integrity.
+- Compare hashes where appropriate.
+- Verify the authoritative copy.
+- Verify all references.
+- Preserve the correct authoritative resource.
+- Remove only the redundant copy when safe.
+
+For confirmed disposable or unused resources:
+
+- Record the exact resource path.
+- Record the reason for removal.
+- Record dependency checks.
+- Record whether recovery is possible.
+- Remove safely when ownership, lack of dependencies,
+  and recoverability are established.
+
+Use reversible Git changes for repository cleanup.
+
+Use small cleanup batches.
+
+Validate affected functionality after each batch.
+
+Do not rewrite Git history.
+Do not force-push.
+Do not delete branches or tags.
+Do not delete approved original artwork.
+Do not delete active production assets.
+Do not delete required rollback deployments.
+Do not delete valid product images or catalog data.
+
+Do not delete subscriber records or financial records
+under general cleanup rules.
+
+Do not delete legal, financial, security, or audit
+records subject to retention requirements.
+
+Do not delete cloud databases, storage buckets,
+production deployments, or other high-impact resources
+without separate explicit approval.
+
+For uncertain resources or irreversible deletion,
+produce an Arabic cleanup proposal and request approval.
+
+Do not keep unnecessary temporary backups indefinitely.
+
+Apply an appropriate documented retention policy to
+temporary recovery copies.
+
+Do not remove the only recoverable copy of any
+valuable project resource.
+
+Create a cloud cleanup report in GitHub containing:
+
+- Resources inspected.
+- Resources retained.
+- Resources reorganized.
+- Confirmed duplicates removed.
+- Confirmed unused files removed.
+- Storage reclaimed.
+- Dependency verification results.
+- Protected resources.
+- Resources requiring further approval.
+
+Perform cleanup without disrupting the existing
+production application.
+
+Protect assets required by installed PWA versions
+and previously supported application releases.
+
+==================================================
+07. EXISTING LOCAL DATA AND CLOUD MIGRATION
+==================================================
+
+Inspect existing SAFAQAT project resources that may
+still depend on the laptop.
+
+Include:
+
+- Product databases.
+- Product image libraries.
+- Product collection checkpoints.
+- Product collection scripts.
+- Project archives.
+- Local backups.
+- Deployment records.
+- Configuration dependencies.
+- Uncommitted valuable project files.
+
+Inspect the existing product library location:
+
+~/Downloads/SAFAQAT_BACKUP/SAFAQAT_PRODUCT_LIBRARY
+
+Also inspect relevant existing SAFAQAT backup resources.
+
+Preserve all existing valuable data.
+
+Verify whether complete recoverable cloud copies exist.
+
+Where an approved cloud destination already exists,
+safely synchronize required resources using small,
+resumable, low-memory batches.
+
+Verify cloud copy integrity using appropriate checksums,
+record counts, manifests, or recovery tests.
+
+Avoid uploading duplicate files unnecessarily.
+
+Do not upload sensitive local credentials to GitHub.
+
+Do not restart product collection workers.
+Do not perform new product collection.
+Preserve existing collection progress.
+
+Do not delete existing valuable local data before
+verifying cloud integrity and receiving explicit
+approval for local removal.
+
+Report all remaining laptop dependencies.
+
+The final architecture must allow development to resume
+on another computer without requiring files from this
+laptop.
+
+==================================================
+08. OFFICIAL ARABIC PROJECT DOCUMENTATION
+==================================================
+
+Create or update the authoritative Arabic project
+requirements inside GitHub.
+
+Consolidate all approved SAFAQAT decisions.
+
+Include:
+
+- Approved visual identity.
+- Updated landing page slogan.
+- Updated shipping and delivery card.
+- Localization.
+- Account categories.
+- Registration requirements.
+- Identity verification.
+- Business verification.
+- Shipping and delivery verification.
+- Account activation.
+- Authentication.
+- Single-device enforcement.
+- Account recovery.
+- Electronic archives.
+- Geographic coverage.
+- Consumer retailer discovery.
+- Retailer favorites.
+- Orders.
+- Invoices.
+- Cumulative financial records.
+- Violations.
+- Complaints.
+- Administrative search.
+- Customer support.
+- Security.
+- Privacy.
+- Cloud architecture.
+- Cloud resource organization.
+- Backup and recovery.
+- Resource protection.
+- Testing.
+- Incremental production deployment.
+- Production rollback procedures.
+- Deferred requirements.
+
+Distinguish approved requirements from technical
+implementation decisions and unresolved business rules.
+
+Do not silently replace approved requirements.
+
+If requirements conflict, report the conflict instead
+of inventing a resolution.
+
+Record the latest approved landing page text changes
+as explicit exceptions to the previous visual baseline.
+
+Record the latest explicit authorization for incremental
+production deployment.
+
+==================================================
+09. PRESERVE THE APPROVED VISUAL DESIGN
+==================================================
+
+Preserve:
+
+- Original approved SAFAQAT logo.
+- Approved purple and gold identity.
+- Approved warehouse background.
+- Approved central shopping cart artwork.
+- Approved landing page layout.
+- Approved role card artwork.
+- Approved typography.
+- Approved startup experience.
+- Existing sharing functionality.
+- Existing installation functionality.
+- Responsive behavior.
+- Smooth interactions.
+
+Use approved design references as visual authority.
+
+Do not replace approved artwork with generic icons
+or alternative visual designs.
+
+Do not regenerate the entire landing artwork merely
+to modify the approved text.
+
+Do not overwrite the original approved design files.
+
+Create a versioned derivative only if the existing
+artwork requires a localized visual text edit.
+
+All new screens must follow the same visual identity,
+quality, clarity, and professional standards.
+
+The shipping and delivery card update and the new
+landing page slogan specified in sections 32 and 33
+are explicitly approved visual changes.
+
+No other redesign is authorized.
+
+==================================================
+10. ARABIC AND ENGLISH LOCALIZATION
+==================================================
+
+Implement complete bilingual architecture.
+
+Arabic is the default language.
+
+Add a compact gold AR/EN language control on the
+opposite side of the existing share button.
+
+Requirements:
+
+- AR indicates Arabic mode.
+- EN indicates English mode.
+- Switching changes the entire application language.
+- Arabic uses RTL.
+- English uses LTR.
+- Persist the selected language.
+- Switch without unnecessary page reloads.
+- Preserve account and application state.
+- Preserve the approved original logo.
+
+Localize:
+
+- Landing page slogan.
+- Role cards.
+- Registration.
+- Verification.
+- Account settings.
+- Navigation.
+- Buttons.
+- Notifications.
+- Error messages.
+- Product interfaces.
+- Product categories.
+- Orders.
+- Invoices.
+- Shipping and delivery interfaces.
+- Policies.
+- Administrative interfaces.
+
+Preserve user-entered names, addresses, and business
+names in their original language.
+
+Use centralized maintainable translations.
+
+Do not create inconsistent hardcoded translations.
+
+Ensure localized text fits the approved layout.
+
+Publish completed localization stages after passing
+the applicable production release gates.
+
+==================================================
+11. SECURE BACKEND AND DATA ARCHITECTURE
+==================================================
+
+Establish real persistent application architecture.
+
+Prepare:
+
+- Secure database schemas.
+- Versioned database migrations.
+- Private document storage.
+- Server-side authorization.
+- Role-based access control.
+- Administrative permissions.
+- Audit logging.
+- Secure session management.
+- Backup and recovery.
+- Environment separation.
+- Database integrity constraints.
+- Transaction-safe operations.
+
+Use cloud infrastructure as the permanent data source.
+
+Do not describe mock interfaces as operational systems.
+
+Do not expose private data through static public assets.
+
+If external services are unavailable, implement safe
+interfaces and isolated test adapters where appropriate.
+
+Clearly report which functions remain dependent on
+external service configuration.
+
+Preserve existing approved application architecture
+where appropriate.
+
+Do not introduce unnecessary services or dependencies.
+
+Inspect existing Cloudflare hosting capabilities.
+
+Use an appropriate approved server-side runtime for
+protected APIs and database access.
+
+Never expose database credentials in browser code.
+
+Do not enable production functionality that requires
+an unavailable backend or external service.
+
+==================================================
+12. REGISTRATION FOR ALL FOUR ACCOUNT TYPES
+==================================================
+
+Implement separate registration workflows for:
+
+1. Suppliers.
+2. Retailers.
+3. Consumers.
+4. Shipping and delivery agents.
+
+Common registration requirements:
+
+- Full name.
+- Mobile phone number.
+- Phone verification architecture.
+- Email address.
+- Email verification when provided.
+- Governorate.
+- City or district.
+- Detailed address.
+- Geographic location.
+- Minimum age of 18.
+- Acceptance of terms and conditions.
+- Acceptance of privacy policy.
+- Acceptance of the commission system.
+- Free registration.
+
+Email is mandatory for suppliers, retailers, and
+delivery agents.
+
+Email is optional for consumers.
+
+Do not require passwords.
+Do not require a personal profile photograph.
+
+Identity verification for suppliers, retailers,
+and delivery agents:
+
+- National ID number.
+- Front image of national ID.
+- Back image of national ID.
+- Identity verification selfie.
+- ID validity review.
+- Administrative identity review.
+
+Suppliers and retailers:
+
+- Company or shop name.
+- Business type.
+- Business premises address.
+- Storefront or company facade photograph.
+- Geographic service coverage.
+
+Use the latest approved business activity categories.
+
+Preserve approved category ordering.
+
+Shipping and delivery agents:
+
+- Vehicle type.
+- Driving license where legally required.
+- Vehicle license where legally required.
+- License plate number where applicable.
+- Vehicle photograph.
+- Geographic delivery coverage.
+
+Do not require vehicle documents for vehicle types
+where those documents are not applicable.
+
+Do not introduce unapproved mandatory requirements for:
+
+- Commercial registration.
+- Tax cards.
+- Business licenses.
+- Criminal records.
+- Bank accounts.
+- Electronic wallets.
+- Paid subscriptions.
+
+Commercial and regulatory requirements must be
+reviewed before permitting regulated business activity.
+
+Do not collect consumer identity documents that were
+not approved.
+
+Do not invent a consumer age-verification mechanism
+requiring additional identity documents.
+
+If an older specification conflicts with the latest
+approved registration requirements, document the
+conflict and apply the latest explicit decision.
+
+Request clarification if the latest decision is unclear.
+
+Do not collect real identity documents in production
+until secure storage, authorization, legal requirements,
+and verification workflows are ready.
+
+==================================================
+13. ACCOUNT ACTIVATION AND VERIFICATION
+==================================================
+
+Consumers:
+
+- Automatic activation after completing all required
+  registration and verification.
+
+Suppliers, retailers, and delivery agents:
+
+- Administrative approval before activation.
+- Browsing-only access while verification is pending.
+- No restricted commercial or delivery activity
+  before approval.
+
+Support appropriate account states:
+
+- Incomplete registration.
+- Pending review.
+- Requires correction.
+- Approved and active.
+- Rejected.
+- Suspended or disabled.
+
+When verification is rejected:
+
+- Display the reason.
+- Allow correction.
+- Allow resubmission.
+
+Authorized administrators may request additional
+documents for a specific justified reason.
+
+Apply policy acceptance requirements by account category.
+
+Sales and purchase policy:
+
+- Suppliers.
+- Retailers.
+- Consumers.
+
+Delivery policy:
+
+- Consumers.
+- Delivery agents.
+
+Record policy versions and acceptance timestamps.
+
+Do not invent unresolved returns policies.
+
+Do not present unapproved policy drafts as legally
+approved production policies.
+
+==================================================
+14. PASSWORDLESS AUTHENTICATION
+==================================================
+
+Implement secure passwordless authentication architecture.
+
+Actual WhatsApp OTP integration is deferred until
+a later approved phase.
+
+Create a replaceable verification provider interface.
+
+Prepare the future approved WhatsApp verification flow:
+
+- The registrant enters a mobile phone number.
+- The application generates a short-lived,
+  single-use verification challenge.
+- The registrant opens WhatsApp using the approved
+  verification action.
+- The registrant sends the prefilled verification
+  message to the official SAFAQAT WhatsApp number.
+- The future authorized WhatsApp integration verifies
+  the sender phone number and verification challenge.
+- Successful verification updates the account's
+  phone verification status securely.
+
+Use the future official WhatsApp integration through
+an authorized provider and verified server-side events.
+
+Do not activate the actual WhatsApp integration yet.
+
+Do not simulate successful production verification.
+
+Do not implement SMS fallback.
+
+Development verification must remain isolated from
+production.
+
+Never activate real production accounts through
+test OTPs or development bypasses.
+
+Requirements:
+
+- One account type per phone number.
+- Account type cannot be changed.
+- Persistent secure authenticated sessions.
+- No repeated OTP request on every application launch.
+- Explicit logout.
+- Server-side session validation.
+- Secure session expiration.
+- Secure session revocation.
+- Rate limiting.
+- Authentication abuse protection.
+- Single-use verification challenges.
+- Replay protection.
+
+Do not store verification challenges insecurely.
+
+Completed authentication architecture may be deployed
+behind secure disabled production feature controls
+until the actual verification provider is available.
+
+==================================================
+15. SINGLE-DEVICE ACCOUNT ENFORCEMENT
+==================================================
+
+Enforce one active authenticated device session
+per account.
+
+If an account is already active on another device:
+
+- Reject ordinary login from the second device.
+- Display a clear localized explanation.
+- Do not automatically disconnect the existing device.
+- Do not allow two concurrent active sessions.
+
+Closing the application or moving it into the
+background must not count as logout.
+
+Changing physical location or network must not
+invalidate a legitimate session solely because of
+that change.
+
+Implement atomic server-side session enforcement.
+
+Use secure session identifiers.
+
+Do not claim access to permanent physical hardware
+identifiers unavailable to PWAs.
+
+Keep ordinary login separate from authorized account
+recovery and device replacement.
+
+Ensure concurrent login requests cannot bypass the
+single-session restriction.
+
+Validate the session on protected server operations.
+
+==================================================
+16. ACCOUNT RECOVERY AND SECURITY
+==================================================
+
+Lost or damaged device:
+
+- Verify ownership through WhatsApp when integrated.
+- Verify the registered email when available.
+- Revoke the old session after successful recovery.
+- Establish the replacement session securely.
+
+Application deletion or device formatting:
+
+- Reverify account ownership.
+- Revoke the previous session.
+- Establish a replacement session.
+
+Lost phone number:
+
+- Support recovery through verified email where available.
+- Verify ownership of the replacement phone number.
+
+Lost phone number without verified email:
+
+- Administrative recovery after proof of account ownership.
+
+Normal device replacement:
+
+- Logout from the previous device.
+- Verify and authenticate the new device.
+
+Phone number change:
+
+- Require verification of the old and new phone numbers
+  under the normal change workflow.
+
+Account settings:
+
+- Registered device information.
+- Last activity.
+- Secure logout.
+- Account deletion requests.
+
+Require fresh security verification before sensitive
+account changes or account deletion.
+
+Protect recovery workflows from account takeover.
+
+Ensure successful authorized recovery revokes the old
+session before establishing the replacement session.
+
+Prevent recovery from creating duplicate accounts.
+
+Account deletion must respect applicable legal rights
+and retention obligations.
+
+Administrators may suspend or disable accounts with
+a recorded reason.
+
+==================================================
+17. ELECTRONIC SUBSCRIBER ARCHIVES
+==================================================
+
+Assign every subscriber a unique immutable membership
+identifier.
+
+Automatically create a private electronic archive
+for every account.
+
+Organize archives by account category and immutable
+subscriber identifier.
+
+Provide separate logical folders or sections:
+
+01 - Basic account information.
+02 - Identity verification documents.
+03 - Business or delivery verification documents.
+04 - Verification review and approval.
+05 - Agreements and policies.
+06 - Account security and recovery.
+07 - Administrative history.
+08 - Violations and penalties.
+09 - Purchase invoices.
+10 - Sales invoices.
+11 - Cumulative financial records.
+12 - Complaints and support history.
+13 - Geographic coverage records.
+
+Show only sections applicable to the account category.
+
+Do not require unapproved consumer identity documents.
+
+Store document metadata, upload dates, review results,
+and authorized administrative actions.
+
+Use encrypted private cloud object storage.
+
+Use controlled document access.
+
+Do not expose private documents through public URLs.
+
+Preserve appropriate document version history subject
+to legal retention requirements.
+
+Keep archives organized and searchable.
+
+Use logical folders linked to database records instead
+of relying on fragile physical file paths.
+
+==================================================
+18. GEOGRAPHIC COVERAGE AND MAPS
+==================================================
+
+Implement real geographic coverage architecture for:
+
+- Suppliers.
+- Retailers.
+- Shipping and delivery agents.
+
+Use simplified geographic maps without unnecessary
+landmarks, commercial POIs, business markers, or
+unrelated place markers.
+
+Preserve necessary geographic boundaries and approved
+governorate, district, and area labels.
+
+Support:
+
+- Current location with permission.
+- Manual location correction.
+- Adjustable coverage radius.
+- Coverage expansion up to the full governorate.
+- Detailed service-area selection.
+- Geographic coverage persistence.
+- Server-side geographic eligibility validation.
+
+Apply approved geographic rules separately to each
+account category.
+
+Do not fabricate coordinates.
+
+Do not expose private subscriber locations to
+unauthorized users.
+
+If location permission is denied, provide a clear
+manual selection or permission recovery workflow.
+
+Use a suitable licensed map provider.
+
+Respect map provider terms and usage limits.
+
+Do not purchase paid map services without approval.
+
+Use efficient geographic queries and appropriate
+spatial indexing where supported.
+
+==================================================
+19. SHIPPING AND DELIVERY GPS NAVIGATION
+==================================================
+
+Keep the normal shipping and delivery coverage map
+simplified and free of unnecessary landmarks.
+
+Only when the delivery agent presses the customer
+delivery action:
+
+توصيل للعميل
+
+For an authorized assigned order:
+
+- Open normal GPS navigation.
+- Show the route to the authorized customer destination.
+- Support ordinary navigation guidance.
+
+Do not expose customer delivery locations to unrelated
+delivery agents.
+
+Do not expose navigation for unauthorized or
+unassigned orders.
+
+Do not introduce continuous background location tracking
+unless separately approved.
+
+Respect device permissions and navigation application
+availability.
+
+==================================================
+20. CONSUMER RETAILER DISCOVERY
+==================================================
+
+Implement these features exclusively for consumers.
+
+Automatically obtain the consumer's current location
+with permission.
+
+Discover eligible active retailers according to
+approved geographic rules.
+
+Apply the same-governorate and 30 km discovery limit
+only after confirming it against the authoritative
+approved project specification.
+
+Do not silently invent a geographic restriction if
+the authoritative specification does not confirm it.
+
+Sort eligible retailers from nearest to farthest.
+
+Support:
+
+- Retailer name search.
+- Unique retailer code search.
+- Retailer distance display.
+- Retailer details.
+- Add to favorites.
+- Remove from favorites.
+- Dedicated favorites list.
+- Persistent account-specific favorites.
+
+Every retailer must have a stable unique searchable code.
+
+Favorites must persist across application restarts
+and authorized account recovery.
+
+Do not apply consumer-only favorites to suppliers,
+retailers, or delivery agents.
+
+Do not fabricate retailers, distances, or geographic
+results in production.
+
+Do not invent geographic eligibility exceptions
+for retailer-code search.
+
+Use pagination and efficient geographic queries.
+
+Do not load the complete retailer database into
+the consumer application.
+
+==================================================
+21. PRODUCT LIBRARY ORGANIZATION
+==================================================
+
+Preserve the existing SAFAQAT product library and
+all valuable collection progress.
+
+Maintain a professional cloud product library hierarchy:
+
+Sector
+  Manufacturer or company
+    Product category
+      Product records
+      Product images
+      Product variants
+
+Maintain appropriate product metadata:
+
+- Product identifier.
+- Product name.
+- Manufacturer.
+- Category.
+- Weight or volume.
+- Packaging information.
+- Image references.
+- Available verification metadata.
+
+Preserve genuine product images.
+
+Prefer approved clean white-background product images
+where available.
+
+Do not replace genuine product images with fabricated
+product representations.
+
+Identify exact duplicate assets using appropriate
+integrity checks.
+
+Do not merge distinct product variants merely because
+their names are similar.
+
+Preserve all valid catalog records and image references.
+
+Do not restart collection workers.
+
+Do not collect additional products during this task.
+
+Use streaming and small batches for catalog inspection
+and organization.
+
+Preserve source and verification metadata where available.
+
+Maintain efficient cloud image delivery and avoid
+unnecessarily loading full-resolution images.
+
+==================================================
+22. ORDERS, INVOICES AND FINANCIAL RECORDS
+==================================================
+
+Establish persistent order and invoice architecture.
+
+Every completed transaction must have an associated
+invoice record.
+
+Store:
+
+- Invoice identifier.
+- Order identifier.
+- Buyer identifier.
+- Seller identifier.
+- Product identifiers.
+- Product names.
+- Quantities.
+- Unit prices.
+- Line totals.
+- Invoice totals.
+- Transaction status.
+- Completion date.
+
+Maintain cumulative financial records from the first
+completed transaction to the latest completed transaction.
+
+Track applicable totals by account category:
+
+- Total purchases.
+- Total sales.
+- Applicable cumulative withdrawals.
+- Completed purchase orders.
+- Completed sales orders.
+- Completed delivery orders.
+- Delivery service totals when financial rules
+  are approved.
+- First completed transaction date.
+- Latest completed transaction date.
+
+Requirements:
+
+- Count completed transactions exactly once.
+- Exclude cancelled orders.
+- Prevent duplicate accounting.
+- Use precise monetary representations.
+- Use transaction-safe accounting operations.
+- Preserve cumulative totals independently of
+  invoice visibility.
+- Maintain auditable financial records.
+
+Prepare configurable three-month invoice visibility
+and retention architecture.
+
+Removing historical invoice details must never reset
+cumulative financial totals.
+
+Do not permanently delete invoices until the exact
+approved deletion policy and applicable legal retention
+requirements are confirmed.
+
+Do not assume whether the three-month period means
+rolling retention or calendar-quarter processing.
+
+Preserve invoices associated with unresolved disputes,
+investigations, or legal obligations.
+
+Prepare financial adjustment architecture without
+inventing unresolved financial rules.
+
+Do not invent:
+
+- Commission rates.
+- Taxes.
+- Delivery fees.
+- Shipping fees.
+- Payout rules.
+- Refund rules.
+- Financial penalties.
+
+Do not activate real financial processing that depends
+on unresolved business or legal requirements.
+
+==================================================
+23. VIOLATIONS AND COMPLAINTS
+==================================================
+
+Create a structured violation history for each
+subscriber.
+
+Store:
+
+- Violation identifier.
+- Date and time.
+- Violation category.
+- Description.
+- Evidence and attachments.
+- Related order.
+- Administrative action.
+- Responsible administrator.
+- Penalty details when approved.
+- Suspension details when applicable.
+- Appeal history.
+- Resolution status.
+
+Preserve violation history independently of invoice
+retention.
+
+Implement complaint and support records.
+
+Store:
+
+- Complaint identifier.
+- Subscriber identifier.
+- Complaint details.
+- Related order or transaction.
+- Responsible administrator.
+- Actions taken.
+- Resolution.
+- Resolution date.
+- Complaint status.
+
+Do not invent violation categories, penalty amounts,
+or enforcement policies that have not been approved.
+
+Store evidence and sensitive attachments privately
+in the appropriate approved cloud storage.
+
+==================================================
+24. CENTRAL ADMINISTRATIVE SEARCH AND SUPPORT
+==================================================
+
+Establish the backend and initial administrative
+workflows for the future complete SAFAQAT control panel.
+
+Create a subscriber search interface with five
+distinct category filters:
+
+- All.
+- Suppliers.
+- Retailers.
+- Delivery Agents.
+- Consumers.
+
+Arabic labels:
+
+- الكل
+- الموردون
+- التجار
+- المناديب
+- المستهلكون
+
+Support search by:
+
+- Full or partial name.
+- Phone number.
+- Membership identifier.
+- Exact national ID number where collected.
+- Business name where applicable.
+
+National ID searches require appropriate administrative
+authorization.
+
+Selecting a search result must open the corresponding
+subscriber's private electronic archive.
+
+Organize subscriber records into separate logical
+sections.
+
+Do not display every record on one long page.
+
+Support authorized administrative actions:
+
+- Review verification.
+- Approve or reject verification.
+- Request justified additional documents.
+- Review account history.
+- Review orders and invoices.
+- Review cumulative financial records.
+- Review violations.
+- Review complaints.
+- Record support actions.
+- Record complaint resolutions.
+- Suspend or disable accounts with a reason.
+- Reactivate accounts when authorized.
+- Assist with account recovery.
+- Revoke sessions when authorized.
+- Add administrative notes.
+
+Record administrative access and modifications in
+secure audit logs.
+
+Restrict sensitive information according to permissions.
+
+Use indexed searches, pagination, and on-demand loading.
+
+Avoid loading all subscriber records into memory.
+
+Do not expose administrative interfaces or data to
+ordinary subscriber accounts.
+
+Do not activate production administrative access
+until secure administrative authentication and
+authorization are fully validated.
+
+==================================================
+25. SECURITY AND PRIVACY
+==================================================
+
+Apply security throughout the architecture.
+
+Requirements:
+
+- Server-side authorization.
+- Least-privilege access.
+- Strong administrative authentication.
+- Multi-factor administrative authentication architecture.
+- Secure transport.
+- Encryption of sensitive stored information.
+- Private identity document storage.
+- Controlled document access.
+- Input validation.
+- Secure file upload validation.
+- Rate limiting.
+- Session revocation.
+- Audit logging.
+- Cross-account access protection.
+- Duplicate financial processing protection.
+- Secure cloud backup and recovery.
+- Configurable legal data retention.
+- Environment isolation.
+- Protection against unauthorized document downloads.
+- Protection against unauthorized administrative access.
+
+Do not log OTPs, credentials, full national ID
+numbers, or sensitive identity documents in ordinary
+application logs.
+
+Do not expose production personal data in development
+or testing.
+
+Do not place private documents in public repositories
+or public cloud storage.
+
+Do not cache sensitive subscriber documents or protected
+API responses in public PWA service-worker caches.
+
+Keep sensitive data collection limited to approved
+and legally appropriate requirements.
+
+Never weaken production security to make an incomplete
+feature appear functional.
+
+==================================================
+26. UNRESOLVED BUSINESS REQUIREMENTS
+==================================================
+
+Preserve unresolved requirements as deferred decisions.
+
+Do not invent:
+
+- Commission percentages.
+- Financial settlement rules.
+- Payout methods.
+- Bank account requirements.
+- Electronic wallet requirements.
+- Returns and refunds policies.
+- Document renewal procedures.
+- Penalty amounts.
+- Unapproved legal requirements.
+- Final invoice deletion rules.
+- Unapproved geographic exceptions.
+- Unapproved shipping prices.
+- Unapproved vehicle-specific business rules.
+
+Implement safe extensible architecture where possible.
+
+If a missing decision blocks implementation, record
+the exact blocker and continue independent work.
+
+Do not activate features requiring unresolved legal,
+financial, or operational rules.
+
+Do not allow one blocked integration to prevent
+deployment of independent completed features.
+
+==================================================
+27. INCREMENTAL IMPLEMENTATION
+==================================================
+
+Before implementing new systems:
+
+- Inspect the current architecture.
+- Preserve existing work.
+- Create a safe recovery checkpoint.
+- Identify infrastructure dependencies.
+- Identify cloud storage dependencies.
+- Establish an incremental implementation plan.
+
+Implement approved systems in small independently
+validated stages.
+
+Prioritize:
+
+1. Previous release validation.
+2. Safe recovery checkpoint.
+3. Cloud resource inventory.
+4. Arabic requirements documentation.
+5. Approved landing page slogan update.
+6. Approved shipping and delivery card update.
+7. Localization and AR/EN control.
+8. Secure cloud data architecture.
+9. Registration.
+10. Verification workflows.
+11. Authentication and session architecture.
+12. Account recovery.
+13. Electronic archives.
+14. Geographic coverage.
+15. Consumer discovery and favorites.
+16. Order and invoice architecture.
+17. Financial cumulative records.
+18. Violations and complaints.
+19. Administrative search and support.
+20. Safe cloud organization and cleanup.
+21. Integrated security and functional validation.
+22. Cloud independence verification.
+
+Publish the completed visual updates as early as
+possible after validation.
+
+Do not delay the approved landing page release until
+backend implementation is finished.
+
+For every independently releasable stage:
+
+- Implement.
+- Validate.
+- Commit.
+- Push.
+- Deploy to production.
+- Verify production.
+- Record the result.
+- Continue to the next stage.
+
+Use the release requirements in section 31.
+
+Continue resource monitoring throughout every stage.
+
+Do not create disconnected mock screens and describe
+them as completed operational systems.
+
+Connect every approved feature to its corresponding
+account category, data model, authorization rules,
+navigation, and cloud storage architecture.
+
+Complete independent feasible stages even when an
+external integration remains blocked.
+
+==================================================
+28. VALIDATION AND TESTING
+==================================================
+
+Run relevant checks sequentially.
+
+Use the lowest practical resource consumption.
+
+Include:
+
+- TypeScript.
+- ESLint.
+- Production build.
+- Database migration validation.
+- Authentication tests.
+- Authorization tests.
+- Role isolation tests.
+- Session enforcement tests.
+- Account recovery tests.
+- Document access tests.
+- Geographic eligibility tests.
+- Retailer sorting tests.
+- Retailer code search tests.
+- Favorites persistence tests.
+- Invoice calculation tests.
+- Duplicate transaction prevention tests.
+- Cumulative financial record tests.
+- Administrative search tests.
+- Audit log tests.
+- Responsive layout tests.
+- Arabic RTL tests.
+- English LTR tests.
+- PWA regression tests.
+- Landing page slogan rendering tests.
+- Shipping and delivery card rendering tests.
+- Shipping and delivery navigation tests.
+- Cloud storage integrity tests.
+- Backup recovery tests.
+- Cleanup dependency validation.
+- Cloud independence tests.
+
+Use synthetic test accounts and synthetic documents.
+
+Validate the approved landing page artwork visually.
+
+Compare the updated landing page with the approved
+visual baseline.
+
+Confirm that only authorized visual differences
+have been introduced.
+
+Do not claim a test passed unless it was executed
+successfully.
+
+Report blocked, skipped, failed, and passed tests
+accurately.
+
+Do not repeatedly rerun resource-intensive tests
+without diagnosing the failure.
+
+Perform relevant regression checks before every
+production release.
+
+Perform production smoke tests after every deployment.
+
+Do not postpone all production validation until the
+end of the entire master task.
+
+Perform comprehensive final testing after all feasible
+implementation stages have been completed.
+
+==================================================
+29. GITHUB CHECKPOINTS AND RESUME SAFETY
+==================================================
+
+Work only on feature/landing-pwa.
+
+Keep main unchanged.
+
+Do not merge into main or develop without explicit
+approval.
+
+Commit and push validated implementation checkpoints
+to GitHub.
+
+Use clear commit messages.
+
+Maintain persistent Arabic project documentation
+inside GitHub.
+
+Maintain a dedicated implementation progress record.
+
+After every validated stage, record:
+
+- Completed requirements.
+- Modified files.
+- Database migrations.
+- Cloud resources involved.
+- Validation results.
+- Git commit identifier.
+- Push status.
+- Production deployment identifier.
+- Production release status.
+- Production verification results.
+- Rollback target.
+- Cloud organization changes.
+- Cleanup results.
+- Remaining tasks.
+- External dependencies.
+- Known blockers.
+- Exact next implementation step.
+
+Do not depend exclusively on temporary files or
+conversation history for progress tracking.
+
+Make the project resumable after:
+
+- Usage limits.
+- Application restarts.
+- Laptop restarts.
+- Internet interruptions.
+- Device replacement.
+- Laptop formatting.
+
+Save progress frequently rather than waiting for
+the entire master task to finish.
+
+If the usage limit approaches, prioritize saving
+a safe checkpoint and documenting the exact resume point.
+
+Do not leave valuable completed work only on the laptop.
+
+Verify successful remote pushes.
+
+Do not claim work is safely stored in GitHub if the
+push failed.
+
+Do not claim a release is live merely because the
+GitHub push succeeded.
+
+Verify the actual production deployment independently.
+
+==================================================
+30. CLOUD INDEPENDENCE ACCEPTANCE CRITERIA
+==================================================
+
+Before declaring a major implementation stage complete,
+verify that its permanent resources are stored in
+the appropriate approved cloud service.
+
+Verify that:
+
+- Source code is recoverable from GitHub.
+- Project documentation is recoverable from GitHub.
+- Deployment configuration is documented.
+- Required secrets are managed securely.
+- Permanent databases are cloud-hosted.
+- Private documents are cloud-hosted.
+- Required product assets are cloud-hosted.
+- Backup procedures are documented.
+- Recovery procedures are documented.
+- No essential production service depends on the laptop.
+- No valuable project resource exists only on the laptop.
+- Development can resume from another authorized device.
+
+Do not claim complete cloud independence if required
+services or migrations remain unfinished.
+
+Report all remaining dependencies explicitly.
+
+The laptop must not be required for ordinary production
+application operation.
+
+==================================================
+31. CONTINUOUS PRODUCTION DEPLOYMENT AUTHORIZATION
+==================================================
+
+The project owner explicitly authorizes immediate
+production deployment of completed, validated,
+secure, approved implementation stages.
+
+This section supersedes all previous instructions
+requiring separate production approval for every
+completed implementation stage.
+
+The authorized production application is:
+
+https://safaqat-59e.pages.dev/
+
+Do not create a replacement production application.
+
+Do not change the existing production URL.
+
+Preserve the existing PWA identity, installation
+identity, supported start URL, and application scope.
+
+Existing installed SAFAQAT applications must receive
+compatible updates through the existing production
+application update mechanism.
+
+Do not require users to reinstall the application
+for ordinary application updates.
+
+MANDATORY RELEASE WORKFLOW:
+
+For each independently completed implementation stage:
+
+1. Finish the approved implementation.
+2. Verify all required dependencies.
+3. Run relevant tests sequentially.
+4. Run the required production build.
+5. Verify security and authorization.
+6. Verify compatibility with existing production data.
+7. Preserve a known healthy rollback target.
+8. Commit the validated changes.
+9. Push the checkpoint to GitHub.
+10. Deploy the validated release to production.
+11. Verify deployment success.
+12. Verify the actual public production URL.
+13. Run relevant production smoke tests.
+14. Verify the installed PWA update mechanism.
+15. Record deployment and validation results.
+16. Continue immediately to the next approved stage.
+
+Do not wait until all 35 sections are completed
+before deploying a completed independent stage.
+
+Do not request repeated approval for ordinary
+production releases within this authorized scope.
+
+Use existing authorized Cloudflare infrastructure.
+
+Inspect current deployment workflows.
+
+Ensure production deployment uses validated release
+commits or validated release artifacts.
+
+Do not configure unrestricted deployment of every
+unvalidated development commit.
+
+Do not merge into main or develop merely to deploy.
+
+Keep main unchanged.
+
+Maintain separate development, testing, and production
+environments.
+
+Use safe release gates for production deployment.
+
+Use server-side feature controls for completed code
+that must remain inactive until external dependencies
+or approved business rules become available.
+
+Never expose unfinished registration, authentication,
+administrative, or financial functionality as fully
+operational.
+
+Never expose test verification bypasses in production.
+
+Never expose development accounts or synthetic data
+to ordinary production users.
+
+Do not connect actual WhatsApp OTP yet.
+
+Do not purchase external services or create paid
+subscriptions without approval.
+
+Do not modify unrelated cloud projects.
+
+Do not disrupt production during cloud organization
+or cleanup.
+
+PRODUCTION DATABASE SAFETY:
+
+- Validate migrations before production execution.
+- Preserve required backups.
+- Prefer backward-compatible migrations.
+- Avoid destructive schema changes.
+- Protect existing production records.
+- Prevent duplicate migration execution.
+- Verify data integrity after migration.
+- Preserve compatibility with the previous release
+  during staged application updates.
+
+Request separate approval for destructive or
+irreversible production database operations.
+
+PRODUCTION FAILURE RECOVERY:
+
+If a deployment fails:
+
+- Stop promotion of the failed release.
+- Preserve the last healthy production application.
+- Diagnose the exact failure.
+- Correct the issue.
+- Revalidate before retrying.
+
+If post-deployment verification detects a critical
+regression:
+
+- Disable the affected feature where possible.
+- Restore the last known healthy release using the
+  existing authorized rollback mechanism.
+- Verify production recovery.
+- Preserve all subscriber and transaction data.
+- Record the incident and recovery result.
+- Do not perform destructive database rollback.
+
+If safe rollback is unavailable, report the blocker
+and avoid further risky production changes.
+
+The owner's authorization includes routine,
+non-destructive recovery to a previously healthy
+release within the same production application.
+
+PWA UPDATE REQUIREMENTS:
+
+- Preserve manifest compatibility.
+- Preserve service worker scope.
+- Version application caches appropriately.
+- Remove only obsolete application-owned caches.
+- Avoid stale application assets.
+- Avoid mixed incompatible application versions.
+- Preserve legitimate authenticated sessions.
+- Preserve language preferences.
+- Preserve subscriber data.
+- Preserve consumer favorites.
+- Preserve active order state.
+- Avoid forced reload during sensitive operations.
+- Apply updates at an appropriate safe lifecycle point.
+- Verify fresh launches receive the current release
+  when network access is available.
+
+Do not promise instantaneous updates on offline
+devices or devices that have not refreshed their
+service worker.
+
+Verify the real update behavior.
+
+==================================================
+32. MANDATORY SHIPPING AND DELIVERY CARD UPDATE
+==================================================
+
+This is an explicitly approved landing page
+label modification.
+
+Replace the existing delivery card label:
+
+مندوب توصيل
+
+With the following exact Arabic two-line text:
+
+Main title:
+شحن و توصيل
+
+Subtitle:
+طيار / سيارة / نقل
+
+The Arabic text must appear exactly as specified.
+
+The main title must appear on the first line in the
+existing white title style.
+
+The subtitle must appear on the second line inside
+the existing gold subtitle strip.
+
+English localization:
+
+Main title:
+Shipping & Delivery
+
+Subtitle:
+Rider / Car / Truck
+
+Preserve:
+
+- Approved original delivery card artwork.
+- Existing delivery icon.
+- Existing card dimensions.
+- Existing card position.
+- Approved purple and gold identity.
+- Approved typography.
+- Approved visual hierarchy.
+- Responsive layout.
+- Professional visual quality.
+- Existing landing page balance.
+
+Do not replace the approved artwork with generic icons.
+
+Ensure both text lines fit clearly without clipping,
+overlapping, or distorting the card.
+
+Ensure correct rendering on small mobile screens,
+large mobile screens, tablets, and desktop screens.
+
+Connect the updated card to the existing shipping
+and delivery registration and account workflows
+as those workflows become operational.
+
+Preserve the existing delivery account category.
+
+Do not create duplicate account categories.
+
+Do not break existing routes, identifiers, account
+relationships, or database relationships.
+
+Prepare the existing delivery account architecture
+to support the approved vehicle categories represented
+by the new subtitle:
+
+- Rider.
+- Car.
+- Truck.
+
+Apply the existing approved vehicle-specific
+registration and verification requirements.
+
+Apply geographic coverage requirements.
+
+Apply authorized customer delivery GPS navigation.
+
+Do not invent new vehicle-specific pricing,
+commission, licensing, or operational business rules.
+
+Update relevant user-facing labels and localization
+records consistently.
+
+Preserve the approved administrative subscriber
+category filters.
+
+Include this modification in the official Arabic
+project specification.
+
+Include this modification in the implementation
+progress records.
+
+Validate Arabic and English rendering as applicable.
+
+Validate the card's existing navigation behavior.
+
+Commit and push the validated change to GitHub.
+
+Deploy the completed visual modification immediately
+to the real production application after validation.
+
+Do not delay this visual release until the entire
+shipping and delivery backend is completed.
+
+==================================================
+33. MANDATORY LANDING PAGE SLOGAN UPDATE
+==================================================
+
+This is the latest explicitly approved branding
+and landing page text modification.
+
+Replace the existing landing page slogan:
+
+كل الجملة في مكان واحد
+
+With the following exact Arabic text:
+
+كل طلباتك في مكان واحد
+
+English localization:
+
+All your needs in one place
+
+The new slogan must appear in the existing slogan
+position directly beneath the SAFAQAT Arabic logo.
+
+Preserve:
+
+- The original SAFAQAT English logo.
+- The original Arabic صفقات logo.
+- The approved shopping cart and boxes logo artwork.
+- The approved warehouse background.
+- The approved central shopping cart artwork.
+- The existing white slogan typography style.
+- The existing gold curved underline.
+- The approved purple and gold visual identity.
+- The original slogan alignment.
+- The existing visual hierarchy.
+- The existing spacing and proportions.
+- The approved visual clarity and quality.
+
+Adjust text fitting only as necessary to accommodate
+the new approved slogan.
+
+Do not introduce unnecessary font, color, background,
+logo, or layout changes.
+
+Do not redesign the entire landing page.
+
+Do not overwrite the original approved artwork.
+
+If the old slogan is embedded in an image, preserve
+the original image and create a versioned derivative
+with only the authorized slogan region changed.
+
+Prefer maintainable localized text rendering where
+it can preserve the approved visual appearance.
+
+Ensure the slogan remains sharp, legible, centered,
+and visually balanced across supported screen sizes.
+
+Update relevant localization records.
+
+Update current landing page branding documentation.
+
+Preserve historical documentation where necessary
+for traceability.
+
+Do not perform a blind global text replacement.
+
+IMPORTANT DISTINCTION:
+
+Landing page slogan:
+كل طلباتك في مكان واحد
+
+Startup splash slogan:
+سوقك الذكي لكل طلباتك
+
+The startup splash slogan must remain unchanged.
+
+The startup splash duration must remain 4000 ms
+including fade.
+
+Do not change the approved startup logo or startup
+behavior while updating the landing page slogan.
+
+The final approved Arabic landing page must retain
+the following main account cards:
+
+أنا مورد
+مصانع / شركات / موزع
+
+أنا تاجر
+محلات / تجار
+
+اتسوق من بيتك
+أفراد / المستهلك
+
+شحن و توصيل
+طيار / سيارة / نقل
+
+Preserve the approved application installation
+and sharing functionality.
+
+Add the approved AR/EN language control without
+disrupting the original visual balance.
+
+Validate the new slogan and updated delivery card
+together as one coherent approved landing page.
+
+Capture actual development preview screenshots.
+
+Verify that the remaining approved visual elements
+have not been unintentionally changed.
+
+Include the new slogan in the official Arabic
+project specification.
+
+Include the new slogan in implementation progress
+records and validation reports.
+
+Commit and push the validated change to GitHub.
+
+Deploy the completed visual updates immediately
+to the existing real production application.
+
+Capture actual production screenshots after deployment.
+
+Verify the new slogan on the production URL.
+
+Do not wait for unrelated backend implementation
+before publishing these completed visual changes.
+
+==================================================
+34. FINAL EXECUTION INSTRUCTIONS
+==================================================
+
+Begin immediately by protecting laptop resources
+and inspecting the exact previous interruption point.
+
+Complete the unfinished production verification.
+
+Then proceed with all feasible approved implementation
+phases, including:
+
+- The new landing page slogan.
+- The updated shipping and delivery card.
+- The AR/EN language control.
+- Secure cloud architecture.
+- Registration and verification architecture.
+- Single-device account enforcement.
+- Account recovery.
+- Electronic subscriber archives.
+- Geographic coverage.
+- Consumer retailer discovery and favorites.
+- Orders and invoice architecture.
+- Cumulative financial records.
+- Violations and complaints.
+- Administrative search and support.
+- Professional cloud organization.
+- Safe cloud cleanup.
+- Cloud independence verification.
+
+Do not stop after merely describing an implementation plan.
+
+Proceed with approved implementation work.
+
+Publish each completed and validated independent stage
+to the real production application.
+
+Do not wait for the complete master task to finish.
+
+Pause only for essential access, security, legal,
+infrastructure, irreversible deletion, or unresolved
+business blockers.
+
+Continue independent approved work when possible.
+
+Use professional, maintainable architecture.
+
+Maintain organized cloud resources.
+
+Remove confirmed unnecessary resources safely.
+
+Protect all valuable project data.
+
+Maintain low memory usage throughout execution.
+
+Use Arabic for:
+
+- Official project requirements.
+- Project documentation.
+- Progress reports.
+- Cloud architecture documentation.
+- Cleanup reports.
+- Production deployment reports.
+- User-facing explanations.
+
+Use English for:
+
+- Source code identifiers.
+- Technical identifiers.
+- Terminal commands.
+- Technical implementation instructions.
+
+Preserve Arabic and English user-facing translations
+as required by the localization architecture.
+
+Save validated progress to GitHub after each stage.
+
+Maintain a cloud-hosted production release history.
+
+Provide a final Arabic report containing:
+
+1. Previous release verification results.
+2. Completed implementation requirements.
+3. Remaining implementation requirements.
+4. Actual test results.
+5. Git commits and push status.
+6. Current production status.
+7. Cloud services and resource inventory.
+8. Cloud organization results.
+9. Files and resources safely removed.
+10. Storage reclaimed.
+11. Protected and retained resources.
+12. Remaining laptop dependencies.
+13. Cloud backup and recovery status.
+14. External service dependencies.
+15. Unresolved business decisions.
+16. Laptop resource protection results.
+17. Shipping and delivery card update results.
+18. Landing page slogan update results.
+19. Arabic and English localization results.
+20. Actual development and production screenshots.
+21. Production deployment history.
+22. Production deployment identifiers.
+23. Features currently active in production.
+24. Features deployed but securely disabled.
+25. Features not yet deployed.
+26. PWA update verification results.
+27. Production rollback readiness.
+28. Exact next resume point.
+
+Clearly distinguish:
+
+- Fully implemented and tested functionality.
+- Functionality live and active in production.
+- Implemented functionality awaiting external integration.
+- Deployed but disabled functionality.
+- Partially implemented functionality.
+- Blocked functionality.
+- Deferred business decisions.
+
+Do not claim the complete application is production-ready
+while essential integrations or security requirements
+remain unfinished.
+
+==================================================
+35. FINAL REAL APPLICATION TESTING AND HANDOVER
+==================================================
+
+After completing all feasible approved implementation
+stages and their incremental production deployments,
+perform comprehensive integrated testing against
+the real production application:
+
+https://safaqat-59e.pages.dev/
+
+The project owner wants to perform final acceptance
+testing using the actual installed SAFAQAT application,
+not merely a local development preview.
+
+Verify:
+
+- Production URL availability.
+- HTTPS integrity.
+- Latest production release identity.
+- Existing installed PWA compatibility.
+- Fresh PWA installation.
+- Application update behavior.
+- Approved startup logo.
+- Four-second startup splash.
+- Approved startup slogan.
+- Updated landing page slogan.
+- Updated shipping and delivery card.
+- AR/EN language switching.
+- Arabic RTL rendering.
+- English LTR rendering.
+- Sharing functionality.
+- Installation functionality.
+- Internal navigation.
+- Android Back behavior.
+- Application background resume.
+- Responsive rendering.
+- Existing application state preservation.
+- All completed and activated account workflows.
+- Secure access to protected features.
+- Geographic functionality where available.
+- Consumer discovery and favorites where available.
+- Authorized administrative functionality.
+- Completed order and invoice functionality.
+- Cloud data persistence.
+- Production error handling.
+- No unexpected runtime exceptions.
+- No broken required assets.
+- No unauthorized private data exposure.
+
+Use isolated synthetic testing where production
+transaction or identity workflows require test data.
+
+Do not create fake real customers, fake financial
+transactions, or unapproved production orders.
+
+Do not bypass WhatsApp verification to make
+registration appear operational.
+
+If physical-device testing requires user interaction,
+provide concise Arabic instructions and clearly
+identify the remaining physical-device checks.
+
+Do not claim physical-device tests were completed
+without actual evidence.
+
+Provide the existing production URL for final testing.
+
+Do not create a separate replacement application link.
+
+Confirm whether the existing installed PWA receives
+the latest compatible production update.
+
+Provide actual production screenshots.
+
+Provide an Arabic checklist showing:
+
+- What is live now.
+- What the owner can test now.
+- What remains disabled.
+- What remains dependent on WhatsApp integration.
+- What requires further business approval.
+- What remains blocked by external services.
+
+The final objective is a secure, professional,
+organized, bilingual, cloud-independent SAFAQAT
+application that preserves every approved requirement
+and the latest approved visual identity.
+
+Completed, validated, independently releasable
+features must be published progressively to the
+real production application.
+
+Do not wait until the end to publish completed work.
+
+Do not sacrifice security, data integrity, or laptop
+stability for deployment speed.
+
+Begin now.
