@@ -292,3 +292,40 @@ test("archive objects are streamed only to the owner and every successful read i
   assert.equal(bucketCalls, 1);
   assert.equal(sql.prepare("SELECT count(*) AS n FROM subscriber_audit_event WHERE event_type = 'document_accessed'").get().n, 1);
 });
+
+test("account HTTP routes authenticate from cookies and isolate invoices and logout", async t => {
+  const { database, sql } = databaseForTest(t);
+  const { createAccountApi } = await import("../accountApi.mjs");
+  const { issueVerifiedSession } = await import("../sessions.mjs");
+  const buyer = await register(database, "consumer", 0);
+  const seller = await register(database, "retailer", 1);
+  const outsider = await register(database, "consumer", 2);
+  for (const account of [buyer, seller, outsider]) activate(sql, account.subscriberId);
+  const session = account => issueVerifiedSession(database, { ...account, now: 102, expiresAt: 200 });
+  const cookie = value => writeSessionCookie(value, 102).split(";")[0];
+  const buyerCookie = cookie(await session(buyer));
+  const outsiderCookie = cookie(await session(outsider));
+  sql.prepare("INSERT INTO commerce_order VALUES ('order-api', ?, ?, 'pending', 102)").run(buyer.subscriberId, seller.subscriberId);
+  const { invoiceId } = await recordCompletedOrder(database, { orderId: "order-api", now: 103, lines: [
+    { productId: "prod", productName: "Synthetic", quantity: 1, unitMinor: 100 },
+  ] });
+  const origin = "https://safaqat.test";
+  const options = { database, origin, clock: () => 104 };
+  const api = createAccountApi({ ...options, invoiceVisibleFrom: () => 100 });
+  const request = (path, headers, method = "GET") => new Request(origin + "/api/account/" + path, { headers, method });
+  const path = "invoices/" + invoiceId;
+  assert.equal((await api(request(path))).status, 401);
+  assert.equal((await api(request(path + "?subscriberId=" + buyer.subscriberId, { Cookie: outsiderCookie }))).status, 404);
+  assert.equal((await createAccountApi(options)(request(path, { Cookie: buyerCookie }))).status, 404);
+  const invoice = await api(request(path, { Cookie: buyerCookie }));
+  assert.equal(invoice.status, 200);
+  assert.equal(invoice.headers.get("cache-control"), "private, no-store");
+  assert.equal((await invoice.json()).totalMinor, "100");
+  assert.equal((await api(request("invoices?limit=900", { Cookie: buyerCookie }))).status, 400);
+  assert.equal((await api(request("logout", { Cookie: buyerCookie }, "POST"))).status, 403);
+  assert.equal((await api(request("session", { Cookie: buyerCookie }))).status, 200);
+  const loggedOut = await api(request("logout", { Cookie: buyerCookie, Origin: origin }, "POST"));
+  assert.equal(loggedOut.status, 204);
+  assert.match(loggedOut.headers.get("set-cookie"), /Max-Age=0/);
+  assert.equal((await api(request("session", { Cookie: buyerCookie }))).status, 401);
+});
