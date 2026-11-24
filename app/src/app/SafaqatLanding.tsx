@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePwaInstall, type InstallNotice } from "./usePwaInstall";
+import { landingMessages, type Language } from "./landingMessages";
 import { useStandaloneRootBack } from "./useStandaloneRootBack";
 import "./SafaqatLanding.css";
 
@@ -60,11 +61,13 @@ const roleArtwork = {
 };
 
 const roles = [
-  { id: "merchant", title: "أنا تاجر", description: "محلات / تجار", icon: "shop" },
-  { id: "supplier", title: "أنا مورد", description: "مصانع / شركات / موزع", icon: "factory" },
-  { id: "courier", title: "مندوب توصيل", description: "طيار / سيارة", icon: "delivery" },
-  { id: "consumer", title: "اتسوّق من بيتك", description: "أفراد / المستهلك", icon: "home" },
+  { id: "merchant", icon: "shop" },
+  { id: "supplier", icon: "factory" },
+  { id: "courier", icon: "delivery" },
+  { id: "consumer", icon: "home" },
 ] as const;
+
+const languageKey = "safaqat-language";
 
 function Icon({ name, className }: { name: keyof typeof iconPaths; className: string }) {
   return (
@@ -85,7 +88,6 @@ function Icon({ name, className }: { name: keyof typeof iconPaths; className: st
 
 const shareData = {
   title: "صفقات - SAFAQAT",
-  text: "سوقك الذكي لكل طلباتك",
   url: "https://safaqat-59e.pages.dev/",
 };
 
@@ -113,7 +115,37 @@ export default function SafaqatLanding() {
   const [shareFeedback, setShareFeedback] = useState("");
   const sharing = useRef(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const requestInstall = usePwaInstall();
+  const [language, setLanguage] = useState<Language>("ar");
+  const messages = landingMessages[language];
+  const direction = language === "ar" ? "rtl" : "ltr";
+  const requestInstall = usePwaInstall(language);
+
+  useEffect(() => {
+    const restorePreference = window.setTimeout(() => {
+      try {
+        if (localStorage.getItem(languageKey) === "en") setLanguage("en");
+      } catch {
+        // Language can still be selected for this launch.
+      }
+    });
+    return () => window.clearTimeout(restorePreference);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.documentElement.dir = direction;
+  }, [language, direction]);
+
+  function toggleLanguage() {
+    const next = language === "ar" ? "en" : "ar";
+    setLanguage(next);
+    setShareFeedback("");
+    try {
+      localStorage.setItem(languageKey, next);
+    } catch {
+      // The selection still applies to this launch.
+    }
+  }
 
   const closeDialog = useCallback(() => {
     if (!dialogRef.current?.open) return;
@@ -140,7 +172,7 @@ export default function SafaqatLanding() {
     try {
       if (typeof navigator.share === "function") {
         try {
-          await navigator.share(shareData);
+          await navigator.share({ ...shareData, text: messages.shareText });
           return;
         } catch (error) {
           if (error instanceof DOMException && error.name === "AbortError") return;
@@ -157,11 +189,11 @@ export default function SafaqatLanding() {
         // Some preview origins or browsers only support copying a selection.
       }
       if (copied || copyWithSelection(shareData.url)) {
-        setShareFeedback("تم نسخ رابط صفقات.");
+        setShareFeedback(messages.copied);
       } else {
         setDialog({
-          title: "مشاركة صفقات",
-          description: "تعذّر نسخ الرابط تلقائيًا. انسخه من الحقل أدناه.",
+          title: messages.shareTitle,
+          description: messages.copyManually,
           shareUrl: shareData.url,
         });
       }
@@ -171,8 +203,8 @@ export default function SafaqatLanding() {
   }
 
   return (
-    <main className="safaqat-landing" lang="ar" dir="rtl">
-      <button type="button" className="safaqat-share" aria-label="مشاركة تطبيق صفقات" onClick={shareApp}>
+    <main className="safaqat-landing" lang={language} dir={direction}>
+      <button type="button" className="safaqat-share" aria-label={messages.share} onClick={shareApp}>
         <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           <path d="m8.7 10.6 6.6-3.7m-6.6 6.5 6.6 3.7" />
           <circle cx="6.5" cy="12" r="2.5" />
@@ -180,19 +212,25 @@ export default function SafaqatLanding() {
           <circle cx="17.5" cy="18.5" r="2.5" />
         </svg>
       </button>
+      <button type="button" className="safaqat-language" aria-label={messages.language} lang={language === "ar" ? "en" : "ar"} onClick={toggleLanguage}>
+        <span lang="en">{language.toUpperCase()}</span>
+      </button>
       <p role="status" className="safaqat-share-status">{shareFeedback}</p>
       <div className="safaqat-content">
         <header className="safaqat-brand">
-          {/* eslint-disable-next-line @next/next/no-img-element -- Serve the original artwork on static hosting. */}
-          <img src="/images/brand-original.png" width={1198} height={1193} alt="صفقات SAFAQAT — كل الجملة في مكان واحد" />
+          <div className="safaqat-brand-mark">
+            {/* eslint-disable-next-line @next/next/no-img-element -- Preserve the original approved artwork. */}
+            <img src="/images/brand-original.png" width={1198} height={1193} alt="صفقات SAFAQAT" />
+            <p className="safaqat-slogan">{messages.slogan}</p>
+          </div>
         </header>
         <div className="safaqat-cart">
           {/* eslint-disable-next-line @next/next/no-img-element -- Serve the original artwork on static hosting. */}
-          <img src="/images/cart-original.png" width={1179} height={1018} alt="عربة التسوق الذهبية على منصة بنفسجية مضيئة" />
+          <img src="/images/cart-original.png" width={1179} height={1018} alt={messages.cart} />
         </div>
         <div className="safaqat-actions">
           <section aria-labelledby="safaqat-role-heading">
-            <h2 id="safaqat-role-heading" className="safaqat-role-heading">معاينة الأدوار</h2>
+            <h2 id="safaqat-role-heading" className="safaqat-role-heading">{messages.roleHeading}</h2>
             <div className="safaqat-roles">
               {roles.map(role => (
                 <button
@@ -202,15 +240,15 @@ export default function SafaqatLanding() {
                   data-role={role.id}
                   aria-haspopup="dialog"
                   onClick={() => setDialog({
-                    title: role.title,
-                    description: "هذه معاينة للدور. التسجيل قيد الإعداد.",
+                    title: messages.roles[role.id][0],
+                    description: messages.rolePreview,
                   })}
                 >
                   <svg className="safaqat-role-icon" viewBox="0 0 80 48" aria-hidden="true">
                     {roleArtwork[role.icon]}
                   </svg>
-                  <strong>{role.title}</strong>
-                  <small>{role.description}</small>
+                  <strong>{messages.roles[role.id][0]}</strong>
+                  <small>{messages.roles[role.id][1]}</small>
                 </button>
               ))}
             </div>
@@ -218,8 +256,8 @@ export default function SafaqatLanding() {
           <button type="button" className="safaqat-download" onClick={install}>
             <Icon name="download" className="safaqat-download-arrow" />
             <span className="safaqat-download-text">
-              <strong>تحميل التطبيق</strong>
-              <small>ثبّت صفقات على جهازك</small>
+              <strong>{messages.download}</strong>
+              <small>{messages.downloadSubtitle}</small>
             </span>
             <Icon name="phone" className="safaqat-download-phone" />
           </button>
@@ -239,13 +277,13 @@ export default function SafaqatLanding() {
         }}
       >
         <div className="safaqat-dialog-content">
-          <button type="button" className="safaqat-close" aria-label="إغلاق" onClick={closeDialog}>
+          <button type="button" className="safaqat-close" aria-label={messages.close} onClick={closeDialog}>
             ×
           </button>
           <h2 id="safaqat-dialog-title">{dialog?.title}</h2>
           <p id="safaqat-dialog-description">{dialog?.description}</p>
           {dialog?.shareUrl && (
-            <input className="safaqat-share-link" aria-label="رابط صفقات" dir="ltr" readOnly value={dialog.shareUrl} onFocus={event => event.currentTarget.select()} />
+            <input className="safaqat-share-link" aria-label={messages.shareLink} dir="ltr" readOnly value={dialog.shareUrl} onFocus={event => event.currentTarget.select()} />
           )}
         </div>
       </dialog>

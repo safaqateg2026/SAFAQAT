@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { landingMessages, type Language } from "./landingMessages";
 
 type InstallChoice = { outcome: "accepted" | "dismissed" };
 type InstallPrompt = Event & {
@@ -10,37 +11,28 @@ type InstallPrompt = Event & {
 
 export type InstallNotice = { title: string; description: string };
 
-const installedNotice: InstallNotice = {
-  title: "صفقات مثبّت",
-  description: "صفقات مثبّت بالفعل. يمكنك فتحه من أيقونة التطبيق على جهازك.",
-};
-
 function hasStandaloneMode() {
   const appleNavigator = navigator as Navigator & { standalone?: boolean };
   return window.matchMedia("(display-mode: standalone)").matches || appleNavigator.standalone === true;
 }
 
-function installInstructions(): InstallNotice {
+function installInstructions(messages: typeof landingMessages[Language]): InstallNotice {
   const { userAgent, platform, maxTouchPoints } = navigator;
   const isMac = /Mac/i.test(platform || userAgent);
   const isIOS = /iPad|iPhone|iPod/i.test(userAgent) || (isMac && maxTouchPoints > 1);
   const isMacSafari = isMac && /Version\/[\d.]+.*Safari\//i.test(userAgent);
-  let description = "ابحث في شريط العنوان أو قائمة المتصفح عن «تثبيت صفقات» أو «تثبيت هذا الموقع كتطبيق». إذا لم يظهر الخيار، جرّب متصفح Chrome أو Edge محدّثًا.";
+  let description: string = messages.installDefault;
+  if (!window.isSecureContext) description = messages.installSecure;
+  else if (isIOS) description = messages.installIOS;
+  else if (/Android/i.test(userAgent)) description = messages.installAndroid;
+  else if (isMacSafari) description = messages.installMac;
 
-  if (!window.isSecureContext) {
-    description = "افتح الرابط الآمن للموقع عبر HTTPS في متصفح جهازك لاستخدام خيارات التثبيت.";
-  } else if (isIOS) {
-    description = "افتح الصفحة في Safari، ثم اضغط «مشاركة» واختر «إضافة إلى الشاشة الرئيسية». فعّل «فتح كتطبيق ويب» إذا ظهر، ثم اضغط «إضافة».";
-  } else if (/Android/i.test(userAgent)) {
-    description = "افتح الصفحة في Chrome، ثم افتح قائمة ⋮ واختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية». إذا لم يظهر الخيار، يمكنك متابعة استخدام صفقات في المتصفح.";
-  } else if (isMacSafari) {
-    description = "في Safari على Mac، اختر «إضافة إلى Dock» من قائمة «ملف» أو زر «مشاركة»، ثم اضغط «إضافة». إذا لم يظهر الخيار، جرّب متصفح Chrome محدّثًا.";
-  }
-
-  return { title: "تثبيت صفقات", description };
+  return { title: messages.installTitle, description };
 }
 
-export function usePwaInstall() {
+export function usePwaInstall(language: Language) {
+  const messages = landingMessages[language];
+  const installedNotice = { title: messages.installed[0], description: messages.installed[1] };
   const pendingPrompt = useRef<InstallPrompt | null>(null);
   const prompting = useRef(false);
   const installedInSession = useRef(false);
@@ -78,7 +70,7 @@ export function usePwaInstall() {
     if (installedInSession.current || hasStandaloneMode()) return installedNotice;
 
     const prompt = pendingPrompt.current;
-    if (!prompt) return installInstructions();
+    if (!prompt) return installInstructions(messages);
 
     pendingPrompt.current = null;
     prompting.current = true;
@@ -87,13 +79,13 @@ export function usePwaInstall() {
       if (installedInSession.current) return installedNotice;
       if (choice.outcome === "dismissed") {
         return {
-          title: "لم يتم التثبيت",
-          description: "أغلقت نافذة التثبيت. يمكنك المحاولة لاحقًا أو استخدام خيار التثبيت في قائمة المتصفح إذا كان متاحًا.",
+          title: messages.dismissed[0],
+          description: messages.dismissed[1],
         };
       }
       return null;
     } catch {
-      return installedInSession.current ? installedNotice : installInstructions();
+      return installedInSession.current ? installedNotice : installInstructions(messages);
     } finally {
       prompting.current = false;
     }

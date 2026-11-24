@@ -5,7 +5,7 @@ import styles from "./startup.module.css";
 
 export const metadata: Metadata = {
   title: "صفقات | SAFAQAT",
-  description: "صفقات - كل الجملة في مكان واحد. نسخة تجريبية.",
+  description: "صفقات - كل طلباتك في مكان واحد. نسخة تجريبية.",
   applicationName: "صفقات",
   manifest: "/manifest.webmanifest",
   appleWebApp: { capable: true, title: "صفقات", statusBarStyle: "black-translucent" },
