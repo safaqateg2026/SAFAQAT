@@ -174,3 +174,15 @@ BEGIN
 END;
 
 CREATE INDEX subscriber_archive_by_account ON subscriber_archive_document(subscriber_id, uploaded_at);
+
+-- A restored account must authenticate again after losing active status or
+-- changing its verified contact. Audit evidence belongs in the event table.
+CREATE TRIGGER subscriber_invalidate_session
+AFTER UPDATE OF state, phone, email, phone_verified_at, email_verified_at ON subscriber
+WHEN (OLD.state = 'active' AND NEW.state <> 'active')
+    OR NEW.phone <> OLD.phone OR NEW.email IS NOT OLD.email
+    OR (OLD.phone_verified_at IS NOT NULL AND NEW.phone_verified_at IS NULL)
+    OR (OLD.email_verified_at IS NOT NULL AND NEW.email_verified_at IS NULL)
+BEGIN
+    DELETE FROM subscriber_session WHERE subscriber_id = NEW.id;
+END;
