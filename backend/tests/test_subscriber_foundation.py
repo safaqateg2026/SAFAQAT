@@ -8,8 +8,9 @@ class SubscriberFoundationTest(unittest.TestCase):
         self.db = sqlite3.connect(":memory:")
         self.addCleanup(self.db.close)
         self.db.execute("PRAGMA foreign_keys = ON")
-        migration = Path(__file__).parents[1] / "migrations/0001_subscriber_foundation.sql"
-        self.db.executescript(migration.read_text())
+        migrations = Path(__file__).parents[1] / "migrations"
+        for migration in sorted(migrations.glob("*.sql")):
+            self.db.executescript(migration.read_text())
 
     def register(self, role, phone, email):
         self.db.execute(
@@ -70,6 +71,42 @@ class SubscriberFoundationTest(unittest.TestCase):
                 ("c" * 64,),
             )
         self.assertEqual(self.db.execute("PRAGMA foreign_key_check").fetchall(), [])
+
+
+    def test_retailer_code_stability_and_consumer_favorites(self):
+        self.register("retailer", "+201000000000", "retailer@example.test")
+        self.register("consumer", "+201000000001", None)
+        self.db.execute("INSERT INTO retailer_directory_identity VALUES ('retailer', 'Example-Code')")
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("INSERT INTO retailer_directory_identity VALUES ('consumer', 'Other')")
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("UPDATE retailer_directory_identity SET search_code='example-code'")
+        row = self.db.execute(
+            "SELECT retailer_id FROM retailer_directory_identity WHERE search_code = ?", ("EXAMPLE-CODE",)
+        ).fetchone()
+        self.assertEqual(row, ("retailer",))
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("INSERT INTO consumer_retailer_favorite VALUES ('consumer', 'retailer', 103)")
+
+        self.db.executemany(
+            "INSERT INTO subscriber_policy_acceptance VALUES (?, ?, 'test', 101)",
+            [(role, policy) for role in ("consumer", "retailer")
+             for policy in ("terms", "privacy", "commission", "sales_purchase")]
+            + [("consumer", "delivery")],
+        )
+        self.db.execute(
+            "INSERT INTO subscriber_verification_review VALUES ('review', 'retailer', 'admin', 'approved', NULL, 102)"
+        )
+        self.db.execute("UPDATE subscriber SET phone_verified_at=102, email_verified_at=102 WHERE role='retailer'")
+        self.db.execute("UPDATE subscriber SET phone_verified_at=102 WHERE role='consumer'")
+        self.db.execute("UPDATE subscriber SET state='active'")
+        self.db.execute("INSERT INTO consumer_retailer_favorite VALUES ('consumer', 'retailer', 104)")
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("INSERT INTO consumer_retailer_favorite VALUES ('consumer', 'retailer', 105)")
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("INSERT INTO consumer_retailer_favorite VALUES ('retailer', 'retailer', 105)")
+        self.db.execute("DELETE FROM consumer_retailer_favorite WHERE consumer_id='consumer' AND retailer_id='retailer'")
+        self.assertEqual(self.db.execute("SELECT count(*) FROM consumer_retailer_favorite").fetchone(), (0,))
 
 
 if __name__ == "__main__":
