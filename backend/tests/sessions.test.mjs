@@ -65,3 +65,25 @@ test("expiry and logout permit replacement without reviving old tokens", async t
   assert.equal(await findActiveSession(database, second.token, 113), null);
   assert.equal((await findActiveSession(database, third.token, 113)).subscriberId, "member");
 });
+
+test("challenge consumption is single-use and bound to a verified sender and purpose", async t => {
+  const { database } = databaseForTest(t);
+  const { createVerificationChallenge, consumeVerifiedEvent } = await import("../verification.mjs");
+  const key = await crypto.subtle.generateKey({ name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const target = "+201000000000";
+  const issue = (now, expiresAt) => createVerificationChallenge(database, key,
+    { subscriberId: "member", purpose: "login", channel: "whatsapp", target, now, expiresAt });
+  const { id, proof } = await issue(104, 120);
+  const event = { id, proof, sender: target, purpose: "login", channel: "whatsapp" };
+  assert.equal(await consumeVerifiedEvent(database, key, { ...event, sender: "+201000000001" }, 105), null);
+  assert.equal(await consumeVerifiedEvent(database, key, { ...event, purpose: "registration" }, 105), null);
+  const claims = await Promise.all([
+    consumeVerifiedEvent(database, key, event, 106),
+    consumeVerifiedEvent(database, key, event, 106),
+  ]);
+  assert.equal(claims.filter(Boolean).length, 1);
+  assert.equal(claims.find(Boolean).subscriberId, "member");
+
+  const expired = await issue(110, 115);
+  assert.equal(await consumeVerifiedEvent(database, key, { ...event, ...expired }, 115), null);
+});
