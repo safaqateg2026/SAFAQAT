@@ -46,7 +46,8 @@ function locationBindings(actor, location) {
 export async function discoverRetailers(database, actor, location, {
   search = "", favoritesOnly = false, after = null, limit = 20,
 } = {}) {
-  if (typeof search !== "string" || search.length > 200 || !Number.isInteger(limit) || limit < 1 || limit > 50
+  if (typeof search !== "string" || search.length > 200 || typeof favoritesOnly !== "boolean"
+    || !Number.isInteger(limit) || limit < 1 || limit > 50
     || (after !== null && (!Number.isFinite(after.distanceMeters) || after.distanceMeters < 0
       || typeof after.retailerId !== "string"))) {
     throw new TypeError("invalid retailer query");
@@ -86,4 +87,18 @@ export async function removeFavorite(database, actor, retailerId) {
     RETURNING retailer_id
   `).bind(actor.subscriberId, retailerId).first();
   return Boolean(row);
+}
+
+export async function readRetailerDetails(database, actor, location, retailerId) {
+  if (typeof retailerId !== "string" || !retailerId || retailerId.length > 128) {
+    throw new TypeError("invalid retailer identifier");
+  }
+  return database.prepare(`
+    ${candidates}
+    SELECT eligible.retailerId, eligible.name, eligible.searchCode, eligible.distanceMeters,
+      eligible.favorite, business.activity_code AS activityCode
+    FROM candidates AS eligible
+    JOIN subscriber_business AS business ON business.subscriber_id = eligible.retailerId
+    WHERE eligible.retailerId = ?6
+  `).bind(...locationBindings(actor, location), retailerId).first();
 }

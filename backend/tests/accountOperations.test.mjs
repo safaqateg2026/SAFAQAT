@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { openSupportCase, recordSupportAction, searchSubscribers } from "../administration.mjs";
 import { saveCoverage } from "../coverage.mjs";
-import { cumulativeOrderTotals, listInvoices, recordCompletedOrder } from "../invoices.mjs";
+import { cumulativeOrderTotals, listInvoices, readInvoice, recordCompletedOrder } from "../invoices.mjs";
 import { requiredPolicies, saveRegistration } from "../registration.mjs";
-import { addFavorite, discoverRetailers, removeFavorite } from "../retailerDiscovery.mjs";
+import { addFavorite, discoverRetailers, readRetailerDetails, removeFavorite } from "../retailerDiscovery.mjs";
 import { clearSessionCookie, readSessionCookie, writeSessionCookie } from "../sessionCookie.mjs";
 import { databaseForTest } from "./sqliteAdapter.mjs";
 
@@ -83,6 +83,10 @@ test("coverage gates code and name discovery, nearest paging and consumer favori
   assert.deepEqual((await discoverRetailers(database, consumer, location, { search: excluded.subscriberId })).retailers, []);
   assert.deepEqual((await discoverRetailers(database, consumer, location, { search: "shop 3" })).retailers, []);
   assert.deepEqual((await discoverRetailers(database, near, location)).retailers, []);
+  assert.equal(await readRetailerDetails(database, consumer, location, excluded.subscriberId), null);
+  const details = await readRetailerDetails(database, consumer, location, near.subscriberId);
+  assert.equal(details.activityCode, "synthetic");
+  assert.equal(details.latitude, undefined);
   assert.equal(await addFavorite(database, consumer, location, excluded.subscriberId, 103), false);
   assert.equal(await addFavorite(database, consumer, location, near.subscriberId, 103), true);
   assert.equal(await addFavorite(database, consumer, location, near.subscriberId, 104), false);
@@ -107,9 +111,17 @@ test("invoice completion counts once and cancelled orders are excluded", async t
   await assert.rejects(recordCompletedOrder(database, { ...input, lines: [
     { ...input.lines[0], unitMinor: Number.MAX_SAFE_INTEGER },
   ] }), /precision/);
+  const outsider = await register(database, "consumer", 2);
+  activate(sql, outsider.subscriberId);
   const outcomes = await Promise.all([recordCompletedOrder(database, input), recordCompletedOrder(database, input)]);
   assert.equal(outcomes.filter(Boolean).length, 1);
-  assert.equal(outcomes.find(Boolean).totalMinor, 375);
+  const completed = outcomes.find(Boolean);
+  assert.equal(completed.totalMinor, 375);
+  assert.equal(await readInvoice(database, outsider, completed.invoiceId, { visibleFrom: 0 }), null);
+  assert.equal(await readInvoice(database, buyer, completed.invoiceId, { visibleFrom: 111 }), null);
+  const invoice = await readInvoice(database, seller, completed.invoiceId, { visibleFrom: 0 });
+  assert.equal(invoice.kind, "sale");
+  assert.equal(invoice.lines[0].lineMinor, "375");
   const { results } = await cumulativeOrderTotals(database, buyer);
   assert.equal(results[0].kind, "purchase");
   assert.equal(results[0].totalMinor, "375");

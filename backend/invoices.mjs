@@ -82,3 +82,33 @@ export async function listInvoices(database, actor, { visibleFrom, limit = 20, a
   const last = invoices.at(-1);
   return { invoices, next: results.length > limit ? { completedAt: last.completedAt, invoiceId: last.invoiceId } : null };
 }
+
+export async function readInvoice(database, actor, invoiceId, { visibleFrom, afterLine = 0, limit = 50 }) {
+  if (typeof invoiceId !== "string" || !invoiceId || invoiceId.length > 128
+    || !Number.isSafeInteger(visibleFrom) || visibleFrom < 0
+    || !Number.isSafeInteger(afterLine) || afterLine < 0
+    || !Number.isInteger(limit) || limit < 1 || limit > 100) throw new TypeError("invalid invoice query");
+  const { results } = await database.prepare(`
+    SELECT total.order_id AS orderId, total.completed_at AS completedAt,
+      CAST(total.total_minor AS TEXT) AS totalMinor, total.currency,
+      CASE WHEN total.buyer_id = ?1 THEN 'purchase' ELSE 'sale' END AS kind,
+      line.line_number AS lineNumber, line.product_id AS productId, line.product_name AS productName,
+      line.quantity, CAST(line.unit_minor AS TEXT) AS unitMinor, CAST(line.line_minor AS TEXT) AS lineMinor
+    FROM order_invoice AS invoice
+    JOIN completed_order_total AS total ON total.order_id = invoice.order_id
+    LEFT JOIN order_invoice_line AS line ON line.invoice_id = invoice.id AND line.line_number > ?4
+    WHERE invoice.id = ?2 AND total.completed_at >= ?3
+      AND (total.buyer_id = ?1 OR total.seller_id = ?1)
+      AND EXISTS (SELECT 1 FROM subscriber WHERE id = ?1 AND state = 'active')
+    ORDER BY line.line_number LIMIT ?5
+  `).bind(actor.subscriberId, invoiceId, visibleFrom, afterLine, limit + 1).all();
+  if (!results.length) return null;
+  const { orderId, completedAt, totalMinor, currency, kind } = results[0];
+  const page = results[0].lineNumber === null ? [] : results.slice(0, limit);
+  return {
+    invoiceId, orderId, completedAt, totalMinor, currency, kind,
+    nextLine: results.length > limit ? page.at(-1).lineNumber : null,
+    lines: page.map(({ lineNumber, productId, productName, quantity, unitMinor, lineMinor }) =>
+      ({ lineNumber, productId, productName, quantity, unitMinor, lineMinor })),
+  };
+}
