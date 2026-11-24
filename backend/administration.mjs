@@ -110,3 +110,31 @@ export async function recordSupportAction(database, actor, {
   if (!access.results.length) throw new Error("administrator access denied");
   return action.results[0]?.id ?? null;
 }
+
+export async function suspendSubscriber(database, actor, { subscriberId, reason, now }) {
+  if (typeof reason !== "string" || !reason.trim()) throw new TypeError("suspension reason is required");
+  const entry = audit(database, actor, "account_suspend", subscriberId, now);
+  const [access, , update] = await database.batch([
+    entry.statement,
+    database.prepare(`
+      INSERT INTO subscriber_suspension (access_event_id, subscriber_id, previous_state, reason, suspended_at)
+      SELECT event.id, account.id, account.state, ?2, event.occurred_at
+      FROM administrator_access_event AS event JOIN subscriber AS account ON account.id = event.subscriber_id
+      WHERE event.id = ?1 AND account.state <> 'suspended'
+    `).bind(entry.id, reason.trim()),
+    database.prepare(`
+      UPDATE subscriber SET state = 'suspended'
+      WHERE id IN (SELECT subscriber_id FROM subscriber_suspension WHERE access_event_id = ?1)
+      RETURNING id
+    `).bind(entry.id),
+    database.prepare(`
+      INSERT INTO subscriber_audit_event (id, subscriber_id, actor_type, actor_id, event_type, occurred_at)
+      SELECT ?2, suspension.subscriber_id, 'administrator', event.administrator_id, 'state_changed', event.occurred_at
+      FROM subscriber_suspension AS suspension
+      JOIN administrator_access_event AS event ON event.id = suspension.access_event_id
+      WHERE suspension.access_event_id = ?1
+    `).bind(entry.id, crypto.randomUUID()),
+  ]);
+  if (!access.results.length) throw new Error("administrator access denied");
+  return update.results.length === 1;
+}

@@ -11,13 +11,18 @@ async function digest(token) {
   return hex(new Uint8Array(await crypto.subtle.digest("SHA-256", encoder.encode(token))));
 }
 
+export async function createSessionSecret() {
+  const token = hex(crypto.getRandomValues(new Uint8Array(32)));
+  return { token, tokenDigest: await digest(token) };
+}
+
 export async function prepareSessionClaim(database, {
   subscriberId, now, expiresAt, deviceLabel = null, challengeId = null, loginClaim = null,
 }) {
   if (!Number.isSafeInteger(now) || !Number.isSafeInteger(expiresAt) || expiresAt <= now) {
     throw new RangeError("invalid session timestamps");
   }
-  const token = hex(crypto.getRandomValues(new Uint8Array(32)));
+  const { token, tokenDigest } = await createSessionSecret();
   const statement = database.prepare(`
     INSERT INTO subscriber_session
         (subscriber_id, token_digest, device_label, issued_at, last_seen_at, expires_at)
@@ -37,7 +42,7 @@ export async function prepareSessionClaim(database, {
     WHERE subscriber_session.expires_at <= excluded.issued_at
        OR subscriber_session.revoked_at <= excluded.issued_at
     RETURNING subscriber_id
-  `).bind(subscriberId, await digest(token), deviceLabel, now, expiresAt, challengeId, loginClaim);
+  `).bind(subscriberId, tokenDigest, deviceLabel, now, expiresAt, challengeId, loginClaim);
   return { statement, token, expiresAt };
 }
 

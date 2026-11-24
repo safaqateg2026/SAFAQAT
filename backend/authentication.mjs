@@ -1,5 +1,5 @@
 import { reserveAuthAttempt } from "./authRateLimit.mjs";
-import { createVerificationChallenge, consumeVerifiedEvent, consumeVerifiedLogin } from "./verification.mjs";
+import { createVerificationChallenge, consumeVerifiedEvent, consumeVerifiedLogin, recoverVerifiedDevice } from "./verification.mjs";
 import { requiredPolicies } from "./registration.mjs";
 
 const encoder = new TextEncoder();
@@ -31,6 +31,22 @@ export function createAuthentication({ database, key, providers, policy, clock }
       if (!challenge) return false;
       await provider.deliver({ purpose, target, ...challenge });
       return true;
+    },
+
+    async acceptRecoveryEvents(payloads, { subscriberId, rateSubject, deviceLabel }) {
+      const now = clock();
+      if (!subscriberId || !Array.isArray(payloads) || payloads.length < 1 || payloads.length > 2
+        || !(await reserve("account_recovery", rateSubject, now))
+        || !(await reserve("account_recovery", ["subscriber", subscriberId], now))) return null;
+      const events = [];
+      for (const { channel, payload } of payloads) {
+        const event = await providerFor(channel)?.authenticate(payload);
+        if (!event || event.purpose !== "recovery") return null;
+        events.push({ ...event, channel });
+      }
+      return recoverVerifiedDevice(database, key, events, {
+        subscriberId, now, expiresAt: now + policy.sessionSeconds, deviceLabel,
+      });
     },
 
     async acceptProviderEvent(channel, payload, { rateSubject, deviceLabel }) {

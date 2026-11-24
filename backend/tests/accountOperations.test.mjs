@@ -199,3 +199,51 @@ test("case actions require account ownership and administrative support permissi
   assert.equal(await recordSupportAction(database, actor, { ...other, ...action }), null);
   assert.ok(await recordSupportAction(database, actor, { subscriberId, ...action }));
 });
+
+test("device recovery requires both current contacts and replaces the old session atomically", async t => {
+  const { database, sql } = databaseForTest(t);
+  const { createVerificationChallenge, recoverVerifiedDevice } = await import("../verification.mjs");
+  const { issueVerifiedSession, findActiveSession } = await import("../sessions.mjs");
+  const { subscriberId } = await register(database, "consumer", 0, { email: "member@example.test" });
+  activate(sql, subscriberId);
+  const old = await issueVerifiedSession(database, { subscriberId, now: 102, expiresAt: 200 });
+  const key = await crypto.subtle.generateKey({ name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const events = [];
+  for (const [channel, target] of [["whatsapp", "+201000000000"], ["email", "member@example.test"]]) {
+    const purpose = "recovery";
+    const { id, proof } = await createVerificationChallenge(database, key, {
+      subscriberId, purpose, channel, target, now: 103, expiresAt: 120,
+    });
+    events.push({ id, proof, purpose, channel, sender: target });
+  }
+  const attempt = proofs => recoverVerifiedDevice(database, key, proofs, { subscriberId, now: 105, expiresAt: 250 });
+  assert.equal(await attempt(events.slice(0, 1)), null);
+  assert.equal(await attempt([events[0], { ...events[1], sender: "different@example.test" }]), null);
+  assert.ok(await findActiveSession(database, old.token, 105));
+  assert.equal(sql.prepare("SELECT count(*) AS n FROM subscriber_verification_challenge WHERE consumed_at IS NOT NULL").get().n, 0);
+  const outcomes = await Promise.all([attempt(events), attempt(events)]);
+  assert.equal(outcomes.filter(Boolean).length, 1);
+  assert.equal(await findActiveSession(database, old.token, 105), null);
+  assert.ok(await findActiveSession(database, outcomes.find(Boolean).token, 105));
+  assert.equal(sql.prepare("SELECT count(*) AS n FROM subscriber_audit_event WHERE event_type = 'recovery_completed'").get().n, 1);
+});
+
+test("authorized suspension records its reason and revokes the existing session", async t => {
+  const { database, sql } = databaseForTest(t);
+  const { suspendSubscriber } = await import("../administration.mjs");
+  const { issueVerifiedSession, findActiveSession } = await import("../sessions.mjs");
+  const { subscriberId } = await register(database, "consumer", 0);
+  activate(sql, subscriberId);
+  const session = await issueVerifiedSession(database, { subscriberId, now: 102, expiresAt: 200 });
+  const actor = { administratorId: "admin", mfaVerified: true };
+  const request = { subscriberId, reason: "Synthetic reason", now: 103 };
+  await assert.rejects(suspendSubscriber(database, actor, request), /denied/);
+  assert.ok(await findActiveSession(database, session.token, 103));
+  sql.exec("INSERT INTO administrator_permission VALUES ('admin', 'account_suspend')");
+  assert.equal(await suspendSubscriber(database, actor, request), true);
+  assert.equal(await suspendSubscriber(database, actor, request), false);
+  assert.equal(await findActiveSession(database, session.token, 103), null);
+  const record = sql.prepare("SELECT reason, previous_state FROM subscriber_suspension").get();
+  assert.equal(record.reason, request.reason);
+  assert.equal(record.previous_state, "active");
+});
