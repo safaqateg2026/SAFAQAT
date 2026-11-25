@@ -31,7 +31,7 @@ export default function BirthDateFields({ language }: { language: Language }) {
       onChange={value => { setDay(Number(value)); setDateMessage(""); }} language={language} placeholder={copy.select} required />
     <SelectionList label={copy.month} value={month ? String(month) : ""} options={months.map(value => ({ value: String(value), label: String(value) }))}
       onChange={changeMonth} language={language} placeholder={copy.select} required />
-    <SelectionList label={copy.year} value={year ? String(year) : ""} options={years.map(value => ({ value: String(value), label: String(value) }))}
+    <SelectionList searchable label={copy.year} value={year ? String(year) : ""} options={years.map(value => ({ value: String(value), label: String(value) }))}
       onChange={changeYear} language={language} placeholder={copy.select} required />
     <input type="hidden" name="consumerBirthDate" value={valid ? `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}` : ""} />
     <ContextHelp label={copy.help} text={copy.consumerBirthHelp} />
