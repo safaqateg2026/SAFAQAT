@@ -4,6 +4,7 @@ import {
 
 import { handleWhatsAppRoute } from "../providers/whatsappRoute.mjs";
 import { createAccountApi } from "../accountApi.mjs";
+import { createDeliveryApi } from "../deliveryApi.mjs";
 
 function json(status, body) {
   return Response.json(body, {
@@ -89,6 +90,23 @@ export default {
               ? ip
               : null;
           }
+        });
+
+        return await handler(request);
+      }
+
+      if (url.pathname.startsWith("/api/delivery/")) {
+        if (
+          env.ACCOUNTS_ENABLED !== "true" ||
+          env.DELIVERY_ENABLED !== "true" ||
+          !env.DB
+        ) {
+          return json(503, { error: "delivery_disabled" });
+        }
+
+        const handler = createDeliveryApi({
+          database: env.DB,
+          origin: env.APP_ORIGIN
         });
 
         return await handler(request);

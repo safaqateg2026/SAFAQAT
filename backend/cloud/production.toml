@@ -15,6 +15,7 @@ binding = "PRIVATE_BUCKET"
 bucket_name = "safaqat-private-production"
 
 [vars]
+DELIVERY_ENABLED = "false"
 WHATSAPP_WEBHOOK_ENABLED = "false"
 PENDING_REGISTRATION_ENABLED = "false"
 ACCOUNTS_ENABLED = "false"
