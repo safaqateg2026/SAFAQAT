@@ -22,7 +22,9 @@ async function request(
       "Content-Type": "application/json"
     },
     body: JSON.stringify({ phone }),
-    signal
+    signal: signal
+      ? AbortSignal.any([signal, AbortSignal.timeout(15000)])
+      : AbortSignal.timeout(15000)
   });
 
   if (!response.ok) {

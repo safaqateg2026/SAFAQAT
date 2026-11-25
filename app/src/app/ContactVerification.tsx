@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { normalizeEgyptPhone } from "../../../shared/egyptPhone.mjs";
 import {
   startPhoneVerification,
   readPhoneVerification,
@@ -27,6 +28,8 @@ export function PhoneVerification({ language }: { language: Language }) {
   const [link, setLink] = useState("");
   const [expiresAt, setExpiresAt] = useState(0);
   const operation = useRef<AbortController | null>(null);
+  const polling = useRef<AbortController | null>(null);
+  const cancelling = useRef(false);
 
   const fullPhone = `+20${phone}`;
   const validPhone = /^1[0-9]{9}$/.test(phone);
@@ -39,6 +42,7 @@ export function PhoneVerification({ language }: { language: Language }) {
     if (phase !== "waiting") return;
 
     const controller = new AbortController();
+    polling.current = controller;
     let timer: ReturnType<typeof setTimeout>;
 
     async function check() {
@@ -57,6 +61,12 @@ export function PhoneVerification({ language }: { language: Language }) {
         );
 
         if (controller.signal.aborted) return;
+
+        if (Date.now() >= expiresAt * 1000) {
+          setPhase("error");
+          setLink("");
+          return;
+        }
 
         if (verified) {
           setPhase("verified");
@@ -87,8 +97,34 @@ export function PhoneVerification({ language }: { language: Language }) {
     };
   }, [phase, fullPhone, expiresAt]);
 
+  useEffect(() => {
+    if (phase !== "verified" && phase !== "waiting") return;
+
+    const expire = () => {
+      if (Date.now() >= expiresAt * 1000) {
+        polling.current?.abort();
+        setLink("");
+        setPhase("error");
+      }
+    };
+
+    const timer = setTimeout(
+      expire,
+      Math.max(0, expiresAt * 1000 - Date.now())
+    );
+
+    document.addEventListener("visibilitychange", expire);
+    window.addEventListener("focus", expire);
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener("visibilitychange", expire);
+      window.removeEventListener("focus", expire);
+    };
+  }, [phase, expiresAt]);
+
   async function begin() {
-    if (!enabled || !validPhone ||
+    if (!enabled || !validPhone || cancelling.current ||
         phase === "starting" || phase === "waiting" ||
         phase === "verified") return;
 
@@ -117,15 +153,21 @@ export function PhoneVerification({ language }: { language: Language }) {
   }
 
   async function cancel() {
+    if (cancelling.current) return;
+    cancelling.current = true;
+    polling.current?.abort();
     operation.current?.abort();
     setPhase("starting");
     setLink("");
 
     try {
       await cancelPhoneVerification(fullPhone);
+      setExpiresAt(0);
       setPhase("idle");
     } catch {
       setPhase("error");
+    } finally {
+      cancelling.current = false;
     }
   }
 
@@ -139,15 +181,12 @@ export function PhoneVerification({ language }: { language: Language }) {
   return <section className="registration-contact-section" aria-label={copy.phoneVerification}>
     <div className="registration-phone-row" dir="ltr">
       <span className="registration-country-code">+20</span>
-      <input type="tel" value={phone} required pattern="1[0-9]{9}" maxLength={10}
+      <input type="tel" value={phone} required pattern="1[0-9]{9}" maxLength={24}
         autoComplete="tel-national" aria-label={copy.phone}
         disabled={phase === "starting" || phase === "waiting" || phase === "verified"}
         onChange={event => {
           operation.current?.abort();
-          setPhone(event.target.value
-            .replace(/[٠-٩]/g, digit => String(digit.charCodeAt(0) - 1632))
-            .replace(/[۰-۹]/g, digit => String(digit.charCodeAt(0) - 1776))
-            .replace(/[^0-9]/g, "").slice(0, 10));
+          setPhone(normalizeEgyptPhone(event.target.value));
           setPhase("idle");
           setLink("");
         }} />
