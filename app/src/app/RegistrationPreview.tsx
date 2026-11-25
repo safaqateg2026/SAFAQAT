@@ -1,6 +1,8 @@
 "use client";
 import businessActivities from "../../../shared/businessActivities.json";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { buildConsumerRegistration } from "../../../shared/consumerRegistrationForm.mjs";
+import { submitRegistration } from "../../../shared/registrationClient.mjs";
 import type { Language } from "./landingMessages";
 import { registrationMessages } from "./registrationMessages";
 import BirthDateFields from "./BirthDateFields";
@@ -27,6 +29,11 @@ const vehicleTypes = (language: Language) => {
 export default function RegistrationPreview({ role, language, initialVehicleType = "" }: { role: RegistrationRole; language: Language; initialVehicleType?: string }) {
   const copy = registrationMessages[language];
   const [checked, setChecked] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState("");
+  const submissionLock = useRef(false);
+  const registrationEnabled = false;
+  const approvedPolicyVersions: Record<string, string> = {};
   const business = role === "merchant" || role === "supplier";
   const courier = role === "courier";
   const consumer = role === "consumer";
@@ -52,8 +59,58 @@ export default function RegistrationPreview({ role, language, initialVehicleType
 
   return (
     <form className="safaqat-registration" method="dialog" autoComplete="off" dir={language === "ar" ? "rtl" : "ltr"}
-      onInput={() => setChecked(false)}
-      onSubmit={event => { event.preventDefault(); setChecked(true); }}>
+      onInput={() => {
+        setChecked(false);
+        setSubmissionStatus("");
+      }}
+      onSubmit={async event => {
+        event.preventDefault();
+
+        if (!registrationEnabled || !consumer) {
+          setChecked(true);
+          return;
+        }
+
+        if (submissionLock.current) return;
+
+        const input = buildConsumerRegistration(
+          new FormData(event.currentTarget),
+          language,
+          approvedPolicyVersions
+        );
+
+        if (!input) {
+          setSubmissionStatus(language === "ar"
+            ? "يرجى استكمال البيانات وتأكيد الموقع والسياسات."
+            : "Complete the required fields, location and policies.");
+          return;
+        }
+
+        submissionLock.current = true;
+        setSubmitting(true);
+        setSubmissionStatus("");
+
+        try {
+          const result = await submitRegistration(input, {
+            enabled: registrationEnabled
+          });
+
+          setSubmissionStatus(result.saved
+            ? (language === "ar"
+              ? "تم حفظ البيانات، ولم يتم تفعيل الحساب بعد."
+              : "Details saved. Account not activated.")
+            : (language === "ar"
+              ? "تعذر حفظ البيانات. حاول مرة أخرى."
+              : "Unable to save details. Please retry."));
+        } catch {
+          setSubmissionStatus(language === "ar"
+            ? "تعذر الاتصال بالخادم."
+            : "Unable to contact the server.");
+        } finally {
+          submissionLock.current = false;
+          setSubmitting(false);
+        }
+      }}>
       <fieldset className="registration-section registration-phone-section">
         <legend>{copy.phoneVerification}</legend>
         <PhoneVerification language={language} />
@@ -82,6 +139,7 @@ export default function RegistrationPreview({ role, language, initialVehicleType
         <label>{copy.businessName}<input name="businessName" required maxLength={150} /></label>
         <SelectionList label={copy.businessType} value={businessType} options={businessTypes.map(item => ({ value: item.id, label: item[language] }))}
           onChange={setBusinessType} language={language} placeholder={copy.select} required />
+        <input type="hidden" name="activityCode" value={businessType} />
         <label>{copy.premises}<input name="premisesAddress" required maxLength={300} /></label>
         <label className="registration-disabled-field">{copy.commercialRegister}<input disabled value={copy.notActive} readOnly /></label>
         <label className="registration-disabled-field">{copy.taxCard}<input disabled value={language === "ar" ? "غير منشطة" : copy.notActive} readOnly /></label>
@@ -99,6 +157,7 @@ export default function RegistrationPreview({ role, language, initialVehicleType
         <legend>{copy.vehicleVerification}</legend>
         <SelectionList id="courier-vehicle" label={copy.vehicle} value={vehicleType} options={vehicleTypes(language)}
           onChange={value => setVehicleType(value)} language={language} placeholder={copy.select} required />
+        <input type="hidden" name="vehicleType" value={vehicleType} />
         {vehicleType && vehicleType !== "bicycle" && <>
           {vehicleType === "car" || vehicleType === "truck" ? <p className="registration-ownership-review" role="status">{copy.manualOwnershipReview}</p> : null}
           <RegistrationPlateArtwork key={vehicleType} editable kind={vehicleType === "rider" ? "compact" : "wide"}
@@ -124,8 +183,8 @@ export default function RegistrationPreview({ role, language, initialVehicleType
         <p>{copy.policyHint}</p>
       </fieldset>
       <p className="registration-preview-warning" role="note">{copy.preview}</p>
-      <button type="submit">{copy.validate}</button>
-      <p role="status">{checked ? copy.previewValidationOnly : ""}</p>
+      <button type="submit" disabled={submitting}>{copy.validate}</button>
+      <p role="status">{submissionStatus || (checked ? copy.previewValidationOnly : "")}</p>
     </form>
   );
 }
