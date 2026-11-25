@@ -179,6 +179,7 @@ export function PhoneVerification({ language }: { language: Language }) {
     (ar ? "أدخل رقم الهاتف للتحقق عبر واتساب." : "Enter your phone number to verify through WhatsApp.");
 
   return <section className="registration-contact-section" aria-label={copy.phoneVerification}>
+    <div className="registration-phone-help-layout">
     <div className="registration-phone-row" dir="ltr">
       <span className="registration-country-code">+20</span>
       <input type="tel" value={phone} required pattern="1[0-9]{9}" maxLength={24}
@@ -195,7 +196,8 @@ export function PhoneVerification({ language }: { language: Language }) {
         onClick={() => void begin()}>
         {phase === "verified" ? <span style={{ color: "#22c55e" }}>✓</span> : copy.verifyPhone}
       </button>
-      <ContextHelp label={copy.help} text={copy.phoneVerificationHelp} />
+    </div>
+    <ContextHelp label={copy.help} text={copy.phoneVerificationHelp} />
     </div>
     <input type="hidden" name="phone" value={phone ? fullPhone : ""} />
     <p className="registration-integration-status" role="status">{status}</p>

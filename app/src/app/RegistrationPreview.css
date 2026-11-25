@@ -620,3 +620,25 @@
   inline-size: 100%;
   box-sizing: border-box;
 }
+
+
+/* Phone verification help layout */
+.safaqat-registration .registration-phone-help-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  direction: ltr;
+  min-width: 0;
+}
+
+.safaqat-registration .registration-phone-help-layout
+.registration-phone-row {
+  min-width: 0;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.safaqat-registration[dir="rtl"]
+.registration-phone-help-layout > :last-child {
+  direction: rtl;
+}
