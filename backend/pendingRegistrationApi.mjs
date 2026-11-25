@@ -1,4 +1,8 @@
 import {
+  completeRegistration
+} from "./registrationCompletion.mjs";
+
+import {
   createPendingRegistration,
   cancelPendingRegistration,
   readPendingRegistration
@@ -90,6 +94,7 @@ export function createPendingRegistrationApi({
   origin,
   businessPhone,
   trustedRateSubject,
+  completionCatalogs = null,
   clock = () => Math.floor(Date.now() / 1000)
 }) {
   if (!database ||
@@ -157,7 +162,8 @@ export function createPendingRegistrationApi({
 
       if (![
         "/api/registration/start",
-        "/api/registration/status"
+        "/api/registration/status",
+        "/api/registration/complete"
       ].includes(url.pathname)) {
         return response(404, {
           error: "not_found"
@@ -180,6 +186,30 @@ export function createPendingRegistrationApi({
         return response(429, {
           error: "rate_limited"
         });
+      }
+
+      if (url.pathname === "/api/registration/complete") {
+        if (typeof completionCatalogs !== "function") {
+          return response(503, {
+            error: "registration_disabled"
+          });
+        }
+
+        const result = await completeRegistration({
+          request,
+          database,
+          key,
+          catalogs: await completionCatalogs(now),
+          now
+        });
+
+        return response(
+          result.status,
+          result.body,
+          result.clearCookie
+            ? clearPendingRegistrationCookie()
+            : undefined
+        );
       }
 
       const input = await readInput(request);
