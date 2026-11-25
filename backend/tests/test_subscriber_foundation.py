@@ -10,6 +10,12 @@ class SubscriberFoundationTest(unittest.TestCase):
         self.db.execute("PRAGMA foreign_keys = ON")
         migrations = Path(__file__).parents[1] / "migrations"
         for migration in sorted(migrations.glob("*.sql")):
+            if (
+                self._testMethodName ==
+                "test_bicycle_migration_preserves_delivery_rows_and_role_guard"
+                and migration.name >= "0012_"
+            ):
+                continue
             self.db.executescript(migration.read_text())
 
     def register(self, role, phone, email):
@@ -27,6 +33,10 @@ class SubscriberFoundationTest(unittest.TestCase):
         self.db.execute("INSERT INTO subscriber_delivery (subscriber_id, vehicle_type, plate_number) VALUES ('courier', 'rider', 'س 123')")
         migration = Path(__file__).parents[1] / "migrations" / "0012_bicycle_delivery.sql"
         self.db.executescript(migration.read_text())
+        self.assertEqual(self.db.execute("SELECT vehicle_type, plate_number FROM subscriber_delivery").fetchone(), ("rider", "س 123"))
+        for later in sorted(migration.parent.glob("*.sql")):
+            if later.name > migration.name:
+                self.db.executescript(later.read_text())
         self.assertEqual(self.db.execute("SELECT vehicle_type, plate_number FROM subscriber_delivery").fetchone(), ("rider", "س 123"))
         self.db.execute("UPDATE subscriber_delivery SET vehicle_type='bicycle', plate_number=NULL WHERE subscriber_id='courier'")
         with self.assertRaises(sqlite3.IntegrityError):
