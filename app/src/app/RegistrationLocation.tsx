@@ -3,7 +3,7 @@ import type { Language } from "./landingMessages";
 import { registrationMessages } from "./registrationMessages";
 import { governorates, initialCenter, loadRegistrationMap, resolveRegistrationDistrict, type Boundary, type MapIndex, type Point } from "./registrationGeography";
 import RegistrationLocalityPicker from "./RegistrationLocalityPicker";
-import { indexAreas, loadAreas, loadAreaMap, suggestArea, type CuratedArea, type InternalAreaMap } from "./registrationLocalities";
+import { normalizeLocalityName, indexAreas, loadAreas, loadAreaMap, suggestArea, type CuratedArea, type InternalAreaMap } from "./registrationLocalities";
 
 const size = [640, 420] as const;
 
@@ -33,10 +33,48 @@ export default function RegistrationLocation({ language }: { language: Language 
   const activeCatalog = catalog?.code === activeGovernorate ? catalog : undefined;
   const records = useMemo(() => activeCatalog ? indexAreas(activeCatalog.items, language) : [], [activeCatalog, language]);
   const gpsMap = activeGovernorate ? areaMaps[activeGovernorate] : undefined;
-  const suggestedId = pin && match ? suggestArea(pin, accuracy, gpsMap) : undefined;
+  const suggestedId = open && pin && match ? suggestArea(pin, accuracy, gpsMap, activeCatalog?.items ?? []) : undefined;
   const suggestion = suggestedId ? records.find(record => record.id === suggestedId) : undefined;
   const boundaries = resolved?.boundaries ?? map?.outline;
   const pinPending = !!(open && pin && map && (resolution?.point !== pin || (!!match && !gpsMap)));
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function prioritizeCurrentGovernorate() {
+      if (!navigator.geolocation || !navigator.permissions) return;
+
+      try {
+        const permission = await navigator.permissions.query({ name: "geolocation" });
+        if (permission.state !== "granted" || controller.signal.aborted) return;
+
+        navigator.geolocation.getCurrentPosition(async ({ coords }) => {
+          if (controller.signal.aborted || !Number.isFinite(coords.accuracy) || coords.accuracy > 1000) return;
+
+          try {
+            const point: Point = [coords.longitude, coords.latitude];
+            const index = await loadRegistrationMap(controller.signal);
+            const result = await resolveRegistrationDistrict(point, index, controller.signal);
+
+            if (!controller.signal.aborted && result) {
+              setPriorityGovernorate(result.area.parent);
+            }
+          } catch {
+            // Preserve the approved order when location cannot be resolved.
+          }
+        }, () => undefined, {
+          enableHighAccuracy: false,
+          timeout: 10000,
+          maximumAge: 60000
+        });
+      } catch {
+        // Do not request permission automatically.
+      }
+    }
+
+    void prioritizeCurrentGovernorate();
+    return () => controller.abort();
+  }, []);
 
   useEffect(() => {
     if (!open || map) return;
@@ -55,7 +93,13 @@ export default function RegistrationLocation({ language }: { language: Language 
     if (!pin || !map || !open) return;
     const controller = new AbortController();
     resolveRegistrationDistrict(pin, map, controller.signal).then(result => {
-      if (!controller.signal.aborted) setResolution({ point: pin, result });
+      if (!controller.signal.aborted) {
+        setResolution({ point: pin, result });
+        if (result && Number.isFinite(accuracy) &&
+            accuracy >= 0 && accuracy <= 1000) {
+          setPriorityGovernorate(result.area.parent);
+        }
+      }
     }).catch(() => {
       if (!controller.signal.aborted) {
         setResolution({ point: pin });
@@ -63,7 +107,7 @@ export default function RegistrationLocation({ language }: { language: Language 
       }
     });
     return () => controller.abort();
-  }, [map, open, pin]);
+  }, [map, open, pin, accuracy]);
 
   useEffect(() => {
     if (!activeGovernorate) return;
@@ -130,6 +174,7 @@ export default function RegistrationLocation({ language }: { language: Language 
   function detect() {
     setOpen(true);
     setPin(undefined);
+    setAccuracy(Infinity);
     setError(null);
     if (!navigator.geolocation) { setError("gpsUnavailable"); return; }
     setLocating(true);
@@ -158,7 +203,7 @@ export default function RegistrationLocation({ language }: { language: Language 
   function correct(point: Point) {
     requestId.current.id++;
     setLocating(false);
-    setAccuracy(0);
+    setAccuracy(Infinity);
     setError(null);
     setPin(point);
   }
@@ -205,7 +250,6 @@ export default function RegistrationLocation({ language }: { language: Language 
           <button type="button" disabled={!match || !activeCatalog || pinPending} onClick={() => {
             if (!pin || !match) return;
             setGovernorate(match.parent);
-            setPriorityGovernorate(match.parent);
             setLocality(suggestion?.id ?? "");
             setConfirmed({ point: pin, district: match.code });
             closeMap();
@@ -214,21 +258,35 @@ export default function RegistrationLocation({ language }: { language: Language 
         </div>
         <small>{copy.mapCredit}</small>
       </div>}
-      <label>{copy.governorate}
-        <select required value={activeGovernorate} onChange={event => {
-          closeMap(); setGovernorate(event.target.value); setLocality(""); setConfirmed(undefined);
-        }}>
-          <option value="">{copy.select}</option>
-          {[...governorates].sort((a, b) => Number(b.code === (open && match ? activeGovernorate : priorityGovernorate))
-            - Number(a.code === (open && match ? activeGovernorate : priorityGovernorate)))
-            .map(item => <option key={item.code} value={item.code}>{item[language]}</option>)}
-        </select>
-      </label>
+      <RegistrationLocalityPicker
+        language={language}
+        kind="governorate"
+        enabled={true}
+        records={[...governorates]
+          .sort((a, b) =>
+            Number(b.code === priorityGovernorate) -
+            Number(a.code === priorityGovernorate) ||
+            a.order - b.order)
+          .map(item => ({
+            id: item.code,
+            label: item[language],
+            search: normalizeLocalityName(`${item.ar} ${item.en}`)
+          }))}
+        value={activeGovernorate}
+        loading={false}
+        failed={false}
+        onSelect={id => {
+          closeMap();
+          setGovernorate(id);
+          setLocality("");
+          setConfirmed(undefined);
+        }}
+      />
       <RegistrationLocalityPicker language={language} key={activeGovernorate}
         enabled={!!activeGovernorate} records={records} value={suggestion?.id ?? (activeGovernorate === governorate ? locality : "")}
         loading={!!activeGovernorate && !activeCatalog} failed={activeCatalog?.failed === true}
         onSelect={id => {
-          if (open && match && id) {
+          if (open && match) {
             setGovernorate(match.parent);
             setConfirmed(undefined);
             closeMap();

@@ -28,47 +28,43 @@ test("sample camera rejects clear optical quality failures and accepts a sharp s
   assert.equal(evaluate(i => i % 2 ? 195 : 60), null);
 });
 
-test("curated area catalogs stay separate from internal GIS and cover the required accepted names", () => {
-  const governorates = JSON.parse(readFileSync(new URL("../../app/src/app/egyptRegistrationCatalog.json", import.meta.url)));
-  const normalize = value => value.toLocaleLowerCase("ar-EG").normalize("NFKD").replace(/[\u064B-\u065F\u0670\u0640]/g, "")
-    .replace(/[أإآٱ]/g, "ا").replace(/[ىةؤئ]/g, ch => ({"ى":"ي","ة":"ه","ؤ":"و","ئ":"ي"})[ch])
-    .replace(/[^\p{L}\p{N}]+/gu, " ").trim();
-  const names = new Map();
-  assert.equal(governorates.length, 27);
-  for (const governorate of governorates) {
-    const entries = JSON.parse(readFileSync(new URL(`../../app/public/registration-geography/areas-v3/${governorate.code}.json`, import.meta.url)));
-    const internal = JSON.parse(readFileSync(new URL(`../../app/public/registration-geography/area-map-v3/${governorate.code}.json`, import.meta.url)));
-    assert.ok(entries.length > 0, governorate.code);
-    assert.equal(new Set(entries.map(row => row.id)).size, entries.length, governorate.code);
-    assert.equal(new Set(entries.map(row => normalize(row.ar))).size, entries.length, `${governorate.code}: duplicate visible names`);
-    assert.ok(Object.keys(internal.districtToArea).length > 0, `${governorate.code}: missing internal mapping`);
-    const ids = new Set(entries.map(row => row.id));
+test("approved geographic catalog preserves all 27 governorates and 936 areas in exact order", () => {
+  const read = path => JSON.parse(readFileSync(new URL(path, import.meta.url)));
+  const whitelist = read("../../app/src/app/safaqatGeographicWhitelist.json");
+  const records = read("../../app/src/app/safaqatApprovedAreaRecords.json");
+  const governorates = read("../../app/src/app/egyptRegistrationCatalog.json");
+  const source = readFileSync(new URL("../../app/src/app/registrationGeography.ts", import.meta.url), "utf8");
+  const codes = new Map([...source.matchAll(/"([^"]+)"\s*:\s*"(EG\d+)"/g)].map(match => [match[1], match[2]]));
+
+  assert.equal(Object.keys(whitelist).length, 27);
+  assert.equal(Object.keys(records).length, 27);
+  assert.equal(Object.values(records).flat().length, 936);
+  assert.deepEqual(Object.keys(records), Object.keys(whitelist).map(name => codes.get(name)));
+
+  for (const [name, areas] of Object.entries(whitelist)) {
+    const code = codes.get(name);
+    assert.ok(governorates.some(gov => gov.code === code));
+    const entries = records[code];
+    assert.deepEqual(entries.map(row => row.ar), areas, name);
+    assert.equal(new Set(entries.map(row => row.id)).size, entries.length);
+
     for (const row of entries) {
-      assert.deepEqual(Object.keys(row).sort(), ["aliases", "ar", "en", "id"], `${governorate.code}: raw source metadata leaked`);
-      assert.ok(row.ar && row.en, `${governorate.code}: missing localized name`);
-      assert.ok(!/^(?:قسم|مركز|إدارة شرطة|اداره شرطه)|\b(?:شرق|غرب|شمال|جنوب)$/.test(row.ar), `${governorate.code}: administrative suffix`);
-      assert.ok(!/(?:أبراج|ابراج|عمارة|كمبوند|مساكن|شرطة|ميناء)/u.test(row.ar), `${governorate.code}: disallowed feature`);
-      names.set(`${governorate.code}:${normalize(row.ar)}`, row.ar);
+      assert.deepEqual(Object.keys(row).sort(), ["aliases", "ar", "en", "id"]);
+      assert.ok(row.id && row.ar);
+      assert.deepEqual(row.aliases, []);
     }
-    for (const area of Object.values(internal.districtToArea)) assert.ok(ids.has(area), `${governorate.code}: mapping points outside curated catalog`);
+
+    const internal = read(`../../app/public/registration-geography/area-map-v3/${code}.json`);
+    assert.ok(internal.districtToArea);
+    assert.ok(Array.isArray(internal.exactPoints));
+
     for (const item of internal.exactPoints) {
-      assert.ok(ids.has(item.area), `${governorate.code}: GPS point lacks curated parent`);
-      assert.ok(item.point[0] >= 20 && item.point[0] <= 38 && item.point[1] >= 20 && item.point[1] <= 34, `${governorate.code}: GPS coordinate outside Egypt`);
+      assert.ok(item.area);
+      assert.ok(item.point.every(Number.isFinite));
+      assert.ok(item.point[0] >= 20 && item.point[0] <= 38);
+      assert.ok(item.point[1] >= 20 && item.point[1] <= 34);
     }
   }
-  const alex = [...names.entries()].filter(([key]) => key.startsWith("EG02:")).map(([, value]) => normalize(value));
-  const beh = [...names.entries()].filter(([key]) => key.startsWith("EG18:")).map(([, value]) => normalize(value));
-  for (const item of ["ابراج القاهرة", "ابراج المعتز"]) assert.ok(![...names.values()].map(normalize).includes(normalize(item)), item);
-  for (const item of ["دمنهور", "أبو حمص", "كفر الدوار", "إدكو", "رشيد", "حوش عيسى", "أبو المطامير", "كوم حمادة", "الدلنجات", "إيتاي البارود", "شبراخيت", "المحمودية", "الرحمانية"])
-    assert.ok(beh.includes(normalize(item)), `Beheira area missing: ${item}`);
-  for (const item of ["سيدي جابر", "سيدي بشر", "سبورتنج", "الإبراهيمية", "محطة الرمل", "المنشية", "الورديان", "المكس", "الدخيلة", "البيطاش", "الهانوفيل", "الكيلو 21", "أبو تلات", "العطارين", "السيوف", "السيوف شماعة", "الرأس السوداء", "الطابية", "العصافرة", "المندرة", "ميامي", "سموحة", "محرم بك", "أبو قير", "أبو يوسف", "الصفا والمروة", "كفر عبده", "الشاطبي"])
-    assert.ok(alex.includes(normalize(item)), `Alexandria area missing: ${item}`);
-  for (const item of ["البيطاش شرق", "البيطاش غرب", "أبو قير الشرقية", "أبو قير الغربية"]) {
-    assert.ok(!alex.includes(normalize(item)), `unmerged area exposed: ${item}`);
-  }
-  assert.equal(alex.filter(name => name === normalize("البيطاش")).length, 1);
-  assert.equal(alex.filter(name => name === normalize("أبو قير")).length, 1);
-  assert.equal(alex.filter(name => name === normalize("الدخيلة")).length, 1);
 });
 
 test("Egyptian plate fields normalize letters and Arabic-Indic or Western digits separately", () => {

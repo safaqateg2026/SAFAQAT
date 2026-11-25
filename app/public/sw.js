@@ -1,5 +1,5 @@
 /* Keep application navigation network-first and cache only the versioned splash and offline notice. */
-const CACHE = "safaqat-offline-v5";
+const CACHE = "safaqat-offline-v6";
 const OFFLINE = "/offline.html";
 const SPLASH = "/images/safaqat-luminous-v4.webp";
 

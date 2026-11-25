@@ -1,0 +1,5672 @@
+{
+  "EG01": [
+    {
+      "id": "area-الزمالك",
+      "ar": "الزمالك",
+      "en": "Zamalik",
+      "aliases": []
+    },
+    {
+      "id": "area-المعادي",
+      "ar": "المعادي",
+      "en": "Maadi",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-ffe22eb2b62c11dfbae1",
+      "ar": "زهراء المعادي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-2aca147a70ccd9d1d5fb",
+      "ar": "دجلة المعادي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-مدينه-نصر",
+      "ar": "مدينة نصر",
+      "en": "Madinat Nasr-2",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-ab86585491c40b0d7e14",
+      "ar": "الحي السابع",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-7c9cf72b04a7adc584d6",
+      "ar": "الحي الثامن",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-20b0ba38ca01219876f8",
+      "ar": "الحي العاشر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-مصر-الجديده",
+      "ar": "مصر الجديدة",
+      "en": "Misr al-Gadida",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-24b343a240d50d2646c0",
+      "ar": "هليوبوليس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-5144190eba52e7c03b0a",
+      "ar": "الكوربة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-c7b1ba23dc1625051592",
+      "ar": "روكسي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-ae60810fe99a8f1e95c5",
+      "ar": "ألماظة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-النزهه",
+      "ar": "النزهة",
+      "en": "Nuzha",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-4994ecf973a6ae8749f2",
+      "ar": "شيراتون",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-69a59fbd4f996d04bd85",
+      "ar": "جسر السويس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-عين-شمس",
+      "ar": "عين شمس",
+      "en": "Ain Shams",
+      "aliases": []
+    },
+    {
+      "id": "area-المطريه",
+      "ar": "المطرية",
+      "en": "Al Matariyya",
+      "aliases": []
+    },
+    {
+      "id": "area-الزيتون",
+      "ar": "الزيتون",
+      "en": "Al Zaytun",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-9e027e3417189bac867b",
+      "ar": "حدائق الزيتون",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-68e0df5fefb1dc58ddec",
+      "ar": "حلمية الزيتون",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-6b0126c67d6d2e0ab42e",
+      "ar": "وسط البلد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-7440253f6c7c246d9f9b",
+      "ar": "التحرير",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-عابدين",
+      "ar": "عابدين",
+      "en": "Abdin",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-ce1f62aeb071626f8bb5",
+      "ar": "باب اللوق",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-e91ba2701d1a6df97ff1",
+      "ar": "جاردن سيتي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-686561cc49221627dead",
+      "ar": "المنيرة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-السيده-زينب",
+      "ar": "السيدة زينب",
+      "en": "Sayyida Zainab",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-bfb3a0149870833a9589",
+      "ar": "الحلمية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الدرب-الاحمر",
+      "ar": "الدرب الأحمر",
+      "en": "Al Darb al-Ahmar",
+      "aliases": []
+    },
+    {
+      "id": "area-الجماليه",
+      "ar": "الجمالية",
+      "en": "Gamaliyya",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-c0354ad3cce51f8474b3",
+      "ar": "الحسين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-e530990f031a1d5612e5",
+      "ar": "الأزهر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الموسكي",
+      "ar": "الموسكي",
+      "en": "Muski",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-6d8a298fcb4ac827ba8e",
+      "ar": "العتبة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-باب-الشعريه",
+      "ar": "باب الشعرية",
+      "en": "Bab Al-Shariyya",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-2c5f0e1f2fb46cf0eb0c",
+      "ar": "العباسية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الوايلي",
+      "ar": "الوايلي",
+      "en": "Al Wayli",
+      "aliases": []
+    },
+    {
+      "id": "area-الظاهر",
+      "ar": "الظاهر",
+      "en": "Al Zahir",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-38653a2963efdd9f4c56",
+      "ar": "الفجالة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-3d9cdcd5218288d8d278",
+      "ar": "رمسيس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-63478392ff25011e20af",
+      "ar": "شبرا مصر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-روض-الفرج",
+      "ar": "روض الفرج",
+      "en": "Rud Al-Farag",
+      "aliases": []
+    },
+    {
+      "id": "area-الساحل",
+      "ar": "الساحل",
+      "en": "Al Sahil",
+      "aliases": []
+    },
+    {
+      "id": "area-الشرابيه",
+      "ar": "الشرابية",
+      "en": "Al Sharabiyya",
+      "aliases": []
+    },
+    {
+      "id": "area-الزاويه-الحمراء",
+      "ar": "الزاوية الحمراء",
+      "en": "Zawiyya Al-Hamra",
+      "aliases": []
+    },
+    {
+      "id": "area-حدايق-القبه",
+      "ar": "حدائق القبة",
+      "en": "Hadaiq Al-Qubba",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-6d83431bb538d96d4ff9",
+      "ar": "كوبري القبة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-fd5d7bc56d358a54046b",
+      "ar": "الأميرية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-المرج",
+      "ar": "المرج",
+      "en": "Marg",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-7955a261185530b08097",
+      "ar": "المرج الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-acdce66df9bbe838dd60",
+      "ar": "عزبة النخل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-957a9e14dfe4f1b00470",
+      "ar": "مدينة السلام",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-2e49e3d787e4c2332c23",
+      "ar": "النهضة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-72e3d39d732617130958",
+      "ar": "التجمع الأول",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-c150e7bb070694cd3c5c",
+      "ar": "التجمع الثالث",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-a22e59b13f17eccdf4dc",
+      "ar": "التجمع الخامس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-616dd0835d4eb6701805",
+      "ar": "الرحاب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-057bf28fab50779abbf2",
+      "ar": "مدينتي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الشروق",
+      "ar": "الشروق",
+      "en": "Shroq",
+      "aliases": []
+    },
+    {
+      "id": "area-بدر",
+      "ar": "بدر",
+      "en": "Badr",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-1f9b0ecf886e49a07e00",
+      "ar": "القطامية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-332045fc253e1768c1a4",
+      "ar": "المقطم",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-11d9a0e253ea6d6b7473",
+      "ar": "الهضبة الوسطى",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-منشاه-ناصر",
+      "ar": "منشأة ناصر",
+      "en": "Minshat Nasir",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-bc3ae95dde20b929710f",
+      "ar": "الدويقة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الخليفه",
+      "ar": "الخليفة",
+      "en": "Al Khalifa",
+      "aliases": []
+    },
+    {
+      "id": "area-البساتين",
+      "ar": "البساتين",
+      "en": "Basatin",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-bed0f8003139f7897283",
+      "ar": "دار السلام",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-مصر-القديمه",
+      "ar": "مصر القديمة",
+      "en": "Misr Al-Qadima",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-4d4cc546767ed51cf884",
+      "ar": "المنيل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-28e7f5738490a3a0f74b",
+      "ar": "فم الخليج",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-حلوان",
+      "ar": "حلوان",
+      "en": "Hilwan",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-503f63b196b8e6dc512b",
+      "ar": "المعصرة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-dca03a7e03cd6bf85a88",
+      "ar": "طرة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG01-9ff10b1967854e24fda9",
+      "ar": "حدائق حلوان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-التبين",
+      "ar": "التبين",
+      "en": "Al Tibbin",
+      "aliases": []
+    },
+    {
+      "id": "area-15-مايو",
+      "ar": "15 مايو",
+      "en": "15 Mayu",
+      "aliases": []
+    }
+  ],
+  "EG21": [
+    {
+      "id": "approved-EG21-6dfb6ed0b6cddc6a71e7",
+      "ar": "المهندسين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الدقي",
+      "ar": "الدقي",
+      "en": "DuqqI",
+      "aliases": []
+    },
+    {
+      "id": "area-العجوزه",
+      "ar": "العجوزة",
+      "en": "Al-Aguza",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-e5513213896cc849d165",
+      "ar": "ميت عقبة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-812f9393c1435e9440a5",
+      "ar": "أرض اللواء",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-امبابه",
+      "ar": "إمبابة",
+      "en": "Imbaba",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-764d147e2e0e55f70e83",
+      "ar": "المنيرة الغربية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الوراق",
+      "ar": "الوراق",
+      "en": "Waraq",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-16abac1c5ba5361a59f1",
+      "ar": "الكيت كات",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-بولاق-الدكرور",
+      "ar": "بولاق الدكرور",
+      "en": "Bulaq Al-DakrUr",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-71106bf1e16300648400",
+      "ar": "صفط اللبن",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-86208f65495e17403c20",
+      "ar": "فيصل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-040fbb05aa1e4aca20bb",
+      "ar": "الطوابق",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-8fbac725b3b423a3e492",
+      "ar": "الطالبية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-b9bee80c6f00d3dc47f0",
+      "ar": "الهرم",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-c8b769c606ff33a0d29f",
+      "ar": "مشعل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-c8f24e869d949f4a5add",
+      "ar": "المريوطية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-048f92fd148ac1763633",
+      "ar": "حدائق الأهرام",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-eb908ee50ea3e69bf0a7",
+      "ar": "نزلة السمان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-6bc96997c1b0e435ed64",
+      "ar": "كفر طهرمس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-العمرانيه",
+      "ar": "العمرانية",
+      "en": "Umraniyya",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-67e5d8225be66c3b9f94",
+      "ar": "ترسا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-d7905ed3bb41d2b97fdf",
+      "ar": "المنيب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-52fe322cf433dbabc082",
+      "ar": "ساقية مكي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-6af5ec44de294bcf2480",
+      "ar": "البحر الأعظم",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-1497cf0a1cadd02955cf",
+      "ar": "أبو النمرس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الحوامديه",
+      "ar": "الحوامدية",
+      "en": "Hwamdeia",
+      "aliases": []
+    },
+    {
+      "id": "area-البدرشين",
+      "ar": "البدرشين",
+      "en": "Badrashain",
+      "aliases": []
+    },
+    {
+      "id": "area-العياط",
+      "ar": "العياط",
+      "en": "Ayat",
+      "aliases": []
+    },
+    {
+      "id": "area-الصف",
+      "ar": "الصف",
+      "en": "Saf",
+      "aliases": []
+    },
+    {
+      "id": "area-اطفيح",
+      "ar": "أطفيح",
+      "en": "Atfeh",
+      "aliases": []
+    },
+    {
+      "id": "area-كرداسه",
+      "ar": "كرداسة",
+      "en": "Kardasa",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-06c353c08f59e57b2d5c",
+      "ar": "ناهيا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-f99692c5c78254eb0975",
+      "ar": "أبو رواش",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-اوسيم",
+      "ar": "أوسيم",
+      "en": "Auseem",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-ad1280b4ba777acf6437",
+      "ar": "بشتيل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-88e5411dd58075b6bf4c",
+      "ar": "برقاش",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-520facd8a56d7fda5c90",
+      "ar": "منشأة القناطر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-eb6934f2c350813b8851",
+      "ar": "مدينة 6 أكتوبر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-f703d113e5bc969a557b",
+      "ar": "حدائق أكتوبر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-f7c60be20610faaf439a",
+      "ar": "أكتوبر الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الشيخ-زايد",
+      "ar": "الشيخ زايد",
+      "en": "Shaykh Zayed",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-8a339ec1a84789e9767f",
+      "ar": "زايد الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-837ac42a4bdc127e9356",
+      "ar": "القرية الذكية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الواحات-البحريه",
+      "ar": "الواحات البحرية",
+      "en": "Bahariya Oasis",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG21-4deeeed37712bde76bdd",
+      "ar": "الباويطي",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG02": [
+    {
+      "id": "area-ابو-قير",
+      "ar": "أبو قير",
+      "en": "Abu Qir",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-e805b11b128b1d318a1b",
+      "ar": "طوسون",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-e3f6bf5aa2a8078d583f",
+      "ar": "المعمورة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-b0ea6cae1239e589acc6",
+      "ar": "المعمورة الشاطئ",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-c78ebccdad1a776d2183",
+      "ar": "المعمورة البلد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-3fb6626d46fa6f59a03f",
+      "ar": "المنتزه",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-868c9db0a8df2310ae4a",
+      "ar": "المندرة بحري",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-f9df5eba6c9a19790478",
+      "ar": "المندرة قبلي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-afd042d8cfa3eeabb62c",
+      "ar": "العصافرة بحري",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-95569c7358751cf34f2a",
+      "ar": "العصافرة قبلي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-ميامي",
+      "ar": "ميامي",
+      "en": "Miami",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-bf9f8defbcf3402a1d4d",
+      "ar": "سيدي بشر بحري",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-92ce2f2c020099a81e88",
+      "ar": "سيدي بشر قبلي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-468c057bc328e863ecd2",
+      "ar": "السرايا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-80daac90e46011fa11b9",
+      "ar": "فيكتوريا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-السيوف",
+      "ar": "السيوف",
+      "en": "Al Seyouf",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-55d93e4410db4fda44e5",
+      "ar": "الساعة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الراس-السوداء",
+      "ar": "الرأس السوداء",
+      "en": "Ras El Soda",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-f35f5c5063cf8ceb0a16",
+      "ar": "خورشيد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-15284a116b7f00896fe5",
+      "ar": "العوايد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-504a172a1b4d6c5c5c69",
+      "ar": "الفلكي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-de88e81c7c97616f99fb",
+      "ar": "عزبة النخل بشرق الإسكندرية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-ff59a1670f72d88bd970",
+      "ar": "سان ستيفانو",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-bfc07b0ebfa15baefcac",
+      "ar": "جليم",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-ac47b944620f104426eb",
+      "ar": "لوران",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-536c9170c693ada9149b",
+      "ar": "زيزينيا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-e7d85519a642c3c62c7f",
+      "ar": "جناكليس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-0db280d45139449a6177",
+      "ar": "باكوس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-9027b4dfe19d5b226e66",
+      "ar": "شدس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-7af12dfb8abd878d567a",
+      "ar": "فلمنج",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-03f967772b8e065a769e",
+      "ar": "بولكلي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-c095ff08d7be3018b2d8",
+      "ar": "وينجت",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-aeb5d3dbc2c706b7958a",
+      "ar": "مصطفى كامل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-d7e3790bca7030575325",
+      "ar": "رشدي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-كفر-عبده",
+      "ar": "كفر عبده",
+      "en": "Kafr Abdo",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-58972c9d8782ca2cf175",
+      "ar": "ستانلي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-efa2aebdd281e3b31ada",
+      "ar": "سابا باشا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-سيدي-جابر",
+      "ar": "سيدي جابر",
+      "en": "Sidi Gaber",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-69c0887dc11882dbf232",
+      "ar": "سيدي جابر المحطة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-88f808205bbd6ec13ba1",
+      "ar": "كليوباترا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-سبورتنج",
+      "ar": "سبورتنج",
+      "en": "Sporting",
+      "aliases": []
+    },
+    {
+      "id": "area-الابراهيميه",
+      "ar": "الإبراهيمية",
+      "en": "Ibrahimia",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-0f236b8da80f7ac88e22",
+      "ar": "كامب شيزار",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الشاطبي",
+      "ar": "الشاطبي",
+      "en": "Shatby",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-699d8349f41f94b4464c",
+      "ar": "الأزاريطة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-محطه-الرمل",
+      "ar": "محطة الرمل",
+      "en": "Raml Station",
+      "aliases": []
+    },
+    {
+      "id": "area-سموحه",
+      "ar": "سموحة",
+      "en": "Smouha",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-b1caeb17adc9f47e3f8e",
+      "ar": "الحضرة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-f2766f556dc1b136d6bc",
+      "ar": "الحضرة الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-ec3d3d16482eff9a5b6c",
+      "ar": "باب شرق",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-محرم-بك",
+      "ar": "محرم بك",
+      "en": "Moharam Bek",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-a8f044d4d27fcf5edebc",
+      "ar": "وابور المياه",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-92589b478f3427be124b",
+      "ar": "كوم الدكة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-العطارين",
+      "ar": "العطارين",
+      "en": "Al Attarin",
+      "aliases": []
+    },
+    {
+      "id": "area-المنشيه",
+      "ar": "المنشية",
+      "en": "Al Mansheya",
+      "aliases": []
+    },
+    {
+      "id": "area-الجمرك",
+      "ar": "الجمرك",
+      "en": "Al Gomrok",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-5e8688a48619b10d5a09",
+      "ar": "الأنفوشي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-cfccc3ccf1c29b1ce339",
+      "ar": "بحري",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-9d85ba975581447530ba",
+      "ar": "رأس التين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-e3ab050d6d65bc4307fc",
+      "ar": "السيالة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-اللبان",
+      "ar": "اللبان",
+      "en": "A L Labban",
+      "aliases": []
+    },
+    {
+      "id": "area-كرموز",
+      "ar": "كرموز",
+      "en": "Karmuz",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-5b75dda70919da6785cd",
+      "ar": "غيط العنب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-مينا-البصل",
+      "ar": "مينا البصل",
+      "en": "Mina Al-Basal",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-6028d3f9c5979e4bf7c8",
+      "ar": "القباري",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-bbf779ab1ed9e8c4362b",
+      "ar": "كفر عشري",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الورديان",
+      "ar": "الورديان",
+      "en": "Al Wardian",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-e114c34684002bd4b853",
+      "ar": "نجع العرب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-المكس",
+      "ar": "المكس",
+      "en": "Al Maks",
+      "aliases": []
+    },
+    {
+      "id": "area-الدخيله",
+      "ar": "الدخيلة",
+      "en": "Al Dikhila",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-e5ea2ec2e52f45a536e7",
+      "ar": "العجمي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-البيطاش",
+      "ar": "البيطاش",
+      "en": "Bitash",
+      "aliases": []
+    },
+    {
+      "id": "area-الهانوفيل",
+      "ar": "الهانوفيل",
+      "en": "Hanoville",
+      "aliases": []
+    },
+    {
+      "id": "area-ابو-يوسف",
+      "ar": "أبو يوسف",
+      "en": "Abu Youssef",
+      "aliases": []
+    },
+    {
+      "id": "area-الكيلو-21",
+      "ar": "الكيلو 21",
+      "en": "Kilometer 21",
+      "aliases": []
+    },
+    {
+      "id": "area-ابو-تلات",
+      "ar": "أبو تلات",
+      "en": "Abu Talat",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-6eb1f6bc20773c8f8500",
+      "ar": "النخيل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-العامريه",
+      "ar": "العامرية",
+      "en": "Al Amreia",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-ae2ac328d4e911190990",
+      "ar": "مرغم",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-f1d4833034479b4a9f05",
+      "ar": "عبد القادر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-d29eb00e68b0e159a8ec",
+      "ar": "الناصرية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-986a4c5d7e569401757b",
+      "ar": "الكينج مريوط",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-aa223ee350f5aa6ee65a",
+      "ar": "الهوارية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-برج-العرب",
+      "ar": "برج العرب",
+      "en": "Burg al-Arab",
+      "aliases": []
+    },
+    {
+      "id": "area-برج-العرب-الجديده",
+      "ar": "برج العرب الجديدة",
+      "en": "Burg Al-Arab City",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-932ae74b5065a8e8004c",
+      "ar": "بهيج",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-5308060f0271b335f016",
+      "ar": "أبو صير",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG02-240604fb7192a9a79151",
+      "ar": "سيدي كرير",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG14": [
+    {
+      "id": "area-بنها",
+      "ar": "بنها",
+      "en": "Banha",
+      "aliases": []
+    },
+    {
+      "id": "area-شبرا-الخيمه",
+      "ar": "شبرا الخيمة",
+      "en": "Shubra Al-Khayma 1",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-95d5c57faf9235dd0d90",
+      "ar": "بهتيم",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-e300ed78b531873e68c3",
+      "ar": "مسطرد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-faa5ca5f63ddfc7eb197",
+      "ar": "المؤسسة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-dafe0030af3e64cc4bfb",
+      "ar": "أم بيومي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-36ecb757bc0fbd4f5b3f",
+      "ar": "شبرا البلد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-قليوب",
+      "ar": "قليوب",
+      "en": "Qalyub",
+      "aliases": []
+    },
+    {
+      "id": "area-القناطر-الخيريه",
+      "ar": "القناطر الخيرية",
+      "en": "Qanatir Al-Khayriyya",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-b0f626092eef06712398",
+      "ar": "أبو الغيط",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-d9b44dcbfed55efff7f9",
+      "ar": "باسوس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-طوخ",
+      "ar": "طوخ",
+      "en": "Tukh",
+      "aliases": []
+    },
+    {
+      "id": "area-قها",
+      "ar": "قها",
+      "en": "Qaha",
+      "aliases": []
+    },
+    {
+      "id": "area-كفر-شكر",
+      "ar": "كفر شكر",
+      "en": "Kafr Shukr",
+      "aliases": []
+    },
+    {
+      "id": "area-شبين-القناطر",
+      "ar": "شبين القناطر",
+      "en": "Shibin al-Qanatir",
+      "aliases": []
+    },
+    {
+      "id": "area-الخانكه",
+      "ar": "الخانكة",
+      "en": "Al Khanka",
+      "aliases": []
+    },
+    {
+      "id": "area-الخصوص",
+      "ar": "الخصوص",
+      "en": "Khsos",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-2d14a1fb83b80fc8f196",
+      "ar": "أبو زعبل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-705d2a0c7067ae36700b",
+      "ar": "القلج",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-9c9ed9f1f30fbc92dec9",
+      "ar": "الجبل الأصفر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-العبور",
+      "ar": "العبور",
+      "en": "Abour",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-aac710ed3f1c3322b66e",
+      "ar": "العبور الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-44cb356f348ab09a9261",
+      "ar": "سنديون",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-b1250077609d92558c2b",
+      "ar": "ميت نما",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-36e611e1a6d893b904ba",
+      "ar": "نامول",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-a438448acb0629c096f6",
+      "ar": "قلقشندة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-85a54a5ef050ae5078b5",
+      "ar": "بلتان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG14-8cfbae78821d9cbec606",
+      "ar": "ترسا",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG18": [
+    {
+      "id": "area-دمنهور",
+      "ar": "دمنهور",
+      "en": "Damanhur",
+      "aliases": []
+    },
+    {
+      "id": "area-كفر-الدوار",
+      "ar": "كفر الدوار",
+      "en": "Kafr Al-Dawwar",
+      "aliases": []
+    },
+    {
+      "id": "area-ابو-حمص",
+      "ar": "أبو حمص",
+      "en": "Abu Hummus",
+      "aliases": []
+    },
+    {
+      "id": "area-ايتاي-البارود",
+      "ar": "إيتاي البارود",
+      "en": "Itay Al-Barud",
+      "aliases": []
+    },
+    {
+      "id": "area-شبراخيت",
+      "ar": "شبراخيت",
+      "en": "Shubra Khit",
+      "aliases": []
+    },
+    {
+      "id": "area-حوش-عيسي",
+      "ar": "حوش عيسى",
+      "en": "Hush Isa",
+      "aliases": []
+    },
+    {
+      "id": "area-ابو-المطامير",
+      "ar": "أبو المطامير",
+      "en": "Abu-l-Matamir",
+      "aliases": []
+    },
+    {
+      "id": "area-الدلنجات",
+      "ar": "الدلنجات",
+      "en": "Al-Dilingat",
+      "aliases": []
+    },
+    {
+      "id": "area-كوم-حماده",
+      "ar": "كوم حمادة",
+      "en": "Kum Hamada",
+      "aliases": []
+    },
+    {
+      "id": "area-الرحمانيه",
+      "ar": "الرحمانية",
+      "en": "Al-Rahmaniyya",
+      "aliases": []
+    },
+    {
+      "id": "area-المحموديه",
+      "ar": "المحمودية",
+      "en": "Al-Mahmudiyya",
+      "aliases": []
+    },
+    {
+      "id": "area-رشيد",
+      "ar": "رشيد",
+      "en": "Rashid",
+      "aliases": []
+    },
+    {
+      "id": "area-ادكو",
+      "ar": "إدكو",
+      "en": "Idku",
+      "aliases": []
+    },
+    {
+      "id": "area-وادي-النطرون",
+      "ar": "وادي النطرون",
+      "en": "Wadi Al-NatrUn",
+      "aliases": []
+    },
+    {
+      "id": "area-بدر",
+      "ar": "بدر",
+      "en": "Badr",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-037da59bd2c6848e5966",
+      "ar": "النوبارية الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-752a622b5730f770fdd2",
+      "ar": "غرب النوبارية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-cb6c41792baeab2f23a0",
+      "ar": "جناكليس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-e8167ba9b2bd3ac414bb",
+      "ar": "البستان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-ef452a193e20228b2120",
+      "ar": "الطود",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-3847ecb7f47375c19494",
+      "ar": "لقانة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-ac9e6d9fa4e979cb7eb6",
+      "ar": "نكلا العنب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-556235fd37f1a76ca05f",
+      "ar": "صفط الحرية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-9a9477957b3ea46c4faf",
+      "ar": "قليشان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-3e881afddfa578ad2145",
+      "ar": "سنهور",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-2d9f89cbe15417d2e130",
+      "ar": "الأبعادية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-67427fb66b7372399d28",
+      "ar": "الشوكة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-45ef3e92d554cc6700de",
+      "ar": "إفلاقة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-75352fecf39ffc0e30a5",
+      "ar": "دسونس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-e407c714d1d7062ffc1f",
+      "ar": "زاوية غزال",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-28829a7ea0dd69c23f24",
+      "ar": "بولين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-cb601fd35cc53050b711",
+      "ar": "كوم البركة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-3d29795fe52362338c33",
+      "ar": "سيدي غازي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG18-5c0ff2b57029d60c1455",
+      "ar": "الكريون",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG33": [
+    {
+      "id": "area-مرسي-مطروح",
+      "ar": "مرسى مطروح",
+      "en": "Marsa Matruh",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-6b7e572133470d489c49",
+      "ar": "وسط البلد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-934f882d414e84b81eac",
+      "ar": "علم الروم",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-0cdb8bf51534f45bc437",
+      "ar": "القصر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-d1fef329ca8bef32fa6c",
+      "ar": "الأبيض",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-fa37057b95b4e95f24e3",
+      "ar": "عجيبة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-82e2e38c30fdaeaf2b04",
+      "ar": "كليوباترا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-51deeaf38de30fab2f12",
+      "ar": "رأس الحكمة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الضبعه",
+      "ar": "الضبعة",
+      "en": "Daba",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-234de164235220dd4763",
+      "ar": "فوكة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-8c9f295cee65aa74b4de",
+      "ar": "سيدي عبد الرحمن",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-العلمين",
+      "ar": "العلمين",
+      "en": "El Alamein",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-990154d80739236ebcef",
+      "ar": "العلمين الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-3cb7d43ffa47a00c2cc1",
+      "ar": "مارينا العلمين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الحمام",
+      "ar": "الحمام",
+      "en": "Al-Hammam",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-eae66959fbf17cbd7c51",
+      "ar": "سيدي حنيش",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-b3a24562f982c44a312d",
+      "ar": "النجيلة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-سيدي-براني",
+      "ar": "سيدي براني",
+      "en": "Sidi Barani",
+      "aliases": []
+    },
+    {
+      "id": "area-السلوم",
+      "ar": "السلوم",
+      "en": "Salloum",
+      "aliases": []
+    },
+    {
+      "id": "area-سيوه",
+      "ar": "سيوة",
+      "en": "Siwa",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-13d2b2e453663b2d5dba",
+      "ar": "أغورمي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-e9e9e8495bfd29b99003",
+      "ar": "بهي الدين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-85761fea952c321afcfc",
+      "ar": "أبو شروف",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG33-b4c051e092c68667bd79",
+      "ar": "المراقي",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG15": [
+    {
+      "id": "area-كفر-الشيخ",
+      "ar": "كفر الشيخ",
+      "en": "Kafr Al-Shaykh",
+      "aliases": []
+    },
+    {
+      "id": "area-دسوق",
+      "ar": "دسوق",
+      "en": "Disuq",
+      "aliases": []
+    },
+    {
+      "id": "area-فوه",
+      "ar": "فوه",
+      "en": "Fuwwa",
+      "aliases": []
+    },
+    {
+      "id": "area-مطوبس",
+      "ar": "مطوبس",
+      "en": "Mitubas",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-ddffc8eb069677177cde",
+      "ar": "بلطيم",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-4bb1cb0e159c8e207deb",
+      "ar": "مصيف بلطيم",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-f6e240519558a45516f9",
+      "ar": "برج البرلس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الحامول",
+      "ar": "الحامول",
+      "en": "Al Hamul",
+      "aliases": []
+    },
+    {
+      "id": "area-بيلا",
+      "ar": "بيلا",
+      "en": "Biyalu",
+      "aliases": []
+    },
+    {
+      "id": "area-الرياض",
+      "ar": "الرياض",
+      "en": "Riyad",
+      "aliases": []
+    },
+    {
+      "id": "area-سيدي-سالم",
+      "ar": "سيدي سالم",
+      "en": "Sidi Salim",
+      "aliases": []
+    },
+    {
+      "id": "area-قلين",
+      "ar": "قلين",
+      "en": "Qillin",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-42e7fcc3e1cc305c32c1",
+      "ar": "سيدي غازي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-0112b828c64dc7edadbd",
+      "ar": "مسير",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-676bde5241ad91e61fff",
+      "ar": "سخا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-240b2d2b35a26c5a97c1",
+      "ar": "محلة أبو علي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-c98434ede27b32beb2a8",
+      "ar": "شباس الشهداء",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-ed150f3db0c094dd464b",
+      "ar": "شباس الملح",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-9e03cabe788bf835ee38",
+      "ar": "سنهور المدينة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-63ff62805e186ab93dc6",
+      "ar": "محلة دياي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-756d578db8f4f47d90ed",
+      "ar": "محلة موسى",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-27a20da007ae8f138174",
+      "ar": "الشمارقة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-23e198bf10f6199aed35",
+      "ar": "إسحاقة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-daf3e8ba63705fbd3c3b",
+      "ar": "الكراكات",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-36f532eb71165c3c0db8",
+      "ar": "تيدا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG15-50a608cbf4b36f2ee39a",
+      "ar": "الحصة",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG16": [
+    {
+      "id": "area-طنطا",
+      "ar": "طنطا",
+      "en": "Tanta",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-dd672d4ba2cc74e50bc5",
+      "ar": "سيجر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-369363bd5d3fe6b7be35",
+      "ar": "العجيزي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-83fee69613ebec220269",
+      "ar": "الجلاء",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-53c7fed4578deae87a74",
+      "ar": "الاستاد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-49429138896e9da1f994",
+      "ar": "سبرباي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-d0ce7171c632136435ed",
+      "ar": "المحلة الكبرى",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-fda827a78ded7ddf566e",
+      "ar": "الشون",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-6480264896dbc2cc83d2",
+      "ar": "منشية البكري",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-a92573341c5ad216561a",
+      "ar": "أبو شاهين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-bd1c25fb3f9fc7373579",
+      "ar": "الجمهورية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-46253bb7845ef0164d78",
+      "ar": "محلة أبو علي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-سمنود",
+      "ar": "سمنود",
+      "en": "Samannud",
+      "aliases": []
+    },
+    {
+      "id": "area-زفتي",
+      "ar": "زفتى",
+      "en": "Zifta",
+      "aliases": []
+    },
+    {
+      "id": "area-السنطه",
+      "ar": "السنطة",
+      "en": "Santa",
+      "aliases": []
+    },
+    {
+      "id": "area-كفر-الزيات",
+      "ar": "كفر الزيات",
+      "en": "Kafr Al-Zayyat",
+      "aliases": []
+    },
+    {
+      "id": "area-بسيون",
+      "ar": "بسيون",
+      "en": "Basyun",
+      "aliases": []
+    },
+    {
+      "id": "area-قطور",
+      "ar": "قطور",
+      "en": "Qutur",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-5768a10ec797e97fd1a5",
+      "ar": "محلة مرحوم",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-4d08c602904a6859bc26",
+      "ar": "نواج",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-3e47d52585e58c802353",
+      "ar": "شوبر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-cc5777ed6b45c7fae822",
+      "ar": "كفر عصام",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-55fa91f894371dd5f391",
+      "ar": "دفرة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-برما",
+      "ar": "برما",
+      "en": "Birma",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-d7e61d70144978e1ccdf",
+      "ar": "بشبيش",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-afe2bd9d6eb68ebbf8d0",
+      "ar": "صفط تراب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-e14cc604c2584f98e2ba",
+      "ar": "محلة روح",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-4b09457696625cc66a60",
+      "ar": "ميت عساس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG16-a0fe162246b510f71517",
+      "ar": "بهبيت الحجارة",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG17": [
+    {
+      "id": "area-شبين-الكوم",
+      "ar": "شبين الكوم",
+      "en": "Shibin al-Kum",
+      "aliases": []
+    },
+    {
+      "id": "area-قويسنا",
+      "ar": "قويسنا",
+      "en": "Quwisna",
+      "aliases": []
+    },
+    {
+      "id": "area-بركه-السبع",
+      "ar": "بركة السبع",
+      "en": "Birkat Al-Sab",
+      "aliases": []
+    },
+    {
+      "id": "area-تلا",
+      "ar": "تلا",
+      "en": "Tala",
+      "aliases": []
+    },
+    {
+      "id": "area-الشهداء",
+      "ar": "الشهداء",
+      "en": "Al-Shuhada",
+      "aliases": []
+    },
+    {
+      "id": "area-الباجور",
+      "ar": "الباجور",
+      "en": "Al-Bagur",
+      "aliases": []
+    },
+    {
+      "id": "area-اشمون",
+      "ar": "أشمون",
+      "en": "Ashmun",
+      "aliases": []
+    },
+    {
+      "id": "area-منوف",
+      "ar": "منوف",
+      "en": "Minuf",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-24502e26b0d7c142a0ee",
+      "ar": "سرس الليان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-السادات",
+      "ar": "السادات",
+      "en": "Sadat City",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-43c236ec5b7adeef7f63",
+      "ar": "البتانون",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-310e8c7475c0d1ffba95",
+      "ar": "ميت خاقان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-8d0167364f52b1815563",
+      "ar": "كفر المصيلحة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-74e467c8e8868807e640",
+      "ar": "مليج",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-a7a1fb9f4fe69f78eb7b",
+      "ar": "شنوان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-5f4654963bae980f6ceb",
+      "ar": "بخاتي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-21fcae64798ce002d3c0",
+      "ar": "طنبشا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-cd8a7f101b54e7d9a35a",
+      "ar": "جنزور",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-85f4c9723133f78e335b",
+      "ar": "طوخ طنبشا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-9dc177892c52327a393f",
+      "ar": "دنشواي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-bffa1d0f999d7b801114",
+      "ar": "زاوية الناعورة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-403bcd93a9d9b7f3d297",
+      "ar": "شما",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-1bc7060e1b94b3825f09",
+      "ar": "سنتريس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-119ebbf4e37ec0ab0d6f",
+      "ar": "سمادون",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-463b1071c0d575167dfc",
+      "ar": "سبك الأحد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-416e5578d90705935241",
+      "ar": "طهواي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-3a16dfdd24674b0e6271",
+      "ar": "جريس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-1c18e18d40c619b3f67a",
+      "ar": "كفر داود",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG17-2ccca8968e9764def208",
+      "ar": "الخطاطبة",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG12": [
+    {
+      "id": "area-المنصوره",
+      "ar": "المنصورة",
+      "en": "E Mansora 2",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-5ab57dd2d81d53b19c74",
+      "ar": "حي الجامعة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-b19482ce2c5742e9e458",
+      "ar": "توريل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-bb05081388eb521a35d0",
+      "ar": "جديلة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-a63f8416e28088cd7be2",
+      "ar": "قولنجيل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-18b0c78db43d6ff897d1",
+      "ar": "سندوب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-bc6eee4fe385f1ef0399",
+      "ar": "المشاية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-dc4fca637226f51b00cd",
+      "ar": "ميت حدر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-a192a189a83f081b8e9a",
+      "ar": "كفر البدماص",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-طلخا",
+      "ar": "طلخا",
+      "en": "Talkha",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-2cdc69bb6abce6b51005",
+      "ar": "نبروه",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-اجا",
+      "ar": "أجا",
+      "en": "Aga",
+      "aliases": []
+    },
+    {
+      "id": "area-ميت-غمر",
+      "ar": "ميت غمر",
+      "en": "Mit Ghamr",
+      "aliases": []
+    },
+    {
+      "id": "area-السنبلاوين",
+      "ar": "السنبلاوين",
+      "en": "Sinbillawin",
+      "aliases": []
+    },
+    {
+      "id": "area-دكرنس",
+      "ar": "دكرنس",
+      "en": "Dikirnis",
+      "aliases": []
+    },
+    {
+      "id": "area-منيه-النصر",
+      "ar": "منية النصر",
+      "en": "Minya Al-Nasr",
+      "aliases": []
+    },
+    {
+      "id": "area-المنزله",
+      "ar": "المنزلة",
+      "en": "Manzala",
+      "aliases": []
+    },
+    {
+      "id": "area-المطريه",
+      "ar": "المطرية",
+      "en": "Matariyya",
+      "aliases": []
+    },
+    {
+      "id": "area-الجماليه",
+      "ar": "الجمالية",
+      "en": "Gamaliyya",
+      "aliases": []
+    },
+    {
+      "id": "area-ميت-سلسيل",
+      "ar": "ميت سلسيل",
+      "en": "MIt Salsil",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-0ec3e83a6c9d5368932b",
+      "ar": "بني عبيد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-70032b480eca679f2c57",
+      "ar": "تمي الأمديد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-بلقاس",
+      "ar": "بلقاس",
+      "en": "Bilqas",
+      "aliases": []
+    },
+    {
+      "id": "area-شربين",
+      "ar": "شربين",
+      "en": "Shirbin",
+      "aliases": []
+    },
+    {
+      "id": "area-جمصه",
+      "ar": "جمصة",
+      "en": "Gamsa",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-560fb1a24e4018daa248",
+      "ar": "المنصورة الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-9f55e5f3c9ccea2c1c5f",
+      "ar": "كفر سعد (مركز ميت غمر)",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-bd3639c31d7a8a8bcc0d",
+      "ar": "بشلا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-d34cb78ee124eda0bc01",
+      "ar": "نوسا الغيط",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-15c61ce0f21c3d4baf60",
+      "ar": "بشمس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-51100819224a96c64c9f",
+      "ar": "طناح",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-574d6a2bd41ac0945af4",
+      "ar": "شاوة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-45999f93aac42708e62d",
+      "ar": "كفر بهيدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-b110ae2f1012f8b56c78",
+      "ar": "ميت خميس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-محله-دمنه",
+      "ar": "محلة دمنة",
+      "en": "Mahalet Demna",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-6b0083157ac11480c394",
+      "ar": "الخيارية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-1dda9997f49538a85b5c",
+      "ar": "بسنديلة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-c37c00403feab238597d",
+      "ar": "الستاموني",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-f21284c21d432bb25a2a",
+      "ar": "أبو جلال",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-3eb1f0eb743e4d7519e1",
+      "ar": "كفر الترعة الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-f47f34edb6a013209359",
+      "ar": "العصافرة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG12-ae548f58ae47ea79bedd",
+      "ar": "الكردي",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG11": [
+    {
+      "id": "area-دمياط",
+      "ar": "دمياط",
+      "en": "Dumyat",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-c06bc72356a0adf9d8e9",
+      "ar": "دمياط الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-راس-البر",
+      "ar": "رأس البر",
+      "en": "Ras al-Bar",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-4b1dd76f7e3dae1b6a8a",
+      "ar": "عزبة البرج",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-فارسكور",
+      "ar": "فارسكور",
+      "en": "Fariskur",
+      "aliases": []
+    },
+    {
+      "id": "area-الزرقا",
+      "ar": "الزرقا",
+      "en": "Zarqa",
+      "aliases": []
+    },
+    {
+      "id": "area-كفر-سعد",
+      "ar": "كفر سعد",
+      "en": "Kafr Sad",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-2d29b9d7bd73eacd05ee",
+      "ar": "كفر البطيخ",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-e715f116031ca0ff76ab",
+      "ar": "ميت أبو غالب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-572221ab9ce4cc06654c",
+      "ar": "الروضة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-cbcb05b4ba2bd4d2a160",
+      "ar": "السرو",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-64d92359a8dfa662ddf7",
+      "ar": "شطا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-dae66d2ef964205a5d4b",
+      "ar": "الشعراء",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-3befb84ed0825401d5c7",
+      "ar": "السنانية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-76e720c531a17084872b",
+      "ar": "البصارطة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-5cd0f03d8f2a7020333b",
+      "ar": "العنانية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-039924a954dd9c0b740e",
+      "ar": "السيالة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-9d0070a6521ba2dae563",
+      "ar": "الخياطة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-9c883b546b8f45c081c1",
+      "ar": "الشيخ درغام",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-1f2b51d79301035bf8f9",
+      "ar": "الجربي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-2e4517bbba1bbc544f88",
+      "ar": "الأعصر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-0547df0952d38baffb6b",
+      "ar": "باب الحرس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-e58fef8c06d57541b0b9",
+      "ar": "الشهابية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-686eeae4114ac3597e54",
+      "ar": "كفر العرب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-0128db69f4f02fa3b51a",
+      "ar": "الرحامنة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-26df4850e288e7ef4d26",
+      "ar": "ميت الخولي عبد الله",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG11-eb39c7e216ff6db67851",
+      "ar": "تفتيش السرو",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG13": [
+    {
+      "id": "area-الزقازيق",
+      "ar": "الزقازيق",
+      "en": "Zaqaziq",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-7b7c09fdb913974439a7",
+      "ar": "القومية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-8d10bbba0528a8aa9fb0",
+      "ar": "فلل الجامعة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-b9c0efc3d08011d7d41b",
+      "ar": "حي الزهور",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-6f475d3ee1ec9ba5d7a7",
+      "ar": "النحال",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-fa24c1ef4cc767a95966",
+      "ar": "الحسينية بمدينة الزقازيق",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-العاشر-من-رمضان",
+      "ar": "العاشر من رمضان",
+      "en": "10 Ramadan 1",
+      "aliases": []
+    },
+    {
+      "id": "area-بلبيس",
+      "ar": "بلبيس",
+      "en": "Bilbis",
+      "aliases": []
+    },
+    {
+      "id": "area-منيا-القمح",
+      "ar": "منيا القمح",
+      "en": "Minya al-Qamh",
+      "aliases": []
+    },
+    {
+      "id": "area-ابو-حماد",
+      "ar": "أبو حماد",
+      "en": "Abu Hammad",
+      "aliases": []
+    },
+    {
+      "id": "area-ابو-كبير",
+      "ar": "أبو كبير",
+      "en": "Abu Kabir",
+      "aliases": []
+    },
+    {
+      "id": "area-ههيا",
+      "ar": "ههيا",
+      "en": "Hihya",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-0450a77ada88d95011c5",
+      "ar": "الإبراهيمية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-ديرب-نجم",
+      "ar": "ديرب نجم",
+      "en": "Dyarb Nigm",
+      "aliases": []
+    },
+    {
+      "id": "area-فاقوس",
+      "ar": "فاقوس",
+      "en": "Faqus",
+      "aliases": []
+    },
+    {
+      "id": "area-الحسينيه",
+      "ar": "الحسينية",
+      "en": "Al-Husayniya",
+      "aliases": []
+    },
+    {
+      "id": "area-كفر-صقر",
+      "ar": "كفر صقر",
+      "en": "Kafr Saqr",
+      "aliases": []
+    },
+    {
+      "id": "area-اولاد-صقر",
+      "ar": "أولاد صقر",
+      "en": "Awlad Saqr",
+      "aliases": []
+    },
+    {
+      "id": "area-مشتول-السوق",
+      "ar": "مشتول السوق",
+      "en": "Mashtul Al-Suq",
+      "aliases": []
+    },
+    {
+      "id": "area-القرين",
+      "ar": "القرين",
+      "en": "Qurin",
+      "aliases": []
+    },
+    {
+      "id": "area-القنايات",
+      "ar": "القنايات",
+      "en": "Al-Qanayat",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-7e2a1f277e1f8c7ef4cc",
+      "ar": "صان الحجر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الصالحيه-الجديده",
+      "ar": "الصالحية الجديدة",
+      "en": "Al-Salhiyya",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-a5d0c0a808ffe866893a",
+      "ar": "منشأة أبو عمر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-28d959e7b813891b84e3",
+      "ar": "حوض الندى",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-8116a5f756ea5269067a",
+      "ar": "بردين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-afdeda53efb62d251228",
+      "ar": "شيبة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-297db78de361d9009f2d",
+      "ar": "هرية رزنة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-5aed2d89c9a0081a9696",
+      "ar": "بني عامر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-8262159ec1e5135a76f4",
+      "ar": "الزوامل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-56c428eb1ea490284a08",
+      "ar": "العدلية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-ca906759893470076ecd",
+      "ar": "أنشاص الرمل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-be7d8bf37791fa69cbe2",
+      "ar": "السعديين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-86acb3078b2185e7c21d",
+      "ar": "كفر أيوب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-d7f767669c51586c2201",
+      "ar": "غزالة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-3b06d506cb44a46c9432",
+      "ar": "الصوة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-6ad09c0ad698f6a2e32b",
+      "ar": "العباسة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-22ae3ee15ff0dfd04d7a",
+      "ar": "أكياد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG13-2f0dbe4a2047fc4961ac",
+      "ar": "كفر الحمام",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG03": [
+    {
+      "id": "approved-EG03-8eac44a10f69e3e81978",
+      "ar": "حي الشرق",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-518e41f19f0646312430",
+      "ar": "حي العرب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-a2d131bf367e7f212211",
+      "ar": "حي المناخ",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-9db9b1f7fc5dd779c8c3",
+      "ar": "حي الزهور",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-82162509370b28456cb5",
+      "ar": "حي الضواحي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-29b7ccf38ac719cd1c32",
+      "ar": "حي الجنوب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-84501549577f2ed362e1",
+      "ar": "حي الغرب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-بورفواد",
+      "ar": "بورفؤاد",
+      "en": "Port Fuad",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-26ec50659cd7f688ac36",
+      "ar": "طرح البحر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-bcda58c475abb65ac2fe",
+      "ar": "حي مبارك",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-0a9d5d76e768130c7293",
+      "ar": "بنك الإسكان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-75ab0e5f9e59176b224a",
+      "ar": "الكويت",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-a3224a9686d966aaa52a",
+      "ar": "السلام",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-70ffcb3b931872c44f29",
+      "ar": "القابوطي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-1991f7021cc679daf13c",
+      "ar": "الحرفيين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-4e826d57221c3f01f432",
+      "ar": "مساكن عثمان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-c82ba4dc56e212b4338c",
+      "ar": "الجميل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-5cd74a4c6d6566b0d7a0",
+      "ar": "الديبة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-المناصره",
+      "ar": "المناصرة",
+      "en": "Al-Manasra",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-bc32823dcfd8a2d46c2e",
+      "ar": "الجرابعة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG03-fbb7ee1cafa1069b7bab",
+      "ar": "منطقة الكيلو 14",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG19": [
+    {
+      "id": "approved-EG19-34c074f4e44396be7143",
+      "ar": "الإسماعيلية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-f44aa3afe54215773b18",
+      "ar": "حي أول",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-b888660ba03bcf765fe3",
+      "ar": "حي ثان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-0e2c0186f42880856da6",
+      "ar": "حي ثالث",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-d2c8f90b2544bcc665e2",
+      "ar": "الشيخ زايد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-9adb9d4ea2d1b5550056",
+      "ar": "حي السلام",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-900f8b19ea44a7f66812",
+      "ar": "حي الزهور",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-8002a30af8330e8a3a15",
+      "ar": "عرايشية مصر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-7be30753c070208893a7",
+      "ar": "أبو عطوة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-ced17adfdcf6f7963b94",
+      "ar": "نفيشة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-98bdf1e555fc3669ec48",
+      "ar": "المستقبل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-7361f704fbdc16fbea06",
+      "ar": "عز الدين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-فايد",
+      "ar": "فايد",
+      "en": "Fayid",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-13c5bdc5130b71499cff",
+      "ar": "سرابيوم",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-056d1f228ee33fe36dee",
+      "ar": "فنارة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-803d4af22fc614ef8612",
+      "ar": "أبو سلطان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-14c61e2a824c9c61ae20",
+      "ar": "القنطرة شرق",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-3ef306fc89cd6d480bf8",
+      "ar": "القنطرة غرب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-التل-الكبير",
+      "ar": "التل الكبير",
+      "en": "Tal al-Kabir, al",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-93b4e43191fc7a3aafef",
+      "ar": "أبو صوير",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-d9b1eaf08fd8e388cbd2",
+      "ar": "القصاصين الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-8f211637d6ee9e3a8145",
+      "ar": "الفردان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-66dcb0101854b8af2685",
+      "ar": "المحسمة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG19-3e833c2a84da703a1129",
+      "ar": "المنايف",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG04": [
+    {
+      "id": "approved-EG04-f133b6870333e52caa94",
+      "ar": "حي السويس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الاربعين",
+      "ar": "الأربعين",
+      "en": "Al-Arbiin",
+      "aliases": []
+    },
+    {
+      "id": "area-فيصل",
+      "ar": "فيصل",
+      "en": "Faysal",
+      "aliases": []
+    },
+    {
+      "id": "area-عتاقه",
+      "ar": "عتاقة",
+      "en": "Ataqa",
+      "aliases": []
+    },
+    {
+      "id": "area-الجناين",
+      "ar": "الجناين",
+      "en": "Al-Ganayin",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-2489eb8dc56b1cac8fee",
+      "ar": "بورتوفيق",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-babe9cedc830ba5966c8",
+      "ar": "الغريب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-cae367f37aac921e5e82",
+      "ar": "كفر أحمد عبده",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-94554c9b37d627b18fd3",
+      "ar": "كفر كامل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-cac3474a87e85eb22247",
+      "ar": "كفر حودة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-60cd8de05653d9cfc92c",
+      "ar": "كفر سليم",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-707c7b35aeafc3ca286a",
+      "ar": "كفر النجار",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-9c58e1ce741749b35e11",
+      "ar": "الملاحة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-c03b07cd6e57def7b280",
+      "ar": "الصباح",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-a4f5e0b666bdf2540f9e",
+      "ar": "السلام",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-7751e287438784f41af8",
+      "ar": "التوفيقية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-f32b24ad1f6dd565eb7b",
+      "ar": "الموشي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-7245557870550676a841",
+      "ar": "الأدبية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-ab78fea98452ec2991ab",
+      "ar": "العين السخنة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-b675461acdf3e0e714d6",
+      "ar": "السادات",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-a0dbef83ecbfccbb5358",
+      "ar": "أبو عارف",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-dd64096da869a41f17ef",
+      "ar": "الشلوفة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-8b3a5c438202a4d5e2d4",
+      "ar": "كبريت",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-368b2151a848879b3ca0",
+      "ar": "جنيفة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG04-17940553076acc979623",
+      "ar": "القطاع الريفي",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG34": [
+    {
+      "id": "area-العريش",
+      "ar": "العريش",
+      "en": "El Arish 1",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-07d39da4040be007c9ef",
+      "ar": "المساعيد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-807b69fc427ead3181c7",
+      "ar": "الريسة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-568d75d57b28691b850f",
+      "ar": "الفواخرية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-c15e70db738238cc4153",
+      "ar": "ضاحية السلام",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-a5a9fc37255f75bb48de",
+      "ar": "أبو صقل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-3f66baaa970ee645656a",
+      "ar": "عاطف السادات",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-02a957301d900725a3c4",
+      "ar": "حي الكرامة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-بير-العبد",
+      "ar": "بئر العبد",
+      "en": "Bir Al-Abd",
+      "aliases": []
+    },
+    {
+      "id": "area-رمانه",
+      "ar": "رمانة",
+      "en": "Rummana",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-07228799a1494055ff89",
+      "ar": "بالوظة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-d85bbbe8e7db3a250f4d",
+      "ar": "الروضة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الشيخ-زويد",
+      "ar": "الشيخ زويد",
+      "en": "Shaykh Zuwayd",
+      "aliases": []
+    },
+    {
+      "id": "area-رفح",
+      "ar": "رفح",
+      "en": "Rafah",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-f8742297f086dd54670e",
+      "ar": "رفح الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-02331698a65793e398f6",
+      "ar": "الجورة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الحسنه",
+      "ar": "الحسنة",
+      "en": "Al-Hasna",
+      "aliases": []
+    },
+    {
+      "id": "area-نخل",
+      "ar": "نخل",
+      "en": "Nakhl",
+      "aliases": []
+    },
+    {
+      "id": "area-القسيمه",
+      "ar": "القسيمة",
+      "en": "Qasima",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-fcf91676682bbee45480",
+      "ar": "بغداد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-207918b64914f3d043d9",
+      "ar": "الجفجافة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-f38c1ee7092d87495612",
+      "ar": "بير لحفن",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-f1118913178ca54c91b9",
+      "ar": "الميدان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG34-66b64d17996f12fc0732",
+      "ar": "الطويل",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG35": [
+    {
+      "id": "area-شرم-الشيخ",
+      "ar": "شرم الشيخ",
+      "en": "Sharm el-Sheikh",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-dba4adc15ae4e5c60190",
+      "ar": "خليج نعمة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-e7b92eaef869e274aa60",
+      "ar": "الهضبة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-e02ba95d959c80738ddf",
+      "ar": "السوق القديم",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-d25b971baf57c7f4f914",
+      "ar": "خليج نبق",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-3771964207299bd2b968",
+      "ar": "خليج القرش",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-66f2608b817e1431486c",
+      "ar": "رأس نصراني",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-f5390c2ca97fbaf187fc",
+      "ar": "الرويسات",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-3f54158d9a55f7bb13e1",
+      "ar": "النور",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-5d26575bf975bb443f9c",
+      "ar": "طور سيناء",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-راس-سدر",
+      "ar": "رأس سدر",
+      "en": "Ras Sidr",
+      "aliases": []
+    },
+    {
+      "id": "area-ابو-زنيمه",
+      "ar": "أبو زنيمة",
+      "en": "Abu Zenima",
+      "aliases": []
+    },
+    {
+      "id": "area-ابو-رديس",
+      "ar": "أبو رديس",
+      "en": "Abu Radis",
+      "aliases": []
+    },
+    {
+      "id": "area-دهب",
+      "ar": "دهب",
+      "en": "Dahab",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-e1f07a72cd1e7d6bcf55",
+      "ar": "العصلة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-e0a906f9d6ea3ae85a4f",
+      "ar": "المسبط",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-5962851229707691595c",
+      "ar": "المشربة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-نويبع",
+      "ar": "نويبع",
+      "en": "Nuweiba",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-fd072683f3ba953761b0",
+      "ar": "الترابين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-f7e8755e09263f2f6ccf",
+      "ar": "المزينة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-طابا",
+      "ar": "طابا",
+      "en": "Taba",
+      "aliases": []
+    },
+    {
+      "id": "area-سانت-كاترين",
+      "ar": "سانت كاترين",
+      "en": "Sant Katrin",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-b8e81d2f73404b59d627",
+      "ar": "وادي فيران",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG35-43137de213d7120fd607",
+      "ar": "وادي سعال",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG23": [
+    {
+      "id": "approved-EG23-5610832639bd95a48f68",
+      "ar": "مدينة الفيوم",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-6a619eedfac661222bbf",
+      "ar": "المسلة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-a934660f8131d9c66a5f",
+      "ar": "دلة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-16554e713f6b8f9dcd98",
+      "ar": "الحادقة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-8a12806d2c3362491f87",
+      "ar": "باغوص",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-751841a2cb5b8e77a0c0",
+      "ar": "قحافة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-3bf91c28691768b3a83f",
+      "ar": "الصوفي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-6e01af4569e3e93f7823",
+      "ar": "كيمان فارس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-eb18308d2e1a9ddb9ec8",
+      "ar": "الجامعة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الفيوم-الجديده",
+      "ar": "الفيوم الجديدة",
+      "en": "Fayyum City",
+      "aliases": []
+    },
+    {
+      "id": "area-سنورس",
+      "ar": "سنورس",
+      "en": "Sinuras",
+      "aliases": []
+    },
+    {
+      "id": "area-طاميه",
+      "ar": "طامية",
+      "en": "Tamya",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-0b39bcf1e742581a9e59",
+      "ar": "إطسا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-96c36c1815f55d16e4b1",
+      "ar": "إبشواي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-يوسف-الصديق",
+      "ar": "يوسف الصديق",
+      "en": "Yousef El sadeq",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-a7ed94a18d6b23ec839f",
+      "ar": "شكشوك",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-bc29c1d3f75b153e1ef7",
+      "ar": "تونس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-8ca5fbab81038e21bcbf",
+      "ar": "النزلة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-0b0daf8bf187891a8fd7",
+      "ar": "العجميين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-4baf7bfc0fd9cdb363ee",
+      "ar": "أبو كساه",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-b64d9308c9f3deb87cee",
+      "ar": "سيلا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-f01840087e43a12a7d0b",
+      "ar": "هوارة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-10d71bdb698a36e06fdc",
+      "ar": "الإعلام",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-ec6955553a651771d72a",
+      "ar": "منشأة عبد الله",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-a1d8174fa3216ec75e44",
+      "ar": "سنهور القبلية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-23e257d441b1ce4bdd77",
+      "ar": "ترسا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-604fad0de44b4844ffaf",
+      "ar": "فيديمين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-19985d76d4502ff25da6",
+      "ar": "قصر الباسل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-485f9d620d9c8eb349b7",
+      "ar": "دفنو",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-4efccd29d42f1e48d746",
+      "ar": "جردو",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG23-882379b171cf89448811",
+      "ar": "قارون",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG22": [
+    {
+      "id": "area-بني-سويف",
+      "ar": "بني سويف",
+      "en": "Bani Swayf",
+      "aliases": []
+    },
+    {
+      "id": "area-بني-سويف-الجديده",
+      "ar": "بني سويف الجديدة",
+      "en": "Bani Swayf City",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-eaf88be1fac7aca7168b",
+      "ar": "شرق النيل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-0626e1c4f9e7e39c0d03",
+      "ar": "الغمراوي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-d9347b4a065356028b7f",
+      "ar": "مقبل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-a86e2501362e4722fbe7",
+      "ar": "الأزهري",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-1daea44ebadec9902895",
+      "ar": "الجزيرة المرتفعة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الواسطي",
+      "ar": "الواسطى",
+      "en": "Al Wasta",
+      "aliases": []
+    },
+    {
+      "id": "area-ناصر",
+      "ar": "ناصر",
+      "en": "Nasir",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-d89e7d8b6f6256aff68e",
+      "ar": "إهناسيا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-ببا",
+      "ar": "ببا",
+      "en": "Biba",
+      "aliases": []
+    },
+    {
+      "id": "area-سمسطا",
+      "ar": "سمسطا",
+      "en": "Sumusta",
+      "aliases": []
+    },
+    {
+      "id": "area-الفشن",
+      "ar": "الفشن",
+      "en": "Al Fashn",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-f6890ed151b88864d7ad",
+      "ar": "إهناسيا الخضراء",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-e6e5c0b3b4621ce3edfa",
+      "ar": "الميمون",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-3261c9931a5df3348db3",
+      "ar": "قمن العروس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-7a012da5127b82dcfc0f",
+      "ar": "أطواب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-db69ae9a78ee3537c6ae",
+      "ar": "أبو صير الملق",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-026920e5f4fd31b5ea8e",
+      "ar": "دلاص",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-37d4dd4a44105b121b0c",
+      "ar": "أشمنت",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-7b8994230b2bf9c604fd",
+      "ar": "بهبشين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-bae55069f4dfae042c63",
+      "ar": "بني هارون",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-75946a2700d37127641f",
+      "ar": "تزمنت الشرقية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-69435a1c00ada1403cd9",
+      "ar": "تزمنت الغربية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-47730656baf97444611a",
+      "ar": "باروط",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-73ba41510bf892109492",
+      "ar": "سدس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-42db3cfaf6ac713cc94b",
+      "ar": "طنسا بني مالو",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-78f4a962f36f125d6848",
+      "ar": "الفقاعي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-bb50050f76293b9f76fb",
+      "ar": "دشطوط",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG22-51d043cf7e6e1019c080",
+      "ar": "الشنطور",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG24": [
+    {
+      "id": "area-المنيا",
+      "ar": "المنيا",
+      "en": "Kesm Al-minya",
+      "aliases": []
+    },
+    {
+      "id": "area-المنيا-الجديده",
+      "ar": "المنيا الجديدة",
+      "en": "New Minya",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-457fad0f3b2aec753433",
+      "ar": "أرض سلطان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-797503f48a58fdbfb64c",
+      "ar": "أبو هلال",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-4780a44f0389c9ad5e6b",
+      "ar": "شلبي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-64e0916339ea9bb6ddcf",
+      "ar": "الحبشي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-4fd9e6ec0159ee8f76ab",
+      "ar": "كدوان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-b5b23b048ea04bc9fa1d",
+      "ar": "ماقوسة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-دير-مواس",
+      "ar": "دير مواس",
+      "en": "Markz Dir Mawas",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-9e4c39e255ff6af5423b",
+      "ar": "ملوي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-818666fd7f6b5cc68bed",
+      "ar": "ملوي الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-ابو-قرقاص",
+      "ar": "أبو قرقاص",
+      "en": "Markz Abu Qurqas",
+      "aliases": []
+    },
+    {
+      "id": "area-سمالوط",
+      "ar": "سمالوط",
+      "en": "Markz Samalut",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-682f5ba71fc9a58a80ed",
+      "ar": "مطاي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-بني-مزار",
+      "ar": "بني مزار",
+      "en": "Markz Bani Mazar",
+      "aliases": []
+    },
+    {
+      "id": "area-مغاغه",
+      "ar": "مغاغة",
+      "en": "Markz Maghagha",
+      "aliases": []
+    },
+    {
+      "id": "area-العدوه",
+      "ar": "العدوة",
+      "en": "Markz Al Idwa",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-69f3e03c3dc52c5ddec2",
+      "ar": "تلة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-1803b92fdde10eedf727",
+      "ar": "البرجاية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-fe9474a6d96b3fa21f64",
+      "ar": "دمشير",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-ac1a82dba0c70c2f6869",
+      "ar": "صفط الخمار",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-3bf2be8500b562a8d809",
+      "ar": "بني أحمد الشرقية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-eb0241495a45eb71bdfc",
+      "ar": "بني أحمد الغربية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-8069bf37cf8c281dff3f",
+      "ar": "طوخ الخيل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-9f8bcbdcc21385ebd252",
+      "ar": "نزلة حسين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-998f5da196f7479f316d",
+      "ar": "طحا الأعمدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-b26e0c8062de1c7b0e79",
+      "ar": "قلوصنا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-8587185dc3eda72a2480",
+      "ar": "بني خالد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-65b2fa35e4a9696e8ae3",
+      "ar": "بردنوها",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-29350e5ef6f621d27da4",
+      "ar": "صندفا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-c87bea4efc1332704f50",
+      "ar": "البهنسا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-ac764bb5d7209be0ac35",
+      "ar": "شارونة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-b3a410cbb8ac683bbe08",
+      "ar": "أبا البلد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-cfcbd34e1853faa6e478",
+      "ar": "تونا الجبل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-871d5253223c8b84b671",
+      "ar": "الأشمونين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-06f766b269b5de943c85",
+      "ar": "دلجا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG24-e27c2b5e706d8563c6ba",
+      "ar": "دير أبو حنس",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG25": [
+    {
+      "id": "area-اسيوط",
+      "ar": "أسيوط",
+      "en": "Assuit",
+      "aliases": []
+    },
+    {
+      "id": "area-اسيوط-الجديده",
+      "ar": "أسيوط الجديدة",
+      "en": "Assuit City",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-61a48744fa242179a278",
+      "ar": "ناصر الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-758b8138334d58b45c17",
+      "ar": "الوليدية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-2c99c25c5ec5aca3a895",
+      "ar": "الأربعين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-5ffdb1931591d2edd7b6",
+      "ar": "الحمراء",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-الفتح",
+      "ar": "الفتح",
+      "en": "Alfath",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-65b0b1cb677c87184923",
+      "ar": "أبو تيج",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-ابنوب",
+      "ar": "أبنوب",
+      "en": "Abnub",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-58fc197abde312da0d4b",
+      "ar": "البداري",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-ساحل-سليم",
+      "ar": "ساحل سليم",
+      "en": "Sahil Silim",
+      "aliases": []
+    },
+    {
+      "id": "area-صدفا",
+      "ar": "صدفا",
+      "en": "Sidfa",
+      "aliases": []
+    },
+    {
+      "id": "area-الغنايم",
+      "ar": "الغنايم",
+      "en": "Al-Ghanayem",
+      "aliases": []
+    },
+    {
+      "id": "area-منفلوط",
+      "ar": "منفلوط",
+      "en": "Manfalut",
+      "aliases": []
+    },
+    {
+      "id": "area-القوصيه",
+      "ar": "القوصية",
+      "en": "Al-Qusia",
+      "aliases": []
+    },
+    {
+      "id": "area-ديروط",
+      "ar": "ديروط",
+      "en": "Dayrut",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-8541cb7922df2bb70825",
+      "ar": "موشا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-9ff7ce1d30f9261b2eca",
+      "ar": "درنكة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-2927c0f98441f8a37931",
+      "ar": "ريفا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-8454c886282521049df5",
+      "ar": "بني غالب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-65761e73a2413d3e53c9",
+      "ar": "منقباد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-1ea4c94ff0f504dc168b",
+      "ar": "بني حسين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-61b551839ebcf84e3d1e",
+      "ar": "سلام",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-ae6bda30bdbccb6e1cda",
+      "ar": "الشغبة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-efbea87fed469ab61998",
+      "ar": "بني مر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-3793487c367174393edf",
+      "ar": "الواسطى",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-73b41a7fd46234f1925d",
+      "ar": "بصرة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-1a525e55d3cd3f1466cc",
+      "ar": "بني عدي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-941c18b58bc3164257e4",
+      "ar": "العزية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-506f315549c1025ccad2",
+      "ar": "مير",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-ad5f136df0bc4ba6e7cc",
+      "ar": "بني قرة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-46d4affca7fa6fe7fd24",
+      "ar": "دشلوط",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-d3a2781e8f98e73e5994",
+      "ar": "صنبو",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-24634e2e629723812974",
+      "ar": "النخيلة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-35c396b6bbf74e705dae",
+      "ar": "الزرابي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-1d321267e86fe7552d24",
+      "ar": "مجريس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG25-4ed525f23df037c89fcd",
+      "ar": "الهمامية",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG26": [
+    {
+      "id": "area-سوهاج",
+      "ar": "سوهاج",
+      "en": "Suhag",
+      "aliases": []
+    },
+    {
+      "id": "area-سوهاج-الجديده",
+      "ar": "سوهاج الجديدة",
+      "en": "Suhag City",
+      "aliases": []
+    },
+    {
+      "id": "area-اخميم",
+      "ar": "أخميم",
+      "en": "Akhmim",
+      "aliases": []
+    },
+    {
+      "id": "area-اخميم-الجديده",
+      "ar": "أخميم الجديدة",
+      "en": "Akhmim City",
+      "aliases": []
+    },
+    {
+      "id": "area-الكوثر",
+      "ar": "الكوثر",
+      "en": "Kawther",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-f481c752efe5ed59e028",
+      "ar": "ناصر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-943bdbb6c5e4ff790f42",
+      "ar": "سيتي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-e2eb13d6b8534b2bd8f8",
+      "ar": "العارف",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-طهطا",
+      "ar": "طهطا",
+      "en": "Kesm Tahta",
+      "aliases": []
+    },
+    {
+      "id": "area-طما",
+      "ar": "طما",
+      "en": "Tama",
+      "aliases": []
+    },
+    {
+      "id": "area-المراغه",
+      "ar": "المراغة",
+      "en": "Al-Maragha",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-757b5bf65b2d202a1f7f",
+      "ar": "جهينة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-886e7d54fb9cf4a64ad2",
+      "ar": "ساقلتة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-المنشاه",
+      "ar": "المنشأة",
+      "en": "Al-Minshat",
+      "aliases": []
+    },
+    {
+      "id": "area-جرجا",
+      "ar": "جرجا",
+      "en": "Girga",
+      "aliases": []
+    },
+    {
+      "id": "area-البلينا",
+      "ar": "البلينا",
+      "en": "Al-Balyana",
+      "aliases": []
+    },
+    {
+      "id": "area-دار-السلام",
+      "ar": "دار السلام",
+      "en": "Dar al-Salam",
+      "aliases": []
+    },
+    {
+      "id": "area-العسيرات",
+      "ar": "العسيرات",
+      "en": "Al Usayrat",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-57c4a6ada557f58b05d1",
+      "ar": "جزيرة شندويل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-ec09a0894771dc43642b",
+      "ar": "شندويل البلد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-4f1d6e7d8fd5367bbae0",
+      "ar": "روافع القصير",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-94678ed10695889bd6a4",
+      "ar": "إدفا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-9ac2d0e7d08ffd5d92fc",
+      "ar": "أولاد عزاز",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-e237418cc9eaa03733f9",
+      "ar": "المحامدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-c0aabde8b3d62d3c68e8",
+      "ar": "الصوامعة شرق",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-1cd945c67001b8195cd5",
+      "ar": "الصوامعة غرب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-24d6d1c5c8111ca71a7f",
+      "ar": "نيدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-7afd2737e6214d4a6b63",
+      "ar": "شطورة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-34f985524868334eb95b",
+      "ar": "بنجا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-73de251dc0a7b2114751",
+      "ar": "مشطا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-4a10467b441c181f4a28",
+      "ar": "المدمر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-bbf944f68c93f4f18c31",
+      "ar": "نزلة القاضي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-11fa621fc809fa63240e",
+      "ar": "بيت داود",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-120619fcca15c5787ccf",
+      "ar": "برديس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-209576fcc2ccec7805df",
+      "ar": "عرابة أبيدوس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-c6c7fd2834a5543faccf",
+      "ar": "أولاد يحيى",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG26-502308cc56eae9880b5e",
+      "ar": "أولاد سالم",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG27": [
+    {
+      "id": "area-قنا",
+      "ar": "قنا",
+      "en": "Qina",
+      "aliases": []
+    },
+    {
+      "id": "area-قنا-الجديده",
+      "ar": "قنا الجديدة",
+      "en": "Qina City",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-398613bb445486aa9898",
+      "ar": "حي الزهور",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-7b752bf291a45602011e",
+      "ar": "المعنا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-2cc471b2b935f5752dc6",
+      "ar": "الحصواية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-79f28aa06b7a6494572a",
+      "ar": "الشؤون",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-17a689731ffd3f51dcb5",
+      "ar": "الحميدات",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-e3661ae33509571e67b2",
+      "ar": "المساكن",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-4489958fbd28ccb517ff",
+      "ar": "أبو تشت",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-فرشوط",
+      "ar": "فرشوط",
+      "en": "Farshut",
+      "aliases": []
+    },
+    {
+      "id": "area-نجع-حمادي",
+      "ar": "نجع حمادي",
+      "en": "Nag Hammadi",
+      "aliases": []
+    },
+    {
+      "id": "area-الوقف",
+      "ar": "الوقف",
+      "en": "Al Waqf",
+      "aliases": []
+    },
+    {
+      "id": "area-دشنا",
+      "ar": "دشنا",
+      "en": "Dishna",
+      "aliases": []
+    },
+    {
+      "id": "area-قفط",
+      "ar": "قفط",
+      "en": "Qift",
+      "aliases": []
+    },
+    {
+      "id": "area-قوص",
+      "ar": "قوص",
+      "en": "Qus",
+      "aliases": []
+    },
+    {
+      "id": "area-نقاده",
+      "ar": "نقادة",
+      "en": "Naqada",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-2ebfc38fca0be78c0373",
+      "ar": "الرحمانية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-3f17c92dc34737f9f548",
+      "ar": "هو",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-5bada0cfcebf6c3fa864",
+      "ar": "بهجورة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-1383e9511dd2e42a54bd",
+      "ar": "القناوية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-03c78a5dcff6187b9f07",
+      "ar": "الرئيسية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-d75178013a03016707db",
+      "ar": "القارة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-b7312585c69e44ec4d1e",
+      "ar": "بخانس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-b973a6ee540442fea40d",
+      "ar": "الكرنك",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-979fa89d1d13ee5d0bd1",
+      "ar": "فاو قبلي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-2db1b7f9ae564c019f23",
+      "ar": "فاو بحري",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-ab339a3aad3f66770a77",
+      "ar": "أبو مناع",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-218a8d6fba00c7b92962",
+      "ar": "أولاد عمرو",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-d228e6b21011987b1fe6",
+      "ar": "دندرة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-734f8cd88b12aa0bad4a",
+      "ar": "الأشراف",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-071750c2bb51c168848e",
+      "ar": "المحروسة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-7c6ed41ecaf64ea0831a",
+      "ar": "كرم عمران",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-a31b5fff8b839ba3344a",
+      "ar": "البراهمة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-ce6089b35361ffb2159b",
+      "ar": "العليقات",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-b20679e0cd6ffead25a9",
+      "ar": "حجازة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-c81de846152985ac8469",
+      "ar": "طوخ",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG27-c699f9ffdd32de7de2d0",
+      "ar": "الخطارة",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG29": [
+    {
+      "id": "approved-EG29-e6572d7fb7e6ab888a6b",
+      "ar": "مدينة الأقصر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-b733f96b747442ea31de",
+      "ar": "الأقصر الجديدة (طيبة الجديدة)",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-2d49bad81a573dc0dd12",
+      "ar": "العوامية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-21db7395ef2580197ca8",
+      "ar": "الكرنك",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-fe52c4bb7f9333d97796",
+      "ar": "الكرنك الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-00b72ce3d9e3fa90284a",
+      "ar": "منشأة العماري",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-5b88a0abfc2a8ff37c42",
+      "ar": "نجع الخطباء",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-a245158a0b70c739f45d",
+      "ar": "الحبيل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-f703ae77881ef1616256",
+      "ar": "البياضية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-71021812c807068dc3cf",
+      "ar": "الزينية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-7b1c3b9dc53246e3aabe",
+      "ar": "الطود",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-9506efe90347bd34658d",
+      "ar": "القرنة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-af313895169a539c6938",
+      "ar": "البعيرات",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-46612e57ee4137f3cd1f",
+      "ar": "الضبعية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-9a909319b5149ab57fb7",
+      "ar": "الأقالتة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-9213faba9cab94c5507f",
+      "ar": "أرمنت",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-6830671b480467004b99",
+      "ar": "أرمنت الحيط",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-2284859c1655143f08ce",
+      "ar": "أرمنت الوابورات",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-61b06d710da4e48dc267",
+      "ar": "إسنا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-0d67210d0f44c70def00",
+      "ar": "الدير",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-6962f286f4797c59cc5c",
+      "ar": "أصفون",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-bce24212665ef9210e5a",
+      "ar": "المطاعنة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-617e55dc8535df597715",
+      "ar": "الكيمان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-ddd3aed7317074ebb823",
+      "ar": "النمسا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-f96108f63b50d0969fdc",
+      "ar": "الكلابية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG29-ff271bfd676858344c93",
+      "ar": "العديسات",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG28": [
+    {
+      "id": "area-اسوان",
+      "ar": "أسوان",
+      "en": "Aswan",
+      "aliases": []
+    },
+    {
+      "id": "area-اسوان-الجديده",
+      "ar": "أسوان الجديدة",
+      "en": "Aswan City",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-1035f317b8f2ebdc4188",
+      "ar": "المحمودية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-d7440e4623844cda43f7",
+      "ar": "العقاد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-443b6ff62493e0b069f7",
+      "ar": "السيل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-7fdd1395e9072a87c805",
+      "ar": "السيل الجديد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-861cba09c036cd38fbcc",
+      "ar": "كيما",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-4e2ce19cce3ddccd0a66",
+      "ar": "الكرور",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-0b1e644d7c36adf02c2a",
+      "ar": "الناصرية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-35d8c29c3f7cda74babb",
+      "ar": "صحاري",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-b132d826632d8779b08b",
+      "ar": "الجزيرة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-550355057129c2c5050a",
+      "ar": "أبو الريش",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-1ee968ef7cb9a9841f9f",
+      "ar": "غرب سهيل",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-b53133db0a25799636ac",
+      "ar": "غرب أسوان",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-ادفو",
+      "ar": "إدفو",
+      "en": "Adfu",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-d5092113953fd747a761",
+      "ar": "إدفو الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-c47d0c033efd8bad30a3",
+      "ar": "الرديسية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-69bece093a503ce817ad",
+      "ar": "البصيلية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-7e938e74e8508e0eb3ed",
+      "ar": "السباعية",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-كوم-امبو",
+      "ar": "كوم أمبو",
+      "en": "Kum Umbu",
+      "aliases": []
+    },
+    {
+      "id": "area-دراو",
+      "ar": "دراو",
+      "en": "Daraw",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-7fd752ac70c3ed586018",
+      "ar": "نصر النوبة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-5c9498f647af6b499c7f",
+      "ar": "كلابشة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-ابو-سمبل",
+      "ar": "أبو سمبل",
+      "en": "Abu Simbel",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-a7f8b942c1dec0002bec",
+      "ar": "توشكى",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-b85a4ba27abaa83cfa7f",
+      "ar": "بلانة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-d3e75a2e5248c4a83006",
+      "ar": "عنيبة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-41b411ab0368fe041258",
+      "ar": "قورتة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-7cca882dbdde869a4f95",
+      "ar": "أبو هور",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-12a04ed17108d6085635",
+      "ar": "دهميت",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-a8bea022ec3994b4bd44",
+      "ar": "كشتمنة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-5c44f83c0047594d2276",
+      "ar": "فارس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-29e9341616e4c4d975ca",
+      "ar": "سلوا",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-8074a6ed03c8b866dc5f",
+      "ar": "حجازة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG28-6456bf248583cf260d24",
+      "ar": "الكاجوج",
+      "en": "",
+      "aliases": []
+    }
+  ],
+  "EG31": [
+    {
+      "id": "area-الغردقه",
+      "ar": "الغردقة",
+      "en": "Hurghada 1",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-657a92c2918f40031918",
+      "ar": "الدهار",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-0d87c681fd1f3f8b5c50",
+      "ar": "السقالة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-a4fa06c9580cee258a2d",
+      "ar": "الأحياء",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-f91867a68eda461ca215",
+      "ar": "الكوثر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-9108a467f2144b944dc7",
+      "ar": "مبارك 2",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-0e1df4d0d5281be34129",
+      "ar": "مبارك 5",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-60452403a730b48366ec",
+      "ar": "مبارك 6",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-013feb7d01f4157c79de",
+      "ar": "مبارك 8",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-66e3ded13953c4b76edc",
+      "ar": "مبارك 11",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-e5b244716e8759cac264",
+      "ar": "مبارك 12",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-b046600cd21a71352342",
+      "ar": "الجونة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-49a949fa11b8f2650903",
+      "ar": "سهل حشيش",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-ef06038c96d03ac6762c",
+      "ar": "مكادي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-0bfb868513313a6394ac",
+      "ar": "سوما باي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-راس-غارب",
+      "ar": "رأس غارب",
+      "en": "Ras Gharib",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-00b491cd188e56e63d66",
+      "ar": "الزعفرانة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-سفاجا",
+      "ar": "سفاجا",
+      "en": "Safaga",
+      "aliases": []
+    },
+    {
+      "id": "area-القصير",
+      "ar": "القصير",
+      "en": "Qusir",
+      "aliases": []
+    },
+    {
+      "id": "area-مرسي-علم",
+      "ar": "مرسى علم",
+      "en": "Marsa Alam",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-9e46df2874037556de52",
+      "ar": "بورت غالب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-e0bf34b9fa5d026a16ac",
+      "ar": "برنيس",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-1d61c0b56899caa31e37",
+      "ar": "أبو رماد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG31-1cc2496893fe6674e0e2",
+      "ar": "الشلاتين",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-حلايب",
+      "ar": "حلايب",
+      "en": "Halayib",
+      "aliases": []
+    }
+  ],
+  "EG32": [
+    {
+      "id": "approved-EG32-7676cdd29d16a666a471",
+      "ar": "الخارجة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-3c16d7a39995d4b7898d",
+      "ar": "الخارجة الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-685822e78872b2d8b9a9",
+      "ar": "الداخلة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "area-موط",
+      "ar": "موط",
+      "en": "Mut",
+      "aliases": []
+    },
+    {
+      "id": "area-الفرافره",
+      "ar": "الفرافرة",
+      "en": "Al Farafra Oasis",
+      "aliases": []
+    },
+    {
+      "id": "area-باريس",
+      "ar": "باريس",
+      "en": "Paris Paris",
+      "aliases": []
+    },
+    {
+      "id": "area-بلاط",
+      "ar": "بلاط",
+      "en": "Balat",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-f6936d51213ab5893b75",
+      "ar": "القصر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-c6c293855da39287c360",
+      "ar": "الراشدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-f9d9341d0b3a92781057",
+      "ar": "الهنداو",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-102f5b0a95ed9678da73",
+      "ar": "المعصرة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-2d07c07591fa703cb961",
+      "ar": "عزب القصر",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-a33ae8fe9c91ac9e8bd0",
+      "ar": "الجديدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-99afbcad902c7a0bc74a",
+      "ar": "بدخلو",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-3279e5be2b2d0e17824d",
+      "ar": "أسمنت",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-3a3bed9c7e6e98ac272f",
+      "ar": "غرب الموهوب",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-89ee4e30b9450dd339e8",
+      "ar": "تنيدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-c75d23912b834142172c",
+      "ar": "البشندي",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-22f15c3fab76f781aaa9",
+      "ar": "ذخيرة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-955ff07a948c4b90ec38",
+      "ar": "المنيرة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-d3eeae82b46c183a95a0",
+      "ar": "الشركة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-584594563666433782ed",
+      "ar": "بولاق",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-081e9cf01a0a8b1d2db0",
+      "ar": "صنعاء",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-0f0b475b42dc5a871bee",
+      "ar": "جناح",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-67872dd537cec8ebef77",
+      "ar": "ناصر الثورة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-3ee6bfce33429b9310c0",
+      "ar": "عدن",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-8114bc4fe245fa0df62c",
+      "ar": "جدة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-459f46f3224f95cb4698",
+      "ar": "بغداد",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-4be81d1bb3cdecf073a4",
+      "ar": "أبو منقار",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-4122f23c5af13e4167c1",
+      "ar": "الكفاح",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-badf847d355a5f2b4802",
+      "ar": "النهضة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-dc1f0395b6cb7da1a6f1",
+      "ar": "عين دلة",
+      "en": "",
+      "aliases": []
+    },
+    {
+      "id": "approved-EG32-71d304cb6e1f0c724da6",
+      "ar": "اللواء صبيح",
+      "en": "",
+      "aliases": []
+    }
+  ]
+}

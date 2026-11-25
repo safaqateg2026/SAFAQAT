@@ -1,5 +1,6 @@
 import type { Language } from "./landingMessages";
 import { governorates } from "./registrationGeography";
+import approvedRecords from "./safaqatApprovedAreaRecords.json";
 
 export type CuratedArea = { id: string; ar: string; en: string; aliases: string[] };
 export type IndexedArea = CuratedArea & { label: string; search: string };
@@ -7,6 +8,7 @@ export type InternalAreaMap = {
   districtToArea: Record<string, string>;
   unmappedDistricts: string[];
   exactPoints: { area: string; point: [number, number] }[];
+  aliases?: Record<string, string[]>;
 };
 
 export function normalizeLocalityName(value: string) {
@@ -25,10 +27,17 @@ function metersBetween(first: [number, number], second: [number, number]) {
 }
 
 export async function loadAreas(code: string, signal: AbortSignal): Promise<CuratedArea[]> {
-  if (!governorates.some(governorate => governorate.code === code)) throw new TypeError("unknown governorate");
-  const response = await fetch(`/registration-geography/areas-v3/${code}.json`, { signal });
-  if (!response.ok) throw new Error("area catalog unavailable");
-  return await response.json() as CuratedArea[];
+  signal.throwIfAborted();
+
+  if (!governorates.some(governorate => governorate.code === code)) {
+    throw new TypeError("unknown governorate");
+  }
+
+  const records = (approvedRecords as Record<string, CuratedArea[]>)[code];
+
+  if (!records) throw new Error("area catalog unavailable");
+
+  return records;
 }
 
 export async function loadAreaMap(code: string, signal: AbortSignal): Promise<InternalAreaMap> {
@@ -39,30 +48,39 @@ export async function loadAreaMap(code: string, signal: AbortSignal): Promise<In
 }
 
 export function indexAreas(records: CuratedArea[], language: Language): IndexedArea[] {
-  const seen = new Set<string>();
-  const normalized = records.flatMap(record => {
-    const label = (language === "ar" ? record.ar : record.en) || record.ar || record.en;
-    const key = normalizeLocalityName(label);
-    if (!key || seen.has(key)) return [];
-    seen.add(key);
-    return [{ ...record, label, search: normalizeLocalityName([record.ar, record.en, ...record.aliases].join(" ")) }];
-  });
-  return normalized.sort((first, second) => new Intl.Collator(language, { numeric: true }).compare(first.label, second.label));
+  return records.map(record => ({ ...record, label: language === "en" && record.en ? record.en : record.ar, search: normalizeLocalityName(`${record.ar} ${record.en}`) }));
 }
 
-export function searchAreas(records: IndexedArea[], query: string) {
+export function searchAreas<T extends { search: string }>(records: T[], query: string) {
   const words = normalizeLocalityName(query).split(" ").filter(Boolean);
   return words.length ? records.filter(record => words.every(word => record.search.includes(word))) : records;
 }
 
-export function suggestArea(point: [number, number], accuracy: number, map: InternalAreaMap | undefined) {
+export function suggestArea(point: [number, number], accuracy: number, map: InternalAreaMap | undefined, records: CuratedArea[]) {
   if (!map || !Number.isFinite(accuracy) || accuracy < 0 || accuracy > 75) return undefined;
-  const exact = map.exactPoints.map(item => ({ ...item, distance: metersBetween(point, item.point) }))
-    .filter(item => item.distance + accuracy <= 90)
-    .sort((first, second) => first.distance - second.distance);
-  if (exact.length && (exact.length === 1 || exact[1].distance - exact[0].distance > accuracy * 2)) return exact[0].area;
-  // A broad administrative polygon can span multiple familiar localities. Only
-  // populate the area field when a surveyed locality point gives a confident match.
-  if (exact.length) return undefined;
-  return undefined;
+  const approved = new Map<string, string[]>();
+
+  for (const record of records) {
+    const key = normalizeLocalityName(record.ar);
+    approved.set(key, [...(approved.get(key) ?? []), record.id]);
+  }
+
+  const nearest = new Map<string, number>();
+
+  for (const item of map.exactPoints) {
+    const distance = metersBetween(point, item.point);
+    nearest.set(item.area, Math.min(nearest.get(item.area) ?? Infinity, distance));
+  }
+
+  const ranked = [...nearest.entries()].sort((a, b) => a[1] - b[1]);
+  const first = ranked[0];
+  const second = ranked[1];
+
+  if (!first || first[1] + accuracy > 90) return undefined;
+  if (second && second[1] - first[1] <= accuracy * 2) return undefined;
+
+  const key = normalizeLocalityName(first[0].replace(/^area-/, ""));
+  const matches = approved.get(key);
+
+  return matches?.length === 1 ? matches[0] : undefined;
 }
