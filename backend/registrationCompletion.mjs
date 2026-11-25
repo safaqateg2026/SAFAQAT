@@ -24,7 +24,7 @@ export function validCompletionInput(input) {
     "role", "fullName", "phone", "email",
     "birthDate", "governorateCode", "districtCode",
     "address", "latitude", "longitude",
-    "business", "delivery", "policyVersions"
+    "business", "delivery", "policyVersions", "language"
   ])) return false;
 
   if (!["consumer", "retailer", "supplier", "courier"]
@@ -48,6 +48,9 @@ export function validCompletionInput(input) {
     "sales_purchase", "delivery"
   ]) || !Object.values(input.policyVersions)
       .every(value => text(value, 100))) return false;
+
+  if (input.language !== undefined &&
+      !["ar", "en"].includes(input.language)) return false;
 
   const businessRole =
     input.role === "retailer" || input.role === "supplier";
@@ -155,6 +158,13 @@ export async function completeRegistration({
           error: "registration_not_completed",
           issues: result.issues
         }
+      };
+    }
+
+    if (!result.subscriberId) {
+      return {
+        status: 503,
+        body: { error: "registration_not_completed" }
       };
     }
 

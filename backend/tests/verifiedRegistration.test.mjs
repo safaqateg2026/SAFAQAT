@@ -469,3 +469,35 @@ test("invalid consumer dates never create accounts", async t => {
     assert.equal(count(sql), 0);
   }
 });
+
+test("concurrent claims create exactly one subscriber and one receipt", async t => {
+  const { database, sql, input, catalogs } = setup(t);
+  const binding = await pending(database);
+
+  const results = await Promise.allSettled([
+    saveVerifiedRegistration(
+      database, key, binding, input, catalogs, 110
+    ),
+    saveVerifiedRegistration(
+      database, key, binding, input, catalogs, 110
+    )
+  ]);
+
+  assert.equal(
+    results.filter(result =>
+      result.status === "fulfilled" &&
+      result.value.subscriberId
+    ).length,
+    1
+  );
+
+  assert.equal(count(sql), 1);
+
+  assert.equal(
+    sql.prepare(`
+      SELECT COUNT(*) AS n
+      FROM verified_registration_claim
+    `).get().n,
+    1
+  );
+});
