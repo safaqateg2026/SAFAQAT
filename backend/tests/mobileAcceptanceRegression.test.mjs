@@ -19,31 +19,57 @@ test("the approved selectable geography remains complete and unique", async () =
   }
 });
 
-test("vehicle labels preserve IDs and use the approved Arabic and English labels", async () => {
-  const [messages, form] = await Promise.all([read("app/src/app/registrationMessages.ts"), read("app/src/app/RegistrationPreview.tsx")]);
-  assert.match(messages, /rider: "موتسيكل\/تروسيكل", car: "سيارة ملاكي", truck: "سيارة نقل", bicycle: "عجلة \/ دراجة"/);
-  assert.match(messages, /rider: "Motorcycle \/ Motorized tricycle", car: "Private car", truck: "Transport vehicle", bicycle: "Bicycle"/);
-  assert.match(form, /<option value="rider">[\s\S]*?<option value="car">[\s\S]*?<option value="truck">[\s\S]*?<option value="bicycle">/);
+test("vehicle labels and unified selection preserve approved IDs", async () => {
+  const messages = await read("app/src/app/registrationMessages.ts");
+  const form = await read("app/src/app/RegistrationPreview.tsx");
+
+  for (const label of [
+    "سيارة نقل", "سيارة ملاكي", "موتسيكل/تروسيكل", "عجلة/دراجة",
+    "Transport vehicle", "Private car", "Motorcycle / Motorized tricycle", "Bicycle"
+  ]) assert.ok(messages.includes(label));
+
+  assert.match(form, /value: "truck"[\s\S]*value: "car"[\s\S]*value: "rider"[\s\S]*value: "bicycle"/);
+  assert.match(form, /<SelectionList id="courier-vehicle"/);
 });
 
-test("plate output is read-only text using unmodified source artwork and responsive positions", async () => {
-  const [component, form, css, fixture] = await Promise.all([
-    read("app/src/app/RegistrationPlateArtwork.tsx"), read("app/src/app/RegistrationPreview.tsx"),
-    read("app/src/app/RegistrationPreview.css"), read("app/src/app/registration-fixture/plates/page.tsx"),
-  ]);
-  assert.doesNotMatch(component, /<input/);
-  assert.match(component, /<span className="plate-letters"/);
-  assert.match(component, /<span className="plate-digits"/);
-  assert.match(form, /<RegistrationPlateArtwork/);
-  assert.doesNotMatch(form, /letters="|digits="/);
+
+test("plate artwork supports manual entry and responsive original artwork", async () => {
+  const component = await read("app/src/app/RegistrationPlateArtwork.tsx");
+  const form = await read("app/src/app/RegistrationPreview.tsx");
+  const css = await read("app/src/app/RegistrationPreview.css");
+  const fixture = await read("app/src/app/registration-fixture/plates/page.tsx");
+
+  assert.match(component, /name="plateLetters"/);
+  assert.match(component, /name="plateDigits"/);
+  assert.match(component, /normalizePlateLetters\(event.target.value\)/);
+  assert.match(component, /normalizePlateDigits\(event.target.value\)/);
+  assert.match(component, /className="plate-letters"/);
+  assert.match(component, /className="plate-digits"/);
+  assert.match(component, /\{editable &&/);
+  assert.match(form, /<RegistrationPlateArtwork key=\{vehicleType\} editable/);
+  assert.match(form, /vehicleType && vehicleType !== "bicycle"/);
+
   assert.match(css, /registration-plate-art \{[^}]*aspect-ratio: 1774 \/ 887/);
   assert.match(css, /wide \.plate-letters \{ inset: 50% 3\.5% 14% 51\.5%; \}/);
   assert.match(css, /wide \.plate-digits \{ inset: 50% 51\.5% 14% 3\.5%; \}/);
   assert.match(css, /compact \.plate-letters \{ inset: 40% 13% 40%;/);
   assert.match(css, /compact \.plate-digits \{ inset: 66% 13% 10%;/);
+
   assert.match(fixture, /RegistrationPlateArtwork/);
-  assert.match(fixture, /letters="س ب ي" digits="٤٣٦٣"/);
+
+  const { createHash } = await import("node:crypto");
+  const hashes = {
+    "transport-red.png": "3c65824887a4087dc13bc89ac197bfad8d707d03be273922dc7c5967900a8cf2",
+    "car-blue.png": "0ca73a92e426df67b30a15bef848259301b5a2df86a35d862d749731292ab589",
+    "motorcycle-light-blue.png": "b865fbe6c18fe3148705118e0a6fecad27f626e0adb3ccc8537090dac5c63512"
+  };
+
+  for (const [file, expected] of Object.entries(hashes)) {
+    const data = await readFile(path.join(root, "app/public/images/vehicle-plates", file));
+    assert.equal(createHash("sha256").update(data).digest("hex"), expected);
+  }
 });
+
 
 test("locality clear control stays inside the field and clears dependent selections", async () => {
   const [picker, form, css] = await Promise.all([
@@ -56,54 +82,66 @@ test("locality clear control stays inside the field and clears dependent selecti
   assert.match(form, /setGovernorate\(id\);\s*setLocality\(""\);/);
 });
 
-test("supplier and merchant premises photos are separately optional controls", async () => {
-  const [form, messages] = await Promise.all([read("app/src/app/RegistrationPreview.tsx"), read("app/src/app/registrationMessages.ts")]);
-  assert.match(form, /business \? \[[\s\S]*key: "premisesExterior", label: copy\.premisesExterior, optional: true[\s\S]*key: "premisesInterior", label: copy\.premisesInterior, optional: true/);
-  assert.match(messages, /premisesExterior: "صورة واجهة النشاط من الخارج"/);
+test("business photos and logo remain separate optional controls", async () => {
+  const form = await read("app/src/app/RegistrationPreview.tsx");
+  const messages = await read("app/src/app/registrationMessages.ts");
+
+  assert.match(form, /role === "merchant" \|\| role === "supplier"/);
+  assert.match(form, /\{business && <fieldset[\s\S]*name="premisesExterior"[\s\S]*name="premisesInterior"/);
+  assert.match(messages, /premisesExterior: "صورة النشاط من الخارج"/);
   assert.match(messages, /premisesInterior: "صورة النشاط من الداخل"/);
-  assert.match(messages, /premisesExterior: "Exterior business premises photo"/);
-  assert.match(messages, /premisesInterior: "Interior business premises photo"/);
-  assert.match(messages, /optionalPhoto: "Optional and does not affect registration completion/);
   assert.doesNotMatch(form, /premisesExterior[^\n]*required|premisesInterior[^\n]*required/);
+  assert.match(form, /defaultImage="\/images\/safaqat-default-business-logo.jpg"/);
 });
 
-test("face prompts are previews only and there is no face frame capture", async () => {
-  const [camera, css, messages] = await Promise.all([
-    read("app/src/app/RegistrationCamera.tsx"), read("app/src/app/RegistrationPreview.css"), read("app/src/app/registrationMessages.ts"),
-  ]);
-  assert.match(camera, /\{!item\.selfie && !item\.videoOnly && !preview && <button[^>]*onClick=\{takePhoto\}/);
+
+test("identity and face previews cannot capture real sensitive data", async () => {
+  const camera = await read("app/src/app/RegistrationCamera.tsx");
+  const css = await read("app/src/app/RegistrationPreview.css");
+  const messages = await read("app/src/app/registrationMessages.ts");
+
+  assert.match(camera, /data-capture-interface="preview-only"/);
   assert.match(camera, /copy\.faceCaptureLabel/);
   assert.match(camera, /copy\.faceManualStep/);
+  assert.match(camera, /copy\.syntheticPreviewOnly/);
+  assert.match(camera, /copy\.captureUnavailable/);
+  assert.match(camera, /scrollIntoView/);
+  assert.doesNotMatch(camera, /getUserMedia|MediaRecorder|takePhoto|toDataURL|toBlob/);
   assert.match(css, /registration-frame-selfie \{ inline-size: min\(56%, 28rem\); aspect-ratio: \.82; border-radius: 50%; \}/);
-  assert.match(css, /inset-inline-start: auto;\s*left: 50%;/);
-  assert.match(messages, /faceCaptureLabel: "Face video preview only/);
   assert.match(messages, /faceCaptureLabel: "معاينة فيديو الوجه فقط/);
 });
 
-test("courier capture controls preserve the required order and success status is per sample", async () => {
-  const [form, camera, css, messages] = await Promise.all([
-    read("app/src/app/RegistrationPreview.tsx"), read("app/src/app/RegistrationCamera.tsx"),
-    read("app/src/app/RegistrationPreview.css"), read("app/src/app/registrationMessages.ts"),
+
+test("courier identity and vehicle controls follow the updated order", async () => {
+  const form = await read("app/src/app/RegistrationPreview.tsx");
+  const camera = await read("app/src/app/RegistrationCamera.tsx");
+
+  const identity = form.match(/const cameraItems = \[([\s\S]*?)\n  \];/)?.[1] ?? "";
+  const vehicle = form.match(/const vehicleItems = ([\s\S]*?)\] : \[\];/)?.[1] ?? "";
+
+  function ordered(block, keys) {
+    let cursor = -1;
+    for (const key of keys) {
+      const next = block.indexOf(`key: "${key}"`, cursor + 1);
+      assert.ok(next > cursor, `Missing or misplaced control: ${key}`);
+      cursor = next;
+    }
+  }
+
+  ordered(identity, ["idFront", "idBack", "faceVideo"]);
+  ordered(vehicle, [
+    "vehicleLicenseFront", "vehicleLicenseBack",
+    "drivingLicenseFront", "drivingLicenseBack", "vehiclePhoto"
   ]);
-  const orderedKeys = ["idFront", "idBack", "vehicleLicenseFront", "vehicleLicenseBack", "drivingLicenseFront", "drivingLicenseBack", "faceVideo"];
-  const vehicleBlock = form.match(/const cameraItems = \[([\s\S]*?)\n  \];/)?.[1] ?? "";
-  let cursor = -1;
-  for (const key of orderedKeys) {
-    const next = vehicleBlock.indexOf(`key: "${key}"`, cursor + 1);
-    assert.ok(next > cursor, `expected ${key} in the ordered courier capture controls`);
-    cursor = next;
-  }
-  assert.match(camera, /acceptedKeys\.has\(option\.key\)/);
-  assert.match(camera, /assessRegistrationImage\([\s\S]*?if \(issue\) \{ setError\(issue\); return; \}/);
-  assert.match(camera, /setAcceptedKeys\(previous => new Set\(previous\)\.add\(completedItem\.key\)\)/);
-  assert.match(camera, /capture-success-indicator/);
-  assert.match(css, /capture-success-indicator[^}]*background: #16803c;[^}]*color: #fff/);
-  assert.match(css, /registration-actions:has\(\.registration-capture-option\)[^{]*\{ display: grid; grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
-  for (const label of ["صورة وجه البطاقة الشخصية", "صورة ظهر البطاقة الشخصية", "صورة وجه رخصة المركبة", "صورة ظهر رخصة المركبة", "صورة وجه رخصة القيادة", "صورة ظهر رخصة القيادة", "تصوير فيديو حيوي للوجه"]) {
-    assert.ok(messages.includes(label), `missing requested Arabic capture label: ${label}`);
-  }
-  assert.match(form, /vehicleType !== "bicycle" && \["car", "truck"\]/);
+
+  assert.match(form, /vehicleType !== "bicycle"/);
+  assert.match(form, /key=\{`vehicle-captures-\$\{vehicleType\}`\}/);
+  assert.match(form, /name="courierProfileImage"/);
+  assert.match(form, /copy\.manualOwnershipReview/);
+  assert.match(camera, /registration-capture-full/);
+  assert.doesNotMatch(camera, /setAcceptedKeys|capture-success-indicator/);
 });
+
 
 test("visual acceptance fixture can render each vehicle through the production registration component", async () => {
   const [fixture, form] = await Promise.all([read("app/src/app/registration-fixture/form/page.tsx"), read("app/src/app/RegistrationPreview.tsx")]);
@@ -113,20 +151,52 @@ test("visual acceptance fixture can render each vehicle through the production r
   assert.match(form, /useState\(initialVehicleType\)/);
 });
 
-test("document OCR fields have stable read-only mappings and feed the plate artwork", async () => {
-  const [mapping, dossier, form, artwork, messages] = await Promise.all([
-    read("app/src/app/verificationOcrMapping.ts"), read("app/src/app/VerificationDossier.tsx"),
-    read("app/src/app/RegistrationPreview.tsx"), read("app/src/app/RegistrationPlateArtwork.tsx"), read("app/src/app/registrationMessages.ts"),
-  ]);
-  for (const key of ["fullName", "identityNumber", "dateOfBirth", "registeredAddress", "expirationDate", "holderName", "licenseNumber", "category", "ownerName", "plateLetters", "plateDigits", "vehicleType", "manufacturer", "model", "color", "chassisNumber", "engineNumber"]) {
+test("trusted OCR mappings remain locked and separate from manual plates", async () => {
+  const mapping = await read("app/src/app/verificationOcrMapping.ts");
+  const dossier = await read("app/src/app/VerificationDossier.tsx");
+  const form = await read("app/src/app/RegistrationPreview.tsx");
+  const artwork = await read("app/src/app/RegistrationPlateArtwork.tsx");
+  const messages = await read("app/src/app/registrationMessages.ts");
+
+  for (const key of [
+    "fullName", "identityNumber", "dateOfBirth", "registeredAddress",
+    "expirationDate", "holderName", "licenseNumber", "category",
+    "ownerName", "plateLetters", "plateDigits", "vehicleType",
+    "manufacturer", "model", "color", "chassisNumber", "engineNumber"
+  ]) {
     assert.match(mapping, new RegExp(`${key}: "(?:nationalIdentity|drivingLicense|vehicleLicense)\\.${key}"`));
   }
-  assert.match(dossier, /data-ocr-field=\{field\.id\} readOnly value=""/);
-  assert.match(mapping, /plateLetters\?: string;[\s\S]*plateDigits\?: string/);
-  assert.match(mapping, /letters: fields\?\.plateLetters \?\? "",[\s\S]*digits: fields\?\.plateDigits \?\? ""/);
-  assert.match(form, /mapTrustedVehiclePlate\(\)/);
+
+  assert.match(dossier, /data-ocr-field/);
+  assert.match(dossier, /readOnly/);
+  assert.match(form, /<RegistrationPlateArtwork key=\{vehicleType\} editable/);
   assert.match(artwork, /letters = "", digits = ""/);
   assert.match(messages, /id: "البطاقة الشخصية"/);
   assert.match(messages, /id: "National identity card"/);
   assert.match(messages, /Official verification and data extraction are unavailable/);
+});
+
+
+test("manual plate and consumer date validation reject malformed values", async () => {
+  const {
+    normalizePlateLetters,
+    normalizePlateDigits,
+    validatePlate,
+    isValidConsumerDate
+  } = await import("../../shared/registrationRules.mjs");
+
+  assert.equal(normalizePlateLetters("Aس1م!د"), "سمد");
+  assert.equal(normalizePlateDigits("0123"), "٠١٢٣");
+  assert.equal(normalizePlateDigits("۰۱۲۳"), "٠١٢٣");
+  assert.equal(validatePlate("سمد", "0123", "truck"), true);
+  assert.equal(validatePlate("سمد", "٠١٢٣", "car"), true);
+  assert.equal(validatePlate("Aس", "1234", "car"), false);
+  assert.equal(validatePlate("سمدب", "1234", "truck"), false);
+  assert.equal(validatePlate("سمد", "12345", "truck"), false);
+  assert.equal(validatePlate("", "", "bicycle"), true);
+  assert.equal(validatePlate("A", "", "bicycle"), false);
+  assert.equal(isValidConsumerDate(2000, 2, 29), true);
+  assert.equal(isValidConsumerDate(2001, 2, 29), false);
+  assert.equal(isValidConsumerDate(2012, 1, 1), false);
+  assert.equal(isValidConsumerDate(2000, 2, 1.5), false);
 });

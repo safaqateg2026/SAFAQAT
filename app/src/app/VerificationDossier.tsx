@@ -1,17 +1,21 @@
+import { Fragment } from "react";
+import type { ReactNode } from "react";
 import type { RegistrationRole } from "./RegistrationPreview";
 import type { Language } from "./landingMessages";
 import { registrationMessages } from "./registrationMessages";
 import { verificationOcrFieldMap } from "./verificationOcrMapping";
+import ContextHelp from "./ContextHelp";
 
-type DocumentField = { id: string; label: string };
+type DocumentField = { id: string; label: string; date?: boolean };
 type DocumentRecord = { kind: string; label: string; fields: DocumentField[] };
 
-export default function VerificationDossier({ role, language, vehicleType }: { role: RegistrationRole; language: Language; vehicleType?: string }) {
+export default function VerificationDossier({ role, language, vehicleType, afterBirth, section = "all" }:
+  { role: RegistrationRole; language: Language; vehicleType?: string; afterBirth?: ReactNode; section?: "identity" | "vehicle" | "all" }) {
   const copy = registrationMessages[language];
   const identity: DocumentRecord = { kind: "nationalIdentity", label: copy.id, fields: [
     { id: verificationOcrFieldMap.nationalIdentity.fullName, label: copy.docFullName },
     { id: verificationOcrFieldMap.nationalIdentity.identityNumber, label: copy.docIdentityNumber },
-    { id: verificationOcrFieldMap.nationalIdentity.dateOfBirth, label: copy.docBirth },
+    { id: verificationOcrFieldMap.nationalIdentity.dateOfBirth, label: copy.birth, date: true },
     { id: verificationOcrFieldMap.nationalIdentity.registeredAddress, label: copy.docAddress },
     { id: verificationOcrFieldMap.nationalIdentity.expirationDate, label: copy.docExpiration },
   ] };
@@ -34,13 +38,23 @@ export default function VerificationDossier({ role, language, vehicleType }: { r
     { id: verificationOcrFieldMap.vehicleLicense.expirationDate, label: copy.docExpiration },
   ] };
   const documents = role === "supplier" || role === "merchant" ? [identity]
-    : role === "courier" ? [identity, ...(vehicleType === "bicycle" ? [] : [driving, vehicle])] : [];
+    : role === "courier" ? [identity, ...(vehicleType && vehicleType !== "bicycle" ? [vehicle, driving] : [])] : [];
   return <div className="verification-dossier" aria-label={copy.dossier}>
-    {documents.map(document => <section key={document.kind} className="verification-document" data-document-kind={document.kind}>
-      <h3>{document.label}</h3>
-      <p>{copy.documentCapturePreview}</p>
-      {document.fields.map(field => <label className="verification-locked" key={field.id}>{field.label}<input name={field.id} data-ocr-field={field.id} readOnly value="" placeholder={copy.awaitingTrustedResult} /></label>)}
+    {documents.filter(document =>
+      section === "all" ||
+      (section === "identity"
+        ? document.kind === "nationalIdentity"
+        : document.kind !== "nationalIdentity")
+    ).map(document => <section key={document.kind} className="verification-document" data-document-kind={document.kind}>
+      {document.kind !== "nationalIdentity" && <h3>{document.label}</h3>}
+      {document.fields.map(field => <Fragment key={field.id}><div className={`verification-field${field.date ? " verification-birth-field" : ""}`} key={field.id}>
+        <label className="verification-locked">{field.label}<input name={field.id} data-ocr-field={field.id} readOnly tabIndex={-1} inputMode="none" value="" placeholder={copy.automatic} aria-readonly="true" /></label>
+        {field.date && <span className="verification-date-lock" aria-hidden="true">▣</span>}
+        <ContextHelp label={copy.help} text={copy.extractedFieldHelp} />
+      </div>
+      {field.id === verificationOcrFieldMap.nationalIdentity.dateOfBirth && afterBirth}
+      </Fragment>)}
     </section>)}
-    <p role="status">{copy.verificationPreviewOnly}</p>
+    <p role="note" className="verification-preview-note">{copy.verificationPreviewOnly}</p>
   </div>;
 }

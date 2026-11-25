@@ -329,3 +329,272 @@ test("account HTTP routes authenticate from cookies and isolate invoices and log
   assert.match(loggedOut.headers.get("set-cookie"), /Max-Age=0/);
   assert.equal((await api(request("session", { Cookie: buyerCookie }))).status, 401);
 });
+
+test("unified dossier enforces MFA, permissions and account isolation", async t => {
+  const { database, sql } = databaseForTest(t);
+  const { readSubscriberDossier } = await import("../subscriberDossier.mjs");
+
+  const merchant = await register(database, "retailer", 0);
+  const consumer = await register(database, "consumer", 1);
+  const courier = await register(database, "courier", 2);
+
+  const actor = {
+    administratorId: "dossier-test-admin",
+    mfaVerified: true
+  };
+
+  const read = (id, principal = actor) =>
+    readSubscriberDossier(database, principal, id, { now: 105 });
+
+  await assert.rejects(read(merchant.subscriberId), /access denied/);
+
+  sql.prepare("INSERT INTO administrator_permission VALUES (?, ?)")
+    .run(actor.administratorId, "subscriber_search");
+
+  await assert.rejects(read(merchant.subscriberId), /access denied/);
+
+  sql.prepare("INSERT INTO administrator_permission VALUES (?, ?)")
+    .run(actor.administratorId, "identity_search");
+
+  await assert.rejects(
+    read(merchant.subscriberId, { ...actor, mfaVerified: false }),
+    /access denied/
+  );
+
+  const merchantFile = await read(merchant.subscriberId);
+  assert.equal(merchantFile.account.subscriberId, merchant.subscriberId);
+  assert.equal(merchantFile.account.role, "retailer");
+  assert.ok(merchantFile.business);
+  assert.equal(merchantFile.vehicle, undefined);
+  assert.equal(merchantFile.contacts.phoneVerified, false);
+
+  const consumerFile = await read(consumer.subscriberId);
+  assert.equal(consumerFile.account.role, "consumer");
+  assert.equal(consumerFile.business, undefined);
+  assert.equal(consumerFile.vehicle, undefined);
+
+  const courierFile = await read(courier.subscriberId);
+  assert.equal(courierFile.account.role, "courier");
+  assert.ok(courierFile.vehicle);
+  assert.equal(courierFile.business, undefined);
+
+  const serialized = JSON.stringify(merchantFile);
+  assert.equal(serialized.includes("token_digest"), false);
+  assert.equal(serialized.includes("object_key"), false);
+  assert.equal(serialized.includes("proof_digest"), false);
+
+  const events = sql.prepare(`
+    SELECT count(*) AS n FROM administrator_access_event
+    WHERE administrator_id = ?
+  `).get(actor.administratorId);
+
+  assert.equal(events.n, 3);
+});
+
+test("subscriber history protects private records and bounds pagination", async t => {
+  const { database, sql } = databaseForTest(t);
+  const { readSubscriberHistory } =
+    await import("../subscriberHistory.mjs");
+
+  const buyer = await register(database, "consumer", 0);
+  const seller = await register(database, "retailer", 1);
+  const outsider = await register(database, "consumer", 2);
+
+  const actor = {
+    administratorId: "history-test-admin",
+    mfaVerified: true
+  };
+
+  const read = (id, section, options = {}) =>
+    readSubscriberHistory(database, actor, id, {
+      section, now: 110, ...options
+    });
+
+  await assert.rejects(
+    read(buyer.subscriberId, "orders"),
+    /access denied/
+  );
+
+  for (const permission of [
+    "subscriber_search", "identity_search"
+  ]) {
+    sql.prepare(
+      "INSERT INTO administrator_permission VALUES (?, ?)"
+    ).run(actor.administratorId, permission);
+  }
+
+  for (const id of ["order-a", "order-b", "order-c"]) {
+    sql.prepare(
+      "INSERT INTO commerce_order VALUES (?, ?, ?, 'pending', 102)"
+    ).run(id, buyer.subscriberId, seller.subscriberId);
+  }
+
+  const first = await read(
+    buyer.subscriberId, "orders", { limit: 2 }
+  );
+
+  assert.equal(first.records.length, 2);
+  assert.equal(first.next, "order-b");
+
+  const second = await read(
+    buyer.subscriberId, "orders",
+    { limit: 2, after: first.next }
+  );
+
+  assert.equal(second.records.length, 1);
+  assert.equal(second.records[0].id, "order-c");
+  assert.equal(second.next, null);
+
+  const isolated = await read(
+    outsider.subscriberId, "orders"
+  );
+
+  assert.deepEqual(isolated.records, []);
+
+  await assert.rejects(
+    read(buyer.subscriberId, "orders", { limit: 51 }),
+    /invalid history query/
+  );
+
+  await assert.rejects(
+    read(buyer.subscriberId, "invoices"),
+    /visibility policy required/
+  );
+
+  await assert.rejects(
+    read(seller.subscriberId, "archive"),
+    /access denied/
+  );
+
+  await assert.rejects(
+    read(seller.subscriberId, "support"),
+    /access denied/
+  );
+
+  sql.prepare(
+    "INSERT INTO administrator_permission VALUES (?, ?)"
+  ).run(actor.administratorId, "archive_read");
+
+  const archive = await read(
+    seller.subscriberId, "archive"
+  );
+
+  assert.deepEqual(archive.records, []);
+
+  sql.prepare(
+    "INSERT INTO administrator_permission VALUES (?, ?)"
+  ).run(actor.administratorId, "support_write");
+
+  const support = await read(
+    seller.subscriberId, "support"
+  );
+
+  assert.deepEqual(support.records, []);
+
+  const activity = await read(
+    buyer.subscriberId, "activity"
+  );
+
+  assert.ok(activity.records.some(
+    event => event.eventType === "registered"
+  ));
+
+  const reviews = await read(
+    seller.subscriberId, "reviews"
+  );
+
+  assert.deepEqual(reviews.records, []);
+
+  const invoices = await read(
+    buyer.subscriberId, "invoices",
+    { invoiceVisibleFrom: 0 }
+  );
+
+  assert.deepEqual(invoices.records, []);
+});
+
+test("admin API requires trusted MFA and isolates subscriber data", async t => {
+  const { database, sql } = databaseForTest(t);
+  const { createAdminApi } = await import("../adminApi.mjs");
+
+  const buyer = await register(database, "consumer", 0);
+  const seller = await register(database, "retailer", 1);
+
+  const actor = {
+    administratorId: "api-test-admin",
+    mfaVerified: true
+  };
+
+  let principal = null;
+
+  const handle = createAdminApi({
+    database,
+    authenticateAdministrator: async () => principal,
+    clock: () => 110,
+    invoiceVisibleFrom: () => 0
+  });
+
+  const base = "https://admin.example.test/api/admin/subscribers";
+
+  const request = (path = "", options = {}) =>
+    handle(new Request(base + path, options));
+
+  assert.equal((await request()).status, 401);
+
+  assert.equal((await request("", {
+    headers: {
+      "X-Administrator-Id": actor.administratorId,
+      "X-MFA-Verified": "true"
+    }
+  })).status, 401);
+
+  principal = { ...actor, mfaVerified: false };
+  assert.equal((await request()).status, 401);
+
+  principal = actor;
+  assert.equal((await request()).status, 403);
+
+  for (const permission of [
+    "subscriber_search", "identity_search"
+  ]) {
+    sql.prepare(
+      "INSERT INTO administrator_permission VALUES (?, ?)"
+    ).run(actor.administratorId, permission);
+  }
+
+  const search = await request("?role=retailer");
+  assert.equal(search.status, 200);
+  assert.equal(search.headers.get("Cache-Control"), "private, no-store");
+
+  const page = await search.json();
+  assert.equal(page.subscribers.length, 1);
+  assert.equal(page.subscribers[0].subscriberId, seller.subscriberId);
+  assert.equal(page.subscribers[0].phone, undefined);
+
+  const dossier = await request("/" + buyer.subscriberId);
+  assert.equal(dossier.status, 200);
+  assert.equal(
+    (await dossier.json()).account.subscriberId,
+    buyer.subscriberId
+  );
+
+  assert.equal((await request(
+    "/" + buyer.subscriberId + "/orders"
+  )).status, 200);
+
+  assert.equal((await request(
+    "/" + buyer.subscriberId + "/archive"
+  )).status, 403);
+
+  assert.equal((await request("?limit=51")).status, 400);
+  assert.equal((await request("?limit=2&limit=3")).status, 400);
+  assert.equal((await request("", { method: "POST" })).status, 405);
+
+  assert.equal((await request("", {
+    headers: { Origin: "https://untrusted.example.test" }
+  })).status, 403);
+
+  assert.equal((await handle(new Request(
+    base.replace("https:", "http:")
+  ))).status, 403);
+});

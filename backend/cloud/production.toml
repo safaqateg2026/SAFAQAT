@@ -1,0 +1,19 @@
+main = "worker.mjs"
+name = "safaqat-api-production"
+compatibility_date = "2026-11-25"
+workers_dev = false
+preview_urls = false
+
+[[d1_databases]]
+binding = "DB"
+database_name = "safaqat-production"
+database_id = "ffb0b7aa-5631-4397-969c-e69cbaebc585"
+migrations_dir = "../migrations"
+
+[[r2_buckets]]
+binding = "PRIVATE_BUCKET"
+bucket_name = "safaqat-private-production"
+
+[vars]
+ACCOUNTS_ENABLED = "false"
+APP_ORIGIN = "https://safaqat-59e.pages.dev"

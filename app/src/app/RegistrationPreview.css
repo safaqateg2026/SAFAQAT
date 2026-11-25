@@ -139,3 +139,484 @@
 .registration-acceptance-fixture-controls { display: flex; flex-wrap: wrap; gap: .5rem; }
 .registration-acceptance-fixture-controls label { display: grid; gap: .25rem; }
 .registration-acceptance-fixture-controls select { min-block-size: 44px; }
+
+
+/* SAFAQAT unified registration controls */
+
+.safaqat-registration .registration-select-field {
+  position: relative;
+  display: grid;
+  gap: .35rem;
+  min-width: 0;
+}
+
+.safaqat-registration .registration-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: .35rem;
+  text-align: start;
+  cursor: pointer;
+}
+
+.registration-select-chevron {
+  color: #ffdf62;
+  flex-shrink: 0;
+}
+
+.safaqat-registration .registration-select-menu {
+  display: grid;
+  gap: .35rem;
+  padding: .55rem;
+  background: #241037;
+  border: 1px solid #ca9d58;
+  border-radius: .7rem;
+  max-height: min(15rem, 38dvh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #ffd96b #260631;
+  animation: registration-menu-open .18s ease-out;
+}
+
+.safaqat-registration .registration-select-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: #260631;
+  border: 1px solid #ba8c4b;
+  border-radius: .5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.safaqat-registration .registration-select-option[data-active="true"],
+.safaqat-registration .registration-select-option[aria-selected="true"] {
+  background: #472353;
+  border-color: #ffdf62;
+}
+
+.safaqat-registration .registration-select-validity {
+  position: absolute;
+  inset-block-start: 1.5rem;
+  inset-inline-start: 0;
+  width: 1px;
+  height: 1px;
+  min-height: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.safaqat-registration .registration-birth {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: .4rem;
+}
+
+.registration-birth .registration-select-trigger {
+  padding-inline: .4rem;
+}
+
+.registration-birth .registration-date-feedback {
+  grid-column: 1 / -1;
+  color: #ffdf62;
+}
+
+.registration-contact-section {
+  display: grid;
+  gap: .4rem;
+  min-width: 0;
+}
+
+.registration-contact-section > h3 {
+  margin: 0;
+}
+
+.registration-phone-row,
+.registration-gmail-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .35rem;
+}
+
+.registration-country-code {
+  color: #ffdf62;
+  font-weight: 700;
+}
+
+.safaqat-registration .registration-google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .3rem;
+}
+
+.google-mark {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex-shrink: 0;
+}
+
+.registration-integration-status,
+.registration-preview-warning,
+.verification-preview-note {
+  font-size: .78rem;
+  line-height: 1.5;
+  color: #e8ccac;
+  margin: .15rem 0;
+}
+
+.registration-help-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+}
+
+.safaqat-registration .registration-help-button {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  min-height: 1.5rem;
+  padding: 0;
+  border: 1px solid #ffdf62;
+  border-radius: 50%;
+  background: #260631;
+  color: #ffdf62;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.registration-help-popover {
+  display: grid;
+  gap: .5rem;
+  width: min(15rem, 65vw);
+  padding: .65rem;
+  border: 1px solid #ca9d58;
+  border-radius: .65rem;
+  background: #241037;
+  color: #fff;
+  font-size: .8rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  animation: registration-menu-open .18s ease-out;
+}
+
+.registration-optional-image {
+  display: grid;
+  gap: .4rem;
+  min-width: 0;
+}
+
+.registration-optional-image-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .4rem;
+}
+
+.registration-image-preview {
+  display: grid;
+  justify-items: center;
+  gap: .4rem;
+}
+
+.registration-image-preview img {
+  display: block;
+  max-width: 100%;
+  max-height: 8rem;
+  object-fit: contain;
+  border-radius: .5rem;
+}
+
+.registration-optional-image small {
+  color: #e8ccac;
+}
+
+.registration-birth .registration-help-wrap,
+.registration-phone-row .registration-help-wrap,
+.registration-gmail-row .registration-help-wrap {
+  grid-column: 1 / -1;
+}
+
+.verification-field {
+  position: relative;
+  display: grid;
+  gap: .35rem;
+  min-width: 0;
+}
+
+.verification-birth-field input {
+  width: 100%;
+  text-align: center;
+  caret-color: transparent;
+}
+
+.verification-date-lock {
+  color: #ffdf62;
+  font-size: .8rem;
+}
+
+.registration-synthetic-viewfinder {
+  min-height: 10rem;
+  aspect-ratio: 1.58;
+  display: grid;
+  place-items: end center;
+  padding: .5rem;
+  box-sizing: border-box;
+}
+
+.registration-synthetic-viewfinder[data-subject="face"] {
+  aspect-ratio: 1;
+  max-height: 38dvh;
+}
+
+.registration-synthetic-viewfinder strong {
+  font-size: .7rem;
+  text-align: center;
+  z-index: 1;
+}
+
+@keyframes registration-menu-open {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .registration-select-menu,
+  .registration-help-popover {
+    animation: none;
+  }
+}
+
+
+
+/* SAFAQAT registration batch refinements */
+
+.safaqat-registration {
+  gap: .7rem;
+}
+
+.safaqat-registration fieldset {
+  gap: .55rem;
+  padding: .7rem;
+}
+
+.safaqat-registration .registration-contact-section {
+  position: relative;
+}
+
+.safaqat-registration .registration-google-button {
+  min-width: 44px;
+  padding: .4rem;
+}
+
+.registration-gmail-row {
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+}
+
+.registration-gmail-row > input {
+  width: 100%;
+}
+
+.registration-gmail-row > button {
+  font-size: .8rem;
+}
+
+.registration-capture-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .25rem;
+  min-width: 0;
+}
+
+.registration-actions:has(.registration-capture-wrapper) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  direction: rtl;
+}
+
+.registration-capture-wrapper.registration-capture-full {
+  grid-column: 1 / -1;
+}
+
+.registration-capture-option {
+  width: 100%;
+  min-width: 0;
+  font-size: .85rem;
+}
+
+.registration-optional-image-actions > button {
+  width: 100%;
+}
+
+.registration-plate-art > .plate-letters {
+  direction: rtl;
+  gap: .32em;
+}
+
+.registration-plate-art > .plate-digits {
+  direction: ltr;
+  gap: .06em;
+}
+
+.registration-plate-art .plate-input-region {
+  position: absolute;
+  display: block;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+}
+
+.registration-plate-art.wide .plate-letter-input-region {
+  inset: 50% 3.5% 14% 51.5%;
+}
+
+.registration-plate-art.wide .plate-digit-input-region {
+  inset: 50% 51.5% 14% 3.5%;
+}
+
+.registration-plate-art.compact .plate-letter-input-region {
+  inset: 40% 13% 40%;
+}
+
+.registration-plate-art.compact .plate-digit-input-region {
+  inset: 66% 13% 10%;
+}
+
+.safaqat-registration .registration-plate-art .plate-input-region input {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: transparent;
+  caret-color: #111;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.safaqat-registration .registration-plate-art .plate-input-region input:focus-visible {
+  outline: 1px solid #ba8c4b;
+  outline-offset: 0;
+}
+
+.verification-document[data-document-kind="nationalIdentity"] {
+  padding: 0;
+  border: 0;
+}
+
+.safaqat-registration .verification-locked input {
+  background: #30243a;
+  border-color: #6a5d73;
+  cursor: not-allowed;
+  caret-color: transparent;
+}
+
+.verification-birth-field .verification-locked input {
+  text-align: center;
+}
+
+.registration-select-option {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.registration-birth .registration-select-option {
+  justify-content: center;
+}
+
+.registration-birth .registration-select-menu {
+  padding: .3rem;
+}
+
+.registration-camera-stage-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .4rem;
+}
+
+.registration-camera-stage p {
+  margin: .2rem 0;
+  font-size: .8rem;
+}
+
+.registration-synthetic-viewfinder {
+  scroll-margin-block: 1rem;
+}
+
+.registration-help-wrap {
+  min-width: 0;
+}
+
+.registration-help-popover {
+  position: fixed;
+  z-index: 100;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  transform: translate(-50%, -50%);
+  width: min(18rem, 80vw);
+  max-height: 60dvh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px #0009;
+  animation: registration-help-open .18s ease-out;
+}
+
+[dir="rtl"] .registration-help-popover {
+  transform: translate(50%, -50%);
+}
+
+@keyframes registration-help-open {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 360px) {
+  .safaqat-registration fieldset {
+    padding: .5rem;
+  }
+
+  .registration-capture-option {
+    font-size: .75rem;
+    padding-inline: .25rem;
+  }
+
+  .registration-gmail-row > button {
+    padding-inline: .25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .registration-help-popover {
+    animation: none;
+  }
+}
+
+
+/* SAFAQAT account registration corrections */
+.registration-premises-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem;
+}
+.registration-premises-images > * {
+  min-inline-size: 0;
+}
+.verification-document > .registration-optional-image {
+  grid-column: 1 / -1;
+  inline-size: 100%;
+  box-sizing: border-box;
+}
