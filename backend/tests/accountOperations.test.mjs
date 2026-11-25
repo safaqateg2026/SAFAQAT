@@ -896,3 +896,107 @@ test("WhatsApp registration integrates signed events with single-use database ch
     findMember.get(other.id).phone_verified_at, null
   );
 });
+
+
+test("browser verification status requires its own authenticated binding", async t => {
+  const { database } = databaseForTest(t);
+
+  const { createVerificationChallenge, consumeVerifiedEvent } =
+    await import("../verification.mjs");
+
+  const {
+    createBrowserBinding,
+    readBrowserVerificationStatus
+  } = await import("../browserVerification.mjs");
+
+  const key = await crypto.subtle.generateKey(
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign", "verify"]
+  );
+
+  const first = await register(database, "consumer", 0);
+  const second = await register(database, "consumer", 1);
+
+  const account = await database.prepare(
+    "SELECT phone FROM subscriber WHERE id = ?1"
+  ).bind(first.subscriberId).first();
+
+  const challenge = await createVerificationChallenge(
+    database, key, {
+      subscriberId: first.subscriberId,
+      purpose: "registration",
+      channel: "whatsapp",
+      target: account.phone,
+      now: 103,
+      expiresAt: 400
+    }
+  );
+
+  assert.ok(challenge);
+
+  const binding = await createBrowserBinding(key, {
+    challengeId: challenge.id,
+    subscriberId: first.subscriberId,
+    now: 103,
+    expiresAt: 400
+  });
+
+  assert.deepEqual(
+    await readBrowserVerificationStatus(
+      database, key, binding, 104
+    ),
+    { verified: false }
+  );
+
+  const consumed = await consumeVerifiedEvent(
+    database, key, {
+      id: challenge.id,
+      proof: challenge.proof,
+      purpose: "registration",
+      channel: "whatsapp",
+      sender: account.phone
+    },
+    105
+  );
+
+  assert.ok(consumed);
+
+  assert.deepEqual(
+    await readBrowserVerificationStatus(
+      database, key, binding, 106
+    ),
+    { verified: true }
+  );
+
+  assert.equal(
+    await readBrowserVerificationStatus(
+      database, key, {
+        ...binding,
+        subscriberId: second.subscriberId
+      }, 106
+    ),
+    null
+  );
+
+  const mismatched = await createBrowserBinding(key, {
+    challengeId: challenge.id,
+    subscriberId: second.subscriberId,
+    now: 103,
+    expiresAt: 400
+  });
+
+  assert.equal(
+    await readBrowserVerificationStatus(
+      database, key, mismatched, 106
+    ),
+    null
+  );
+
+  assert.equal(
+    await readBrowserVerificationStatus(
+      database, key, binding, 400
+    ),
+    null
+  );
+});
