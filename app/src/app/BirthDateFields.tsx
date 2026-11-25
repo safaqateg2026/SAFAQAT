@@ -15,7 +15,7 @@ export default function BirthDateFields({ language }: { language: Language }) {
   const numbers = (from: number, to: number) => Array.from({ length: to - from + 1 }, (_, index) => index + from);
   const months = numbers(1, 12);
   const today = getEgyptToday();
-  const years = numbers(1, getLatestBirthYear("consumer", today));
+  const years = numbers(1, getLatestBirthYear("consumer", today)).reverse();
   const valid = isValidConsumerDate(year, month, day, today);
   const days = numbers(1, getDaysInMonth(year, month));
   function changeMonth(value: string) {
