@@ -25,3 +25,11 @@
 - Python/SQLite tests: all 5 passed, including migration row preservation, bicycle acceptance, trigger and foreign-key checks.
 - Static production build: passed using one worker and 768 MB Node heap. No production migration or deployment was run.
 - Next: inspect exact task-only staged files, commit and push feature branch, confirm remote commit, then create an isolated release worktree.
+
+## Follow-up review from ea0bc4b
+- Corrected dossier role routing: `merchant` and `supplier` show national identity fields; courier dossier content follows vehicle type. Bicycles show identity fields only, with no driving/vehicle license records or plate fields.
+- Locked the non-consumer registration name field and moved date-of-birth display to the read-only dossier path, avoiding editable duplicates of document-derived identity fields. The separate location/address field remains editable.
+- Visually inspected a synthetic-only plate fixture in Chrome at 390×844 and 1440×1000. Adjusted overlay coordinates so wide plate Arabic letters sit on the right and digits on the left. Compact plate values are stacked in the white field. Original PNG dimensions and alpha transparency were verified. Screenshots are in `docs/validation/vehicle-plates/`.
+- Source image SHA-256 values were recorded during review. No artwork pixels were changed.
+- Production baseline review: `c495be2..ea0bc4b` contains the approved geographic catalog/selector and cache updates, approved desktop landing spacing, and safe registration/vehicle preview changes. The remaining differences are geographic source/report documents and the requested plate assets. Production rollback reference remains the previously recorded Pages deployment `aa570d08-d343-4c5d-b76c-ad4f44476e9d`.
+- Interactive app browser testing remains limited because the CUA browser host is unavailable and `next dev` could not bind port 3000 (`listen EPERM`). Chrome headless captured the isolated fixture only. Do not treat that as an end-to-end test of all registration controls.

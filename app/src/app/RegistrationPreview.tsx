@@ -38,10 +38,10 @@ export default function RegistrationPreview({ role, language }: { role: Registra
       onSubmit={event => { event.preventDefault(); setChecked(true); }}>
       <fieldset>
         <legend>{copy.basics}</legend>
-        <label>{copy.name}<input required maxLength={150} /></label>
+        <label>{copy.name}{role === "consumer" ? <input required maxLength={150} /> : <input readOnly value="" placeholder={copy.awaitingTrustedResult} />}</label>
         <label>{copy.phone}<input required type="tel" dir="ltr" pattern="\+201[0-9]{9}" maxLength={13} /></label>
         <label>{consumer ? copy.optionalEmail : copy.email}<input required={!consumer} dir="ltr" type="email" maxLength={254} /></label>
-        <BirthDateFields language={language} />
+        {consumer ? <BirthDateFields language={language} /> : <p className="verification-locked">{copy.birth} · {copy.awaitingTrustedResult}</p>}
       </fieldset>
       <RegistrationLocation language={language} />
       {!consumer && <label>{copy.coverage}<input disabled placeholder={copy.coverageHint} /></label>}
@@ -74,7 +74,7 @@ export default function RegistrationPreview({ role, language }: { role: Registra
           {business && <li>{copy.facade}</li>}
         </ul>
         <RegistrationCamera language={language} items={cameraItems} />
-        <VerificationDossier role={role} language={language} />
+        <VerificationDossier role={role} language={language} vehicleType={vehicleType} />
         <p>{copy.upload}</p>
       </fieldset>}
       <fieldset>

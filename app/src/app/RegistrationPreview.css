@@ -96,12 +96,12 @@
 .registration-camera-stage:has(.registration-frame-selfie) .registration-frame-selfie { inset: 10% 34%; border-radius: 50% / 42%; }
 .registration-plate-art input:focus { outline: none; }
 .registration-plate-art { position: relative; inline-size: min(100%, 25rem); justify-self: center; aspect-ratio: 3.7 / 1; direction: ltr; }
-.registration-plate-art.compact { inline-size: min(58%, 12rem); aspect-ratio: 1.22 / 1; }
+.registration-plate-art.compact { inline-size: min(58%, 12rem); aspect-ratio: 1347 / 1168; }
 .registration-plate-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .registration-plate-art label { position: absolute; display: grid; place-items: center; color: #111; font-weight: 800; }
 .registration-plate-art label span { position: absolute; width: 1px; height: 1px; overflow: hidden; }
 .registration-plate-art input { width: 100%; border: 0; padding: 0; color: #111; background: transparent; text-align: center; font-weight: 800; }
-.registration-plate-art.wide .plate-letters { inset: 28% 52% 28% 8%; }
-.registration-plate-art.wide .plate-digits { inset: 28% 8% 28% 52%; }
-.registration-plate-art.compact .plate-letters { inset: 12% 12% 52%; }
-.registration-plate-art.compact .plate-digits { inset: 52% 12% 12%; }
+.registration-plate-art.wide .plate-letters { inset: 53% 8% 10% 52%; }
+.registration-plate-art.wide .plate-digits { inset: 53% 52% 10% 8%; }
+.registration-plate-art.compact .plate-letters { inset: 61% 14% 23%; }
+.registration-plate-art.compact .plate-digits { inset: 76% 14% 8%; }
