@@ -1,5 +1,6 @@
 import {
   createPendingRegistration,
+  cancelPendingRegistration,
   readPendingRegistration
 } from "./pendingRegistration.mjs";
 
@@ -137,6 +138,16 @@ export function createPendingRegistrationApi({
       }
 
       if (url.pathname === "/api/registration/cancel") {
+        const binding = readPendingRegistrationCookie(
+          request.headers.get("Cookie")
+        );
+
+        if (binding) {
+          await cancelPendingRegistration(
+            database, key, binding
+          );
+        }
+
         return response(
           200,
           { cancelled: true },

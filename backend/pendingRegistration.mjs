@@ -210,3 +210,76 @@ export async function purgeExpiredPendingRegistrations(
 
   return result.results.length;
 }
+
+// Trusted server-side helper. The statement must execute in
+// the same atomic batch as subscriber creation.
+export async function prepareVerifiedRegistrationClaim(
+  database, key,
+  { id, browserSecret, phone, subscriberId },
+  now
+) {
+  if (!validId(id) ||
+      !validId(subscriberId) ||
+      !validToken(browserSecret) ||
+      !validPhone(phone) ||
+      !validTime(now)) {
+    throw new TypeError("invalid registration claim");
+  }
+
+  return database.prepare(`
+    INSERT INTO verified_registration_claim (
+      pending_id, subscriber_id,
+      verified_at, claimed_at
+    )
+    VALUES (
+      (
+        SELECT id FROM pending_registration
+        WHERE id = ?1
+          AND browser_digest = ?2
+          AND phone_digest = ?3
+          AND verified_at IS NOT NULL
+          AND verified_at <= ?5
+          AND claimed_at IS NULL
+          AND expires_at > ?5
+      ),
+      ?4,
+      (
+        SELECT verified_at
+        FROM pending_registration
+        WHERE id = ?1
+      ),
+      ?5
+    )
+  `).bind(
+    id,
+    await digest(key, "browser", browserSecret),
+    await digest(key, "phone", phone),
+    subscriberId,
+    now
+  );
+}
+
+export async function cancelPendingRegistration(
+  database, key, binding
+) {
+  if (!binding ||
+      !validId(binding.id) ||
+      !validToken(binding.browserSecret)) {
+    return false;
+  }
+
+  const row = await database.prepare(`
+    DELETE FROM pending_registration
+    WHERE id = ?1
+      AND browser_digest = ?2
+      AND claimed_at IS NULL
+    RETURNING id
+  `).bind(
+    binding.id,
+    await digest(
+      key, "browser", binding.browserSecret
+    )
+  ).first();
+
+  return row !== null;
+}

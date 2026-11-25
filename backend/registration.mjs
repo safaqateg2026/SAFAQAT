@@ -1,3 +1,13 @@
+import {
+  isEligibleBirthDate,
+  validatePlate
+} from "../shared/registrationRules.mjs";
+
+import {
+  prepareVerifiedRegistrationClaim,
+  readPendingRegistration
+} from "./pendingRegistration.mjs";
+
 // Server-side preflight. The caller supplies the approved catalogs for the
 // selected environment and persists the validated registration atomically.
 const roles = new Set(["supplier", "retailer", "consumer", "courier"]);
@@ -49,6 +59,15 @@ export function validateRegistration(input, { today, districts, activities, poli
     issues.push("invalidBirthDate");
   }
 
+  if (!issues.includes("invalidBirthDate") &&
+      !isEligibleBirthDate(
+        role,
+        ...birth.split("-").map(Number),
+        today
+      )) {
+    issues.push("invalidBirthDate");
+  }
+
   if (!districts.get(input.governorateCode)?.has(input.districtCode)) issues.push("invalidDistrict");
   requireText(input.address, "addressRequired");
   if (!Number.isFinite(input.latitude) || Math.abs(input.latitude) > 90
@@ -80,7 +99,9 @@ export function validateRegistration(input, { today, districts, activities, poli
 
 // The trusted caller supplies the current catalogs and policy versions.
 // Document uploads and contact delivery are separate, authorized operations.
-export async function saveRegistration(database, input, catalogs, now) {
+async function persistRegistration(
+  database, input, catalogs, now, verification = null
+) {
   if (!Number.isSafeInteger(now) || now < 0) throw new TypeError("invalid registration timestamp");
 
   const issues = validateRegistration(input, catalogs);
@@ -128,6 +149,82 @@ export async function saveRegistration(database, input, catalogs, now) {
     INSERT INTO subscriber_audit_event (id, subscriber_id, actor_type, actor_id, event_type, occurred_at)
     VALUES (?1, ?2, 'subscriber', ?3, 'registered', ?4)
   `).bind(crypto.randomUUID(), id, id, now));
+  if (verification) {
+    statements.push(
+      await prepareVerifiedRegistrationClaim(
+        database,
+        verification.key,
+        {
+          id: verification.binding.id,
+          browserSecret: verification.binding.browserSecret,
+          phone: input.phone,
+          subscriberId: id
+        },
+        now
+      )
+    );
+  }
+
   await database.batch(statements);
   return { subscriberId: id };
+}
+
+
+// Internal compatibility path. Never expose directly to public clients.
+export async function saveRegistration(
+  database, input, catalogs, now
+) {
+  return persistRegistration(
+    database, input, catalogs, now
+  );
+}
+
+// Public registration must use this verified path.
+export async function saveVerifiedRegistration(
+  database, key, binding, input, catalogs, now
+) {
+  const issues = validateRegistration(input, catalogs);
+
+  if (input?.role === "courier") {
+    const delivery = input.delivery;
+
+    if (!validatePlate(
+      delivery?.plateLetters ?? "",
+      delivery?.plateDigits ?? "",
+      delivery?.vehicleType
+    ) || (
+      delivery?.plateNumber !== undefined &&
+      delivery?.plateNumber !== null &&
+      delivery?.plateNumber !== ""
+    )) {
+      if (!issues.includes("invalidPlate")) {
+        issues.push("invalidPlate");
+      }
+    }
+  }
+
+  if (issues.length) return { issues };
+
+  if (!binding) {
+    return { issues: ["phoneVerificationRequired"] };
+  }
+
+  const status = await readPendingRegistration(
+    database, key,
+    {
+      id: binding.id,
+      browserSecret: binding.browserSecret,
+      phone: input.phone
+    },
+    now
+  );
+
+  if (!status?.verified) {
+    return { issues: ["phoneVerificationRequired"] };
+  }
+
+  return persistRegistration(
+    database, input, catalogs, now,
+    { key, binding }
+  );
 }

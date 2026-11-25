@@ -195,8 +195,8 @@ test("manual plate and consumer date validation reject malformed values", async 
   assert.equal(validatePlate("سمد", "12345", "truck"), false);
   assert.equal(validatePlate("", "", "bicycle"), true);
   assert.equal(validatePlate("A", "", "bicycle"), false);
-  assert.equal(isValidConsumerDate(2000, 2, 29), true);
-  assert.equal(isValidConsumerDate(2001, 2, 29), false);
-  assert.equal(isValidConsumerDate(2012, 1, 1), false);
-  assert.equal(isValidConsumerDate(2000, 2, 1.5), false);
+  assert.equal(isValidConsumerDate(2000, 2, 29, "2026-11-25"), true);
+  assert.equal(isValidConsumerDate(2001, 2, 29, "2026-11-25"), false);
+  assert.equal(isValidConsumerDate(2012, 1, 1, "2026-11-25"), false);
+  assert.equal(isValidConsumerDate(2000, 2, 1.5, "2026-11-25"), false);
 });

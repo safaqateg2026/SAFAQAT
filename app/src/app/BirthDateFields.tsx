@@ -4,7 +4,7 @@ import type { Language } from "./landingMessages";
 import { registrationMessages } from "./registrationMessages";
 import SelectionList from "./SelectionList";
 import ContextHelp from "./ContextHelp";
-import { getDaysInMonth, isValidConsumerDate } from "../../../shared/registrationRules.mjs";
+import { getDaysInMonth, isValidConsumerDate, getEgyptToday, getLatestBirthYear } from "../../../shared/registrationRules.mjs";
 
 export default function BirthDateFields({ language }: { language: Language }) {
   const copy = registrationMessages[language];
@@ -14,8 +14,9 @@ export default function BirthDateFields({ language }: { language: Language }) {
   const [dateMessage, setDateMessage] = useState("");
   const numbers = (from: number, to: number) => Array.from({ length: to - from + 1 }, (_, index) => index + from);
   const months = numbers(1, 12);
-  const years = numbers(1970, 2011);
-  const valid = isValidConsumerDate(year, month, day);
+  const today = getEgyptToday();
+  const years = numbers(1, getLatestBirthYear("consumer", today));
+  const valid = isValidConsumerDate(year, month, day, today);
   const days = numbers(1, getDaysInMonth(year, month));
   function changeMonth(value: string) {
     const next = Number(value); setMonth(next);
