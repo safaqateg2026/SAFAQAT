@@ -37,3 +37,23 @@
 - Pushed `d5800be93a237ac8a0743f09bec8b19d8c3d8055` to `feature/landing-pwa`; remote `main` remains `d7ad56652c255e384ead547e6247be1d8b354a74`.
 - Release preview was not created. `wrangler whoami` reported the stored Cloudflare token expired and unable to refresh because the Cloudflare auth endpoint could not be reached. No preview URL exists. Production was not deployed and the rollback reference remains unchanged.
 - Full interactive browser checks of role/vehicle flows remain unverified. CUA browser host was unavailable and local `next dev` failed to bind with `listen EPERM`. The attached Chrome screenshots verify the isolated artwork fixture at mobile and desktop viewport sizes only.
+
+## Mobile acceptance fixes (in progress from b35de84)
+- Preserved the 27-governorate / 936-area selectable records unchanged.
+- Moved locality clear into the input with a compact RTL/LTR logical-positioned X, hid Chrome's duplicate native search clear, and verified that governorate clearing resets the area.
+- Replaced registration plate inputs with non-editable, accessible text output. Registration supplies empty values; the noindex plate fixture uses synthetic values with the same production component and styles.
+- Inspected original plate PNGs: motorcycle 1347×1168; car and transport 1774×887. Corrected the wide plate container's aspect ratio to 1774:887 and centered overlays in the actual white compartments. Artwork hashes/pixels remain unchanged.
+- Changed rider display labels to `موتسيكل/تروسيكل` and `Motorcycle / Motorized tricycle`, keeping the `rider` key.
+- Expanded the responsive gold face guide to a centered near-circular oval using the live video aspect ratio. A synthetic 640×480 stream verified mobile and desktop geometry, front/right/left manual steps, disabled frame capture, and stream cleanup. The browser's fake camera does not satisfy the app's exact `facingMode: user` constraint; no real camera or Android handset was available in this workspace.
+- Added separate optional business exterior/interior camera controls with subject-specific instructions and stable identifiers; they do not block form completion. Real image/document upload remains disabled.
+- Added responsive wrapping/overflow protections and regression tests. See `docs/validation/mobile-acceptance/` for Chrome screenshots of registration, selected geographic fields, all original plate artwork with synthetic labels, and the synthetic face guide at mobile/desktop sizes.
+
+### Final validation for mobile acceptance fixes
+- ESLint: passed (`NODE_OPTIONS=--max-old-space-size=768 npm run lint`).
+- TypeScript: passed (`npx tsc --noEmit --incremental false`, 768 MB heap).
+- Node/backend regression suite: passed, 6 test files, 0 failures. Includes 27 governors / 936 areas, order-safe catalog count, clear/reset behavior, plate positioning, four vehicle labels, optional business photos, and preview-only face workflow.
+- SQLite migration/integrity suite: passed, 5 tests (`backend.tests.test_subscriber_foundation`). No production migrations were applied.
+- Static production export: passed (`SAFAQAT_PAGES_EXPORT=1`, one worker, 768 MB heap); fixture and landing routes prerendered.
+- Chrome interaction checks: passed at 390×844 emulation. Confirmed 27 governorates, all 78 Cairo areas in a scrollable list, partial Arabic matching, Ta Marbuta normalization (`دجله المعادي` → `دجلة المعادي`), selected state, clear behavior, governorate-to-area reset, rider/car/truck/bicycle plate visibility, optional business photo controls, required geographic values, no horizontal overflow, and RTL/LTR clear-button mirroring.
+- Synthetic video UI check: passed at 390×844 and 1440×1000. Face guide centered at 0 px horizontal offset, ratio 0.82, gold outline; manual front/right/left prompts worked, no still capture control appeared, and stream ended on finish. This is not a physical-camera acceptance test.
+- Preview/publishing work remains: inspect branch configuration and Pages production branch, commit only this batch, push feature branch, prepare isolated candidate, and deploy to existing `preview-b35de84` only if verified non-production.

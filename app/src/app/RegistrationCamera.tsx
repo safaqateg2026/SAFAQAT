@@ -3,7 +3,7 @@ import type { Language } from "./landingMessages";
 import { registrationMessages } from "./registrationMessages";
 import { assessRegistrationImage } from "./registrationImageQuality";
 
-type CameraItem = { key: string; label: string; selfie?: boolean };
+type CameraItem = { key: string; label: string; selfie?: boolean; optional?: boolean };
 type CaptureError = NonNullable<ReturnType<typeof assessRegistrationImage>> | "cameraUnavailable";
 
 export default function RegistrationCamera({ language, items }: { language: Language; items: CameraItem[] }) {
@@ -15,8 +15,16 @@ export default function RegistrationCamera({ language, items }: { language: Lang
   const [error, setError] = useState<CaptureError>();
   const [accepted, setAccepted] = useState<string>();
   const [faceStep, setFaceStep] = useState(0);
+  const [videoRatio, setVideoRatio] = useState("4 / 3");
   const video = useRef<HTMLVideoElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
+  const instruction = item?.selfie
+    ? [copy.faceFront, copy.faceRight, copy.faceLeft][faceStep]
+    : item?.key === "vehiclePhoto" ? copy.vehiclePhotoFrame
+      : item?.key === "premisesExterior" ? copy.premisesExteriorFrame
+        : item?.key === "premisesInterior" ? copy.premisesInteriorFrame
+          : item?.key === "idBack" ? copy.idBackFrame : item?.key === "drivingLicense" ? copy.drivingLicenseFrame
+            : item?.key === "vehicleLicense" ? copy.vehicleLicenseFrame : copy.photoFrame;
 
   useEffect(() => {
     if (!item || preview) return;
@@ -92,21 +100,26 @@ export default function RegistrationCamera({ language, items }: { language: Lang
       </label>
       <div className="registration-actions">
         {items.map(option => <button key={option.key} type="button" disabled={!consent} onClick={() => {
-          clear(); setAccepted(undefined); setFaceStep(0); setItem({ ...option });
+          clear(); setAccepted(undefined); setFaceStep(0); setVideoRatio("4 / 3"); setItem({ ...option });
         }}>{option.label}</button>)}
       </div>
       {item && <div className="registration-camera-stage">
         <strong>{item.label}</strong>
-        {item.selfie && <p role="note">{[copy.faceFront, copy.faceRight, copy.faceLeft][faceStep]} {copy.faceManualStep}</p>}
-        {!preview && <div className="registration-viewfinder">
-          <video ref={video} autoPlay muted playsInline onLoadedData={() => setReady(true)} />
+        {item.selfie && <p role="note">{copy.faceCaptureLabel} {instruction} {copy.faceManualStep}</p>}
+        {!item.selfie && <p role="note">{copy.documentCaptureLabel} {instruction}{item.optional ? ` ${copy.optionalPhoto}` : ""}</p>}
+        {!preview && <div className="registration-viewfinder" style={{ aspectRatio: videoRatio }}>
+          <video ref={video} autoPlay muted playsInline onLoadedMetadata={event => {
+            const { videoWidth, videoHeight } = event.currentTarget;
+            if (videoWidth && videoHeight) setVideoRatio(`${videoWidth} / ${videoHeight}`);
+          }} onLoadedData={() => setReady(true)} />
           <div aria-hidden="true" className={item.selfie ? "registration-frame registration-frame-selfie" : "registration-frame"} />
         </div>}
-        <canvas ref={canvas} hidden={!preview} aria-label={copy.photoPreview} />
-        <p role="status">{error ? copy[error] : preview ? copy.photoReview : copy.photoFrame}</p>
+        {!item.selfie && <canvas ref={canvas} hidden={!preview} aria-label={copy.photoPreview} />}
+        <p role="status">{error ? copy[error] : preview ? copy.photoReview : instruction}</p>
         <div className="registration-actions">
-          {item.selfie && faceStep < 2 && <button type="button" onClick={() => setFaceStep(value => value + 1)}>{copy.nextFaceStep}</button>}
-          {!preview && <button type="button" disabled={!ready} onClick={takePhoto}>{copy.capture}</button>}
+          {item.selfie && faceStep < 2 && <button type="button" disabled={!ready} onClick={() => setFaceStep(value => value + 1)}>{copy.nextFaceStep}</button>}
+          {item.selfie && faceStep === 2 && <button type="button" onClick={() => { setItem(undefined); setAccepted(copy.faceCaptureLabel); }}>{copy.finishFacePreview}</button>}
+          {!item.selfie && !preview && <button type="button" disabled={!ready} onClick={takePhoto}>{copy.capture}</button>}
           {preview && <>
             <button type="button" onClick={clear}>{copy.retake}</button>
             <button type="button" onClick={() => { clear(); setAccepted(item.label); setItem(undefined); }}>{copy.confirmSample}</button>

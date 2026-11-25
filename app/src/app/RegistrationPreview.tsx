@@ -5,7 +5,7 @@ import BirthDateFields from "./BirthDateFields";
 import RegistrationLocation from "./RegistrationLocation";
 import RegistrationCamera from "./RegistrationCamera";
 import VerificationDossier from "./VerificationDossier";
-import Image from "next/image";
+import RegistrationPlateArtwork from "./RegistrationPlateArtwork";
 import "./RegistrationPreview.css";
 
 export type RegistrationRole = keyof typeof registrationMessages.ar.title;
@@ -20,6 +20,10 @@ export default function RegistrationPreview({ role, language }: { role: Registra
   const cameraItems = [
     { key: "idFront", label: copy.idFront }, { key: "idBack", label: copy.idBack },
     { key: "selfie", label: copy.selfie, selfie: true },
+    ...(business ? [
+      { key: "premisesExterior", label: copy.premisesExterior, optional: true },
+      { key: "premisesInterior", label: copy.premisesInterior, optional: true },
+    ] : []),
     ...(courier && ["rider", "bicycle"].includes(vehicleType) ? [{
       key: "vehiclePhoto", label: vehicleType === "rider" ? `${copy.vehiclePhoto} · ${copy.plateVisible}` : copy.vehiclePhoto,
     }] : []),
@@ -44,7 +48,7 @@ export default function RegistrationPreview({ role, language }: { role: Registra
         {consumer ? <BirthDateFields language={language} /> : <p className="verification-locked">{copy.birth} · {copy.awaitingTrustedResult}</p>}
       </fieldset>
       <RegistrationLocation language={language} />
-      {!consumer && <label>{copy.coverage}<input disabled placeholder={copy.coverageHint} /></label>}
+      {!consumer && <div className="registration-coverage"><strong>{copy.coverage}</strong><p>{copy.coverageHint}</p></div>}
       {business && <fieldset>
         <legend>{copy.business}</legend>
         <label>{copy.businessName}<input required maxLength={150} /></label>
@@ -61,11 +65,10 @@ export default function RegistrationPreview({ role, language }: { role: Registra
           <option value="bicycle">{copy.bicycle}</option>
         </select></label>
         {vehicleType && ["car", "truck"].includes(vehicleType) && <p role="status">{copy.manualOwnershipReview}</p>}
-        {vehicleType && vehicleType !== "bicycle" && <div className={`registration-plate-art ${vehicleType === "rider" ? "compact" : "wide"}`} aria-label={copy.plate}>
-          <Image src={`/images/vehicle-plates/${vehicleType === "rider" ? "motorcycle-light-blue" : vehicleType === "car" ? "car-blue" : "transport-red"}.png`} alt="" width={vehicleType === "rider" ? 1347 : 1774} height={vehicleType === "rider" ? 1168 : 887} unoptimized />
-          <label className="plate-letters"><span>{copy.plateLetters}</span><input readOnly aria-label={copy.plateLetters} value="" /></label>
-          <label className="plate-digits"><span>{copy.plateDigits}</span><input readOnly aria-label={copy.plateDigits} value="" /></label>
-        </div>}
+        {vehicleType && vehicleType !== "bicycle" && <RegistrationPlateArtwork
+          kind={vehicleType === "rider" ? "compact" : "wide"}
+          image={`/images/vehicle-plates/${vehicleType === "rider" ? "motorcycle-light-blue" : vehicleType === "car" ? "car-blue" : "transport-red"}.png`}
+          alt={copy.plate} lettersLabel={copy.plateLetters} digitsLabel={copy.plateDigits} />}
       </fieldset>}
       {!consumer && <fieldset>
         <legend>{copy.documents}</legend>

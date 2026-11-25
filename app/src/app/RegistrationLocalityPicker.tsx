@@ -26,12 +26,14 @@ export default function RegistrationLocalityPicker({ language, enabled, records,
         {selected && <option value={selected.id}>{selected.label}</option>}
       </select>
       <div className="registration-locality-menu">
+        <div className="registration-locality-input">
         <input type="search" autoComplete="off" aria-label={searchLabel} aria-controls={listId}
           disabled={!enabled || failed} placeholder={selected?.label ?? (failed ? copy.localityUnavailable : loading ? copy.localitiesLoading : searchLabel)}
           value={expanded ? query : selected?.label ?? ""} onFocus={() => { if (!expanded) { setQuery(""); setExpanded(true); } }}
           onClick={() => { if (!expanded) { setQuery(""); setExpanded(true); } }}
           role="combobox" aria-expanded={expanded} aria-autocomplete="list" onChange={event => { setQuery(event.target.value); onSelect(""); setExpanded(true); }} />
-        {(query || selected) && <button type="button" aria-label={language === "ar" ? "مسح الاختيار" : "Clear selection"} onClick={() => { setQuery(""); onSelect(""); setExpanded(true); }}>×</button>}
+        {(query || selected) && <button className="registration-locality-clear" type="button" aria-label={language === "ar" ? "مسح الاختيار" : "Clear selection"} onClick={() => { setQuery(""); onSelect(""); setExpanded(true); }}>×</button>}
+        </div>
       {expanded && enabled && <>
         <div id={listId} className="registration-locality-results" role="listbox">
           {loading ? <p role="status">{copy.localitiesLoading}</p> : failed || records.length === 0 ? <p role="status">{copy.localityUnavailable}</p> :
