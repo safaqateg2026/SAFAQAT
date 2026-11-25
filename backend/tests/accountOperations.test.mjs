@@ -808,4 +808,91 @@ test("WhatsApp registration integrates signed events with single-use database ch
   assert.notEqual(
     findMember.get(member.id).state, "active"
   );
+
+  const limitedHandler = createWhatsAppRegistrationHandler({
+    database, key, config,
+    rateLimit: { windowSeconds: 60, limit: 1 },
+    clock: () => now
+  });
+
+  const limited = await issue();
+  assert.ok(limited);
+
+  assert.deepEqual(
+    await limitedHandler(request(limited)),
+    { accepted: 0 }
+  );
+
+  now = 180;
+
+  const renewed = await createVerificationChallenge(
+    database, key, {
+      subscriberId: member.id,
+      purpose: "registration",
+      channel: "whatsapp",
+      target: member.phone,
+      now,
+      expiresAt: 240
+    }
+  );
+
+  assert.ok(renewed);
+
+  assert.deepEqual(
+    await limitedHandler(request(renewed)),
+    { accepted: 1 }
+  );
+
+  assert.equal(
+    findMember.get(member.id).phone_verified_at, 105
+  );
+
+  const challengeState = sql.prepare(
+    "SELECT consumed_at FROM subscriber_verification_challenge WHERE id = ?"
+  );
+
+  assert.equal(
+    challengeState.get(renewed.id).consumed_at, 180
+  );
+
+  const renewedReceipt = sql.prepare(
+    "SELECT subscriber_id, verified_at FROM subscriber_registration_contact_receipt WHERE challenge_id = ?"
+  ).get(renewed.id);
+
+  assert.ok(renewedReceipt);
+  assert.equal(renewedReceipt.subscriber_id, member.id);
+  assert.equal(renewedReceipt.verified_at, 180);
+
+  const blocked = await createVerificationChallenge(
+    database, key, {
+      subscriberId: member.id,
+      purpose: "registration",
+      channel: "whatsapp",
+      target: member.phone,
+      now,
+      expiresAt: 240
+    }
+  );
+
+  assert.ok(blocked);
+
+  assert.deepEqual(
+    await limitedHandler(request(blocked)),
+    { accepted: 0 }
+  );
+
+  assert.equal(
+    challengeState.get(blocked.id).consumed_at, null
+  );
+
+  assert.equal(
+    sql.prepare(
+      "SELECT COUNT(*) AS total FROM subscriber_registration_contact_receipt WHERE challenge_id = ?"
+    ).get(blocked.id).total,
+    0
+  );
+
+  assert.equal(
+    findMember.get(other.id).phone_verified_at, null
+  );
 });

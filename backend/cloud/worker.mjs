@@ -1,3 +1,4 @@
+import { handleWhatsAppRoute } from "../providers/whatsappRoute.mjs";
 import { createAccountApi } from "../accountApi.mjs";
 
 function json(status, body) {
@@ -28,6 +29,10 @@ export default {
 
       if (origin && origin !== env.APP_ORIGIN) {
         return json(403, { error: "origin_denied" });
+      }
+
+      if (url.pathname === "/api/webhooks/whatsapp") {
+        return await handleWhatsAppRoute(request, env);
       }
 
       if (url.pathname.startsWith("/api/admin/")) {
