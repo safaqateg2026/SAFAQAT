@@ -44,6 +44,18 @@ export default {
             env.PENDING_REGISTRATION_ENABLED !== "true" ||
             env.WHATSAPP_WEBHOOK_ENABLED !== "true" ||
             !env.DB ||
+            typeof env.WHATSAPP_APP_SECRET !== "string" ||
+            env.WHATSAPP_APP_SECRET.length < 32 ||
+            env.WHATSAPP_APP_SECRET.length > 512 ||
+            typeof env.WHATSAPP_VERIFY_TOKEN !== "string" ||
+            env.WHATSAPP_VERIFY_TOKEN.length < 32 ||
+            env.WHATSAPP_VERIFY_TOKEN.length > 512 ||
+            !/^[0-9]{1,32}$/.test(
+              env.WHATSAPP_BUSINESS_ACCOUNT_ID ?? ""
+            ) ||
+            !/^[0-9]{1,32}$/.test(
+              env.WHATSAPP_PHONE_NUMBER_ID ?? ""
+            ) ||
             typeof env.AUTH_HMAC_SECRET !== "string" ||
             env.AUTH_HMAC_SECRET.length < 32 ||
             env.AUTH_HMAC_SECRET.length > 512 ||
