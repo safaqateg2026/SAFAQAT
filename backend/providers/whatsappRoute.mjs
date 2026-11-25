@@ -1,4 +1,8 @@
 import {
+  createPendingWhatsAppHandler
+} from "./pendingWhatsApp.mjs";
+
+import {
   createWhatsAppRegistrationHandler
 } from "./whatsappRegistration.mjs";
 
@@ -118,7 +122,12 @@ export async function handleWhatsAppRoute(request, env) {
       ["sign"]
     );
 
-    const handler = createWhatsAppRegistrationHandler({
+    const createHandler =
+      env.PENDING_REGISTRATION_ENABLED === "true"
+        ? createPendingWhatsAppHandler
+        : createWhatsAppRegistrationHandler;
+
+    const handler = createHandler({
       database: env.DB,
       key,
       config: {

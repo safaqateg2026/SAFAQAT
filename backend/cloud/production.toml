@@ -15,5 +15,7 @@ binding = "PRIVATE_BUCKET"
 bucket_name = "safaqat-private-production"
 
 [vars]
+WHATSAPP_WEBHOOK_ENABLED = "false"
+PENDING_REGISTRATION_ENABLED = "false"
 ACCOUNTS_ENABLED = "false"
 APP_ORIGIN = "https://safaqat-59e.pages.dev"

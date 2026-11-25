@@ -282,3 +282,97 @@ test("another sender cannot exhaust the legitimate sender verification quota", a
     { verified: true }
   );
 });
+
+test("protected worker webhook verifies a pending registration", async t => {
+  const { database, sql } = databaseForTest(t);
+
+  const secret =
+    "synthetic-route-hmac-secret-1234567890";
+
+  const routeKey = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+
+  const now = Math.floor(Date.now() / 1000);
+
+  const pending = await createPendingRegistration(
+    database,
+    routeKey,
+    {
+      phone,
+      rateSubject: "synthetic-route-source",
+      now,
+      expiresAt: now + 300
+    }
+  );
+
+  assert.ok(pending);
+
+  const worker = (
+    await import("../cloud/worker.mjs")
+  ).default;
+
+  const env = {
+    DB: database,
+    APP_ORIGIN: "https://testing.safaqat.invalid",
+    ACCOUNTS_ENABLED: "true",
+    PENDING_REGISTRATION_ENABLED: "true",
+    WHATSAPP_WEBHOOK_ENABLED: "true",
+    WHATSAPP_VERIFY_TOKEN:
+      "synthetic-verification-token-123456789",
+    AUTH_HMAC_SECRET: secret,
+    WHATSAPP_APP_SECRET: config.appSecret,
+    WHATSAPP_BUSINESS_ACCOUNT_ID:
+      config.businessAccountId,
+    WHATSAPP_PHONE_NUMBER_ID:
+      config.phoneNumberId
+  };
+
+  const forged = await worker.fetch(
+    await request(pending, {
+      secret: "incorrect-synthetic-secret-123456789"
+    }),
+    env
+  );
+
+  assert.equal(forged.status, 403);
+
+  const disabled = await worker.fetch(
+    await request(pending),
+    { ...env, ACCOUNTS_ENABLED: "false" }
+  );
+
+  assert.equal(disabled.status, 503);
+
+  const result = await worker.fetch(
+    await request(pending),
+    env
+  );
+
+  assert.equal(result.status, 200);
+
+  assert.deepEqual(
+    await readPendingRegistration(
+      database,
+      routeKey,
+      {
+        id: pending.id,
+        browserSecret: pending.browserSecret,
+        phone
+      },
+      Math.floor(Date.now() / 1000)
+    ),
+    { verified: true }
+  );
+
+  assert.equal(
+    sql.prepare(
+      "SELECT COUNT(*) AS n FROM subscriber"
+    ).get().n,
+    0
+  );
+});

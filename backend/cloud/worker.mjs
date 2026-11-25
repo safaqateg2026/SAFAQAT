@@ -1,3 +1,7 @@
+import {
+  createPendingRegistrationApi
+} from "../pendingRegistrationApi.mjs";
+
 import { handleWhatsAppRoute } from "../providers/whatsappRoute.mjs";
 import { createAccountApi } from "../accountApi.mjs";
 
@@ -33,6 +37,49 @@ export default {
 
       if (url.pathname === "/api/webhooks/whatsapp") {
         return await handleWhatsAppRoute(request, env);
+      }
+
+      if (url.pathname.startsWith("/api/registration/")) {
+        if (env.ACCOUNTS_ENABLED !== "true" ||
+            env.PENDING_REGISTRATION_ENABLED !== "true" ||
+            env.WHATSAPP_WEBHOOK_ENABLED !== "true" ||
+            !env.DB ||
+            typeof env.AUTH_HMAC_SECRET !== "string" ||
+            env.AUTH_HMAC_SECRET.length < 32 ||
+            env.AUTH_HMAC_SECRET.length > 512 ||
+            !/^201[0-9]{9}$/.test(
+              env.WHATSAPP_BUSINESS_PHONE ?? ""
+            )) {
+          return json(503, {
+            error: "registration_disabled"
+          });
+        }
+
+        const key = await crypto.subtle.importKey(
+          "raw",
+          new TextEncoder().encode(env.AUTH_HMAC_SECRET),
+          { name: "HMAC", hash: "SHA-256" },
+          false,
+          ["sign"]
+        );
+
+        const handler = createPendingRegistrationApi({
+          database: env.DB,
+          key,
+          origin: env.APP_ORIGIN,
+          businessPhone: env.WHATSAPP_BUSINESS_PHONE,
+          trustedRateSubject: request => {
+            const ip = request.headers.get(
+              "CF-Connecting-IP"
+            );
+
+            return ip && /^[0-9a-f:.]{3,64}$/i.test(ip)
+              ? ip
+              : null;
+          }
+        });
+
+        return await handler(request);
       }
 
       if (url.pathname.startsWith("/api/admin/")) {
