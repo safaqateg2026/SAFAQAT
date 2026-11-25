@@ -1,4 +1,5 @@
 "use client";
+import businessActivities from "../../../shared/businessActivities.json";
 import { useState } from "react";
 import type { Language } from "./landingMessages";
 import { registrationMessages } from "./registrationMessages";
@@ -32,12 +33,8 @@ export default function RegistrationPreview({ role, language, initialVehicleType
   const [vehicleType, setVehicleType] = useState(initialVehicleType);
   const [businessType, setBusinessType] = useState("");
   const businessTypes = role === "supplier"
-    ? (language === "ar"
-      ? ["مصنع", "شركة", "موزع جملة"]
-      : ["Factory", "Company", "Wholesale distributor"])
-    : (language === "ar"
-      ? ["هايبر ماركت", "سوبر ماركت", "ميني ماركت", "محمصة تسالي", "بازار", "كشك", "مطعم", "كافيه"]
-      : ["Hypermarket", "Supermarket", "Mini market", "Roastery and snacks", "Bazaar", "Kiosk", "Restaurant", "Cafe"]);
+    ? businessActivities.supplier
+    : businessActivities.retailer;
   const cameraItems = [
     { key: "idFront", label: copy.idFront }, { key: "idBack", label: copy.idBack },
     { key: "faceVideo", label: copy.selfie, selfie: true, videoOnly: true },
@@ -83,7 +80,7 @@ export default function RegistrationPreview({ role, language, initialVehicleType
       {business && <fieldset className="registration-section registration-business-section">
         <legend>{copy.business}</legend>
         <label>{copy.businessName}<input name="businessName" required maxLength={150} /></label>
-        <SelectionList label={copy.businessType} value={businessType} options={businessTypes.map((label, index) => ({ value: `${role}-${role === "merchant" ? (index + 7) % 8 : index}`, label }))}
+        <SelectionList label={copy.businessType} value={businessType} options={businessTypes.map(item => ({ value: item.id, label: item[language] }))}
           onChange={setBusinessType} language={language} placeholder={copy.select} required />
         <label>{copy.premises}<input name="premisesAddress" required maxLength={300} /></label>
         <label className="registration-disabled-field">{copy.commercialRegister}<input disabled value={copy.notActive} readOnly /></label>

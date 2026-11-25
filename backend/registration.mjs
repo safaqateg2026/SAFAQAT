@@ -34,7 +34,7 @@ export function requiredPolicies(role) {
   return policies;
 }
 
-export function validateRegistration(input, { today, districts, activities, policyVersions }) {
+export function validateRegistration(input, { today, districts, activities, policyVersions, isApprovedBusinessActivity }) {
   const issues = [];
   const role = input?.role;
   if (!roles.has(role)) return ["invalidRole"];
@@ -78,7 +78,11 @@ export function validateRegistration(input, { today, districts, activities, poli
   if (role === "supplier" || role === "retailer") {
     requireText(input.business?.name, "businessNameRequired");
     requireText(input.business?.premisesAddress, "premisesAddressRequired");
-    if (!activities.has(input.business?.activityCode)) issues.push("invalidBusinessActivity");
+    if (!activities.has(input.business?.activityCode) ||
+      (isApprovedBusinessActivity &&
+       !isApprovedBusinessActivity(role, input.business?.activityCode))) {
+      issues.push("invalidBusinessActivity");
+    }
   }
   if (role === "courier") {
     if (!vehicles.has(input.delivery?.vehicleType)) issues.push("invalidVehicle");

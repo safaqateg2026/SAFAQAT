@@ -1,0 +1,17 @@
+{
+  "supplier": [
+    {"id":"supplier-0","ar":"مصنع","en":"Factory"},
+    {"id":"supplier-1","ar":"شركة","en":"Company"},
+    {"id":"supplier-2","ar":"موزع جملة","en":"Wholesale distributor"}
+  ],
+  "retailer": [
+    {"id":"merchant-7","ar":"هايبر ماركت","en":"Hypermarket"},
+    {"id":"merchant-0","ar":"سوبر ماركت","en":"Supermarket"},
+    {"id":"merchant-1","ar":"ميني ماركت","en":"Mini market"},
+    {"id":"merchant-2","ar":"محمصة تسالي","en":"Roastery and snacks"},
+    {"id":"merchant-3","ar":"بازار","en":"Bazaar"},
+    {"id":"merchant-4","ar":"كشك","en":"Kiosk"},
+    {"id":"merchant-5","ar":"مطعم","en":"Restaurant"},
+    {"id":"merchant-6","ar":"كافيه","en":"Cafe"}
+  ]
+}

@@ -1,3 +1,4 @@
+import { createApprovedActivities, isApprovedBusinessActivity } from "./businessActivities.mjs";
 import approvedRecords from "../app/src/app/safaqatApprovedAreaRecords.json" with { type: "json" };
 import governorates from "../app/src/app/egyptRegistrationCatalog.json" with { type: "json" };
 
@@ -68,7 +69,10 @@ export function createRegistrationCatalogs({
   return {
     today: getEgyptToday(new Date(now * 1000)),
     districts: createApprovedDistricts(),
-    activities: new Set(activities),
+    activities: new Set(
+      [...activities].filter(id => createApprovedActivities().has(id))
+    ),
+    isApprovedBusinessActivity,
     policyVersions: new Map(policyVersions)
   };
 }
