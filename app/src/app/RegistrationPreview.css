@@ -565,9 +565,12 @@
 .registration-help-popover {
   position: fixed;
   z-index: 100;
-  inset-inline-start: 50%;
-  inset-block-start: 50%;
+  left: 50%;
+  top: 50%;
+  right: auto;
+  bottom: auto;
   transform: translate(-50%, -50%);
+  box-sizing: border-box;
   width: min(18rem, 80vw);
   max-height: 60dvh;
   overflow-y: auto;
@@ -575,9 +578,7 @@
   animation: registration-help-open .18s ease-out;
 }
 
-[dir="rtl"] .registration-help-popover {
-  transform: translate(50%, -50%);
-}
+
 
 @keyframes registration-help-open {
   from { opacity: 0; }
