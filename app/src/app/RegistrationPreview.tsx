@@ -6,20 +6,27 @@ import RegistrationLocation from "./RegistrationLocation";
 import RegistrationCamera from "./RegistrationCamera";
 import VerificationDossier from "./VerificationDossier";
 import RegistrationPlateArtwork from "./RegistrationPlateArtwork";
+import { mapTrustedVehiclePlate } from "./verificationOcrMapping";
 import "./RegistrationPreview.css";
 
 export type RegistrationRole = keyof typeof registrationMessages.ar.title;
 
-export default function RegistrationPreview({ role, language }: { role: RegistrationRole; language: Language }) {
+export default function RegistrationPreview({ role, language, initialVehicleType = "" }: { role: RegistrationRole; language: Language; initialVehicleType?: string }) {
   const copy = registrationMessages[language];
   const [checked, setChecked] = useState(false);
   const business = role === "merchant" || role === "supplier";
   const courier = role === "courier";
   const consumer = role === "consumer";
-  const [vehicleType, setVehicleType] = useState("");
+  const [vehicleType, setVehicleType] = useState(initialVehicleType);
   const cameraItems = [
     { key: "idFront", label: copy.idFront }, { key: "idBack", label: copy.idBack },
-    { key: "selfie", label: copy.selfie, selfie: true },
+    ...(courier && vehicleType !== "bicycle" && ["car", "truck"].includes(vehicleType) ? [
+      { key: "vehicleLicenseFront", label: copy.vehicleLicenseFront },
+      { key: "vehicleLicenseBack", label: copy.vehicleLicenseBack },
+      { key: "drivingLicenseFront", label: copy.drivingLicenseFront },
+      { key: "drivingLicenseBack", label: copy.drivingLicenseBack },
+    ] : []),
+    { key: "faceVideo", label: copy.selfie, selfie: true, videoOnly: true },
     ...(business ? [
       { key: "premisesExterior", label: copy.premisesExterior, optional: true },
       { key: "premisesInterior", label: copy.premisesInterior, optional: true },
@@ -28,8 +35,6 @@ export default function RegistrationPreview({ role, language }: { role: Registra
       key: "vehiclePhoto", label: vehicleType === "rider" ? `${copy.vehiclePhoto} · ${copy.plateVisible}` : copy.vehiclePhoto,
     }] : []),
     ...(courier && ["car", "truck"].includes(vehicleType) ? [
-      { key: "drivingLicense", label: copy.drivingLicense },
-      { key: "vehicleLicense", label: copy.vehicleLicense },
       { key: "vehiclePhoto", label: `${copy.vehiclePhoto} · ${copy.manualOwnershipReview}` },
     ] : []),
   ];
@@ -68,7 +73,8 @@ export default function RegistrationPreview({ role, language }: { role: Registra
         {vehicleType && vehicleType !== "bicycle" && <RegistrationPlateArtwork
           kind={vehicleType === "rider" ? "compact" : "wide"}
           image={`/images/vehicle-plates/${vehicleType === "rider" ? "motorcycle-light-blue" : vehicleType === "car" ? "car-blue" : "transport-red"}.png`}
-          alt={copy.plate} lettersLabel={copy.plateLetters} digitsLabel={copy.plateDigits} />}
+          alt={copy.plate} lettersLabel={copy.plateLetters} digitsLabel={copy.plateDigits}
+          {...mapTrustedVehiclePlate()} />}
       </fieldset>}
       {!consumer && <fieldset>
         <legend>{copy.documents}</legend>

@@ -40,6 +40,12 @@
 .safaqat-registration ul { margin: 0; padding-inline-start: 1.3rem; }
 
 .registration-birth, .registration-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.registration-actions:has(.registration-capture-option) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.registration-capture-option { display: flex; align-items: center; justify-content: center; gap: .55rem; min-inline-size: 0; overflow-wrap: anywhere; }
+.registration-capture-option > span:first-child { min-inline-size: 0; }
+.registration-capture-option:has(.capture-success-indicator) { padding-inline-end: .4rem; }
+.capture-success-indicator { display: inline-grid; place-items: center; flex: 0 0 1.35rem; inline-size: 1.35rem; block-size: 1.35rem; min-block-size: 1.35rem; padding: 0; border-radius: 50%; background: #16803c; color: #fff; font-size: 1rem; font-weight: 900; line-height: 1; box-shadow: 0 0 0 1px #fff inset; }
+.registration-actions:has(.registration-capture-option) > .registration-capture-video { grid-column: 1 / -1; }
 .registration-plate { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; direction: rtl; }
 .registration-plate > label { min-width: 0; }
 .registration-plate input { width: 100%; }

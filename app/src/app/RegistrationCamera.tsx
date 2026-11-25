@@ -3,7 +3,7 @@ import type { Language } from "./landingMessages";
 import { registrationMessages } from "./registrationMessages";
 import { assessRegistrationImage } from "./registrationImageQuality";
 
-type CameraItem = { key: string; label: string; selfie?: boolean; optional?: boolean };
+type CameraItem = { key: string; label: string; selfie?: boolean; optional?: boolean; videoOnly?: boolean };
 type CaptureError = NonNullable<ReturnType<typeof assessRegistrationImage>> | "cameraUnavailable";
 
 export default function RegistrationCamera({ language, items }: { language: Language; items: CameraItem[] }) {
@@ -14,6 +14,7 @@ export default function RegistrationCamera({ language, items }: { language: Lang
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<CaptureError>();
   const [accepted, setAccepted] = useState<string>();
+  const [acceptedKeys, setAcceptedKeys] = useState<Set<string>>(() => new Set());
   const [faceStep, setFaceStep] = useState(0);
   const [videoRatio, setVideoRatio] = useState("4 / 3");
   const video = useRef<HTMLVideoElement>(null);
@@ -23,8 +24,9 @@ export default function RegistrationCamera({ language, items }: { language: Lang
     : item?.key === "vehiclePhoto" ? copy.vehiclePhotoFrame
       : item?.key === "premisesExterior" ? copy.premisesExteriorFrame
         : item?.key === "premisesInterior" ? copy.premisesInteriorFrame
-          : item?.key === "idBack" ? copy.idBackFrame : item?.key === "drivingLicense" ? copy.drivingLicenseFrame
-            : item?.key === "vehicleLicense" ? copy.vehicleLicenseFrame : copy.photoFrame;
+          : item?.key.startsWith("id") ? item.key.endsWith("Back") ? copy.idBackFrame : copy.idFrontFrame
+            : item?.key.startsWith("drivingLicense") ? item.key.endsWith("Back") ? copy.drivingLicenseBackFrame : copy.drivingLicenseFrame
+              : item?.key.startsWith("vehicleLicense") ? item.key.endsWith("Back") ? copy.vehicleLicenseBackFrame : copy.vehicleLicenseFrame : copy.photoFrame;
 
   useEffect(() => {
     if (!item || preview) return;
@@ -95,13 +97,23 @@ export default function RegistrationCamera({ language, items }: { language: Lang
       <label className="registration-consent">
         <input type="checkbox" checked={consent} onChange={event => {
           clear(); setItem(undefined); setConsent(event.target.checked);
+          if (!event.target.checked) setAcceptedKeys(new Set());
         }} />
         {copy.sampleCamera}
       </label>
       <div className="registration-actions">
-        {items.map(option => <button key={option.key} type="button" disabled={!consent} onClick={() => {
-          clear(); setAccepted(undefined); setFaceStep(0); setVideoRatio("4 / 3"); setItem({ ...option });
-        }}>{option.label}</button>)}
+        {items.map(option => {
+          const complete = acceptedKeys.has(option.key);
+          return <button key={option.key} className={`registration-capture-option${option.videoOnly ? " registration-capture-video" : ""}`} type="button" disabled={!consent}
+            aria-label={`${option.label}${complete ? ` · ${copy.captureQualityPassed}` : ""}`}
+            onClick={() => {
+              clear(); setAccepted(undefined); setFaceStep(0); setVideoRatio("4 / 3"); setItem({ ...option });
+              setAcceptedKeys(previous => { const next = new Set(previous); next.delete(option.key); return next; });
+            }}>
+            <span>{option.label}</span>
+            {complete && <span className="capture-success-indicator" role="img" aria-label={copy.captureQualityPassed}>✓</span>}
+          </button>;
+        })}
       </div>
       {item && <div className="registration-camera-stage">
         <strong>{item.label}</strong>
@@ -119,10 +131,15 @@ export default function RegistrationCamera({ language, items }: { language: Lang
         <div className="registration-actions">
           {item.selfie && faceStep < 2 && <button type="button" disabled={!ready} onClick={() => setFaceStep(value => value + 1)}>{copy.nextFaceStep}</button>}
           {item.selfie && faceStep === 2 && <button type="button" onClick={() => { setItem(undefined); setAccepted(copy.faceCaptureLabel); }}>{copy.finishFacePreview}</button>}
-          {!item.selfie && !preview && <button type="button" disabled={!ready} onClick={takePhoto}>{copy.capture}</button>}
+          {!item.selfie && !item.videoOnly && !preview && <button type="button" disabled={!ready} onClick={takePhoto}>{copy.capture}</button>}
+          {item.videoOnly && <p role="note">{copy.faceVideoCaptureUnavailable}</p>}
           {preview && <>
             <button type="button" onClick={clear}>{copy.retake}</button>
-            <button type="button" onClick={() => { clear(); setAccepted(item.label); setItem(undefined); }}>{copy.confirmSample}</button>
+            <button type="button" onClick={() => {
+              const completedItem = item;
+              clear(); setAccepted(completedItem.label); setItem(undefined);
+              setAcceptedKeys(previous => new Set(previous).add(completedItem.key));
+            }}>{copy.confirmSample}</button>
           </>}
           <button type="button" onClick={() => { clear(); setItem(undefined); }}>{copy.cancel}</button>
         </div>

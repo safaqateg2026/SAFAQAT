@@ -8,6 +8,7 @@ import "../../RegistrationPreview.css";
 export default function RegistrationAcceptanceFixture() {
   const [role, setRole] = useState<RegistrationRole>("courier");
   const [language, setLanguage] = useState<Language>("ar");
+  const [vehicleType, setVehicleType] = useState("car");
   return <main className="registration-acceptance-fixture" dir={language === "ar" ? "rtl" : "ltr"}>
     <h1>SAFAQAT registration visual acceptance fixture</h1>
     <div className="registration-acceptance-fixture-controls">
@@ -17,7 +18,11 @@ export default function RegistrationAcceptanceFixture() {
       <label>Language<select value={language} onChange={event => setLanguage(event.target.value as Language)}>
         <option value="ar">Arabic</option><option value="en">English</option>
       </select></label>
+      <label>Vehicle preview<select value={vehicleType} onChange={event => setVehicleType(event.target.value)}>
+        <option value="rider">Motorcycle / tricycle</option><option value="car">Private car</option>
+        <option value="truck">Transport vehicle</option><option value="bicycle">Bicycle</option>
+      </select></label>
     </div>
-    <RegistrationPreview role={role} language={language} />
+    <RegistrationPreview key={`${role}-${language}-${vehicleType}`} role={role} language={language} initialVehicleType={vehicleType} />
   </main>;
 }
