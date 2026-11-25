@@ -48,3 +48,10 @@ test("courier plate fields stay optional and reject characters outside the separ
   assert.deepEqual(validateRegistration({ ...input, delivery: { vehicleType: "rider", plateLetters: "ABC", plateDigits: "43-63" } }, config), ["invalidPlate"]);
   assert.deepEqual(validateRegistration({ ...input, delivery: { vehicleType: "rider", plateLetters: "", plateDigits: "" } }, config), []);
 });
+
+
+test("bicycles are accepted without plates and reject any plate values", () => {
+  const input = fixture("courier");
+  assert.deepEqual(validateRegistration({ ...input, delivery: { vehicleType: "bicycle" } }, config), []);
+  assert.deepEqual(validateRegistration({ ...input, delivery: { vehicleType: "bicycle", plateLetters: "س", plateDigits: "1" } }, config), ["invalidPlate"]);
+});

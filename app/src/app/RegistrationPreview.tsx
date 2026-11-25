@@ -4,6 +4,8 @@ import { registrationMessages } from "./registrationMessages";
 import BirthDateFields from "./BirthDateFields";
 import RegistrationLocation from "./RegistrationLocation";
 import RegistrationCamera from "./RegistrationCamera";
+import VerificationDossier from "./VerificationDossier";
+import Image from "next/image";
 import "./RegistrationPreview.css";
 
 export type RegistrationRole = keyof typeof registrationMessages.ar.title;
@@ -14,13 +16,17 @@ export default function RegistrationPreview({ role, language }: { role: Registra
   const business = role === "merchant" || role === "supplier";
   const courier = role === "courier";
   const consumer = role === "consumer";
+  const [vehicleType, setVehicleType] = useState("");
   const cameraItems = [
     { key: "idFront", label: copy.idFront }, { key: "idBack", label: copy.idBack },
     { key: "selfie", label: copy.selfie, selfie: true },
-    ...(courier ? [
-      { key: "vehiclePhoto", label: copy.vehiclePhoto },
+    ...(courier && ["rider", "bicycle"].includes(vehicleType) ? [{
+      key: "vehiclePhoto", label: vehicleType === "rider" ? `${copy.vehiclePhoto} · ${copy.plateVisible}` : copy.vehiclePhoto,
+    }] : []),
+    ...(courier && ["car", "truck"].includes(vehicleType) ? [
       { key: "drivingLicense", label: copy.drivingLicense },
       { key: "vehicleLicense", label: copy.vehicleLicense },
+      { key: "vehiclePhoto", label: `${copy.vehiclePhoto} · ${copy.manualOwnershipReview}` },
     ] : []),
   ];
   const policies = [copy.terms, copy.privacy, copy.commission];
@@ -47,18 +53,19 @@ export default function RegistrationPreview({ role, language }: { role: Registra
       </fieldset>}
       {courier && <fieldset>
         <legend>{copy.delivery}</legend>
-        <label>{copy.vehicle}<select required defaultValue="">
+        <label>{copy.vehicle}<select required value={vehicleType} onChange={event => setVehicleType(event.target.value)}>
           <option value="">{copy.select}</option>
           <option value="rider">{copy.rider}</option>
           <option value="car">{copy.car}</option>
           <option value="truck">{copy.truck}</option>
+          <option value="bicycle">{copy.bicycle}</option>
         </select></label>
-        <div className="registration-plate" aria-label={copy.plate}>
-          <label>{copy.plateLetters}<input name="plate_letters" dir="rtl" inputMode="text" maxLength={6}
-            pattern="[ء-يٱ-ۓ ]{0,6}" autoComplete="off" /></label>
-          <label>{copy.plateDigits}<input name="plate_digits" dir="ltr" inputMode="numeric" maxLength={8}
-            pattern="[0-9٠-٩۰-۹ ]{0,8}" autoComplete="off" /></label>
-        </div>
+        {vehicleType && ["car", "truck"].includes(vehicleType) && <p role="status">{copy.manualOwnershipReview}</p>}
+        {vehicleType && vehicleType !== "bicycle" && <div className={`registration-plate-art ${vehicleType === "rider" ? "compact" : "wide"}`} aria-label={copy.plate}>
+          <Image src={`/images/vehicle-plates/${vehicleType === "rider" ? "motorcycle-light-blue" : vehicleType === "car" ? "car-blue" : "transport-red"}.png`} alt="" width={vehicleType === "rider" ? 1347 : 1774} height={vehicleType === "rider" ? 1168 : 887} unoptimized />
+          <label className="plate-letters"><span>{copy.plateLetters}</span><input readOnly aria-label={copy.plateLetters} value="" /></label>
+          <label className="plate-digits"><span>{copy.plateDigits}</span><input readOnly aria-label={copy.plateDigits} value="" /></label>
+        </div>}
       </fieldset>}
       {!consumer && <fieldset>
         <legend>{copy.documents}</legend>
@@ -67,6 +74,7 @@ export default function RegistrationPreview({ role, language }: { role: Registra
           {business && <li>{copy.facade}</li>}
         </ul>
         <RegistrationCamera language={language} items={cameraItems} />
+        <VerificationDossier role={role} language={language} />
         <p>{copy.upload}</p>
       </fieldset>}
       <fieldset>

@@ -1,7 +1,7 @@
 // Server-side preflight. The caller supplies the approved catalogs for the
 // selected environment and persists the validated registration atomically.
 const roles = new Set(["supplier", "retailer", "consumer", "courier"]);
-const vehicles = new Set(["rider", "car", "truck"]);
+const vehicles = new Set(["rider", "car", "truck", "bicycle"]);
 const arabicDigits = "٠١٢٣٤٥٦٧٨٩";
 const persianDigits = "۰۱۲۳۴۵۶۷۸۹";
 
@@ -67,7 +67,8 @@ export function validateRegistration(input, { today, districts, activities, poli
     const digits = input.delivery?.plateDigits ?? "";
     if (typeof letters !== "string" || typeof digits !== "string"
       || (letters && !/^[ء-يٱ-ۓ ]{1,6}$/.test(letters))
-      || (digits && !/^[0-9٠-٩۰-۹ ]{1,8}$/.test(digits))) issues.push("invalidPlate");
+      || (digits && !/^[0-9٠-٩۰-۹ ]{1,8}$/.test(digits))
+      || (input.delivery?.vehicleType === "bicycle" && (letters || digits))) issues.push("invalidPlate");
   }
 
   if (requiredPolicies(role).some(policy => {

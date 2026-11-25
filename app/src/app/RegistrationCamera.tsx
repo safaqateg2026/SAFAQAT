@@ -14,6 +14,7 @@ export default function RegistrationCamera({ language, items }: { language: Lang
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<CaptureError>();
   const [accepted, setAccepted] = useState<string>();
+  const [faceStep, setFaceStep] = useState(0);
   const video = useRef<HTMLVideoElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
 
@@ -91,11 +92,12 @@ export default function RegistrationCamera({ language, items }: { language: Lang
       </label>
       <div className="registration-actions">
         {items.map(option => <button key={option.key} type="button" disabled={!consent} onClick={() => {
-          clear(); setAccepted(undefined); setItem({ ...option });
+          clear(); setAccepted(undefined); setFaceStep(0); setItem({ ...option });
         }}>{option.label}</button>)}
       </div>
       {item && <div className="registration-camera-stage">
         <strong>{item.label}</strong>
+        {item.selfie && <p role="note">{[copy.faceFront, copy.faceRight, copy.faceLeft][faceStep]} {copy.faceManualStep}</p>}
         {!preview && <div className="registration-viewfinder">
           <video ref={video} autoPlay muted playsInline onLoadedData={() => setReady(true)} />
           <div aria-hidden="true" className={item.selfie ? "registration-frame registration-frame-selfie" : "registration-frame"} />
@@ -103,6 +105,7 @@ export default function RegistrationCamera({ language, items }: { language: Lang
         <canvas ref={canvas} hidden={!preview} aria-label={copy.photoPreview} />
         <p role="status">{error ? copy[error] : preview ? copy.photoReview : copy.photoFrame}</p>
         <div className="registration-actions">
+          {item.selfie && faceStep < 2 && <button type="button" onClick={() => setFaceStep(value => value + 1)}>{copy.nextFaceStep}</button>}
           {!preview && <button type="button" disabled={!ready} onClick={takePhoto}>{copy.capture}</button>}
           {preview && <>
             <button type="button" onClick={clear}>{copy.retake}</button>

@@ -22,6 +22,17 @@ class SubscriberFoundationTest(unittest.TestCase):
             (role, role, phone, email),
         )
 
+    def test_bicycle_migration_preserves_delivery_rows_and_role_guard(self):
+        self.register("courier", "+201000000000", "courier@example.test")
+        self.db.execute("INSERT INTO subscriber_delivery (subscriber_id, vehicle_type, plate_number) VALUES ('courier', 'rider', 'س 123')")
+        migration = Path(__file__).parents[1] / "migrations" / "0012_bicycle_delivery.sql"
+        self.db.executescript(migration.read_text())
+        self.assertEqual(self.db.execute("SELECT vehicle_type, plate_number FROM subscriber_delivery").fetchone(), ("rider", "س 123"))
+        self.db.execute("UPDATE subscriber_delivery SET vehicle_type='bicycle', plate_number=NULL WHERE subscriber_id='courier'")
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("INSERT INTO subscriber_delivery (subscriber_id, vehicle_type) VALUES ('missing', 'bicycle')")
+        self.assertEqual(self.db.execute("PRAGMA foreign_key_check").fetchall(), [])
+
     def test_roles_contacts_and_membership_invariants(self):
         for index, role in enumerate(("supplier", "retailer", "consumer", "courier")):
             self.register(role, f"+20100000000{index}", None if role == "consumer" else f"{role}@example.test")
