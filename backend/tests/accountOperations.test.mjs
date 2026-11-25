@@ -598,3 +598,214 @@ test("admin API requires trusted MFA and isolates subscriber data", async t => {
     base.replace("https:", "http:")
   ))).status, 403);
 });
+
+
+test("WhatsApp registration integrates signed events with single-use database challenges", async t => {
+  const { database, sql } = databaseForTest(t);
+
+  const { createVerificationChallenge } =
+    await import("../verification.mjs");
+
+  const { createWhatsAppRegistrationHandler } =
+    await import("../providers/whatsappRegistration.mjs");
+
+  const { createHmac } = await import("node:crypto");
+
+  const first = await register(database, "consumer", 0);
+  const second = await register(database, "consumer", 1);
+
+  const findMember = sql.prepare(
+    "SELECT id, phone, state, phone_verified_at FROM subscriber WHERE id = ?"
+  );
+
+  const member = findMember.get(first.subscriberId);
+  const other = findMember.get(second.subscriberId);
+
+  assert.ok(member);
+  assert.ok(other);
+
+  const key = await crypto.subtle.generateKey(
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+
+  const config = {
+    appSecret: "synthetic-registration-test-secret-only",
+    businessAccountId: "100001",
+    phoneNumberId: "100002"
+  };
+
+  let now = 105;
+
+  const handler = createWhatsAppRegistrationHandler({
+    database, key, config,
+    clock: () => now
+  });
+
+  async function issue(purpose = "registration") {
+    return createVerificationChallenge(database, key, {
+      subscriberId: member.id,
+      purpose,
+      channel: "whatsapp",
+      target: member.phone,
+      now: 103,
+      expiresAt: 120
+    });
+  }
+
+  function request(challenge, {
+    sender = member.phone,
+    purpose = "registration",
+    valid = true,
+    messageId = "wamid.synthetic-registration",
+    destination = config.phoneNumberId
+  } = {}) {
+    const payload = {
+      object: "whatsapp_business_account",
+      entry: [{
+        id: config.businessAccountId,
+        changes: [{
+          field: "messages",
+          value: {
+            messaging_product: "whatsapp",
+            metadata: {
+              phone_number_id: destination
+            },
+            messages: [{
+              id: messageId,
+              from: sender.replace(/^\+/, ""),
+              type: "text",
+              text: {
+                body: `SAFAQAT ${purpose} ${challenge.id} ${challenge.proof}`
+              }
+            }]
+          }
+        }]
+      }]
+    };
+
+    const body = JSON.stringify(payload);
+
+    const signature = createHmac(
+      "sha256", config.appSecret
+    ).update(body).digest("hex");
+
+    return new Request(
+      "https://example.test/webhook",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Hub-Signature-256":
+            "sha256=" + (valid
+              ? signature
+              : "0".repeat(64))
+        },
+        body
+      }
+    );
+  }
+
+  const challenge = await issue();
+  assert.ok(challenge);
+
+  assert.equal(
+    await handler(request(challenge, { valid: false })),
+    null
+  );
+
+  assert.deepEqual(
+    await handler(request(challenge, { sender: other.phone })),
+    { accepted: 0 }
+  );
+
+  assert.deepEqual(
+    await handler(request(challenge, { destination: "999999" })),
+    { accepted: 0 }
+  );
+
+  assert.deepEqual(
+    await handler(request({
+      ...challenge,
+      proof: "0".repeat(64)
+    })),
+    { accepted: 0 }
+  );
+
+  assert.deepEqual(
+    await handler(request(challenge, { purpose: "login" })),
+    { accepted: 0 }
+  );
+
+  assert.equal(
+    findMember.get(member.id).phone_verified_at, null
+  );
+
+  assert.equal(
+    findMember.get(other.id).phone_verified_at, null
+  );
+
+  assert.deepEqual(
+    await handler(request(challenge)),
+    { accepted: 1 }
+  );
+
+  assert.deepEqual(
+    await handler(request(challenge)),
+    { accepted: 0 }
+  );
+
+  assert.deepEqual(
+    await handler(request(challenge, {
+      messageId: "wamid.synthetic-replay"
+    })),
+    { accepted: 0 }
+  );
+
+  assert.equal(
+    findMember.get(member.id).phone_verified_at, 105
+  );
+
+  assert.equal(
+    findMember.get(other.id).phone_verified_at, null
+  );
+
+  const receipt = sql.prepare(
+    "SELECT COUNT(*) AS total FROM subscriber_registration_contact_receipt WHERE subscriber_id = ?"
+  ).get(member.id);
+
+  assert.equal(receipt.total, 1);
+
+  const expired = await issue();
+  assert.ok(expired);
+
+  now = 120;
+
+  assert.deepEqual(
+    await handler(request(expired)),
+    { accepted: 0 }
+  );
+
+  const login = await issue("login");
+  assert.ok(login);
+
+  now = 106;
+
+  assert.deepEqual(
+    await handler(request(login, { purpose: "login" })),
+    { accepted: 0 }
+  );
+
+  const recovery = await issue("recovery");
+  assert.ok(recovery);
+
+  assert.deepEqual(
+    await handler(request(recovery, { purpose: "recovery" })),
+    { accepted: 0 }
+  );
+
+  assert.notEqual(
+    findMember.get(member.id).state, "active"
+  );
+});
