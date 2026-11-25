@@ -11,6 +11,7 @@ export default function RegistrationLocation({ language }: { language: Language 
   const copy = registrationMessages[language];
   const [governorate, setGovernorate] = useState("");
   const [locality, setLocality] = useState("");
+  const [address, setAddress] = useState("");
   const [open, setOpen] = useState(false);
   const [map, setMap] = useState<MapIndex>();
   const [resolution, setResolution] = useState<{ point: Point; result?: { area: Boundary; boundaries: Boundary[] } }>();
@@ -292,8 +293,24 @@ export default function RegistrationLocation({ language }: { language: Language 
             closeMap();
           }
           setLocality(id);
+          setConfirmed(undefined);
         }} />
-      <label>{copy.address}<input required maxLength={300} /></label>
+      <label>{copy.address}<input
+        name="address"
+        required
+        maxLength={300}
+        value={address}
+        onChange={event => {
+          setAddress(event.target.value);
+          setConfirmed(undefined);
+        }}
+      /></label>
+      <input type="hidden" name="governorateCode" value={governorate} />
+      <input type="hidden" name="districtCode" value={locality} />
+      <input type="hidden" name="latitude"
+        value={!open && confirmed && locality ? confirmed.point[1] : ""} />
+      <input type="hidden" name="longitude"
+        value={!open && confirmed && locality ? confirmed.point[0] : ""} />
       {confirmed && !open && <p role="status">{copy.locationConfirmed}</p>}
     </fieldset>
   );
