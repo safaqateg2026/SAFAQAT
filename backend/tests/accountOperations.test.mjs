@@ -52,7 +52,7 @@ test("four registration roles persist only appropriate profiles, policies and au
     assert.equal(row.state, "incomplete");
   }
   await assert.rejects(register(database, "consumer", 1), /UNIQUE/);
-  assert.deepEqual(await register(database, "retailer", 5, { email: null }), { issues: ["emailRequired"] });
+
   for (const [table, count] of Object.entries({
     subscriber: 4, subscriber_business: 2, subscriber_delivery: 1,
     retailer_directory_identity: 1, subscriber_audit_event: 4, subscriber_policy_acceptance: 17,
@@ -999,4 +999,20 @@ test("browser verification status requires its own authenticated binding", async
     ),
     null
   );
+});
+
+
+test("retailer registration accepts an omitted email", async t => {
+  const { database, sql } = databaseForTest(t);
+  const result = await register(database, "retailer", 5, { email: null });
+  assert.equal(result.issues, undefined);
+
+  const account = sql.prepare(
+    "SELECT role, email, state, phone_verified_at FROM subscriber"
+  ).get();
+
+  assert.equal(account.role, "retailer");
+  assert.equal(account.email, null);
+  assert.equal(account.state, "incomplete");
+  assert.equal(account.phone_verified_at, null);
 });

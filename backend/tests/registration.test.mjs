@@ -26,7 +26,7 @@ test("each approved role has its own minimum registration fields", () => {
     assert.deepEqual(validateRegistration(fixture(role), config), []);
   }
   assert.deepEqual(validateRegistration({ ...fixture("retailer"), email: null, business: null }, config),
-    ["emailRequired", "businessNameRequired", "premisesAddressRequired", "invalidBusinessActivity"]);
+    ["businessNameRequired", "premisesAddressRequired", "invalidBusinessActivity"]);
   assert.deepEqual(validateRegistration({ ...fixture("courier"), delivery: null }, config), ["invalidVehicle"]);
 });
 

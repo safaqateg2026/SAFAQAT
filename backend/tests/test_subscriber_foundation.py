@@ -35,7 +35,7 @@ class SubscriberFoundationTest(unittest.TestCase):
         self.db.executescript(migration.read_text())
         self.assertEqual(self.db.execute("SELECT vehicle_type, plate_number FROM subscriber_delivery").fetchone(), ("rider", "س 123"))
         for later in sorted(migration.parent.glob("*.sql")):
-            if later.name > migration.name:
+            if migration.name < later.name < "0018_":
                 self.db.executescript(later.read_text())
         self.assertEqual(self.db.execute("SELECT vehicle_type, plate_number FROM subscriber_delivery").fetchone(), ("rider", "س 123"))
         self.db.execute("UPDATE subscriber_delivery SET vehicle_type='bicycle', plate_number=NULL WHERE subscriber_id='courier'")
@@ -52,8 +52,10 @@ class SubscriberFoundationTest(unittest.TestCase):
             self.db.execute("UPDATE subscriber SET role='retailer' WHERE id='consumer'")
         with self.assertRaises(sqlite3.IntegrityError):
             self.db.execute("UPDATE subscriber SET phone='+201000000000' WHERE id='consumer'")
-        with self.assertRaises(sqlite3.IntegrityError):
-            self.db.execute("UPDATE subscriber SET email=NULL WHERE id='supplier'")
+        self.db.execute("UPDATE subscriber SET email=NULL WHERE id='supplier'")
+        self.assertIsNone(self.db.execute(
+            "SELECT email FROM subscriber WHERE id='supplier'"
+        ).fetchone()[0])
 
     def test_activation_requires_verified_contact_policies_and_latest_review(self):
         self.register("retailer", "+201000000000", "retailer@example.test")

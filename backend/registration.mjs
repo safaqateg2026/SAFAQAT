@@ -48,7 +48,7 @@ export function validateRegistration(input, { today, districts, activities, poli
     issues.push("invalidPhone");
   }
   const emailProvided = input.email !== undefined && input.email !== null && input.email !== "";
-  if (!emailProvided && role !== "consumer") issues.push("emailRequired");
+
   if (emailProvided && (typeof input.email !== "string" || input.email.length > 254
     || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email))) issues.push("invalidEmail");
 
