@@ -117,7 +117,7 @@ export default function RegistrationPreview({ role, language, initialVehicleType
       </fieldset>
       <fieldset className="registration-section registration-gmail-section">
         <legend>{copy.gmailVerification}</legend>
-        <GmailVerification language={language} optional={consumer} />
+        <GmailVerification language={language} optional />
       </fieldset>
 
       {consumer ? <>

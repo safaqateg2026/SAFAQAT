@@ -215,6 +215,27 @@ export function PhoneVerification({ language }: { language: Language }) {
 export function GmailVerification({ language, optional = false }: { language: Language; optional?: boolean }) {
   const copy = registrationMessages[language];
   return <section className="registration-contact-section" aria-label={copy.gmailVerification}>
+    {optional && <div style={{
+      border: "1px solid rgba(235,190,80,.45)",
+      borderRadius: 12,
+      padding: 12,
+      marginBottom: 10,
+      background: "rgba(235,190,80,.06)"
+    }}>
+      <strong style={{ color: "#f5ce73" }}>
+        {language === "ar" ? "أمان إضافي لحسابك (اختياري)" : "Extra account protection (optional)"}
+      </strong>
+      <p style={{ fontSize: 13, lineHeight: 1.7, margin: "6px 0" }}>
+        {language === "ar"
+          ? "إضافة بريدك الإلكتروني تعزز حماية حسابك وتسهّل استعادته في حالة فقدان الوصول إليه."
+          : "Adding your email strengthens account protection and makes recovery easier."}
+      </p>
+      <small>
+        {language === "ar"
+          ? "يمكنك إضافته لاحقًا من إعدادات حسابك."
+          : "You can add it later in your account settings."}
+      </small>
+    </div>}
     <div className="registration-gmail-row">
       <button type="button" className="registration-google-button" disabled aria-describedby="gmail-unavailable"><GoogleMark /><span className="plate-visually-hidden">Google</span></button>
       <input name="email" type="email" autoComplete="email" maxLength={254} data-email-optional={optional} dir="ltr" placeholder={copy.email}
