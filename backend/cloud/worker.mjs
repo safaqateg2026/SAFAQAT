@@ -41,8 +41,7 @@ export default {
       }
 
       if (url.pathname.startsWith("/api/registration/")) {
-        if (env.ACCOUNTS_ENABLED !== "true" ||
-            env.PENDING_REGISTRATION_ENABLED !== "true" ||
+        if (env.PENDING_REGISTRATION_ENABLED !== "true" ||
             env.WHATSAPP_WEBHOOK_ENABLED !== "true" ||
             !env.DB ||
             typeof env.WHATSAPP_APP_SECRET !== "string" ||

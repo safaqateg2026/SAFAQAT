@@ -343,14 +343,32 @@ test("protected worker webhook verifies a pending registration", async t => {
 
   const disabled = await worker.fetch(
     await request(pending),
-    { ...env, ACCOUNTS_ENABLED: "false" }
+    {
+      ...env,
+      ACCOUNTS_ENABLED: "false",
+      PENDING_REGISTRATION_ENABLED: "false"
+    }
   );
 
   assert.equal(disabled.status, 503);
 
+  assert.deepEqual(
+    await readPendingRegistration(
+      database,
+      routeKey,
+      {
+        id: pending.id,
+        browserSecret: pending.browserSecret,
+        phone
+      },
+      Math.floor(Date.now() / 1000)
+    ),
+    { verified: false }
+  );
+
   const result = await worker.fetch(
     await request(pending),
-    env
+    { ...env, ACCOUNTS_ENABLED: "false" }
   );
 
   assert.equal(result.status, 200);

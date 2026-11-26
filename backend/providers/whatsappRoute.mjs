@@ -101,7 +101,8 @@ export async function handleWhatsAppRoute(request, env) {
       return response(405, "Method not allowed");
     }
 
-    if (env.ACCOUNTS_ENABLED !== "true" ||
+    if ((env.PENDING_REGISTRATION_ENABLED !== "true" &&
+         env.ACCOUNTS_ENABLED !== "true") ||
         !env.DB ||
         !validSecret(env.WHATSAPP_APP_SECRET) ||
         !validSecret(env.AUTH_HMAC_SECRET) ||
